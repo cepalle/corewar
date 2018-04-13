@@ -1,0 +1,7 @@
+CMakeLists.txt
+.idea/
+cmake-build-debug/
+corewar.iml
+
+*.[oa]
+*~
