@@ -91,7 +91,7 @@ opcode ::=
 ```
 
 ```
-params ::= param [, params]
+params ::= param [, params] [, params]
 ```
 
 ```
@@ -146,11 +146,11 @@ champion_description ::= .comment string
 Les parametres sont précédé par un octet de descriptionsous la forme suivante:
 `0b __ __ __ 00` sur les 3 duo de bit il est stoque le code du type des parametres. Les types sont les suivant:
 
-Registre: **REG_CODE**, numeraux d'un registre code sur **REG_SIZE** (1) Octet
+Registre: **REG_CODE**, numeraux d'un registre codé sur **REG_SIZE** (1) Octet
 
-Direct: **DIR_CODE**, integer code sur **DIR_SIZE** (4) Octet **TODO ? and label**
+Direct: **DIR_CODE**, integer codé sur **DIR_SIZE** (4) Octet **TODO ? and label**
 
-Indirect: **IND_CODE**, address relative a PC code sur **IND_SIZE** (2) Octet **TODO ? and label**
+Indirect: **IND_CODE**, address relative a PC codé sur **IND_SIZE** (2) Octet **TODO ? and label**
 
 exemple:
 - r2,23,%34 donne l’octet de codage 0b01111000, soit 0x78
@@ -163,6 +163,9 @@ Les paramètres, directement, selon le modèle suivant :
 
 
 **TODO trouver l'encodage des labels**
+
+un label est un index qui est une addresse dans la memoire de la VM
+a l'endroid du label ?
 
 #### Exemple with bee_gees.s:
 
@@ -269,12 +272,12 @@ d’une chaîne de caractères parmi **LABEL_CHARS** suivi par **LABEL_CHAR** ; 
 opcode ; et ses paramètres, séparés par **SEPARATOR_CHAR**. Un paramètre peut
 être de trois types :
 
-- Registre : (r1 <–> rx avec x = **REG_NUMBER**)
+    - Registre : (r1 <–> rx avec x = **REG_NUMBER**)
 
-- Direct : Le caractère **DIRECT_CHAR** suivi d’une valeur numérique ou d’un
+    - Direct : Le caractère **DIRECT_CHAR** suivi d’une valeur numérique ou d’un
 label (précédé par **LABEL_CHAR**), ce qui représente une valeur directe.
 
-- Indirect : Une valeur ou un label (précédé de **LABEL_CHAR**), ce qui repré-
+    - Indirect : Une valeur ou un label (précédé de **LABEL_CHAR**), ce qui repré-
 sente la valeur qui se trouve à l’adresse du paramètre, relativement au **PC** du
 processus courant.
 
