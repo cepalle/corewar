@@ -6,12 +6,14 @@
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:48 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/17 09:22:13 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/17 14:29:43 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+typedef char t_bool;
 
 struct	s_op {
 		char	*name;
@@ -20,8 +22,8 @@ struct	s_op {
 		int 	opcode;
 		int   cycle;
 		char  *descr;
-		int 	octet_param;
-		int 	to_do; // TODO
+		t_bool 	octet_param; // si vrai il y a un octet de description des parametres
+		t_bool 	dir_size_2;  // T_DIR size is 2 if true else 4
 };
 
 typedef struct s_op t_op;
