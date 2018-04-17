@@ -31,7 +31,7 @@ et ne pas produire de fichier .cor
 
 #### Symbols:
 
-`:`, `,`, `%`, `#`
+`,`, `%`, `+`, `-`.
 
 #### White characters:
 
@@ -39,7 +39,7 @@ Space and tabulations are the only white space characters supported. Both count 
 
 #### End-of-line:
 
-End of lines are `\n\r`, and `\r\n`, and `\r`, and `\n`, freely intermixed.
+End of lines are `\n`.
 
 #### Strings:
 
@@ -68,7 +68,6 @@ digit ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 ```
 integer ::= [op] digit { digit }
-op ::= + | - 
 ```
 
 #### Invalid characters:
