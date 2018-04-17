@@ -87,7 +87,7 @@ struct	s_op
 	int   	cycle;
 	char  	*descr;
 	int 	octet_param;
-	int 	to_do;
+	int 	dir_size_2; //par defaut size dir == 4 et si variable a 1, dir_size == 2
 };
 
 typedef struct s_op t_op;
