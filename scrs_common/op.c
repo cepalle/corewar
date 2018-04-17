@@ -20,8 +20,8 @@ struct	s_op {
 		int 	opcode;
 		int   cycle;
 		char  *descr;
-		int 	octal; // TODO: a creuser
-		int 	to_do; // TODO: a trouver
+		int 	octet_param;
+		int 	to_do; // TODO
 };
 
 typedef struct s_op t_op;
