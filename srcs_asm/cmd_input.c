@@ -1,5 +1,6 @@
 #include "../includes/asm.h"
 #include <fcntl.h>
+#include <errno.h>
 
 t_cmdl cmd_input(int argc, char **argv)
 {
@@ -26,7 +27,7 @@ t_cmdl cmd_input(int argc, char **argv)
 	fd = open(argv[0 + cmdl.opt_a], O_RDONLY);
 	if (fd < 0)
 	{
-		// perror
+		perror();
 		cmdl.er = 1;
 	}
 	return cmdl;

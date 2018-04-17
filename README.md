@@ -122,39 +122,35 @@ champion_description ::= .comment string
 
 #define MAX_CHECKS				10
 
-| Op    | Binaire | Hexa |  Cycle | Arg 1                   | Arg 2                   | Arg 3          | carry | octet_param | autre | dir_size_2 |
-| ------|:-------:| :---:| :----: | :---------------------: | :---------------------: | :------------: | :----:| :----------:|:-----:| :---------:|
-| live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           |0      | 0          |
-| ld    | 0000010 | 0x02 | 5      | T_DIR or T_IND          | T_REG                   |                | 1     | 1           |0      | 0          |
-| st    | 0000011 | 0x03 | 5      | T_REG                   | T_IND or T_REG          |                | 0     | 1           |0      | 0          |
-| add   | 0000100 | 0x04 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           |0      | 0          |
-| sub   | 0000101 | 0x05 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           |0      | 0          |
-| and   | 0000110 | 0x06 | 6      | T_REG or T_DIR or T_IND | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           |0      | 0          |
-| or    | 0000111 | 0x07 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           |0      | 0          |
-| xor   | 0001000 | 0x08 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           |0      | 0          |
-| zjmp  | 0001001 | 0x09 | 20     | T_DIR                   |                         |                | 0     | 0           |1      | 1          |
-| ldi   | 0001010 | 0x0a | 25     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 0     | 1           |1      | 1          |
-| sti   | 0001011 | 0x0b | 25     | T_REG                   | T_REG or T_IND or T_DIR | T_DIR or T_REG | 0     | 1           |1      | 1          |
-| fork  | 0001100 | 0x0c | 800    | T_DIR                   |                         |                | 0     | 0           |1      | 1          |
-| lld   | 0001101 | 0x0d | 10     | T_DIR or T_IND          | T_REG                   |                | 1     | 1           |0      | 0          |
-| lldi  | 0001110 | 0x0e | 50     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 1     | 1           |1      | 1          |
-| lfork | 0001111 | 0x0f | 1000   | T_DIR                   |                         |                | 0     | 0           |1      | 1          |
-| aff   | 0010000 | 0x10 | 2      | T_REG                   |                         |                | 0     | 1           |0      | 0          |
+| Op    | Binaire | Hexa |  Cycle | Arg 1                   | Arg 2                   | Arg 3          | carry | octet_param | dir_size_2 |
+| ------|:-------:| :---:| :----: | :---------------------: | :---------------------: | :------------: | :----:| :----------:| :---------:|
+| live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           | 0          |
+| ld    | 0000010 | 0x02 | 5      | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |
+| st    | 0000011 | 0x03 | 5      | T_REG                   | T_IND or T_REG          |                | 0     | 1           | 0          |
+| add   | 0000100 | 0x04 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |
+| sub   | 0000101 | 0x05 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |
+| and   | 0000110 | 0x06 | 6      | T_REG or T_DIR or T_IND | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |
+| or    | 0000111 | 0x07 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |
+| xor   | 0001000 | 0x08 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |
+| zjmp  | 0001001 | 0x09 | 20     | T_DIR                   |                         |                | 0     | 0           | 1          |
+| ldi   | 0001010 | 0x0a | 25     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 0     | 1           | 1          |
+| sti   | 0001011 | 0x0b | 25     | T_REG                   | T_REG or T_IND or T_DIR | T_DIR or T_REG | 0     | 1           | 1          |
+| fork  | 0001100 | 0x0c | 800    | T_DIR                   |                         |                | 0     | 0           | 1          |
+| lld   | 0001101 | 0x0d | 10     | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |
+| lldi  | 0001110 | 0x0e | 50     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 1     | 1           | 1          |
+| lfork | 0001111 | 0x0f | 1000   | T_DIR                   |                         |                | 0     | 0           | 1          |
+| aff   | 0010000 | 0x10 | 2      | T_REG                   |                         |                | 0     | 1           | 0          |
 
 #### Octet de codage des paramètres:
 
 Les parametres sont précédé par un octet de description sous la forme suivante:
 `0b __ __ __ 00` sur les 3 duo de bit il est stoque le code du type des parametres. Les types sont les suivant:
 
-# define REG_CODE				1
-# define DIR_CODE				2
-# define IND_CODE				3
+Registre: **REG_CODE**: 1 = 0b01, numeraux d'un registre codé sur **REG_SIZE** (1) Octet
 
-Registre: **REG_CODE**, numeraux d'un registre codé sur **REG_SIZE** (1) Octet
+Direct: **DIR_CODE**: 2 = 0b10, integer codé sur **DIR_SIZE** (4) Octet, mais varis en fonction de l'Op
 
-Direct: **DIR_CODE**, integer codé sur **DIR_SIZE** (4) Octet, mais varis en fonction de l'Op
-
-Indirect: **IND_CODE**, address relative a PC codé sur **IND_SIZE** (2) Octets
+Indirect: **IND_CODE**3 = 0b11, address relative a PC codé sur **IND_SIZE** (2) Octets
 
 exemple:
 - r2,23,%34 donne l’octet de codage 0b01111000, soit 0x78

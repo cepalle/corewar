@@ -17,6 +17,7 @@ enum TOKEN
 
 struct s_token
 {
+		int er;
 		int token;
 		char *data;
 };
@@ -33,7 +34,7 @@ typedef struct s_tab_token t_tab_token;
 struct s_lexer
 {
 	  int er;
-		t_tab_token tab_token;
+	  t_tab_token tab_token;
 };
 typedef struct s_lexer t_lexer;
 
@@ -61,6 +62,9 @@ t_lexer lexer(int fd);
 t_parser parser(void);
 void display_ast(void);
 void ast_to_byte(void);
+void line_to_token(t_token *ltken);
+void tab_token_multi_add(t_lexer *lexer_res, t_token *ltken);
+
 
 
 
