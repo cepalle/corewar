@@ -142,6 +142,8 @@ champion_description ::= .comment string
 | lfork | 0001111 | 0x0f | 1000   | T_DIR                   |                         |                | 0     | 0           |1      |
 | aff   | 0010000 | 0x10 | 2      | T_REG                   |                         |                | 0     | 1           |0      |
 
+**TODO trouver qu'est ce que DIR size dans le tableaux** 
+
 #### Octet de codage des paramètres:
 
 Les parametres sont précédé par un octet de description sous la forme suivante:
