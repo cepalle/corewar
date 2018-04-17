@@ -20,7 +20,7 @@ struct	s_op {
 		int 	opcode;
 		int   cycle;
 		char  *descr;
-		int 	octal;
+		int 	octet_param;
 		int 	to_do; // TODO
 };
 
