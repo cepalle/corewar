@@ -49,7 +49,7 @@ The strings are ASCII strings: enclosed by `"`.
 
 #### Comments:
 
-In line comment start with `#`.
+In line comment start with `#` or `;`.
 
 #### Labels:
 
@@ -67,10 +67,9 @@ digit ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 #### Numbers:
 
 ```
-integer ::= digit { digit }
+integer ::= [op] digit { digit }
+op ::= + | - 
 ```
-
-**TODO ? add `op ::= + | - `**
 
 #### Invalid characters:
 
@@ -148,9 +147,9 @@ Les parametres sont précédé par un octet de descriptionsous la forme suivante
 
 Registre: **REG_CODE**, numeraux d'un registre codé sur **REG_SIZE** (1) Octet
 
-Direct: **DIR_CODE**, integer codé sur **DIR_SIZE** (4) Octet **TODO ? and label**
+Direct: **DIR_CODE**, integer codé sur **DIR_SIZE** (4) Octets
 
-Indirect: **IND_CODE**, address relative a PC codé sur **IND_SIZE** (2) Octet **TODO ? and label**
+Indirect: **IND_CODE**, address relative a PC codé sur **IND_SIZE** (2) Octets
 
 exemple:
 - r2,23,%34 donne l’octet de codage 0b01111000, soit 0x78
@@ -161,11 +160,8 @@ Les paramètres, directement, selon le modèle suivant :
 - r2,23,%34 donne l’OCP 0x78 puis 0x02 0x00 0x17 0x00 0x00 0x00 0x22
 - 23,45,%34 donne l’OCP 0xF8 puis 0x00 0x17 0x00 0x2d 0x00 0x00 0x00 0x22
 
-
-**TODO trouver l'encodage des labels**
-
-un label est un index qui est une addresse dans la memoire de la VM
-a l'endroid du label ?
+un label est transformé en valeur indirect qui point relativement au PC vers
+la declaration du label.
 
 #### Exemple with bee_gees.s:
 
@@ -241,11 +237,7 @@ live:
 L’exécutable commence toujours par un header, défini dans op.h par le type
 **header_t**
 
-### 4) AST to ByteCode
-
-**TODO**
-
-### 5) Exemple complet de compilation
+### 4) Exemple complet de compilation
 
 ```
 .name "zork"
@@ -263,7 +255,7 @@ zjmp %:live
 # 0x09,0xff,0xfb
 ```
 
-### 6) Fonctionnement
+### 5) Fonctionnement
 
 - Le langage assembleur est composé d’une instruction par ligne.
 
@@ -299,61 +291,61 @@ tableau op_tab déclaré dans op.c. Les cycles sont toujours consommés.
 - Tous les autres codes n’ont aucune action a part passer au suivant et perdre un
 cycle.
 
-- lfork : Ca signifie long-fork, pour pouvoir fourcher de la paille à une distance
+- **lfork** : Ca signifie long-fork, pour pouvoir fourcher de la paille à une distance
 de 15 mètres, exactement comme son opcode. Pareil qu’un fork sans modulo à l’adresse.
 
-- sti : Opcode 11. Prend un registre, et deux index (potentiellement des registres).
+- **sti** : Opcode 11. Prend un registre, et deux index (potentiellement des registres).
 Additionne les deux derniers, utilise cette somme comme une adresse ou sera copiée
 la valeur du premier paramètre.
 
-- fork : Pas d’octet de codage des paramètres, prend un index, opcode 0x0c. Crée
+- **fork** : Pas d’octet de codage des paramètres, prend un index, opcode 0x0c. Crée
 un nouveau processus, qui hérite des différents états de son père, à part son **PC**,
 qui est mis à (**PC** + (1er paramètre % **IDX_MOD**)).
 
-- lld : Signifie long-load, donc son opcode est évidemment 13. C’est la même chose
+- **lld** : Signifie long-load, donc son opcode est évidemment 13. C’est la même chose
 que ld, mais sans % **IDX_MOD**. Modifie le carry.
 
-- ld : Prend un paramètre quelconque et un registre. Charge la valeur du premier
+- **ld** : Prend un paramètre quelconque et un registre. Charge la valeur du premier
 paramètre dans le registre. Son opcode est 10 en binaire, et il changera le carry.
 
-- add : Opcode 4. Prend trois registres, additionne les 2 premiers, et met le résultat
+- **add** : Opcode 4. Prend trois registres, additionne les 2 premiers, et met le résultat
 dans le troisième, juste avant de modifier le carry.
 
-- zjmp : Il n’y a jamais eu, n’y a pas, et n’y aura jamais d’octet de codage des
+- **zjmp** : Il n’y a jamais eu, n’y a pas, et n’y aura jamais d’octet de codage des
 paramètres derrière cette opération dont l’opcode est de 9. Elle prendra un index,
 et fait un saut à cette adresse si le carry est à 1.
 
-- sub : Pareil que add, mais l’opcode est 0b101, et utilise une soustraction.
+- **sub** : Pareil que add, mais l’opcode est 0b101, et utilise une soustraction.
 
-- ldi : ldi, comme son nom l’indique, n’implique nullement de se baigner dans de
+- **ldi** : ldi, comme son nom l’indique, n’implique nullement de se baigner dans de
 la crème de marrons, même si son opcode est 0x0a. Au lieu de ça, ca prend 2 index
 et 1 registre, additionne les 2 premiers, traite ca comme une adresse, y lit une
 valeur de la taille d’un registre et la met dans le 3eme.
 
-- or : Cette opération est un OU bit-à-bit, suivant le même principe que and, son
+- **or** : Cette opération est un OU bit-à-bit, suivant le même principe que and, son
 opcode est donc évidemment 7.
 
-- st : Prend un registre et un registre ou un indirect, et stocke la valeur du registre
+- **st** : Prend un registre et un registre ou un indirect, et stocke la valeur du registre
 vers le second paramètre. Son opcode est 0x03. Par exemple, st r1, 42 stocke la
 valeur de r1 à l’adresse (**PC** + (42 % **IDX_MOD**))
 
-- aff : L’opcode est 10 en hexadécimal. Il y a un octet de codage des paramètres,
+- **aff** : L’opcode est 10 en hexadécimal. Il y a un octet de codage des paramètres,
 même si c’est un peu bête car il n’y a qu’un paramètre, qui est un registre, dont
 le contenu est interprété comme la valeur ASCII d’un caractère à afficher sur la
 sortie standard. Ce code est modulo 256.
 
-- live : L’instruction qui permet à un processus de rester vivant. A également pour
+- **live** : L’instruction qui permet à un processus de rester vivant. A également pour
 effet de rapporter que le joueur dont le numéro est en paramètre est en vie. Pas
 d’octet de codage des paramètres, opcode 0x01. Oh, et son seul paramètre est sur
 4 octets.
 
-- xor : Fait comme and avec un OU exclusif. Comme vous l’aurez deviné, son opcode
+- **xor** : Fait comme and avec un OU exclusif. Comme vous l’aurez deviné, son opcode
 en octal est 10.
 
-- lldi : Opcode 0x0e. Pareil que ldi, mais n’applique aucun modulo aux adresses.
+- **lldi** : Opcode 0x0e. Pareil que ldi, mais n’applique aucun modulo aux adresses.
 Modifiera, par contre, le carry.
 
-- and : Applique un & (ET bit-à-bit) sur les deux premiers paramètres, et stocke le
+- **and** : Applique un & (ET bit-à-bit) sur les deux premiers paramètres, et stocke le
 résultat dans le registre qui est le 3ème paramètre. Opcode 0x06. Modifie le carry.
 
 
