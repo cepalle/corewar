@@ -13,7 +13,7 @@
 
 #include "../includes/op.h"
 
-t_op    g_op_tab[17] =
+static	t_op    g_op_tab[17] =
 {
 	{"live", 1, {T_DIR}                                              ,
 		1, 10, "alive", 0, 0},
@@ -49,3 +49,8 @@ t_op    g_op_tab[17] =
 		16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
+
+t_op	*gopt(void)
+{
+	return (g_op_tab);
+}

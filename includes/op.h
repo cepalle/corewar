@@ -3,7 +3,7 @@
 /*                                                              /             */
 /*   op.h                                             .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:27 by cepalle      #+#   ##    ##    #+#       */
 /*   Updated: 2018/04/12 14:17:33 by cepalle     ###    #+. /#+    ###.fr     */
@@ -91,3 +91,5 @@ struct	s_op
 };
 
 typedef struct s_op t_op;
+
+t_op	*gopt(void);
