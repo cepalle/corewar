@@ -3,7 +3,7 @@
 /*                                                              /             */
 /*   op.c                                             .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:48 by cepalle      #+#   ##    ##    #+#       */
 /*   Updated: 2018/04/17 09:22:13 by cepalle     ###    #+. /#+    ###.fr     */
@@ -12,19 +12,6 @@
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
-struct	s_op {
-		char	*name;
-		int 	nb_arg;
-		int		args[3];
-		int 	opcode;
-		int   cycle;
-		char  *descr;
-		int 	octet_param;
-		int 	to_do; // TODO
-};
-
-typedef struct s_op t_op;
 
 t_op    g_op_tab[17] =
 {

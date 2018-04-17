@@ -149,6 +149,10 @@ champion_description ::= .comment string
 Les parametres sont précédé par un octet de description sous la forme suivante:
 `0b __ __ __ 00` sur les 3 duo de bit il est stoque le code du type des parametres. Les types sont les suivant:
 
+# define REG_CODE				1
+# define DIR_CODE				2
+# define IND_CODE				3
+
 Registre: **REG_CODE**, numeraux d'un registre codé sur **REG_SIZE** (1) Octet
 
 Direct: **DIR_CODE**, integer codé sur **DIR_SIZE** (4) Octets

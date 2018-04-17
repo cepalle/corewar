@@ -47,7 +47,7 @@
 #define CYCLE_TO_DIE			1536
 #define CYCLE_DELTA				50
 #define NBR_LIVE				21
-#define MAX_CHECKS				10
+
 
 /*
 ** OP_TAB
@@ -77,3 +77,17 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+struct	s_op
+{
+	char	*name;
+	int 	nb_arg;
+	int		args[3];
+	int 	opcode;
+	int   	cycle;
+	char  	*descr;
+	int 	octet_param;
+	int 	to_do;
+};
+
+typedef struct s_op t_op;
