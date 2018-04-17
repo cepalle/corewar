@@ -6,12 +6,12 @@
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:48 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/10 17:23:37 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/17 09:22:13 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "../includes/op.h"
 
 struct	s_op {
 		char	*name;
