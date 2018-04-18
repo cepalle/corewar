@@ -28,7 +28,7 @@ t_cmdl cmd_input(int argc, char **argv)
 	fd = open(argv[0 + cmdl.opt_a], O_RDONLY);
 	if (fd < 0)
 	{
-		perror(NULL);
+		perror(NULL); // TODO change?
 		cmdl.er = 1;
 	}
 	return cmdl;

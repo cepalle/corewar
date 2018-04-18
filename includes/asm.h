@@ -4,7 +4,6 @@ enum TOKEN
 {
 		TOKEN_PROG_NAME,      // .name                 data -> NULL
 		TOKEN_PROG_COMMENT,   // .comment              data -> NULL
-		TOKEN_OP_NAME,        // see g_op_tab in op.c, data -> op_name
 		TOKEN_LABEL,          // label,                data -> label
 		TOKEN_NUMBER,         // number,               data -> number
 		TOKEN_STRING,         // " * ",                data -> string
