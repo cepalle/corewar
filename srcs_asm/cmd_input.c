@@ -8,7 +8,7 @@ t_cmdl cmd_input(int argc, char **argv)
 	t_cmdl cmdl;
 	int fd;
 
-	cmdl = {0, 0, 0};
+	ft_bzero(&cmdl, sizeof(t_cmdl));
 	if (argc != 1 && argc != 0)
 	{
 		asm_usage();

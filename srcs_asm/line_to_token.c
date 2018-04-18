@@ -7,7 +7,7 @@ t_token get_dote_start_token(int *i_token, const char *line, int line_file)
 {
 	t_token token;
 
-	token = {0, 0, NULL};
+	ft_bzero(&token, sizeof(t_token));
 
 	if (ft_strnequ(".name", line + *i_token, 5))
 	{
@@ -31,7 +31,7 @@ t_token get_digit(int *i_token, const char *line, int line_file)
 	t_token token;
 	int i;
 
-	token = {0, 0, NULL};
+	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_NUMBER;
 	token.data = ft_strdup(line + *i_token);
@@ -54,7 +54,8 @@ t_token get_label(int *i_token, const char *line, int line_file)
 	t_token token;
 	int i;
 
-	token = {0, 0, NULL};
+	(void)line_file;
+	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_LABEL;
 	token.data = ft_strdup(line + *i_token);
@@ -71,7 +72,7 @@ t_token get_single_char_token(int *i_token, const char *line, int line_file)
 	t_token token;
 
 	(void)line_file;
-	token = {0, 0, NULL};
+	ft_bzero(&token, sizeof(t_token));
 
 	if (line[*i_token] == ':')
 		token.enum_token = TOKEN_LABEL_CHAR;
@@ -93,7 +94,7 @@ t_token get_comment(int *i_token, const char *line, int line_file)
 	t_token token;
 
 	(void)line_file;
-	token = {0, 0, NULL};
+	ft_bzero(&token, sizeof(t_token));
 	(*i_token)++;
 	token.enum_token = TOKEN_COMMENT;
 	token.data = ft_strdup(line + *i_token);
@@ -106,7 +107,7 @@ t_token get_string(int *i_token, const char *line, int line_file)
 	t_token token;
 	int i;
 
-	token = {0, 0, NULL};
+	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_STRING;
 	(*i_token)++;
@@ -132,7 +133,7 @@ t_token get_token(int *i_token, const char *line, int line_file)
 {
 	t_token token;
 
-	token = {0, 0, NULL};
+	ft_bzero(&token, sizeof(t_token));
 
 	if (line[*i_token] && ft_strchr(":-+%,", line[*i_token]))
 		token = get_single_char_token(i_token, line, line_file);
