@@ -11,7 +11,7 @@ t_lexer lexer(int fd) {
     char *line;
 
     ft_bzero(&lexer_res, sizeof(t_lexer));
-    ft_bzero(ltken, sizeof(t_token) * 5);
+    ft_bzero(ltken, sizeof(t_token) * LEN_LTOKEN);
     while (get_next_line(fd, &line) > 0)
     {
         line_to_token(ltken, line);
