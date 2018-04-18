@@ -1,7 +1,12 @@
 // LEXER
 
+#define TAB_TOKEN_LEN_INIT 64
+#define LEN_LTOKEN 16
+
+
 enum TOKEN
 {
+        I_DONT_EXISTE,
 		TOKEN_PROG_NAME,      // .name                 data -> NULL
 		TOKEN_PROG_COMMENT,   // .comment              data -> NULL
 		TOKEN_LABEL,          // label,                data -> label
@@ -68,9 +73,9 @@ t_lexer lexer(int fd);
 t_parser parser(void);
 void display_ast(void);
 void ast_to_byte(void);
-void line_to_token(t_token *ltken, char *line);
+void line_to_token(t_token *ltken, char *line, int line_file);
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
-
+void print_tab_token(t_tab_token tab_token);
 
 
 

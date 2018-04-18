@@ -6,7 +6,6 @@
 t_cmdl cmd_input(int argc, char **argv)
 {
     t_cmdl cmdl;
-    int fd;
 
     ft_bzero(&cmdl, sizeof(t_cmdl));
     if ((argc != 2 && argc != 1) ||
@@ -18,8 +17,9 @@ t_cmdl cmd_input(int argc, char **argv)
         return cmdl;
     }
     cmdl.opt_a = argc == 2;
-    fd = open(argv[0 + cmdl.opt_a], O_RDONLY);
-    if (fd < 0) {
+    cmdl.fd = open(argv[0 + cmdl.opt_a], O_RDONLY);
+    if (cmdl.fd < 0)
+    {
         ft_printf("No file name %s\n", argv[0 + cmdl.opt_a]);
         cmdl.er = 1;
     }

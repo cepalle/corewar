@@ -1,6 +1,7 @@
 #include "../libft/includes/libft.h"
 #include "../includes/op.h"
 #include "../includes/asm.h"
+#include <unistd.h>
 
 int main(int argc, char **argv)
 {
@@ -12,6 +13,7 @@ int main(int argc, char **argv)
 	if (cmdl.er)
 		return (1);
 	lexer_res = lexer(cmdl.fd);
+	close(cmdl.fd);
 	if (lexer_res.er)
 		return (1);
 	parser_res = parser();
