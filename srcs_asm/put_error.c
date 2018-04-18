@@ -2,7 +2,8 @@
 
 int put_error(char *msg)
 {
-	msg && ft_putstr_fd(msg, 2);
+	if (msg)
+		ft_putstr_fd(msg, 2);
 	return (-1);
 }
 

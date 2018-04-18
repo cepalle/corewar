@@ -1,4 +1,5 @@
-#include "../includes/asm.h"
+#include "asm.h"
+#include "libft.h"
 #include <fcntl.h>
 #include <errno.h>
 
@@ -14,7 +15,7 @@ t_cmdl cmd_input(int argc, char **argv)
 		cmdl.er = 1;
 		return cmdl;
 	}
-	if (argv == 1)
+	if (argc == 1)
 	{
 		if (!ft_strequ("-a", argv[0]))
 		{
@@ -27,7 +28,7 @@ t_cmdl cmd_input(int argc, char **argv)
 	fd = open(argv[0 + cmdl.opt_a], O_RDONLY);
 	if (fd < 0)
 	{
-		perror();
+		perror(NULL);
 		cmdl.er = 1;
 	}
 	return cmdl;

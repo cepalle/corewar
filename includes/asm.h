@@ -1,3 +1,5 @@
+// LEXER
+
 enum TOKEN
 {
 		TOKEN_PROG_NAME,      // .name                 data -> NULL
@@ -18,7 +20,7 @@ enum TOKEN
 struct s_token
 {
 		int er;
-		int token;
+		int enum_token;
 		char *data;
 };
 typedef struct s_token t_token;
@@ -38,6 +40,8 @@ struct s_lexer
 };
 typedef struct s_lexer t_lexer;
 
+// CMD
+
 struct s_cmdl
 {
 		int er;
@@ -45,6 +49,8 @@ struct s_cmdl
 		char opt_a;
 };
 typedef struct s_cmdl t_cmdl;
+
+// PARSER
 
 struct s_parser
 {
@@ -57,13 +63,14 @@ typedef struct s_parser t_parser;
 
 
 int put_error(char *msg);
+int asm_usage(void);
 t_cmdl cmd_input(int argc, char **argv);
 t_lexer lexer(int fd);
 t_parser parser(void);
 void display_ast(void);
 void ast_to_byte(void);
-void line_to_token(t_token *ltken);
-void tab_token_multi_add(t_lexer *lexer_res, t_token *ltken);
+void line_to_token(t_token *ltken, char *line);
+void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 
 
 
