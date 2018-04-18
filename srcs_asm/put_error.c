@@ -10,6 +10,6 @@ int put_error(char *msg)
 int asm_usage(void)
 {
 	put_error("Usage: ./bin_ref/asm [-a] <sourcefile.s>\n");
-	put_error("    -a : Display AST");
+	put_error("    -a : Display AST\n");
 	return (-1);
 };
