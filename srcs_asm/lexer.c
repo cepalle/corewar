@@ -13,7 +13,7 @@ t_lexer lexer(int fd)
 
     ft_bzero(&lexer_res, sizeof(t_lexer));
     ft_bzero(ltken, sizeof(t_token) * LEN_LTOKEN);
-    line_num = 0;
+    line_num = 1;
     while (get_next_line(fd, &line) > 0)
     {
         line_to_token(ltken, line, line_num);

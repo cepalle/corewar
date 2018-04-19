@@ -164,7 +164,6 @@ void line_to_token(t_token *ltken, char *line, int line_file)
 
 	i_tken = 0;
 	i_line = 0;
-	line_file = 0;
 
 	while (line[i_line] == '\t' || line[i_line] == ' ')
 		i_line++;
