@@ -1,6 +1,6 @@
 // LEXER
 
-#define TAB_TOKEN_LEN_INIT 64
+#define TAB_TOKEN_LEN_INIT 4
 #define LEN_LTOKEN 16
 
 
