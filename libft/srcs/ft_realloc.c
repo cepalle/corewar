@@ -18,10 +18,12 @@ void	*ft_realloc(void *pt, int sizeold, int new_size)
 {
 	void	*to_do;
 
+	if (sizeold < 0 || new_size < 0)
+		return (NULL);
 	if (sizeold >= new_size)
 		return (pt);
-	to_do = ft_memalloc(new_size);
-	ft_memmove(to_do, pt, sizeold);
+	to_do = ft_memalloc((size_t)new_size);
+	ft_memmove(to_do, pt, (size_t)sizeold);
 	free(pt);
 	return (to_do);
 }
