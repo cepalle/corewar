@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-t_lexer lexer(int fd)
+t_lexer lexer(t_cmdl cmdl)
 {
     t_lexer lexer_res;
     t_token ltken[LEN_LTOKEN];
@@ -14,7 +14,7 @@ t_lexer lexer(int fd)
     ft_bzero(&lexer_res, sizeof(t_lexer));
     ft_bzero(ltken, sizeof(t_token) * LEN_LTOKEN);
     line_num = 1;
-    while (get_next_line(fd, &line) > 0)
+    while (get_next_line(cmdl.fd, &line) > 0)
     {
         line_to_token(ltken, line, line_num);
         //ft_printf("----line: %s\n", line);
@@ -22,7 +22,7 @@ t_lexer lexer(int fd)
         if (ltken[0].er)
         {
             //free
-            close(fd);
+            close(cmdl.fd);
             lexer_res.er = 1;
             return lexer_res;
         }
@@ -30,6 +30,7 @@ t_lexer lexer(int fd)
         line_num++;
         //print_tab_token(lexer_res.tab_token); // TEST
     }
+		ft_printf("\n### LEXER\n\n");
     print_tab_token(lexer_res.tab_token); // TEST
     return lexer_res;
 };

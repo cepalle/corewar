@@ -56,6 +56,11 @@ typedef struct s_cmdl t_cmdl;
 
 // PARSER
 
+
+
+
+
+
 struct s_parser
 {
 		int er;
@@ -69,8 +74,8 @@ typedef struct s_parser t_parser;
 int put_error(char *msg);
 int asm_usage(void);
 t_cmdl cmd_input(int argc, char **argv);
-t_lexer lexer(int fd);
-t_parser parser(void);
+t_lexer lexer(t_cmdl cmdl);
+t_parser parser(t_lexer lexer_res);
 void display_ast(void);
 void ast_to_byte(void);
 void line_to_token(t_token *ltken, char *line, int line_file);

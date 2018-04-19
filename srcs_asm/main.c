@@ -12,11 +12,11 @@ int main(int argc, char **argv)
 	cmdl = cmd_input(argc - 1, argv + 1);
 	if (cmdl.er)
 		return (1);
-	lexer_res = lexer(cmdl.fd);
+	lexer_res = lexer(cmdl);
 	close(cmdl.fd);
 	if (lexer_res.er)
 		return (1);
-	parser_res = parser();
+	parser_res = parser(lexer_res);
 	if (parser_res.er)
 		return (1); // May be need free
 	if (cmdl.opt_a)
