@@ -21,7 +21,7 @@ t_token get_dote_start_token(int *i_token, const char *line, int line_file)
 		*i_token = *i_token + 8;
 		return token;
 	}
-	ft_printf("line %d: get_dote_start_token, Unexpected token after '.'\n", line_file);
+	ft_printf("lexer error: line %d: get_dote_start_token, Unexpected token after '.'\n", line_file);
 	token.er = 1;
 	return (token);
 };
@@ -42,7 +42,7 @@ t_token get_digit(int *i_token, const char *line, int line_file)
 	{
 		free(token.data);
 		token.er = 1;
-		ft_printf("line %d: get_digit, Unexpected token\n", line_file);
+		ft_printf("lexer error: line %d: get_digit, Unexpected token\n", line_file);
 	}
 	token.data[i] = '\0';
 	*i_token = *i_token + i;
@@ -125,7 +125,7 @@ t_token get_string(int *i_token, const char *line, int line_file)
 	}
 	free(token.data);
 	token.er = 1;
-	ft_printf("line %d: get_string, Unclosed string in the same line\n", line_file);
+	ft_printf("lexer error: line %d: get_string, Unclosed string in the same line\n", line_file);
 	return (token);
 };
 
@@ -149,7 +149,7 @@ t_token get_token(int *i_token, const char *line, int line_file)
 		token = get_label(i_token, line, line_file);
 	else
 	{
-		ft_printf("line %d: get_token, Unexpected token: '%c' %d\n", line_file, line[*i_token], line[*i_token] == '\t');
+		ft_printf("lexer error: line %d: get_token, Unexpected token: '%c' %d\n", line_file, line[*i_token], line[*i_token] == '\t');
 		token.er = 1;
 	};
 	while (line[*i_token] == '\t' || line[*i_token] == ' ')
@@ -172,7 +172,7 @@ void line_to_token(t_token *ltken, char *line, int line_file)
 		ltken[i_tken] = get_token(&i_line, line, line_file);
 		if (i_tken >= LEN_LTOKEN)
 		{
-			ft_printf("line %d:line_to_token, Too many token in one line\n", line_file);
+			ft_printf("lexer error: line %d:line_to_token, Too many token in one line\n", line_file);
 			ltken[0].er = 1;
 		}
 		if (ltken[i_tken].er)

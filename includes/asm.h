@@ -12,7 +12,7 @@ enum TOKEN
 		TOKEN_LABEL,          // label,                data -> label
 		TOKEN_NUMBER,         // number,               data -> number
 		TOKEN_STRING,         // " * ",                data -> string
-		TOKEN_COMMENT,        // '#' or ';' * \n              data -> comment
+		TOKEN_COMMENT,        // '#' or ';' * \n       data -> comment
 		TOKEN_LABEL_CHAR,     // :                     data -> NULL
 		TOKEN_MINUS,          // -                     data -> NULL
 		TOKEN_PLUS,           // +                     data -> NULL
@@ -122,6 +122,7 @@ int asm_usage(void);
 void line_to_token(t_token *ltken, char *line, int line_file);
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 void print_tab_token(t_tab_token tab_token);
+void ast_add_next(t_parser *parser_res, t_tab_token *tab_token, int *i);
 
 
 

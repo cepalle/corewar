@@ -22,7 +22,6 @@ t_lexer lexer(t_cmdl cmdl)
         if (ltken[0].er)
         {
             //free
-            close(cmdl.fd);
             lexer_res.er = 1;
             return lexer_res;
         }
@@ -30,7 +29,9 @@ t_lexer lexer(t_cmdl cmdl)
         line_num++;
         //print_tab_token(lexer_res.tab_token); // TEST
     }
-		ft_printf("\n### LEXER\n\n");
+    ft_printf("\n### LEXER\n\n");
     print_tab_token(lexer_res.tab_token); // TEST
+    if (lexer_res.tab_token.i < 0)
+        lexer_res.er = 1;
     return lexer_res;
 };

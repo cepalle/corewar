@@ -7,6 +7,8 @@ void print_tab_token(t_tab_token tab_token)
 	int i;
 
 	i = 0;
+	if (tab_token.i < 0)
+		return;
 	while (i <= tab_token.i)
 	{
 		if (tab_token.tokens[i].enum_token == TOKEN_PROG_NAME)
