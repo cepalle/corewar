@@ -139,7 +139,7 @@ t_token get_token(int *i_token, const char *line, int line_file)
 		token = get_single_char_token(i_token, line, line_file);
 	else if (line[*i_token] == '.')
 		token = get_dote_start_token(i_token, line, line_file);
-	else if (line[*i_token] == '#')
+	else if (line[*i_token] == '#' || line[*i_token] == ';')
 		token = get_comment(i_token, line, line_file);
 	else if (line[*i_token] == '"')
 		token = get_string(i_token, line, line_file);

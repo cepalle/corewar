@@ -12,7 +12,7 @@ enum TOKEN
 		TOKEN_LABEL,          // label,                data -> label
 		TOKEN_NUMBER,         // number,               data -> number
 		TOKEN_STRING,         // " * ",                data -> string
-		TOKEN_COMMENT,        // '#' * \n              data -> comment
+		TOKEN_COMMENT,        // '#' or ';' * \n              data -> comment
 		TOKEN_LABEL_CHAR,     // :                     data -> NULL
 		TOKEN_MINUS,          // -                     data -> NULL
 		TOKEN_PLUS,           // +                     data -> NULL
