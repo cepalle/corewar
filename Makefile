@@ -47,6 +47,7 @@ $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)
 
 # BIN
 
+# ADD libft_file in dependance ?
 $(LIBFT):
 	make -C $(LIBFTDIR) all
 

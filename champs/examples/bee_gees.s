@@ -19,6 +19,10 @@ zjmp	%:forks
 endwhile:
 ld	%0, r4			;carry = 1
 
+titi:
+toto:
 live:
 live %4
 zjmp %:live
+zjmp %:toto
+zjmp %:titi
