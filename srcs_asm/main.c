@@ -18,11 +18,11 @@ int main(int argc, char **argv)
 		return (1);
 	parser_res = parser(lexer_res);
 	if (parser_res.er)
-		return (1); // May be need free
+		return (1); // free
 	if (cmdl.opt_a)
-		display_ast();
+		display_ast(parser_res);
 	else
-		ast_to_byte();
+		ast_to_byte(parser_res);
 	// free
 	return (0);
 }
