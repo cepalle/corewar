@@ -2,26 +2,52 @@
 #include "libft.h"
 #include "op.h"
 
-// GLOBAL CHECK
 int is_registre(char *label)
 {
 	int reg_num;
 	int er;
 
+	er = 0;
 	if (label[0] != 'r')
 		return 0;
 	label++;
 	reg_num = ft_atoi_only(label, &er);
-	if (er || reg_num <= 0 || reg_num > 16)
+	if (er || reg_num <= 0 || reg_num > REG_NUMBER)
 		return 0;
 	return 1;
 };
 
-// GOBAL CHECK
-int check_label_if_exist(t_parser parser_res, char *to_find)
+int check_registres(t_ast_inst *ast_inst)
+{
+	int i;
+
+	if (!ast_inst)
+		return 0;
+	i = 0;
+	while (i < ast_inst->nb_ast_params)
+	{
+		if (ast_inst->ast_params[i].enum_token == TOKEN_LABEL &&
+						!is_registre(ast_inst->ast_params[i].data))
+		{
+			ft_printf("no valid param registre '%s'\n", ast_inst->ast_params[i].data);
+			print_token(ast_inst->ast_params[i]);
+			return 1;
+		}
+		i++;
+	}
+	return check_registres(ast_inst->next);
+};
+
+int check_label_if_exist(t_parser parser_res, const char *to_find)
 {
 	(void) parser_res;
 	(void) to_find;
+	return 0;
+};
+
+int check_labels(t_ast_inst *ast_inst)
+{
+	(void)ast_inst;
 	return 0;
 };
 
@@ -281,11 +307,10 @@ int check_insts(t_ast_inst *inst)
 
 int check_ast(t_parser parser_res)
 {
-	// check regist
-	// check label
-
 	if (!ft_strlen(parser_res.ast_prog.prog_name) ||
 			ft_strlen(parser_res.ast_prog.prog_name) > PROG_NAME_LENGTH ||
+			check_registres(parser_res.ast_prog.ast_inst) ||
+			check_labels(parser_res.ast_prog.ast_inst) ||
 			check_insts(parser_res.ast_prog.ast_inst))
 	{
 		// free parser_res
