@@ -7,22 +7,22 @@
 
 enum TOKEN
 {
-    EMPTYY,
-		TOKEN_PROG_NAME,         // .name                 data -> NULL
-		TOKEN_PROG_COMMENT,      // .comment              data -> NULL
+    EMPTYY,                  // 0
+		TOKEN_PROG_NAME,         // 1 .name                 data -> NULL
+		TOKEN_PROG_COMMENT,      // 2 .comment              data -> NULL
 
-		TOKEN_DIRECT_LABEL,      // %:label               data -> label
-		TOKEN_DIRECT_NUMBER,     // %number               data -> number
-		TOKEN_INDIRECT_LABEL,  	 // :label                data -> label
-		TOKEN_INDIRECT_NUMBER,   // number                data -> number
+		TOKEN_DIRECT_LABEL,      // 3 %:label               data -> label
+		TOKEN_DIRECT_NUMBER,     // 4 %number               data -> number
+		TOKEN_INDIRECT_LABEL,  	 // 5 :label                data -> label
+		TOKEN_INDIRECT_NUMBER,   // 6 number                data -> number
 
-		TOKEN_LABEL_DECLARATION, // label:                data -> label
-		TOKEN_LABEL,             // label                 data -> label
+		TOKEN_LABEL_DECLARATION, // 7 label:                data -> label
+		TOKEN_LABEL,             // 8 label                 data -> label
 
-		TOKEN_STRING,            // "string",             data -> string
-		TOKEN_COMMENT,           //  <#|;>comment\n       data -> comment
-		TOKEN_SEPARATOR_CHAR,    // ,                     data -> NULL
-		TOKEN_EOL,               // \n                    data -> NULL
+		TOKEN_STRING,            // 9 "string",             data -> string
+		TOKEN_COMMENT,           // 10 <#|;>comment\n       data -> comment
+		TOKEN_SEPARATOR_CHAR,    // 11 ,                    data -> NULL
+		TOKEN_EOL,               // 12 \n                   data -> NULL
 };
 
 struct s_token

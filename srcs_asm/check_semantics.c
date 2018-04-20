@@ -44,7 +44,7 @@ int check_ld(t_ast_inst *inst)
 			 inst->ast_params[0].enum_token != TOKEN_DIRECT_NUMBER &&
 			 inst->ast_params[0].enum_token != TOKEN_INDIRECT_LABEL &&
 			 inst->ast_params[0].enum_token != TOKEN_INDIRECT_NUMBER) ||
-			inst->ast_params[1].enum_token != TOKEN_DIRECT_LABEL)
+			inst->ast_params[1].enum_token != TOKEN_LABEL)
 	{
 		ft_printf("ld bad parameters\n");
 		return 1;
