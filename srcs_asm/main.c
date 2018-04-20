@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	if (lexer_res.er)
 		return (1);
 	parser_res = parser(lexer_res);
-	if (parser_res.er)
+	if (parser_res.er || check_semantics(parser_res))
 		return (1); // free ?
 	if (cmdl.opt_a)
 		display_ast(parser_res);
