@@ -104,7 +104,7 @@ void print_tab_token(t_tab_token tab_token);
 void print_token(t_token token);
 void ast_add_next(t_parser *parser_res, t_tab_token tab_token, int *i);
 void print_ast_prog(t_ast_prog ast_prog);
-int check_semantics(t_parser parser_res);
+int check_ast(t_parser parser_res);
 
 
 
