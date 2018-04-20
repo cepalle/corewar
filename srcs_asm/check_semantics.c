@@ -27,10 +27,9 @@ int check_registres(t_ast_inst *ast_inst)
 	while (i < ast_inst->nb_ast_params)
 	{
 		if (ast_inst->ast_params[i].enum_token == TOKEN_LABEL &&
-						!is_registre(ast_inst->ast_params[i].data))
+				!is_registre(ast_inst->ast_params[i].data))
 		{
 			ft_printf("no valid param registre '%s'\n", ast_inst->ast_params[i].data);
-			print_token(ast_inst->ast_params[i]);
 			return 1;
 		}
 		i++;
@@ -38,17 +37,41 @@ int check_registres(t_ast_inst *ast_inst)
 	return check_registres(ast_inst->next);
 };
 
-int check_label_if_exist(t_parser parser_res, const char *to_find)
+int check_label_if_exist(t_ast_inst *ast_inst, const char *to_find)
 {
-	(void) parser_res;
-	(void) to_find;
-	return 0;
+	int i;
+
+	if (!ast_inst)
+		return 1;
+	i = 0;
+	while (i < ast_inst->nb_labels_dec)
+	{
+		if (ft_strequ(to_find, ast_inst->labels_dec[i].data))
+			return 0;
+		i++;
+	}
+	return check_label_if_exist(ast_inst->next, to_find);
 };
 
-int check_labels(t_ast_inst *ast_inst)
+int check_labels(t_parser parser_res, t_ast_inst *ast_inst)
 {
-	(void)ast_inst;
-	return 0;
+	int i;
+
+	if (!ast_inst)
+		return 0;
+	i = 0;
+	while (i < ast_inst->nb_ast_params)
+	{
+		if ((ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL ||
+				 ast_inst->ast_params[i].enum_token == TOKEN_INDIRECT_LABEL) &&
+				check_label_if_exist(parser_res.ast_prog.ast_inst, ast_inst->ast_params[i].data))
+		{
+			ft_printf("label is not declare '%s'\n", ast_inst->ast_params[i].data);
+			return 1;
+		}
+		i++;
+	}
+	return check_labels(parser_res, ast_inst->next);
 };
 
 int check_live(t_ast_inst *inst)
@@ -309,8 +332,9 @@ int check_ast(t_parser parser_res)
 {
 	if (!ft_strlen(parser_res.ast_prog.prog_name) ||
 			ft_strlen(parser_res.ast_prog.prog_name) > PROG_NAME_LENGTH ||
+			ft_strlen(parser_res.ast_prog.prog_comment) > COMMENT_LENGTH ||
 			check_registres(parser_res.ast_prog.ast_inst) ||
-			check_labels(parser_res.ast_prog.ast_inst) ||
+			check_labels(parser_res, parser_res.ast_prog.ast_inst) ||
 			check_insts(parser_res.ast_prog.ast_inst))
 	{
 		// free parser_res
