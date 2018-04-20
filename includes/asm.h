@@ -2,7 +2,7 @@
 
 #define TAB_TOKEN_LEN_INIT 4
 #define LEN_LTOKEN 16
-
+#define LABELS_DEC_LEN 8
 
 enum TOKEN
 {
@@ -58,21 +58,14 @@ typedef struct s_cmdl t_cmdl;
 
 // PARSER
 
-struct s_ast_param
-{
-	  int enum_toekn;
-		char *data;
-};
-typedef struct s_ast_param t_ast_param;
-
 struct s_ast_inst
 {
 		int er;
-		int nb_label;
-		char label[8];
+		int nb_labels_dec;
+		t_token labels_dec[LABELS_DEC_LEN];
 	  int opcode;
 		int nb_ast_param;
-		t_ast_param ast_param[3];
+		t_token ast_param[3];
 		struct s_ast_inst *next;
 };
 typedef struct s_ast_inst t_ast_inst;
@@ -107,7 +100,6 @@ void line_to_token(t_token *ltken, char *line, int line_file);
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 void print_tab_token(t_tab_token tab_token);
 void ast_add_next(t_parser *parser_res, t_tab_token tab_token, int *i);
-void print_tab_token(t_tab_token tab_token);
 
 
 

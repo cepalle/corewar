@@ -74,7 +74,7 @@ integer ::= digit { digit }
 
 Any other character is invalid.
 
-### 2) Syntactic Specifications
+### 2) Syntactic Specifications /!\\ NEED UPDATE /!\\
 
 We use Extended BNF, with `[` and `]` for zero or once, and `{` and `}` for any number of repetition including zero.
 
