@@ -3,6 +3,7 @@
 #define TAB_TOKEN_LEN_INIT 4
 #define LEN_LTOKEN 16
 #define LABELS_DEC_LEN 8
+#define MAX_PARAMS 3
 
 enum TOKEN
 {
@@ -12,8 +13,9 @@ enum TOKEN
 
 		TOKEN_DIRECT_LABEL,      // %:label               data -> label
 		TOKEN_DIRECT_NUMBER,     // %number               data -> number
-		TOKEN_INDIRECT_NUMBER,	 // :label                data -> label
-		TOKEN_INDIRECT_LABEL,    // number                data -> number
+		TOKEN_INDIRECT_LABEL,  	 // :label                data -> label
+		TOKEN_INDIRECT_NUMBER,   // number                data -> number
+
 		TOKEN_LABEL_DECLARATION, // label:                data -> label
 		TOKEN_LABEL,             // label                 data -> label
 
@@ -63,9 +65,9 @@ struct s_ast_inst
 		int er;
 		int nb_labels_dec;
 		t_token labels_dec[LABELS_DEC_LEN];
-	  int opcode;
-		int nb_ast_param;
-		t_token ast_param[3];
+	  char *cmd;
+		int nb_ast_params;
+		t_token ast_params[MAX_PARAMS];
 		struct s_ast_inst *next;
 };
 typedef struct s_ast_inst t_ast_inst;
@@ -99,6 +101,7 @@ int asm_usage(void);
 void line_to_token(t_token *ltken, char *line, int line_file);
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 void print_tab_token(t_tab_token tab_token);
+void print_token(t_token token);
 void ast_add_next(t_parser *parser_res, t_tab_token tab_token, int *i);
 
 
