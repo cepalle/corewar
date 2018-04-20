@@ -17,12 +17,13 @@ int main(int argc, char **argv)
 	if (lexer_res.er)
 		return (1);
 	parser_res = parser(lexer_res);
+	// free lexer
 	if (parser_res.er || check_semantics(parser_res))
-		return (1); // free ?
+		return (1);
 	if (cmdl.opt_a)
 		display_ast(parser_res);
 	else
 		ast_to_byte(parser_res);
-	// free
+	// free parser
 	return (0);
 }

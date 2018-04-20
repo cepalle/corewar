@@ -164,6 +164,29 @@ Les paramètres, directement, selon le modèle suivant :
 un label est transformé en valeur indirect qui point relativement au PC vers
 la declaration du label (ff ff = -1).
 
+#### Header:
+
+L’exécutable commence toujours par un header, défini dans op.h par le type
+**header_t**
+
+### 4) Exemple complet de compilation
+
+```
+.name "zork"
+.comment "just a basic living prog"
+l2: sti r1,%:live,%1
+and r1,%0,r1
+live: live %1
+zjmp %:live
+
+# Executable compile:
+#
+# 0x0b,0x68,0x01,0x00,0x0f,0x00,0x01
+# 0x06,0x64,0x01,0x00,0x00,0x00,0x00,0x01
+# 0x01,0x00,0x00,0x00,0x01
+# 0x09,0xff,0xfb
+```
+
 #### Exemple with bee_gees.s:
 
 ```
@@ -231,29 +254,6 @@ live:
 
 > zjmp %:live
 < 09 ff-fb
-```
-
-#### Header:
-
-L’exécutable commence toujours par un header, défini dans op.h par le type
-**header_t**
-
-### 4) Exemple complet de compilation
-
-```
-.name "zork"
-.comment "just a basic living prog"
-l2: sti r1,%:live,%1
-and r1,%0,r1
-live: live %1
-zjmp %:live
-
-# Executable compile:
-#
-# 0x0b,0x68,0x01,0x00,0x0f,0x00,0x01
-# 0x06,0x64,0x01,0x00,0x00,0x00,0x00,0x01
-# 0x01,0x00,0x00,0x00,0x01
-# 0x09,0xff,0xfb
 ```
 
 ### 5) Fonctionnement
