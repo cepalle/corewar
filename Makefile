@@ -19,7 +19,8 @@ DIR_COREWAR = srcs_corewar/
 
 C_FILES_NAMES_COMMON = op.c
 C_FILES_NAMES_ASM = ast_to_byte.c cmd_input.c display_ast.c lexer.c \
-	line_to_token.c main.c parser.c put_error.c tab_token.c
+	line_to_token.c main.c parser.c put_error.c tab_token.c \
+	ast_handler.c
 C_FILES_NAMES_COREWAR = main.c
 
 OBJDIR_COMMON = objs_common/
@@ -70,9 +71,17 @@ clean:
 
 re: fclean all
 
+re_asm: fclean_not_lib $(ASM_NAME)
+
+re_corewar: fclean_not_lib $(COREWAR_NAME)
+
 fclean: clean
 	rm -f $(ASM_NAME)
 	rm -f $(COREWAR_NAME)
 	make -C $(LIBFTDIR) fclean
+
+fclean_not_lib: clean
+	rm -f $(ASM_NAME)
+	rm -f $(COREWAR_NAME)
 
 .PHONY: all clean re fclean

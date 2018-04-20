@@ -84,7 +84,7 @@ typedef struct s_ast_op t_ast_op;
 
 struct s_ast_inst
 {
-		int nb_label
+		int nb_label;
 		char label[8];
 	  int opcode;
 		int nb_ast_param;
