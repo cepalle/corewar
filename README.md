@@ -20,7 +20,7 @@ l’extension .s par .cor .
 - En cas d’erreur, vous devrez afficher un message pertinent sur la sortie d’erreur,
 et ne pas produire de fichier .cor
 
-### 1) Lexical Specifications
+### 1) Lexical Specifications /!\\ NEED UPDATE /!\\
 
 #### Keywords:
 
@@ -67,7 +67,7 @@ digit ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 #### Numbers:
 
 ```
-integer ::= [op] digit { digit }
+integer ::= digit { digit }
 ```
 
 #### Invalid characters:

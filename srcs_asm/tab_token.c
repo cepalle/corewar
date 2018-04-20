@@ -15,22 +15,22 @@ void print_tab_token(t_tab_token tab_token)
 			ft_printf(".name ");
 		if (tab_token.tokens[i].enum_token == TOKEN_PROG_COMMENT)
 			ft_printf(".comment ");
-		if (tab_token.tokens[i].enum_token == TOKEN_LABEL)
+		if (tab_token.tokens[i].enum_token == TOKEN_DIRECT_LABEL)
+			ft_printf("%%:%s ", tab_token.tokens[i].data);
+		if (tab_token.tokens[i].enum_token == TOKEN_DIRECT_NUMBER)
+			ft_printf("%%%s ", tab_token.tokens[i].data);
+		if (tab_token.tokens[i].enum_token == TOKEN_INDIRECT_NUMBER)
 			ft_printf("%s ", tab_token.tokens[i].data);
-		if (tab_token.tokens[i].enum_token == TOKEN_NUMBER)
+		if (tab_token.tokens[i].enum_token == TOKEN_INDIRECT_LABEL)
+			ft_printf(":%s ", tab_token.tokens[i].data);
+		if (tab_token.tokens[i].enum_token == TOKEN_LABEL_DECLARATION)
+			ft_printf("%s: ", tab_token.tokens[i].data);
+		if (tab_token.tokens[i].enum_token == TOKEN_LABEL)
 			ft_printf("%s ", tab_token.tokens[i].data);
 		if (tab_token.tokens[i].enum_token == TOKEN_STRING)
 			ft_printf("'%s' ", tab_token.tokens[i].data);
 		if (tab_token.tokens[i].enum_token == TOKEN_COMMENT)
-			ft_printf("#%s", tab_token.tokens[i].data);
-		if (tab_token.tokens[i].enum_token == TOKEN_LABEL_CHAR)
-			ft_printf(":");
-		if (tab_token.tokens[i].enum_token == TOKEN_MINUS)
-			ft_printf("-");
-		if (tab_token.tokens[i].enum_token == TOKEN_PLUS)
-			ft_printf("+");
-		if (tab_token.tokens[i].enum_token == TOKEN_DIRECT_CHAR)
-			ft_printf("%%");
+			ft_printf("#%s ", tab_token.tokens[i].data);
 		if (tab_token.tokens[i].enum_token == TOKEN_SEPARATOR_CHAR)
 			ft_printf(", ");
 		if (tab_token.tokens[i].enum_token == TOKEN_EOL)

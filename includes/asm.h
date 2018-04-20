@@ -7,18 +7,20 @@
 enum TOKEN
 {
     EMPTYY,
-		TOKEN_PROG_NAME,      // .name                 data -> NULL
-		TOKEN_PROG_COMMENT,   // .comment              data -> NULL
-		TOKEN_LABEL,          // label,                data -> label
-		TOKEN_NUMBER,         // number,               data -> number
-		TOKEN_STRING,         // " * ",                data -> string
-		TOKEN_COMMENT,        // '#' or ';' * \n       data -> comment
-		TOKEN_LABEL_CHAR,     // :                     data -> NULL
-		TOKEN_MINUS,          // -                     data -> NULL
-		TOKEN_PLUS,           // +                     data -> NULL
-		TOKEN_DIRECT_CHAR,    // %                     data -> NULL
-		TOKEN_SEPARATOR_CHAR, // ,                     data -> NULL
-		TOKEN_EOL,            // \n                    data -> NULL
+		TOKEN_PROG_NAME,         // .name                 data -> NULL
+		TOKEN_PROG_COMMENT,      // .comment              data -> NULL
+
+		TOKEN_DIRECT_LABEL,      // %:label               data -> label
+		TOKEN_DIRECT_NUMBER,     // %number               data -> number
+		TOKEN_INDIRECT_NUMBER,	 // :label                data -> label
+		TOKEN_INDIRECT_LABEL,    // number                data -> number
+		TOKEN_LABEL_DECLARATION, // label:                data -> label
+		TOKEN_LABEL,             // label                 data -> label
+
+		TOKEN_STRING,            // "string",             data -> string
+		TOKEN_COMMENT,           //  <#|;>comment\n       data -> comment
+		TOKEN_SEPARATOR_CHAR,    // ,                     data -> NULL
+		TOKEN_EOL,               // \n                    data -> NULL
 };
 
 struct s_token
@@ -84,6 +86,7 @@ typedef struct s_ast_op t_ast_op;
 
 struct s_ast_inst
 {
+		int er;
 		int nb_label;
 		char label[8];
 	  int opcode;

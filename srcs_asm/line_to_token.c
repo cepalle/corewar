@@ -3,22 +3,22 @@
 #include <stdlib.h>
 #include "libft.h"
 
-t_token get_dote_start_token(int *i_token, const char *line, int line_file)
+t_token get_dote_start_token(int *i_line, const char *line, int line_file)
 {
 	t_token token;
 
 	ft_bzero(&token, sizeof(t_token));
 
-	if (ft_strnequ(".name", line + *i_token, 5))
+	if (ft_strnequ(".name", line + *i_line, 5))
 	{
 		token.enum_token = TOKEN_PROG_NAME;
-		*i_token = *i_token + 5;
+		*i_line = *i_line + 5;
 		return token;
 	}
-	if (ft_strnequ(".comment", line + *i_token, 8))
+	if (ft_strnequ(".comment", line + *i_line, 8))
 	{
 		token.enum_token = TOKEN_PROG_COMMENT;
-		*i_token = *i_token + 8;
+		*i_line = *i_line + 8;
 		return token;
 	}
 	ft_printf("lexer error: line %d: get_dote_start_token, Unexpected token after '.'\n", line_file);
@@ -26,30 +26,38 @@ t_token get_dote_start_token(int *i_token, const char *line, int line_file)
 	return (token);
 };
 
-t_token get_digit(int *i_token, const char *line, int line_file)
+t_token get_indirect_number(int *i_line, const char *line, int line_file)
 {
 	t_token token;
 	int i;
 
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
-	token.enum_token = TOKEN_NUMBER;
-	token.data = ft_strdup(line + *i_token);
+	token.enum_token = TOKEN_INDIRECT_NUMBER;
+	token.data = ft_strdup(line + *i_line);
 
+	if (token.data[i] == '-')
+		i++;
 	while (ft_isdigit(token.data[i]))
 		i++;
 	if (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
 	{
 		free(token.data);
 		token.er = 1;
-		ft_printf("lexer error: line %d: get_digit, Unexpected token\n", line_file);
+		ft_printf("lexer error: line %d: get_indirect_number, Unexpected token\n", line_file);
 	}
 	token.data[i] = '\0';
-	*i_token = *i_token + i;
+	if (i == 1 && token.data[i] == '-')
+	{
+		free(token.data);
+		token.er = 1;
+		ft_printf("lexer error: line %d: get_indirect_number, no number found after '-'\n", line_file);
+	}
+	*i_line = *i_line + i;
 	return (token);
 };
 
-t_token get_label(int *i_token, const char *line, int line_file)
+t_token get_label(int *i_line, const char *line, int line_file)
 {
 	t_token token;
 	int i;
@@ -58,51 +66,48 @@ t_token get_label(int *i_token, const char *line, int line_file)
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_LABEL;
-	token.data = ft_strdup(line + *i_token);
+	token.data = ft_strdup(line + *i_line);
 
 	while (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
 		i++;
 	token.data[i] = '\0';
-	*i_token = *i_token + i;
+	if (line[*i_line + i] == ':')
+	{
+		token.enum_token = TOKEN_LABEL_DECLARATION;
+		(*i_line)++;
+	}
+	*i_line = *i_line + i;
 	return (token);
 };
 
-t_token get_single_char_token(int *i_token, const char *line, int line_file)
+t_token get_separator_char(int *i_line, const char *line, int line_file)
+{
+	t_token token;
+
+	(void)line_file;
+	(void)line;
+	ft_bzero(&token, sizeof(t_token));
+
+	token.enum_token = TOKEN_SEPARATOR_CHAR;
+
+	(*i_line)++;
+	return (token);
+};
+
+t_token get_comment(int *i_line, const char *line, int line_file)
 {
 	t_token token;
 
 	(void)line_file;
 	ft_bzero(&token, sizeof(t_token));
-
-	if (line[*i_token] == ':')
-		token.enum_token = TOKEN_LABEL_CHAR;
-	else if (line[*i_token] == '-')
-		token.enum_token = TOKEN_MINUS;
-	else if (line[*i_token] == '+')
-		token.enum_token = TOKEN_PLUS;
-	else if (line[*i_token] == '%')
-		token.enum_token = TOKEN_DIRECT_CHAR;
-	else
-		token.enum_token = TOKEN_SEPARATOR_CHAR;
-
-	(*i_token)++;
-	return (token);
-};
-
-t_token get_comment(int *i_token, const char *line, int line_file)
-{
-	t_token token;
-
-	(void)line_file;
-	ft_bzero(&token, sizeof(t_token));
-	(*i_token)++;
+	(*i_line)++;
 	token.enum_token = TOKEN_COMMENT;
-	token.data = ft_strdup(line + *i_token);
-	*i_token = *i_token + (int)ft_strlen(token.data);
+	token.data = ft_strdup(line + *i_line);
+	*i_line = *i_line + (int)ft_strlen(token.data);
 	return (token);
 };
 
-t_token get_string(int *i_token, const char *line, int line_file)
+t_token get_string(int *i_line, const char *line, int line_file)
 {
 	t_token token;
 	int i;
@@ -110,15 +115,15 @@ t_token get_string(int *i_token, const char *line, int line_file)
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_STRING;
-	(*i_token)++;
-	token.data = ft_strdup(line + *i_token);
+	(*i_line)++;
+	token.data = ft_strdup(line + *i_line);
 
 	while (token.data[i])
 	{
 		if (token.data[i] == '"')
 		{
 			token.data[i] = '\0';
-			*i_token = *i_token + i + 1;
+			*i_line = *i_line + i + 1;
 			return token;
 		}
 		i++;
@@ -129,31 +134,134 @@ t_token get_string(int *i_token, const char *line, int line_file)
 	return (token);
 };
 
-t_token get_token(int *i_token, const char *line, int line_file)
+t_token get_indirect_label(int *i_line, const char *line, int line_file)
+{
+	t_token token;
+	int i;
+
+	ft_bzero(&token, sizeof(t_token));
+	i = 0;
+	token.enum_token = TOKEN_INDIRECT_LABEL;
+	(*i_line)++;
+	token.data = ft_strdup(line + *i_line);
+
+	while (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
+		i++;
+	token.data[i] = '\0';
+	if (!ft_strlen(token.data))
+	{
+		free(token.data);
+		token.er = 1;
+		ft_printf("lexer error: line %d: get_indirect_label expected label after ':'\n", line_file);
+	}
+	*i_line = *i_line + i;
+	return (token);
+};
+
+t_token get_direct_label(int *i_line, const char *line, int line_file)
+{
+	t_token token;
+	int i;
+
+	ft_bzero(&token, sizeof(t_token));
+	i = 0;
+	token.enum_token = TOKEN_DIRECT_LABEL;
+	(*i_line)++;
+	token.data = ft_strdup(line + *i_line);
+
+	while (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
+		i++;
+	token.data[i] = '\0';
+	if (!ft_strlen(token.data))
+	{
+		free(token.data);
+		token.er = 1;
+		ft_printf("lexer error: line %d: get_direct_label expected label after ':'\n", line_file);
+	}
+	*i_line = *i_line + i;
+	return (token);
+};
+
+t_token get_direct_number(int *i_line, const char *line, int line_file)
+{
+	t_token token;
+	int i;
+
+	ft_bzero(&token, sizeof(t_token));
+	i = 0;
+	token.enum_token = TOKEN_DIRECT_NUMBER;
+	token.data = ft_strdup(line + *i_line);
+
+	if (token.data[i] == '-')
+		i++;
+	while (ft_isdigit(token.data[i]))
+		i++;
+	if (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
+	{
+		free(token.data);
+		token.er = 1;
+		ft_printf("lexer error: line %d: get_direct_number, Unexpected token\n", line_file);
+	}
+	if (i == 1 && token.data[i] == '-')
+	{
+		free(token.data);
+		token.er = 1;
+		ft_printf("lexer error: line %d: get_direct_number, no number found after '-'\n", line_file);
+	}
+
+	token.data[i] = '\0';
+	*i_line = *i_line + i;
+	return (token);
+};
+
+t_token get_direct(int *i_line, const char *line, int line_file)
+{
+	t_token token;
+
+	(*i_line)++;
+
+	ft_bzero(&token, sizeof(t_token));
+	if (line[*i_line] == ':')
+		token = get_direct_label(i_line, line, line_file);
+	else if (ft_isdigit(line[*i_line]) || line[*i_line] == '-')
+		token = get_direct_number(i_line, line, line_file);
+	else
+	{
+		token.er = 1;
+		ft_printf("lexer error: line %d: get_direct excepted ':' or digit\n", line_file);
+	}
+	return token;
+};
+
+t_token get_token(int *i_line, const char *line, int line_file)
 {
 	t_token token;
 
 	ft_bzero(&token, sizeof(t_token));
 
-	if (line[*i_token] && ft_strchr(":-+%,", line[*i_token]))
-		token = get_single_char_token(i_token, line, line_file);
-	else if (line[*i_token] == '.')
-		token = get_dote_start_token(i_token, line, line_file);
-	else if (line[*i_token] == '#' || line[*i_token] == ';')
-		token = get_comment(i_token, line, line_file);
-	else if (line[*i_token] == '"')
-		token = get_string(i_token, line, line_file);
-	else if (ft_isdigit(line[*i_token]))
-		token = get_digit(i_token, line, line_file);
-	else if (line[*i_token] && ft_strchr(LABEL_CHARS, line[*i_token]))
-		token = get_label(i_token, line, line_file);
+	if (line[*i_line] == ',')
+		token = get_separator_char(i_line, line, line_file);
+	else if (line[*i_line] == '.')
+		token = get_dote_start_token(i_line, line, line_file);
+	else if (line[*i_line] == '%')
+		token = get_direct(i_line, line, line_file);
+	else if (line[*i_line] == ':')
+		token = get_indirect_label(i_line, line, line_file);
+	else if (line[*i_line] == '#' || line[*i_line] == ';')
+		token = get_comment(i_line, line, line_file);
+	else if (line[*i_line] == '"')
+		token = get_string(i_line, line, line_file);
+	else if (ft_isdigit(line[*i_line]) || line[*i_line] == '-')
+		token = get_indirect_number(i_line, line, line_file);
+	else if (line[*i_line] && ft_strchr(LABEL_CHARS, line[*i_line]))
+		token = get_label(i_line, line, line_file);
 	else
 	{
-		ft_printf("lexer error: line %d: get_token, Unexpected token: '%c' %d\n", line_file, line[*i_token], line[*i_token] == '\t');
+		ft_printf("lexer error: line %d: get_token, Unexpected char: '%c' %d\n", line_file, line[*i_line], line[*i_line] == '\t');
 		token.er = 1;
 	};
-	while (line[*i_token] == '\t' || line[*i_token] == ' ')
-		(*i_token)++;
+	while (line[*i_line] == '\t' || line[*i_line] == ' ')
+		(*i_line)++;
 	return token;
 }
 

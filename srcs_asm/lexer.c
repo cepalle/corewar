@@ -17,7 +17,6 @@ t_lexer lexer(t_cmdl cmdl)
     while (get_next_line(cmdl.fd, &line) > 0)
     {
         line_to_token(ltken, line, line_num);
-        //ft_printf("----line: %s\n", line);
         free(line);
         if (ltken[0].er)
         {
@@ -27,10 +26,9 @@ t_lexer lexer(t_cmdl cmdl)
         }
         tab_token_multi_add(&(lexer_res.tab_token), ltken);
         line_num++;
-        //print_tab_token(lexer_res.tab_token); // TEST
     }
     ft_printf("\n### LEXER\n\n");
-    print_tab_token(lexer_res.tab_token); // TEST
+    print_tab_token(lexer_res.tab_token);
     if (lexer_res.tab_token.i < 0)
         lexer_res.er = 1;
     return lexer_res;

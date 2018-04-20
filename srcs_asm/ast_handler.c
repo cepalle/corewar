@@ -32,10 +32,17 @@ void ast_add_dote_start(t_parser *parser_res, t_tab_token tab_token, int *i)
 
 void ast_add_inst(t_parser *parser_res, t_tab_token tab_token, int *i)
 {
-    (void)parser_res;
-    (void)tab_token;
+	t_ast_inst ast_inst;
 
-	(*i)++;
+	(void)parser_res;
+	(void)tab_token;
+	(void)i;
+	ft_bzero(&ast_inst, sizeof(ast_inst));
+
+
+
+
+
 
 };
 
@@ -44,10 +51,8 @@ void ast_add_next(t_parser *parser_res, t_tab_token tab_token, int *i)
     if (tab_token.tokens[*i].enum_token == TOKEN_PROG_NAME ||
             tab_token.tokens[*i].enum_token == TOKEN_PROG_COMMENT)
         ast_add_dote_start(parser_res, tab_token, i);
-		else if (tab_token.tokens[*i].enum_token == TOKEN_LABEL)
-			ast_add_inst(parser_res, tab_token, i);
 		else if (tab_token.tokens[*i].enum_token == TOKEN_EOL)
-			(*i)++;
+			  (*i)++;
     else
     {
         ft_printf("parser error: ast_add_next unexpected token\n");
