@@ -58,31 +58,12 @@ typedef struct s_cmdl t_cmdl;
 
 // PARSER
 
-enum PARAM
-{
-		EMPTY,
-		PARAM_REGISTRE,
-		PARAM_DIRECT_LABEL,
-		PARAM_DIRECT_NUMBER,
-		PARAM_INDIRECT_LABEL,
-		PARAM_INDIRECT_NUMBER,
-		PARAM_OP,
-};
-
 struct s_ast_param
 {
-	  int enum_param;
-		void *data;
+	  int enum_toekn;
+		char *data;
 };
 typedef struct s_ast_param t_ast_param;
-
-struct s_ast_op
-{
-		int enum_token;
-		t_ast_param ast_param1;
-		t_ast_param ast_param2;
-};
-typedef struct s_ast_op t_ast_op;
 
 struct s_ast_inst
 {
