@@ -6,7 +6,7 @@
 int len_param(int enum_token, char *cmd)
 {
 	if (enum_token == TOKEN_INDIRECT_LABEL ||
-			enum_token == TOKEN_INDIRECT_NUMBER)
+	    enum_token == TOKEN_INDIRECT_NUMBER)
 		return 2;
 	if (enum_token == TOKEN_LABEL)
 		return 1;
@@ -42,6 +42,53 @@ void inst_feed_label_dec(t_ast_inst *ast_inst, int pos)
 		i++;
 	}
 	inst_feed_label_dec(ast_inst->next, pos + inst_len(ast_inst));
+};
+
+int find_label_pos(t_ast_inst *ast_inst, char *label)
+{
+	int i;
+
+	if (!ast_inst)
+	{
+		ft_printf("find_label_pos, label not found\n");
+		return 0;
+	}
+	i = 0;
+	while (i < ast_inst->nb_labels_dec)
+	{
+		if (ft_strequ(ast_inst->labels_dec[i].data, label))
+			return ast_inst->labels_dec[i].pos_octet_label_dec;
+		i++;
+	}
+	return find_label_pos(ast_inst->next, label);
+}
+
+void token_label_feed_pos(t_parser parser_res, t_token *token)
+{
+	token->pos_octet_label_dec = find_label_pos(parser_res.ast_prog.ast_inst, token->data);
+};
+
+void inst_feed_label(t_parser parser_res, t_ast_inst *ast_inst)
+{
+	int i;
+
+	i = 0;
+	while (i < ast_inst->nb_labels_dec)
+	{
+		if (ast_inst->ast_params[i].enum_token == TOKEN_INDIRECT_LABEL ||
+		    ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL)
+			token_label_feed_pos(parser_res, ast_inst->ast_params + i);
+		i++;
+	}
+};
+
+void insts_feed_label(t_parser parser_res, t_ast_inst *ast_inst)
+{
+	if (!ast_inst)
+		return;
+
+	inst_feed_label(parser_res, ast_inst->next);
+	insts_feed_label(parser_res, ast_inst->next);
 };
 
 int open_new_file(char *file_name)
@@ -100,7 +147,7 @@ void write_octet_param(int fd, t_ast_inst *ast_inst)
 		if (i < ast_inst->nb_ast_params)
 		{
 			if (ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_NUMBER ||
-					ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL)
+			    ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL)
 				write(fd, "\10", 1); // TODO works?
 			else if (ast_inst->ast_params[i].enum_token == TOKEN_LABEL)
 				write(fd, "\01", 1);
@@ -121,14 +168,14 @@ void write_param(int fd, t_token token, int dir_size_2, int pos)
 
 	if (token.enum_token == TOKEN_LABEL)
 	{
-		t_write_1 = (signed char)ft_atoi(token.data + 1);
+		t_write_1 = (signed char) ft_atoi(token.data + 1);
 		write(fd, &t_write_1, 1);
 	}
 	else if (token.enum_token == TOKEN_DIRECT_NUMBER)
 	{
 		if (dir_size_2)
 		{
-			to_write_2 = (signed short)ft_atoi(token.data);
+			to_write_2 = (signed short) ft_atoi(token.data);
 			write(fd, &to_write_2, 2);
 		}
 		else
@@ -141,7 +188,7 @@ void write_param(int fd, t_token token, int dir_size_2, int pos)
 	{
 		if (dir_size_2)
 		{
-			to_write_2 = (signed short)(token.pos_octet_label_dec - pos);
+			to_write_2 = (signed short) (token.pos_octet_label_dec - pos);
 			write(fd, &to_write_2, 2);
 		}
 		else
@@ -152,12 +199,12 @@ void write_param(int fd, t_token token, int dir_size_2, int pos)
 	}
 	else if (token.enum_token == TOKEN_INDIRECT_NUMBER)
 	{
-		to_write_2 = (signed short)ft_atoi(token.data);
+		to_write_2 = (signed short) ft_atoi(token.data);
 		write(fd, &to_write_2, 2);
 	}
 	else if (token.enum_token == TOKEN_INDIRECT_LABEL)
 	{
-		to_write_2 = (signed short)(token.pos_octet_label_dec - pos);
+		to_write_2 = (signed short) (token.pos_octet_label_dec - pos);
 		write(fd, &to_write_2, 2);
 	}
 	ft_printf("write_param, tokem ennum not valide\n");
@@ -202,7 +249,7 @@ void ast_to_byte(t_parser parser_res, char *file_name)
 	if (fd < 0)
 		return;
 	inst_feed_label_dec(parser_res.ast_prog.ast_inst, 0);
-	// TODO inst_feed_label(parser_res.ast_prog.ast_inst, 0);
+	insts_feed_label(parser_res, parser_res.ast_prog.ast_inst);
 	write_header(fd, parser_res);
 	write_insts(fd, parser_res.ast_prog.ast_inst, 0);
 };
