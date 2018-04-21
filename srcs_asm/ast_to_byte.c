@@ -90,13 +90,56 @@ t_op get_op(char *cmd)
 	return gopt()[OP_TAB_LENGTH];
 }
 
+void write_octet_param(int fd, t_ast_inst *ast_inst)
+{
+    int i;
+
+    i = 0;
+    while (i < 4)
+    {
+        if (i < ast_inst->nb_ast_params)
+        {
+            if (ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_NUMBER ||
+                    ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL)
+                write(fd, "\10", 1); // TODO works?
+            else if (ast_inst->ast_params[i].enum_token == TOKEN_LABEL)
+                write(fd, "\01", 1);
+            else
+                write(fd, "\11", 1);
+        }
+        else
+            write(fd, "\0", 1);
+        i++;
+    }
+}
+
+void write_params(int fd, t_token token)
+{
+    (void)fd;
+    (void)token;
+};
+
+void write_params(int fd, t_ast_inst *ast_inst)
+{
+    int i;
+
+    i = 0;
+    while (i < ast_inst->nb_ast_params)
+    {
+        write_param(fd, ast_inst->ast_params[i]);
+        i++;
+    }
+};
+
 void write_inst(int fd, t_ast_inst *ast_inst)
 {
 	t_op op;
 
 	op = get_op(ast_inst->cmd);
-	(void)op;
-	(void)fd;
+    write(fd, &op.opcode, 1);
+    if (op.octet_param)
+        write_octet_param(fd, ast_inst);
+    write_params(fd, ast_inst);
 };
 
 void write_insts(int fd, t_ast_inst *ast_inst)
