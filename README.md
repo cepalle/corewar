@@ -27,11 +27,9 @@ et ne pas produire de fichier .cor
 `live`, `ld`, `st`, `add`, `or`, `xor`, `zjmp`, `ldi`, `sti`, `fork`, `lld`,
 `lldi`, `lfork`, `aff`, `.name`, `.comment`
 
-**TODO ? add `.extend`, `.code`, `mine`, `rx`**
-
 #### Symbols:
 
-`,`, `%`, `+`, `-`.
+`,`, `%`, `-`.
 
 #### White characters:
 
