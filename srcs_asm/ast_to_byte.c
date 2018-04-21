@@ -73,8 +73,52 @@ void inst_feed_label(t_ast_inst *ast_inst, int pos)
 	inst_feed_label(ast_inst->next, pos + inst_len(ast_inst));
 };
 
-void ast_to_byte(t_parser parser_res)
+int open_new_file(char *file_name)
 {
+	int fd;
+
+	// TODO
+
+	return fd;
+};
+
+int prog_len(t_ast_inst *ast_inst)
+{
+	if (!ast_inst)
+		return 0;
+	return inst_len(ast_inst) + prog_len(ast_inst->next);
+};
+
+void write_header(int fd, t_parser parser_res)
+{
+	t_header header;
+
+	ft_bzero(&header, sizeof(t_header));
+	header.magic = COREWAR_EXEC_MAGIC;
+	ft_strcpy(header.prog_name, parser_res.ast_prog.prog_name);
+	header.prog_size = prog_len(parser_res.ast_prog.ast_inst);
+	ft_strcpy(header.comment, parser_res.ast_prog.prog_comment);
+
+	write_bin(fd, &header, sizeof(t_header));
+};
+
+void write_insts(int fd, t_parser parser_res)
+{
+
+
+
+
+
+};
+
+void ast_to_byte(t_parser parser_res, char *file_name)
+{
+	int fd;
+
+	fd = open_new_file(file_name);
+	if (fd < 0)
+		return;
 	inst_feed_label(parser_res.ast_prog.ast_inst, 0);
-	// write binnaire, header
+	write_header(fd, parser_res);
+	write_insts(fd, parser_res);
 };

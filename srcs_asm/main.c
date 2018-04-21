@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	if (cmdl.opt_a)
 		display_ast(parser_res);
 	else
-		ast_to_byte(parser_res);
+		ast_to_byte(parser_res, cmdl.file_name);
 	// free parser
 	return (0);
 }

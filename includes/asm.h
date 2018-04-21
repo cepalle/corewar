@@ -56,6 +56,7 @@ struct s_cmdl
     int er;
     int fd;
     char opt_a;
+    char *file_name;
 };
 typedef struct s_cmdl t_cmdl;
 
@@ -97,7 +98,7 @@ t_parser parser(t_lexer lexer_res);
 
 void display_ast(t_parser parser_res);
 
-void ast_to_byte(t_parser parser_res);
+void ast_to_byte(t_parser parser_res, char *file_name);
 
 int put_error(char *msg);
 
