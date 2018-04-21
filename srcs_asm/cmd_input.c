@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <errno.h>
 
-// file name must be name.s ?
+// TODO file name must be name.s ?
 t_cmdl cmd_input(int argc, char **argv)
 {
     t_cmdl cmdl;

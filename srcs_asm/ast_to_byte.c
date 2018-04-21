@@ -1,36 +1,7 @@
 #include "asm.h"
 #include "op.h"
 #include "libft.h"
-
-int has_octet_param(char *cmd)
-{
-	int i;
-
-	i = 0;
-	while (i < OP_TAB_LENGTH)
-	{
-		if (ft_strequ(gopt()[i].name, cmd))
-			return gopt()[i].octet_param;
-		i++;
-	}
-	ft_printf("has_octet_param, cmd no found\n");
-	return 0;
-};
-
-int dir_size(char *cmd)
-{
-	int i;
-
-	i = 0;
-	while (i < OP_TAB_LENGTH)
-	{
-		if (ft_strequ(gopt()[i].name, cmd))
-			return 2 + !gopt()[i].dir_size_2 * 2;
-		i++;
-	}
-	ft_printf("dir_size, cmd no found\n");
-	return 0;
-};
+#include <unistd.h>
 
 int len_param(int enum_token, char *cmd)
 {
@@ -39,7 +10,7 @@ int len_param(int enum_token, char *cmd)
 		return 2;
 	if (enum_token == TOKEN_LABEL)
 		return 1;
-	return dir_size(cmd);
+	return 2 + !get_op(cmd).dir_size_2 * 2;
 };
 
 int inst_len(t_ast_inst *ast_inst)
@@ -49,7 +20,7 @@ int inst_len(t_ast_inst *ast_inst)
 
 	i = 0;
 	len = 1;
-	len += has_octet_param(ast_inst->cmd);
+	len += get_op(ast_inst->cmd).octet_param;
 	while (i < ast_inst->nb_ast_params)
 	{
 		len += len_param(ast_inst->ast_params[i].enum_token, ast_inst->cmd);
@@ -78,6 +49,8 @@ int open_new_file(char *file_name)
 	int fd;
 
 	// TODO
+	(void)file_name;
+	fd = 1;
 
 	return fd;
 };
@@ -99,16 +72,39 @@ void write_header(int fd, t_parser parser_res)
 	header.prog_size = prog_len(parser_res.ast_prog.ast_inst);
 	ft_strcpy(header.comment, parser_res.ast_prog.prog_comment);
 
-	write_bin(fd, &header, sizeof(t_header));
+	write(fd, &header, sizeof(t_header));
 };
 
-void write_insts(int fd, t_parser parser_res)
+t_op get_op(char *cmd)
 {
+	int i;
 
+	i = 0;
+	while (i < OP_TAB_LENGTH)
+	{
+		if (ft_strcmp(gopt()[i].name, cmd))
+			return gopt()[i];
+		i++;
+	}
+	ft_printf("get_op cmd no found\n");
+	return gopt()[OP_TAB_LENGTH];
+}
 
+void write_inst(int fd, t_ast_inst *ast_inst)
+{
+	t_op op;
 
+	op = get_op(ast_inst->cmd);
+	(void)op;
+	(void)fd;
+};
 
-
+void write_insts(int fd, t_ast_inst *ast_inst)
+{
+	if (!ast_inst)
+		return;
+	write_inst(fd, ast_inst);
+	write_insts(fd, ast_inst->next);
 };
 
 void ast_to_byte(t_parser parser_res, char *file_name)
@@ -120,5 +116,5 @@ void ast_to_byte(t_parser parser_res, char *file_name)
 		return;
 	inst_feed_label(parser_res.ast_prog.ast_inst, 0);
 	write_header(fd, parser_res);
-	write_insts(fd, parser_res);
+	write_insts(fd, parser_res.ast_prog.ast_inst);
 };

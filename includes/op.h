@@ -11,6 +11,8 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
+// TODO proteect multi inclution
+
 /*
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
@@ -93,3 +95,5 @@ struct	s_op
 typedef struct s_op t_op;
 
 t_op	*gopt(void);
+
+t_op get_op(char *cmd);

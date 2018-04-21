@@ -1,5 +1,8 @@
 // LEXER
 
+// TODO proteect multi inclution
+
+
 #define TAB_TOKEN_LEN_INIT 4
 #define LEN_LTOKEN 16
 #define LABELS_DEC_LEN 8
@@ -117,7 +120,6 @@ void ast_add_next(t_parser *parser_res, t_tab_token tab_token, int *i);
 void print_ast_prog(t_ast_prog ast_prog);
 
 int check_ast(t_parser parser_res);
-
 
 
 
