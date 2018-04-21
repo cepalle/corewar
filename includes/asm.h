@@ -33,7 +33,7 @@ struct s_token
     int er;
     int enum_token;
     char *data;
-    int pos_octet_label;
+    int pos_octet_label_dec;
 };
 typedef struct s_token t_token;
 
