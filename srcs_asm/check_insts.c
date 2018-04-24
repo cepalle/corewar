@@ -28,6 +28,7 @@ int check_cmd(t_ast_inst *inst, t_op op_desc) {
 	{
 		if (check_param(inst->ast_params[i].enum_token, op_desc.args[i]))
 			return 1;
+		i++;
 	}
 	return 0;
 };

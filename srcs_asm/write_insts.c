@@ -36,6 +36,7 @@ void write_param(int fd, t_token token, int dir_size_2, int pos)
 	{
 		t_write_1 = (signed char) ft_atoi(token.data + 1);
 		write(fd, &t_write_1, 1);
+		return;
 	}
 	else if (token.enum_token == TOKEN_DIRECT_NUMBER)
 	{
@@ -43,37 +44,45 @@ void write_param(int fd, t_token token, int dir_size_2, int pos)
 		{
 			to_write_2 = (signed short) ft_atoi(token.data);
 			write(fd, &to_write_2, 2);
+			return;
 		}
 		else
 		{
 			to_write_4 = ft_atoi(token.data);
 			write(fd, &to_write_4, 4);
+			return;
 		}
 	}
 	else if (token.enum_token == TOKEN_DIRECT_LABEL)
 	{
 		if (dir_size_2)
 		{
-			to_write_2 = (signed short) (token.pos_octet_label_dec - pos);
+			to_write_2 = (signed short) (token.pose_octet_label_dec - pos);
 			write(fd, &to_write_2, 2);
+			return;
 		}
 		else
 		{
-			to_write_4 = token.pos_octet_label_dec - pos;
+			to_write_4 = token.pose_octet_label_dec - pos;
 			write(fd, &to_write_4, 4);
+			return;
 		}
 	}
 	else if (token.enum_token == TOKEN_INDIRECT_NUMBER)
 	{
 		to_write_2 = (signed short) ft_atoi(token.data);
 		write(fd, &to_write_2, 2);
+		return;
 	}
 	else if (token.enum_token == TOKEN_INDIRECT_LABEL)
 	{
-		to_write_2 = (signed short) (token.pos_octet_label_dec - pos);
+		to_write_2 = (signed short) (token.pose_octet_label_dec - pos);
 		write(fd, &to_write_2, 2);
+		return;
 	}
 	ft_printf("write_param, tokem ennum not valide\n");
+	print_token(token);
+	ft_printf("\n");
 };
 
 void write_params(int fd, t_ast_inst *ast_inst, int dir_size_2, int pos)

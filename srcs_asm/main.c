@@ -1,6 +1,4 @@
-#include "../libft/includes/libft.h"
-#include "../includes/op.h"
-#include "../includes/asm.h"
+#include "asm.h"
 #include <unistd.h>
 
 int main(int argc, char **argv)

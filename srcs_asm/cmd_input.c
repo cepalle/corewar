@@ -33,5 +33,6 @@ t_cmdl cmd_input(int argc, char **argv)
 		ft_printf("No file name %s\n", argv[0 + cmdl.opt_a]);
 		cmdl.er = 1;
 	}
+	cmdl.file_name = argv[0 + cmdl.opt_a];
 	return cmdl;
 };

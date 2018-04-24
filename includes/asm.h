@@ -2,6 +2,8 @@
 #ifndef ASM_H
 # define ASM_H
 
+#include <stdlib.h>
+
 # define TAB_TOKEN_LEN_INIT 4
 # define LEN_LTOKEN 16
 # define LABELS_DEC_LEN 8
@@ -27,12 +29,16 @@ enum TOKEN
     TOKEN_EOL,               // 12 \n                   data -> NULL
 };
 
+
+// handel error, line and pos caractere.
 struct s_token
 {
+	int file_pose_line;
+	int file_pose_col;
     int er;
     int enum_token;
     char *data;
-    int pos_octet_label_dec;
+    int pose_octet_label_dec;
 };
 typedef struct s_token t_token;
 
@@ -142,5 +148,8 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst);
 
 int check_insts(t_ast_inst *inst);
 
+int write_mem(int fd, void *pt, size_t size);
+
+void swap_4(unsigned int *to_swap);
 
 #endif
