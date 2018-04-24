@@ -6,7 +6,7 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:27 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/24 10:10:01 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/24 10:10:34 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,7 +97,6 @@ typedef struct s_op t_op;
 
 t_op	*gopt(void);
 
-t_op get_op(char *cmd);
 t_op get_op(char *cmd);
 
 #endif

@@ -136,4 +136,11 @@ void insts_feed_label(t_parser parser_res, t_ast_inst *ast_inst);
 
 void write_insts(int fd, t_ast_inst *ast_inst, int pos);
 
+int check_registres(t_ast_inst *ast_inst);
+
+int check_labels(t_parser parser_res, t_ast_inst *ast_inst);
+
+int check_insts(t_ast_inst *inst);
+
+
 #endif
