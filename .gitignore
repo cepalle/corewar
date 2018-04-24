@@ -6,3 +6,4 @@ corewar.iml
 asm
 corewar
 *.cor
+/test
