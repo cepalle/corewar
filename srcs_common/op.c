@@ -63,7 +63,7 @@ t_op get_op(char *cmd)
 	i = 0;
 	while (i < OP_TAB_LENGTH)
 	{
-		if (ft_strcmp(gopt()[i].name, cmd))
+		if (ft_strequ(gopt()[i].name, cmd))
 			return gopt()[i];
 		i++;
 	}
