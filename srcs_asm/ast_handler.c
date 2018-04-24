@@ -38,7 +38,7 @@ void inst_add_labels_dec(t_ast_inst *ast_inst, t_tab_token tab_token, int *i)
 	{
 		if (ast_inst->nb_labels_dec >= LABELS_DEC_LEN)
 		{
-			ft_printf("paser error: inst_add_labels_dec label not found\n");
+			ft_printf("paser error: inst_add_labels_dec too many label\n");
 			ast_inst->er = 1;
 			// free inst
 			return;
@@ -48,7 +48,8 @@ void inst_add_labels_dec(t_ast_inst *ast_inst, t_tab_token tab_token, int *i)
 						tab_token.tokens[*i].data);
 		ast_inst->nb_labels_dec++;
 		(*i)++;
-		while (tab_token.tokens[*i].enum_token == TOKEN_EOL)
+		while (tab_token.tokens[*i].enum_token == TOKEN_EOL ||
+				tab_token.tokens[*i].enum_token == TOKEN_COMMENT)
 			(*i)++;
 	}
 };
@@ -114,9 +115,18 @@ void ast_add_inst(t_parser *parser_res, t_tab_token tab_token, int *i)
 		parser_res->er = 1;
 		return;
 	}
+	if (ast_inst.nb_labels_dec > 0 && tab_token.i < (*i))
+	{
+		ft_printf("cmd empty add\n");
+		print_token(tab_token.tokens[*i]);
+		add_inst_pareser_res(parser_res, ast_inst);
+		return;
+	};
 	if (tab_token.tokens[*i].enum_token != TOKEN_LABEL)
 	{
 		ft_printf("paser error: ast_add_inst label not found\n");
+		print_token(tab_token.tokens[*i]);
+		ft_printf("\n");
 		parser_res->er = 1;
 		// free inst
 		return;

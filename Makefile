@@ -22,7 +22,7 @@ C_FILES_NAMES_ASM = ast_to_byte.c cmd_input.c display_ast.c lexer.c \
 	line_to_token.c main.c parser.c put_error.c tab_token.c \
 	check_ast.c ast_handler.c feed_label.c len_prog.c open_new_file.c \
 	write_header.c write_insts.c check_labels.c check_registres.c \
-	check_insts.c write_mem.c swap_char.c
+	check_insts.c swap_char.c
 C_FILES_NAMES_COREWAR = main.c
 
 OBJDIR_COMMON = objs_common/
