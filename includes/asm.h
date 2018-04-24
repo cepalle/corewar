@@ -121,5 +121,18 @@ void print_ast_prog(t_ast_prog ast_prog);
 
 int check_ast(t_parser parser_res);
 
+int open_new_file(char *file_name);
 
+unsigned prog_len(t_ast_inst *ast_inst);
 
+int inst_len(t_ast_inst *ast_inst);
+
+int len_param(int enum_token, char *cmd);
+
+void write_header(int fd, t_parser parser_res);
+
+void inst_feed_label_dec(t_ast_inst *ast_inst, int pos);
+
+void insts_feed_label(t_parser parser_res, t_ast_inst *ast_inst);
+
+void write_insts(int fd, t_ast_inst *ast_inst, int pos);

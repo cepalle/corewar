@@ -6,12 +6,13 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:48 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/17 16:39:23 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/24 09:59:46 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+#include "libft.h"
 
 static	t_op    g_op_tab[17] =
 {
@@ -53,4 +54,19 @@ static	t_op    g_op_tab[17] =
 t_op	*gopt(void)
 {
 	return (g_op_tab);
+}
+
+t_op get_op(char *cmd)
+{
+	int i;
+
+	i = 0;
+	while (i < OP_TAB_LENGTH)
+	{
+		if (ft_strcmp(gopt()[i].name, cmd))
+			return gopt()[i];
+		i++;
+	}
+	ft_printf("get_op cmd no found\n");
+	return gopt()[OP_TAB_LENGTH];
 }
