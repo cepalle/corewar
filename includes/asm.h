@@ -1,12 +1,11 @@
-// LEXER
 
-// TODO proteect multi inclution
+#ifndef ASM_H
+# define ASM_H
 
-
-#define TAB_TOKEN_LEN_INIT 4
-#define LEN_LTOKEN 16
-#define LABELS_DEC_LEN 8
-#define MAX_PARAMS 3
+# define TAB_TOKEN_LEN_INIT 4
+# define LEN_LTOKEN 16
+# define LABELS_DEC_LEN 8
+# define MAX_PARAMS 3
 
 enum TOKEN
 {
@@ -136,3 +135,5 @@ void inst_feed_label_dec(t_ast_inst *ast_inst, int pos);
 void insts_feed_label(t_parser parser_res, t_ast_inst *ast_inst);
 
 void write_insts(int fd, t_ast_inst *ast_inst, int pos);
+
+#endif
