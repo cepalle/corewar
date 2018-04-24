@@ -6,24 +6,23 @@
 void write_octet_param(int fd, t_ast_inst *ast_inst)
 {
 	int i;
+	unsigned int codect;
 
 	i = 0;
-	while (i < 4)
+	codect = 0;
+	while (i < ast_inst->nb_ast_params)
 	{
-		if (i < ast_inst->nb_ast_params)
-		{
-			if (ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_NUMBER ||
-			    ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL)
-				write(fd, "\10", 1); // TODO works?
-			else if (ast_inst->ast_params[i].enum_token == TOKEN_LABEL)
-				write(fd, "\01", 1);
-			else
-				write(fd, "\11", 1);
-		}
+		if (ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_NUMBER ||
+		    ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL)
+			codect |= (0b10 << (3 - i));
+		else if (ast_inst->ast_params[i].enum_token == TOKEN_LABEL)
+			codect |= (0b01 << (3 - i));
 		else
-			write(fd, "\0", 1);
+			codect |= (0b11 << (3 - i));
 		i++;
 	}
+	swap_4(&codect);
+	write(fd, &codect, 4);
 }
 
 void write_param(int fd, t_token token, int dir_size_2, int pos)

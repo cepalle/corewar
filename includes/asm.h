@@ -148,8 +148,8 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst);
 
 int check_insts(t_ast_inst *inst);
 
-int write_mem(int fd, void *pt, size_t size);
-
 void swap_4(unsigned int *to_swap);
+
+void swap_2(unsigned short int *to_swap);
 
 #endif

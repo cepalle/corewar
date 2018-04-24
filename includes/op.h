@@ -6,7 +6,7 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:27 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/24 10:10:34 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/24 11:49:08 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,8 +85,8 @@ struct	s_op
 {
 	char	*name;
 	int 	nb_arg;
-	int		args[3];
-	int 	opcode;
+	int 	args[3];
+	char 	opcode;
 	int   	cycle;
 	char  	*descr;
 	int 	octet_param;
