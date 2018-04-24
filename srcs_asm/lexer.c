@@ -16,7 +16,7 @@ t_lexer lexer(t_cmdl cmdl)
     line_num = 1;
     while (get_next_line(cmdl.fd, &line) > 0)
     {
-        line_to_token(ltken, line, line_num);
+        line_to_token(ltken, &line, &line_num, cmdl.fd);
         free(line);
         if (ltken[0].er)
         {

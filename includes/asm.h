@@ -112,7 +112,7 @@ int put_error(char *msg);
 
 int asm_usage(void);
 
-void line_to_token(t_token *ltken, char *line, int line_file);
+void line_to_token(t_token *ltken, char **line, int *line_file, int fd);
 
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 
