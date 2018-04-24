@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 		return (1);
 	parser_res = parser(lexer_res);
 	// free lexer
-	display_ast(parser_res); // TO DEL
+	//display_ast(parser_res); // TO DEL
 	if (parser_res.er || check_ast(parser_res))
 		return (1);
 	if (cmdl.opt_a)

@@ -21,7 +21,7 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst)
 {
 	int i;
 
-	ft_printf("### check_labels\n");
+	//ft_printf("### check_labels\n");
 
 	if (!ast_inst)
 		return 0;

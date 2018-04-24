@@ -117,7 +117,7 @@ void ast_add_inst(t_parser *parser_res, t_tab_token tab_token, int *i)
 	}
 	if (ast_inst.nb_labels_dec > 0 && tab_token.i < (*i))
 	{
-		ft_printf("cmd empty add\n");
+		//ft_printf("cmd empty add\n");
 		print_token(tab_token.tokens[*i]);
 		add_inst_pareser_res(parser_res, ast_inst);
 		return;

@@ -4,7 +4,7 @@
 
 int check_ast(t_parser parser_res)
 {
-	ft_printf("### check_ast\n");
+	// ft_printf("### check_ast\n");
 
 	if (!ft_strlen(parser_res.ast_prog.prog_name) ||
 	    ft_strlen(parser_res.ast_prog.prog_name) > PROG_NAME_LENGTH ||

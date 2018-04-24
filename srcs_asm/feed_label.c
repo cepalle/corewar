@@ -10,7 +10,7 @@ void inst_feed_label_dec(t_ast_inst *ast_inst, int pos)
 	i = 0;
 	while (i < ast_inst->nb_labels_dec)
 	{
-		ft_printf("inst_feed_label_dec label: %s is pose: %d\n", ast_inst->labels_dec[i].data, pos);
+		//ft_printf("inst_feed_label_dec label: %s is pose: %d\n", ast_inst->labels_dec[i].data, pos);
 		ast_inst->labels_dec[i].pose_octet_label_dec = pos;
 		i++;
 	}
@@ -41,7 +41,7 @@ void token_label_feed_pos(t_parser parser_res, t_token *token)
 	int pose;
 
 	pose = find_label_pos(parser_res.ast_prog.ast_inst, token->data);
-	ft_printf("token_label_feed_pos label: %s pose %d\n", token->data, pose);
+	//ft_printf("token_label_feed_pos label: %s pose %d\n", token->data, pose);
 	token->pose_octet_label_dec = pose;
 };
 

@@ -6,7 +6,7 @@
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/04 10:42:17 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/04 10:42:18 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/24 16:53:00 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,8 @@
 
 int		ft_strequ(char const *s1, char const *s2)
 {
+	if (!s1 && !s2)
+		return (1);
 	if (!s1 || !s2)
 		return (0);
 	return (!ft_strcmp(s1, s2));

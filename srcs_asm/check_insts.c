@@ -63,7 +63,7 @@ int check_inst(t_ast_inst *inst)
 
 int check_insts(t_ast_inst *inst)
 {
-	ft_printf("### check_insts\n");
+	//ft_printf("### check_insts\n");
 
 	if (!inst)
 		return 0;

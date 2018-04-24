@@ -17,6 +17,8 @@ int inst_len(t_ast_inst *ast_inst)
 	int i;
 	int len;
 
+	if (!ast_inst->cmd)
+		return 0;
 	i = 0;
 	len = 1;
 	len += get_op(ast_inst->cmd).octet_param;
