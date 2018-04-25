@@ -1,7 +1,8 @@
 
-void swap_char(unsigned char *a, unsigned char *b)
+static	void swap_char(unsigned char *a, unsigned char *b)
 {
 	unsigned char tmp;
+
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
