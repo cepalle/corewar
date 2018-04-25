@@ -48,8 +48,9 @@
 # define REG_NUMBER				16
 
 # define CYCLE_TO_DIE			1536
-# define CYCLE_DELTA				50
+# define CYCLE_DELTA			50
 # define NBR_LIVE				21
+# define MAX_CHECKS				10
 
 
 /*
@@ -98,5 +99,9 @@ typedef struct s_op t_op;
 t_op	*gopt(void);
 
 t_op get_op(char *cmd);
+
+void swap_4(unsigned int *to_swap);
+
+void swap_2(unsigned short int *to_swap);
 
 #endif

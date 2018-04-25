@@ -142,7 +142,7 @@ champion_description ::= .comment string
 #### Octet de codage des paramètres:
 
 Les parametres sont précédé par un octet de description sous la forme suivante:
-`0b __ __ __ 00` sur les 3 duo de bit il est stoque le code du type des parametres. Les types sont les suivant:
+0b `__ __ __ 00` sur les 3 duo de bit il est stoque le code du type des parametres. Les types sont les suivant:
 
 Registre: **REG_CODE**: 1 = 0b01, numeraux d'un registre codé sur **REG_SIZE** (1) Octet
 

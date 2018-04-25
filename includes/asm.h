@@ -11,7 +11,7 @@
 
 enum TOKEN
 {
-    EMPTYY,                  // 0
+    EMPTY,                   // 0
     TOKEN_PROG_NAME,         // 1 .name                 data -> NULL
     TOKEN_PROG_COMMENT,      // 2 .comment              data -> NULL
 
@@ -148,8 +148,5 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst);
 
 int check_insts(t_ast_inst *inst);
 
-void swap_4(unsigned int *to_swap);
-
-void swap_2(unsigned short int *to_swap);
 
 #endif
