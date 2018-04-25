@@ -8,6 +8,7 @@
 # define LEN_LTOKEN 16
 # define LABELS_DEC_LEN 8
 # define MAX_PARAMS 3
+# define LEN_INIT_FILES 4
 
 enum TOKEN
 {
@@ -53,6 +54,7 @@ typedef struct s_tab_token t_tab_token;
 struct s_lexer
 {
     int er;
+	char **files; // end with null
     t_tab_token tab_token;
 };
 typedef struct s_lexer t_lexer;
@@ -108,11 +110,9 @@ void display_ast(t_parser parser_res);
 
 void ast_to_byte(t_parser parser_res, char *file_name);
 
-int put_error(char *msg);
-
 int asm_usage(void);
 
-void line_to_token(t_token *ltken, char **line, int *line_file, int fd);
+void line_to_token(t_token *ltken, char **files, int *i);
 
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 

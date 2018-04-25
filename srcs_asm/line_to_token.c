@@ -113,7 +113,7 @@ t_token get_comment(int *i_line, const char *line, int line_file)
 	return (token);
 };
 
-t_token get_string(int *i_line, char **line, int *line_file, int fd)
+t_token get_string(int *i_line, char **files, int *i_files)
 {
 	t_token token;
 	int i;
@@ -123,33 +123,28 @@ t_token get_string(int *i_line, char **line, int *line_file, int fd)
 	i = 0;
 	token.enum_token = TOKEN_STRING;
 	(*i_line)++;
-	token.data = ft_strdup(*line + *i_line);
+	token.data = ft_strdup(files[*i_files] + *i_line);
 
 	while (token.data[i] != '"')
 	{
-		if (token.data[i] == '"')
-		{
-		}
 		if (!token.data[i])
 		{
-			free((void *) (*line)); // risque de double free?
-			if (get_next_line(fd, line) <= 0)
+			(*i_files)++;
+			*i_line = 0;
+			if (!files[*i_files])
 			{
-				free(token.data);
 				token.er = 1;
 				ft_printf("lexer error: line %d: get_string, Unclosed string\n",
-				          *line_file);
+				          *i_line);
 				return (token);
 			}
-			*i_line = 0;
 			tmp = token.data;
 			token.data = ft_strjoin(token.data, "\n");
 			free(tmp);
 			tmp = token.data;
-			token.data = ft_strjoin(token.data, *line);
+			token.data = ft_strjoin(token.data, files[*i_files]);
 			free(tmp);
 			//ft_printf("%s\n", token.data);
-			(*line_file)++;
 			continue;
 		}
 		(*i_line)++;
@@ -157,10 +152,7 @@ t_token get_string(int *i_line, char **line, int *line_file, int fd)
 	}
 	token.data[i] = '\0';
 	ft_printf(token.data);
-	ft_printf("\n");
-	ft_printf("rest: '%s'\n", *line + *i_line);
 	(*i_line)++;
-	ft_printf("rest: '%s'\n", *line + *i_line);
 	return token;
 };
 
@@ -271,41 +263,42 @@ t_token get_direct(int *i_line, char *line, int line_file)
 	return token;
 };
 
-t_token get_token(int *i_line, char **line, int *line_file, int fd)
+t_token get_token(int *i_line, char **files, int *i_files)
 {
 	t_token token;
 
 	ft_bzero(&token, sizeof(t_token));
-
-	if ((*line)[*i_line] == ',')
-		token = get_separator_char(i_line, *line, *line_file);
-	else if ((*line)[*i_line] == '.')
-		token = get_dote_start_token(i_line, *line, *line_file);
-	else if ((*line)[*i_line] == '%')
-		token = get_direct(i_line, *line, *line_file);
-	else if ((*line)[*i_line] == ':')
-		token = get_indirect_label(i_line, *line, *line_file);
-	else if ((*line)[*i_line] == '#' || (*line)[*i_line] == ';')
-		token = get_comment(i_line, *line, *line_file);
-	else if ((*line)[*i_line] == '"')
-		token = get_string(i_line, line, line_file, fd);
-	else if (ft_isdigit((*line)[*i_line]) || (*line)[*i_line] == '-')
-		token = get_indirect_number(i_line, *line, *line_file);
-	else if ((*line)[*i_line] && ft_strchr(LABEL_CHARS, (*line)[*i_line]))
-		token = get_label(i_line, *line, *line_file);
+	token.file_pose_col = *i_line;
+	token.file_pose_line = *i_files;
+	if (files[*i_files][*i_line] == ',')
+		token = get_separator_char(i_line, files[*i_files], *i_files);
+	else if (files[*i_files][*i_line] == '.')
+		token = get_dote_start_token(i_line, files[*i_files], *i_files);
+	else if (files[*i_files][*i_line] == '%')
+		token = get_direct(i_line, files[*i_files], *i_files);
+	else if (files[*i_files][*i_line] == ':')
+		token = get_indirect_label(i_line, files[*i_files], *i_files);
+	else if (files[*i_files][*i_line] == '#' || files[*i_files][*i_line] == ';')
+		token = get_comment(i_line, files[*i_files], *i_files);
+	else if (files[*i_files][*i_line] == '"')
+		token = get_string(i_line, files, i_files);
+	else if (ft_isdigit(files[*i_files][*i_line]) || files[*i_files][*i_line] == '-')
+		token = get_indirect_number(i_line, files[*i_files], *i_files);
+	else if (files[*i_files][*i_line] && ft_strchr(LABEL_CHARS, files[*i_files][*i_line]))
+		token = get_label(i_line, files[*i_files], *i_files);
 	else
 	{
-		ft_printf("lexer error: line %d: get_token, Unexpected char: '%c'\n",
-		          *line_file, (*line)[*i_line]);
+		ft_printf("lexer error: line %d column %d get_token, Unexpected char: '%c'\n",
+		          *i_files, *i_line, files[*i_files][*i_line]);
 		token.er = 1;
 	};
-	while ((*line)[*i_line] &&
-	       ((*line)[*i_line] == '\t' || (*line)[*i_line] == ' '))
+	while (files[*i_files] &&
+	       (files[*i_files][*i_line] == '\t' || files[*i_files][*i_line] == ' '))
 		(*i_line)++;
 	return token;
 }
 
-void line_to_token(t_token *ltken, char **line, int *line_file, int fd)
+void line_to_token(t_token *ltken, char **files, int *i_files)
 {
 	int i_tken;
 	int i_line;
@@ -313,16 +306,16 @@ void line_to_token(t_token *ltken, char **line, int *line_file, int fd)
 	i_tken = 0;
 	i_line = 0;
 
-	while ((*line)[i_line] == '\t' || (*line)[i_line] == ' ')
+	while (files[*i_files][i_line] == '\t' || files[*i_files][i_line] == ' ')
 		i_line++;
-	while ((*line)[i_line] && !ltken[0].er)
+	while (files[*i_files][i_line] && !ltken[0].er)
 	{
-		ltken[i_tken] = get_token(&i_line, line, line_file, fd);
+		ltken[i_tken] = get_token(&i_line, files, i_files);
 		if (i_tken >= LEN_LTOKEN)
 		{
 			ft_printf(
 					"lexer error: line %d:line_to_token, Too many token in one line\n",
-					*line_file);
+					*i_files);
 			ltken[0].er = 1;
 		}
 		if (ltken[i_tken].er)
