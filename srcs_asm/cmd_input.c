@@ -1,7 +1,6 @@
 #include "asm.h"
 #include "libft.h"
 #include <fcntl.h>
-#include <errno.h>
 
 t_cmdl cmd_input(int argc, char **argv)
 {
