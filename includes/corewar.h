@@ -18,12 +18,22 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-typedef	struct s_vm
+typedef	struct 		s_player
 {
-	unsigned int tab[MEM_SIZE];
-	char *player_1;
-	unsigned int nb_process;
-	unsigned int cycle;
-};
+	char			*name;
+	unsigned int	last_live;
+	unsigned int	live;
+	char			comment[COMMENT_LENGTH + 1];
+	unsigned int	prog_size;
+
+}					t_player;
+
+typedef	struct 		s_vm
+{
+	unsigned char 	tab[MEM_SIZE];
+	t_player 		*player;
+	unsigned int 	nb_process;
+	unsigned int 	cycle;
+}					t_vm;
 
 #endif

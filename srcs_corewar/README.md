@@ -35,3 +35,22 @@ limite de ld 4294967295 (soit code sur 4 octet)
 
 lld : Signifie long-load, donc son opcode est évidemment 13. C’est la même chose
 que ld, mais sans % IDX_MOD. Modifie le carry.
+
+ |  NOM   |  op  |  oc_param |     ecriture         | ecriture bytecode |  operation                                      |       remarque
+---------------------------------------------------------------------------------------------------------------------------------
+ |  live  |  01  |              sti rx, var, var
+ |	ld    |  02  |
+ |	st    |  03  |
+ |	add   |  04  |
+ |	sub   |  05  |
+ |	and   |  06  |
+ |	or    |  07  |
+ |	xor   |  08  |
+ |	zjmp  |  09  |
+ |	ldi   |  10  |
+ |	sti   |  11  |               adresse = (index + index) % (1024*4/8)          | on copie registre a cette adresse
+ |	fork  |  12  |
+ |	lld   |  13  |
+ |	lldi  |  14  |
+ |	lfork |  15  |
+ |	aff   |  16  |

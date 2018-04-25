@@ -15,13 +15,13 @@
 #include "corewar.h"
 #include <stdio.h>
 #include "asm.h"
+#include "../libft/includes/libft.h"
 
 int 	main(void)
 {
-	ssize_t ret;
-	t_header header;
-
-//	malloc(MEM_SIZE);
+	ssize_t		ret;
+	t_header	header;
+	t_vm		vm;
 
 	ret = read(0, &header, sizeof(t_header));
 	if (ret == sizeof(t_header))
@@ -47,10 +47,24 @@ int 	main(void)
 	unsigned int a;
 
 	a = 0;
-	while (a < header.prog_size)
+//	while (a < header.prog_size)
+//	{
+//		printf("%0.2hhx ", buffer_prog[a]);
+//		a++;
+//	}
+
+	a = -1;
+	ft_memset(vm.tab, 0, MEM_SIZE);
+	ft_memcpy(vm.tab, buffer_prog, header.prog_size);
+
+	int b;
+	b = 1;
+	while (++a < MEM_SIZE)
 	{
-		printf("%0.2hhx ", buffer_prog[a]);
-		a++;
+		printf("%0.2hhx ", vm.tab[a]);
+		if (b % 64 == 0)
+			printf("\n");
+		b++;
 	}
 
 	char *pt_head;
@@ -58,13 +72,15 @@ int 	main(void)
 	pt_head = (char *)&header;
 	a = 0;
 
-	printf("\n\n");
+//	printf("\n\n");
+//
+//	while (a < sizeof(header))
+//	{
+//		printf("%0.2hhx ", pt_head[a]);
+//		a++;
+//	}
 
-	while (a < sizeof(header))
-	{
-		printf("%0.2hhx ", pt_head[a]);
-		a++;
-	}
+
 
 	return (0);
 }
