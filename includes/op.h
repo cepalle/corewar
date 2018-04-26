@@ -20,8 +20,8 @@
 */
 
 # define IND_SIZE				2
-# define REG_SIZE				4 // le sujet dit 4 mais c'est pas 1?
-# define DIR_SIZE				REG_SIZE
+# define REG_SIZE				1
+# define DIR_SIZE				4
 
 
 # define REG_CODE				1

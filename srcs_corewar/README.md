@@ -10,7 +10,7 @@ live:	live %1
 
  [op] [index]   [op]  [ocod]  [reg]   [index]   [valeur]   [op]    [param]   [op]   [index]
 
- fork    10     sti    1+2+4    1      pc + 7      1       live       1      zjmp   %4096
+ fork    10     sti    1+2+2    1      pc + 7      1       live       1      zjmp   %4096
 
 sti : Opcode 11. Prend un registre, et deux index (potentiellement des registres).
 Additionne les deux derniers, utilise cette somme comme une adresse ou sera copiée
