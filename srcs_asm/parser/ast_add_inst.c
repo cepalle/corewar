@@ -74,36 +74,36 @@ void ast_add_inst_aux(t_parser *parser_res, t_ast_inst ast_inst)
 	}
 }
 
-void ast_add_inst(t_parser *parser_res, t_tab_token tab_token, int *i)
+void ast_add_inst(t_parser *parser_res,  t_lexer lexer_res, int *i)
 {
 	t_ast_inst ast_inst;
 
 	ft_bzero(&ast_inst, sizeof(ast_inst));
-	inst_add_labels_dec(&ast_inst, tab_token, i);
+	inst_add_labels_dec(&ast_inst, lexer_res.tab_token, i);
 	if (ast_inst.er)
 	{
 		parser_res->er = 1;
 		return;
 	}
-	if (ast_inst.nb_labels_dec > 0 && tab_token.i < (*i))
+	if (ast_inst.nb_labels_dec > 0 && lexer_res.tab_token.i < (*i))
 	{
 		//ft_printf("cmd empty add\n");
-		print_token(tab_token.tokens[*i]);
+		print_token(lexer_res.tab_token.tokens[*i]);
 		ast_add_inst_aux(parser_res, ast_inst);
 		return;
 	};
-	if (tab_token.tokens[*i].enum_token != TOKEN_LABEL)
+	if (lexer_res.tab_token.tokens[*i].enum_token != TOKEN_LABEL)
 	{
 		ft_printf("paser error: ast_add_inst label not found\n");
-		print_token(tab_token.tokens[*i]);
+		print_token(lexer_res.tab_token.tokens[*i]);
 		ft_printf("\n");
 		parser_res->er = 1;
 		// free inst
 		return;
 	}
-	ast_inst.cmd = ft_strdup(tab_token.tokens[*i].data);
+	ast_inst.cmd = ft_strdup(lexer_res.tab_token.tokens[*i].data);
 	(*i)++;
-	inst_add_params(&ast_inst, tab_token, i);
+	inst_add_params(&ast_inst, lexer_res.tab_token, i);
 	if (ast_inst.er)
 		parser_res->er = 1;
 	ast_add_inst_aux(parser_res, ast_inst);

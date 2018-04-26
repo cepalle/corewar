@@ -22,7 +22,7 @@ t_token get_direct_number(int *i_line, char **file, int *i_col)
 		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
-		                  "lexer: Direct number unexpected char");
+		                  "lexer: Direct number, unexpected char");
 	}
 	if (i == 1 && token.data[i] == '-')
 	{
@@ -55,7 +55,7 @@ t_token get_direct_label(int *i_line, char **file, int *i_col)
 		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
-		                  "lexer: Direct label unexpected char after ':'");
+		                  "lexer: Direct label, unexpected char after ':'");
 	}
 	*i_col = *i_col + i;
 	return (token);

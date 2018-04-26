@@ -33,7 +33,7 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	lexer/get_indirect.c \
 	lexer/get_label.c \
 	lexer/get_string.c \
-	parser/ast_handler.c \
+	parser/ast_add_next.c \
 	parser/check_ast.c \
 	parser/check_insts.c \
 	parser/check_labels.c \

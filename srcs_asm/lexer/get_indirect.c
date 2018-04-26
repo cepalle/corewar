@@ -22,7 +22,7 @@ t_token get_indirect_label(int *i_line, char **file, int *i_col)
 		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
-		                  "lexer: Indirect label expected a label after ':'");
+		                  "lexer: Indirect label, expected a label after ':'");
 	}
 	*i_col = *i_col + i;
 	return (token);

@@ -13,9 +13,9 @@ t_parser parser(t_lexer lexer_res)
 	//ft_printf("\n###PARSER\n\n");
 
 	while (i <= lexer_res.tab_token.i && !parser_res.er)
-		ast_add_next(&parser_res, lexer_res.tab_token, &i);
+		ast_add_next(&parser_res, lexer_res, &i);
 
-	if (check_ast(parser_res))
+	if (parser_res.er || check_ast(parser_res))
 	{
 		//free
 		parser_res.er = 1;

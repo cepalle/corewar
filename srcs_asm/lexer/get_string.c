@@ -25,7 +25,7 @@ t_token get_string(int *i_line, char **file, int *i_col)
 				token.er = 1;
 
 				print_local_error(file, i_col, i_line,
-				                  "lexer: String Unclosed string");
+				                  "lexer: Unclosed string");
 				return (token);
 			}
 			tmp = token.data;

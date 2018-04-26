@@ -110,6 +110,12 @@ void display_ast(t_parser parser_res);
 
 void ast_to_byte(t_parser parser_res, char *file_name);
 
+void ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i);
+
+void ast_add_inst(t_parser *parser_res,  t_lexer lexer_res, int *i);
+
+void ast_add_next(t_parser *parser_res, t_lexer lexer_res, int *i);
+
 int asm_usage(void);
 
 int print_local_error(char **files, const int *i_col, const int *i_line, char *msg);
@@ -121,8 +127,6 @@ void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 void print_tab_token(t_tab_token tab_token);
 
 void print_token(t_token token);
-
-void ast_add_next(t_parser *parser_res, t_tab_token tab_token, int *i);
 
 void print_ast_prog(t_ast_prog ast_prog);
 
@@ -166,9 +170,6 @@ t_token get_separator_char(int *i_line, char **file, int *i_col);
 
 t_token get_comment(int *i_line, char **file, int *i_col);
 
-void ast_add_dote_start(t_parser *parser_res, t_tab_token tab_token, int *i);
-
-void ast_add_inst(t_parser *parser_res, t_tab_token tab_token, int *i);
 
 
 

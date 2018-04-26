@@ -5,10 +5,12 @@
 t_token get_token(int *i_line, char **file, int *i_col)
 {
 	t_token token;
+	int i_line_sav;
+	int i_col_sav;
 
+	i_line_sav = *i_line;
+	i_col_sav = *i_col;
 	ft_bzero(&token, sizeof(t_token));
-	token.file_pose_col = *i_col;
-	token.file_pose_line = *i_line;
 	if (file[*i_line][*i_col] == ',')
 		token = get_separator_char(i_line, file, i_col);
 	else if (file[*i_line][*i_col] == '.')
@@ -37,6 +39,8 @@ t_token get_token(int *i_line, char **file, int *i_col)
 	       (file[*i_line][*i_col] == '\t' ||
 	        file[*i_line][*i_col] == ' '))
 		(*i_col)++;
+	token.file_pose_col = i_col_sav;
+	token.file_pose_line = i_line_sav;
 	return token;
 }
 
