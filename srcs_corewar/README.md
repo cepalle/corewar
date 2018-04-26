@@ -12,13 +12,35 @@ live:	live %1
 
  fork    10     sti    1+2+4    1      pc + 7      1       live       1      zjmp   %4096
 
+sti : Opcode 11. Prend un registre, et deux index (potentiellement des registres).
+Additionne les deux derniers, utilise cette somme comme une adresse ou sera copiée
+la valeur du premier paramètre.
+index1 + index2 = dist en octet depuis le debut
+on reecrit ce que contient le r1 a cette adresse
+limite %512 au total => %IDX_MOD soit %1024*4/8
+ecriture = "sti r10, %256, %256"
 
+fork : Pas d’octet de codage des paramètres, prend un index, opcode 0x0c. Crée
+		un nouveau processus, qui hérite des différents états de son père, à part son PC,
+		qui est mis à (PC + (1er paramètre % IDX_MOD)).
+	    fork = PC + %5(exemple) % (1024*4/8)
+
+
+
+ld : Prend un paramètre quelconque et un registre. Charge la valeur du premier
+paramètre dans le registre. Son opcode est 10 en binaire, et il changera le carry
+registre = valeur du param
+ecriture = "ld %12, r10"
+limite de ld 4294967295 (soit code sur 4 octet)
+
+lld : Signifie long-load, donc son opcode est évidemment 13. C’est la même chose
+que ld, mais sans % IDX_MOD. Modifie le carry.
 
  |  NOM   |  op  |  oc_param |     ecriture         | ecriture bytecode         | operation                                      |       remarque
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
  |  live  |  01  |     0     | live %X              | 01 (XX-XX-XX-XX)                                 | player_live = live + 1                         |
  |	ld    |  02  |     1     | ld X, rX             | 02 XX (XX *2 ou *4) XX                           | rX = val_param                                 | change le carry
- |	st    |  03  |     1     | st rX, NBR           | 03 XX XX (XX *2 ou *4)                           | adresse = **PC** + (NBR % **IDX_MOD**))        | stock le registre a cette adresse
+ |	st    |  03  |     1     | st rX, NBR           | 03 XX XX (XX *1 ou *4)                           | adresse = **PC** + (NBR % **IDX_MOD**))        | stock le registre a cette adresse
  |	add   |  04  |     1     | add rX, rX, rX       | 04 XX XX XX XX                                   | param_3 = param_1 + param_2                    | change le carry ensuite
  |	sub   |  05  |     1     | sub rX, rX, rX       | 05 XX XX XX XX                                   | param_3 = param_1 - param_2                    | change le carry
  |	and   |  06  |     1     | and X, X, rX         | 06 XX (XX *1 ou *2 ou *4) (XX *1 ou *2 ou *4) XX | registre = param_1 & param_2                   | change le carry
