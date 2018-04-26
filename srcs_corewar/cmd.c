@@ -1,6 +1,8 @@
 
 
-
+#include "../includes/corewar.h"
+#include "../includes/op.h"
+#include "../libft/includes/libft.h"
 
 
 void 	ft_live(t_player *player, int Num_player)
@@ -19,7 +21,7 @@ void 	ft_st(t_player player, int nbr, int num_reg, t_vm *vm)
 	int addr;
 
 	addr = vm->tab[player.PC] + (nbr % IDX_MOD);
-	ft_memcpy(vm->tab + addr, player.reg + num_reg, REG_SIZE);
+	ft_memcpy(vm->tab + addr, player.reg + num_reg, REG_CONTENT_SIZE);
 }
 
 int 	ft_add(t_player player ,int num_reg1,int num_reg2)
@@ -60,7 +62,7 @@ int		ft_sti(int reg, int param_1, int param_2 , t_vm *vm)
 	int addr;
 
 	addr = param_1 + param_2;
-	ft_memcpy(vm->tab + addr, &reg, REG_SIZE);
+	ft_memcpy(vm->tab + addr, &reg, REG_CONTENT_SIZE);
 }
 
 

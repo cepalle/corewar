@@ -15,6 +15,7 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
+# define REG_CONTENT_SIZE 4
 #include <stdlib.h>
 #include <unistd.h>
 
