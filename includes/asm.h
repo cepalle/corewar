@@ -2,7 +2,7 @@
 #ifndef ASM_H
 # define ASM_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 # define TAB_TOKEN_LEN_INIT 4
 # define LEN_LTOKEN 16
@@ -54,7 +54,7 @@ typedef struct s_tab_token t_tab_token;
 struct s_lexer
 {
     int er;
-	char **files; // end with null
+	char **file;
     t_tab_token tab_token;
 };
 typedef struct s_lexer t_lexer;
@@ -112,7 +112,9 @@ void ast_to_byte(t_parser parser_res, char *file_name);
 
 int asm_usage(void);
 
-void line_to_token(t_token *ltken, char **files, int *i);
+int print_local_error(char **files, const int *i_col, const int *i_line, char *msg);
+
+void line_to_token(t_token *ltken, char **file, int *i_line);
 
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);
 
@@ -148,5 +150,20 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst);
 
 int check_insts(t_ast_inst *inst);
 
+t_token get_direct(int *i_line, char **file, int *i_col);
+
+t_token get_indirect_number(int *i_line, char **file, int *i_col);
+
+t_token get_indirect_label(int *i_line, char **file, int *i_col);
+
+t_token get_string(int *i_line, char **file, int *i_col);
+
+t_token get_label(int *i_line, char **file, int *i_col);
+
+t_token get_dote_start(int *i_line, char **file, int *i_col);
+
+t_token get_separator_char(int *i_line, char **file, int *i_col);
+
+t_token get_comment(int *i_line, char **file, int *i_col);
 
 #endif

@@ -43,5 +43,11 @@ t_parser parser(t_lexer lexer_res)
 
 	while (i <= lexer_res.tab_token.i && !parser_res.er)
 		ast_add_next(&parser_res, lexer_res.tab_token, &i);
+
+	if (check_ast(parser_res))
+	{
+		//free
+		parser_res.er = 1;
+	}
 	return parser_res;
 };

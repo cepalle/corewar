@@ -6,7 +6,7 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:27 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/26 10:14:23 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/26 15:30:11 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,7 +37,7 @@
 
 # define COMMENT_CHAR			'#'
 # define LABEL_CHAR				':'
-# define DIRECT_CHAR				'%'
+# define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','
 
 # define LABEL_CHARS				"abcdefghijklmnopqrstuvwxyz_0123456789"
