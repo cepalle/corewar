@@ -6,7 +6,7 @@
 
 # define TAB_TOKEN_LEN_INIT 4
 # define LEN_LTOKEN 16
-# define LABELS_DEC_LEN 8
+# define LABELS_DEC_LEN 16
 # define MAX_PARAMS 3
 # define LEN_INIT_FILES 4
 
