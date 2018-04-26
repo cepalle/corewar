@@ -18,14 +18,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+typedef	struct		s_proc
+{
+	int				PC;
+	int				carry;
+	int 			reg[REG_NUMBER];
+}					t_proc;
+
 typedef	struct 		s_player
 {
 	char			*name;
 	unsigned int	last_live;
 	unsigned int	live;
+	t_proc			*PC;
 	char			comment[COMMENT_LENGTH + 1];
 	unsigned int	prog_size;
-
 }					t_player;
 
 typedef	struct 		s_vm

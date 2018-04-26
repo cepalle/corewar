@@ -35,8 +35,8 @@ sortie standard. Ce code est modulo 256.
  |	sti   |  11  |     1     | sti rx, index, index | 0b XX XX (XX *1 ou *2 ou *4) (XX *1 ou *2)       | adresse = (index + index) % (1024*4/8)         | on copie registre a cette adresse en octet depuis le debut
  |	fork  |  12  |     0     | fork INDEX           | 0c (XX-XX)                                       | fork ?  PC = (PC + (1er paramètre % IDX_MOD))  | nouveau processus, qui hérite des différents états de son père
  |	lld   |  13  |     1     | lld X, rX            | 0d XX (XX *2 ou *4) XX                           | rX = val_param                                 | ld sans modulo change le carry                               
- |	lldi  |  14  |     1     | ldi INDEX, INDEX, rX | 0e XX (XX *1 ou *2 ou *4) (XX *1 ou *2) XX       | adresse = (index + index)                      | ldi sans modulo
- |	lfork |  15  |     0     | fork INDEX           | 0f (XX-XX)                                       | fork PC = (PC + (1er paramètre))               | lfork sans modulo
+ |	lldi  |  14  |     1     | lldi INDEX, INDEX, rX| 0e XX (XX *1 ou *2 ou *4) (XX *1 ou *2) XX       | adresse = (index + index)                      | ldi sans modulo
+ |	lfork |  15  |     0     | lfork INDEX          | 0f (XX-XX)                                       | fork PC = (PC + (1er paramètre))               | lfork sans modulo
  |	aff   |  16  |     1     | aff rX               | 10 XX XX                                         | interpreter l'octet comme un acii              | pourrait servir a qqc
 
 

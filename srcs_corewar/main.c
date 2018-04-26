@@ -79,9 +79,6 @@ int 	main(void)
 //		printf("%0.2hhx ", pt_head[a]);
 //		a++;
 //	}
-
-
-
 	return (0);
 }
 
