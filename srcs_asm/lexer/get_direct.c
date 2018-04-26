@@ -3,7 +3,7 @@
 #include "op.h"
 
 
-t_token get_direct_number(int *i_line, const char *line, int line_file)
+t_token get_direct_number(int *i_line, char **file, int *i_col)
 {
 	t_token token;
 	int i;
@@ -11,7 +11,7 @@ t_token get_direct_number(int *i_line, const char *line, int line_file)
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_DIRECT_NUMBER;
-	token.data = ft_strdup(line + *i_line);
+	token.data = ft_strdup(file[*i_line] + *i_col);
 
 	if (token.data[i] == '-')
 		i++;
@@ -21,24 +21,22 @@ t_token get_direct_number(int *i_line, const char *line, int line_file)
 	{
 		free(token.data);
 		token.er = 1;
-		ft_printf("lexer error: line %d: get_direct_number, Unexpected token\n",
-		          line_file);
+		print_local_error(file, i_col, i_line,
+		                  "lexer: Direct number unexpected char");
 	}
 	if (i == 1 && token.data[i] == '-')
 	{
 		free(token.data);
 		token.er = 1;
-		ft_printf(
-				"lexer error: line %d: get_direct_number, no number found after '-'\n",
-				line_file);
+		print_local_error(file, i_col, i_line,
+		                  "lexer: Direct_number, no number found after '-'");
 	}
-
 	token.data[i] = '\0';
-	*i_line = *i_line + i;
+	*i_col = *i_col + i;
 	return (token);
 };
 
-t_token get_direct_label(int *i_line, const char *line, int line_file)
+t_token get_direct_label(int *i_line, char **file, int *i_col)
 {
 	t_token token;
 	int i;
@@ -46,8 +44,8 @@ t_token get_direct_label(int *i_line, const char *line, int line_file)
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_DIRECT_LABEL;
-	(*i_line)++;
-	token.data = ft_strdup(line + *i_line);
+	(*i_col)++;
+	token.data = ft_strdup(file[*i_line] + *i_col);
 
 	while (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
 		i++;
@@ -56,30 +54,30 @@ t_token get_direct_label(int *i_line, const char *line, int line_file)
 	{
 		free(token.data);
 		token.er = 1;
-		ft_printf(
-				"lexer error: line %d: get_direct_label expected label after ':'\n",
-				line_file);
+		print_local_error(file, i_col, i_line,
+		                  "lexer: Direct label unexpected char after ':'");
 	}
-	*i_line = *i_line + i;
+	*i_col = *i_col + i;
 	return (token);
 };
 
-t_token get_direct(int *i_line, char *line, int line_file)
+t_token get_direct(int *i_line, char **file, int *i_col)
 {
 	t_token token;
 
-	(*i_line)++;
+	(*i_col)++;
 
 	ft_bzero(&token, sizeof(t_token));
-	if (line[*i_line] == ':')
-		token = get_direct_label(i_line, line, line_file);
-	else if (ft_isdigit(line[*i_line]) || line[*i_line] == '-')
-		token = get_direct_number(i_line, line, line_file);
+	if (file[*i_line][*i_col] == ':')
+		token = get_direct_label(i_line, file, i_col);
+	else if (ft_isdigit(file[*i_line][*i_col]) ||
+	         file[*i_line][*i_col] == '-')
+		token = get_direct_number(i_line, file, i_col);
 	else
 	{
 		token.er = 1;
-		ft_printf("lexer error: line %d: get_direct excepted ':' or digit\n",
-		          line_file);
+		print_local_error(file, i_col, i_line,
+		                  "lexer: excepted ':' or digit");
 	}
 	return token;
 };

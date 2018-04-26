@@ -7,27 +7,31 @@ int asm_usage(void)
 	return (-1);
 };
 
-int print_local_error(char **files, const int *col, const int *line, char *msg)
+int
+print_local_error(char **files, const int *i_col, const int *i_line, char *msg)
 {
 	int i;
 
 	i = 0;
 	if (msg)
 		ft_printf("%s\n", msg);
-	if (files && line)
-		ft_printf("%s\n", files[*line]);
-	if (files && line && col)
+	if (files && i_line)
+		ft_printf("%s\n", files[*i_line]);
+	if (files && i_line && i_col)
 	{
-		while (i + 1 < *col)
+		while (i < *i_col)
 		{
-			ft_printf(" ");
+			if (files[*i_line][i] == '\t')
+				ft_printf("\t");
+			else
+				ft_printf(" ");
 			i++;
 		}
-		ft_printf("\033[31m^\033[0m\n"); // COLOR ?
+		ft_printf("\033[31m^\033[0m\n");
 	}
-	if (line && col)
-		ft_printf("line: %d column: %d\n", *line + 1, *col + 1);
-	else if (line)
-		ft_printf("line: %d\n", *line + 1);
+	if (i_line && i_col)
+		ft_printf("line: %d column: %d\n", *i_line + 1, *i_col + 1);
+	else if (i_line)
+		ft_printf("line: %d\n", *i_line + 1);
 	return (-1);
 };

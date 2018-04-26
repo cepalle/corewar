@@ -1,28 +1,26 @@
 #include "asm.h"
 #include "libft.h"
 
-t_token get_dote_start(int *i_line, const char *line, int line_file)
+t_token get_dote_start(int *i_line, char **file, int *i_col)
 {
 	t_token token;
 
 	ft_bzero(&token, sizeof(t_token));
 
-	if (ft_strnequ(".name", line + *i_line, 5))
+	if (ft_strnequ(".name", file[*i_line] + *i_col, 5))
 	{
 		token.enum_token = TOKEN_PROG_NAME;
-		*i_line = *i_line + 5;
+		*i_col = *i_col + 5;
 		return token;
 	}
-	if (ft_strnequ(".comment", line + *i_line, 8))
+	if (ft_strnequ(".comment", file[*i_line] + *i_col, 8))
 	{
 		token.enum_token = TOKEN_PROG_COMMENT;
-		*i_line = *i_line + 8;
+		*i_col = *i_col + 8;
 		return token;
 	}
-	ft_printf(
-			"lexer error: line %d: get_dote_start, Unexpected token after '.'\n",
-			line_file);
+	print_local_error(file, i_col, i_line,
+	                  "lexer: Dote start, unexpected word after '.'");
 	token.er = 1;
 	return (token);
 };
-

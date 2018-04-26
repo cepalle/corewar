@@ -2,61 +2,60 @@
 #include "op.h"
 #include "libft.h"
 
-t_token get_token(int *i_line, char **files, int *i_files)
+t_token get_token(int *i_line, char **file, int *i_col)
 {
 	t_token token;
 
 	ft_bzero(&token, sizeof(t_token));
-	token.file_pose_col = *i_line;
-	token.file_pose_line = *i_files;
-	if (files[*i_files][*i_line] == ',')
-		token = get_separator_char(i_line, files[*i_files], *i_files);
-	else if (files[*i_files][*i_line] == '.')
-		token = get_dote_start(i_line, files[*i_files], *i_files);
-	else if (files[*i_files][*i_line] == '%')
-		token = get_direct(i_line, files[*i_files], *i_files);
-	else if (files[*i_files][*i_line] == ':')
-		token = get_indirect_label(i_line, files[*i_files], *i_files);
-	else if (files[*i_files][*i_line] == '#' || files[*i_files][*i_line] == ';')
-		token = get_comment(i_line, files[*i_files], *i_files);
-	else if (files[*i_files][*i_line] == '"')
-		token = get_string(i_line, files, i_files);
-	else if (ft_isdigit(files[*i_files][*i_line]) ||
-	         files[*i_files][*i_line] == '-')
-		token = get_indirect_number(i_line, files[*i_files], *i_files);
-	else if (files[*i_files][*i_line] &&
-	         ft_strchr(LABEL_CHARS, files[*i_files][*i_line]))
-		token = get_label(i_line, files[*i_files], *i_files);
+	token.file_pose_col = *i_col;
+	token.file_pose_line = *i_line;
+	if (file[*i_line][*i_col] == ',')
+		token = get_separator_char(i_line, file, i_col);
+	else if (file[*i_line][*i_col] == '.')
+		token = get_dote_start(i_line, file, i_col);
+	else if (file[*i_line][*i_col] == '%')
+		token = get_direct(i_line, file, i_col);
+	else if (file[*i_line][*i_col] == ':')
+		token = get_indirect_label(i_line, file, i_col);
+	else if (file[*i_line][*i_col] == '#' || file[*i_line][*i_col] == ';')
+		token = get_comment(i_line, file, i_col);
+	else if (file[*i_line][*i_col] == '"')
+		token = get_string(i_line, file, i_col);
+	else if (ft_isdigit(file[*i_line][*i_col]) ||
+	         file[*i_line][*i_col] == '-')
+		token = get_indirect_number(i_line, file, i_col);
+	else if (file[*i_line][*i_col] &&
+	         ft_strchr(LABEL_CHARS, file[*i_line][*i_col]))
+		token = get_label(i_line, file, i_col);
 	else
 	{
-		ft_printf(
-				"lexer error: line %d column %d get_token, Unexpected char: '%c'\n",
-				*i_files, *i_line, files[*i_files][*i_line]);
+		print_local_error(file, i_col, i_line,
+		                  "lexer: Unexpected char");
 		token.er = 1;
 	};
-	while (files[*i_files] &&
-	       (files[*i_files][*i_line] == '\t' ||
-	        files[*i_files][*i_line] == ' '))
-		(*i_line)++;
+	while (file[*i_line] &&
+	       (file[*i_line][*i_col] == '\t' ||
+	        file[*i_line][*i_col] == ' '))
+		(*i_col)++;
 	return token;
 }
 
-void line_to_token(t_token *ltken, char **files, int *i_files)
+void line_to_token(t_token *ltken, char **file, int *i_line)
 {
 	int i_tken;
-	int i_line;
+	int i_col;
 
 	i_tken = 0;
-	i_line = 0;
+	i_col = 0;
 
-	while (files[*i_files][i_line] == '\t' || files[*i_files][i_line] == ' ')
-		i_line++;
-	while (files[*i_files][i_line] && !ltken[0].er)
+	while (file[*i_line][i_col] == '\t' || file[*i_line][i_col] == ' ')
+		i_col++;
+	while (file[*i_line][i_col] && !ltken[0].er)
 	{
-		ltken[i_tken] = get_token(&i_line, files, i_files);
+		ltken[i_tken] = get_token(i_line, file, &i_col);
 		if (i_tken + 2 >= LEN_LTOKEN)
 		{
-			print_local_error(NULL, NULL, i_files,
+			print_local_error(NULL, NULL, i_line,
 			                  "lexer: Too many token in one line");
 			ltken[0].er = 1;
 		}
