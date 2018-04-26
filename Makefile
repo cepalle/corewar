@@ -18,11 +18,26 @@ DIR_ASM = srcs_asm/
 DIR_COREWAR = srcs_corewar/
 
 C_FILES_NAMES_COMMON = op.c swap_char.c
-C_FILES_NAMES_ASM = ast_to_byte.c cmd_input.c display_ast.c lexer.c \
-	line_to_token.c main.c parser.c put_error.c tab_token.c \
-	check_ast.c ast_handler.c feed_label.c len_prog.c open_new_file.c \
-	write_header.c write_insts.c check_labels.c check_registres.c \
-	check_insts.c
+C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
+	ast_to_byte/feed_label.c \
+	ast_to_byte/len_prog.c \
+	ast_to_byte/open_new_file.c \
+	ast_to_byte/write_header.c \
+	ast_to_byte/write_insts.c \
+	lexer/lexer.c \
+	lexer/line_to_token.c \
+	lexer/tab_token.c \
+	parser/ast_handler.c \
+	parser/check_ast.c \
+	parser/check_insts.c \
+	parser/check_labels.c \
+	parser/check_registres.c \
+	parser/display_ast.c \
+	parser/parser.c \
+	cmd_input.c \
+	main.c \
+	put_error.c
+
 C_FILES_NAMES_COREWAR = main.c
 
 OBJDIR_COMMON = objs_common/
@@ -42,6 +57,9 @@ $(OBJDIR_COMMON)%.o: $(DIR_COMMON)%.c $(INCLUDE_H)
 
 $(OBJDIR_ASM)%.o: $(DIR_ASM)%.c $(INCLUDE_H)
 	@mkdir -p $(OBJDIR_ASM)
+	@mkdir -p $(OBJDIR_ASM)/ast_to_byte
+	@mkdir -p $(OBJDIR_ASM)/lexer
+	@mkdir -p $(OBJDIR_ASM)/parser
 	$(CC) -c $< $(CFLAGS) -o $@ -I $(INCLUDE_DIR) -I $(INCLUDEDIR_LIBFT)
 
 $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)

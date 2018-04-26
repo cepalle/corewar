@@ -1,5 +1,6 @@
 #include "asm.h"
 #include <unistd.h>
+#include "libft.h"
 
 int main(int argc, char **argv)
 {
@@ -17,7 +18,7 @@ int main(int argc, char **argv)
 	parser_res = parser(lexer_res);
 	// free lexer
 	//display_ast(parser_res); // TO DEL
-	if (parser_res.er || check_ast(parser_res))
+	if (parser_res.er)
 		return (1);
 	if (cmdl.opt_a)
 		display_ast(parser_res);

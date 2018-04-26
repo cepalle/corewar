@@ -1,5 +1,5 @@
-#include "../includes/asm.h"
-#include "../libft/includes/libft.h"
+#include "asm.h"
+#include "libft.h"
 #include <unistd.h>
 #include <stdlib.h>
 

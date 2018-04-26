@@ -112,6 +112,8 @@ void ast_to_byte(t_parser parser_res, char *file_name);
 
 int asm_usage(void);
 
+int print_local_error(char **files, const int *col, const int *line, char *msg);
+
 void line_to_token(t_token *ltken, char **files, int *i);
 
 void tab_token_multi_add(t_tab_token *tab_token, t_token *ltken);

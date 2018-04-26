@@ -7,7 +7,7 @@ int asm_usage(void)
 	return (-1);
 };
 
-int print_local_error(char **files, int *col, int *line, char *msg)
+int print_local_error(char **files, const int *col, const int *line, char *msg)
 {
 	int i;
 
@@ -23,11 +23,11 @@ int print_local_error(char **files, int *col, int *line, char *msg)
 			ft_printf(" ");
 			i++;
 		}
-		ft_printf("^\n"); // COLOR ?
+		ft_printf("\033[31m^\033[0m\n"); // COLOR ?
 	}
 	if (line && col)
-		ft_printf("line: %d column: %d\n", *line, *col);
+		ft_printf("line: %d column: %d\n", *line + 1, *col + 1);
 	else if (line)
-		ft_printf("line: %d\n", *line);
+		ft_printf("line: %d\n", *line + 1);
 	return (-1);
 };
