@@ -8,3 +8,4 @@ corewar
 *.cor
 /test
 a.out
+.swp

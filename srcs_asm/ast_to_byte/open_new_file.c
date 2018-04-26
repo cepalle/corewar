@@ -9,7 +9,7 @@ int open_new_file(char *file_name)
 	char *new_file_name;
 
 	len = ft_strlen(file_name);
-	new_file_name = ft_strnew(len + 2);
+	new_file_name = ft_strnew(len + 3);
 	ft_strcpy(new_file_name, file_name);
 	new_file_name[len + 1] = 'r';
 	new_file_name[len] = 'o';
