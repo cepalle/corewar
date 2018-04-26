@@ -38,7 +38,7 @@ que ld, mais sans % IDX_MOD. Modifie le carry.
 
  |  NOM   |  op  |  oc_param |     ecriture         | ecriture bytecode |  operation                                      |       remarque
 --------------------------------------------------------------------------------------------------------------------------------------------------
- |  live  |  01  |     0     |   sti rx, var, var   |                   |                                                 |
+ |  live  |  01  |     0     |                    |                   |                                                 |
  |	ld    |  02  |
  |	st    |  03  |
  |	add   |  04  |
