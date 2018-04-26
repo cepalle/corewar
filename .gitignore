@@ -7,3 +7,4 @@ asm
 corewar
 *.cor
 /test
+a.out
