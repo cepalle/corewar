@@ -2,7 +2,7 @@
 #ifndef ASM_H
 # define ASM_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 # define TAB_TOKEN_LEN_INIT 4
 # define LEN_LTOKEN 16
@@ -150,5 +150,20 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst);
 
 int check_insts(t_ast_inst *inst);
 
+t_token get_direct(int *i_line, char *line, int line_file);
+
+t_token get_indirect_number(int *i_line, const char *line, int line_file);
+
+t_token get_indirect_label(int *i_line, const char *line, int line_file);
+
+t_token get_string(int *i_line, char **files, int *i_files);
+
+t_token get_label(int *i_line, const char *line, int line_file);
+
+t_token get_dote_start(int *i_line, const char *line, int line_file);
+
+t_token get_separator_char(int *i_line, const char *line, int line_file);
+
+t_token get_comment(int *i_line, const char *line, int line_file);
 
 #endif

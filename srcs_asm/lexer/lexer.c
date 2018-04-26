@@ -1,7 +1,5 @@
 #include "asm.h"
 #include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
 
 
 void feed_lexer_files(t_lexer *lexer_res, int fd)
@@ -28,7 +26,7 @@ void feed_lexer_files(t_lexer *lexer_res, int fd)
 	}
 	if (res < 0)
 	{
-		ft_printf("Error with gnl\n");
+		ft_printf("Unexpected error with gnl\n");
 		lexer_res->er = 1;
 	}
 }
@@ -63,7 +61,7 @@ t_lexer lexer(t_cmdl cmdl)
 	if (lexer_res.tab_token.i < 0)
 	{
 		// free();
-		ft_printf("tab token is empty\n");
+		ft_printf("lexer: the program is empty\n");
 		lexer_res.er = 1;
 	}
 	return lexer_res;

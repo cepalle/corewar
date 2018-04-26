@@ -27,6 +27,12 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	lexer/lexer.c \
 	lexer/line_to_token.c \
 	lexer/tab_token.c \
+	lexer/get_comment_sep.c \
+	lexer/get_direct.c \
+	lexer/get_dote_start.c \
+	lexer/get_indirect.c \
+	lexer/get_label.c \
+	lexer/get_string.c \
 	parser/ast_handler.c \
 	parser/check_ast.c \
 	parser/check_insts.c \
@@ -36,7 +42,7 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	parser/parser.c \
 	cmd_input.c \
 	main.c \
-	put_error.c
+	print_error.c
 
 C_FILES_NAMES_COREWAR = main.c
 
