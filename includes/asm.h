@@ -166,4 +166,10 @@ t_token get_separator_char(int *i_line, char **file, int *i_col);
 
 t_token get_comment(int *i_line, char **file, int *i_col);
 
+void ast_add_dote_start(t_parser *parser_res, t_tab_token tab_token, int *i);
+
+void ast_add_inst(t_parser *parser_res, t_tab_token tab_token, int *i);
+
+
+
 #endif

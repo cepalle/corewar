@@ -40,6 +40,9 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	parser/check_registres.c \
 	parser/display_ast.c \
 	parser/parser.c \
+	parser/print_ast.c \
+	parser/ast_add_inst.c \
+	parser/ast_dote_start.c \
 	cmd_input.c \
 	main.c \
 	print_error.c
