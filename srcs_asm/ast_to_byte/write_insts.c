@@ -107,9 +107,9 @@ void write_inst(int fd, t_ast_inst *ast_inst, int pos)
 {
 	t_op op;
 
-	if (!ast_inst->cmd)
+	if (!ast_inst->cmd.enum_token)
 		return;
-	op = get_op(ast_inst->cmd);
+	op = get_op(ast_inst->cmd.data);
 	write(fd, &op.opcode, 1);
 	//ft_printf("cmd: %s, opcode: %d\n", ast_inst->cmd, op.opcode);
 	if (op.octet_param)

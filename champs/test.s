@@ -27,7 +27,7 @@ tir:	sti	r1,%:tirb,%1
 tirf:	live	%42
 	fork	%:tirop
 	live	%742
-	sub	r3,r5,r3,#%4
+	sub	r3,r5,r3#,#%4
 	zjmp	%:top
 	ld	%0,r11
 	fork	%:tirvd
@@ -251,3 +251,12 @@ tird:	live	%42
 	zjmp	%:p1
 
 fin:	live	%633
+
+fin1:
+fin2:
+fin1:
+fin2:
+fin1:
+fin2:
+fin1:
+fin2:

@@ -108,7 +108,8 @@ void ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
 		// free inst
 		return;
 	}
-	ast_inst.cmd = ft_strdup(lexer_res.tab_token.tokens[*i].data);
+	ast_inst.cmd = lexer_res.tab_token.tokens[*i];
+	ast_inst.cmd.data = ft_strdup(lexer_res.tab_token.tokens[*i].data);
 	(*i)++;
 	inst_add_params(&ast_inst, lexer_res, i);
 	if (ast_inst.er)

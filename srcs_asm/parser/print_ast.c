@@ -14,7 +14,7 @@ void print_ast_inst(t_ast_inst *ast_inst)
 		i++;
 	}
 	i = 0;
-	ft_printf("%s ", ast_inst->cmd);
+	ft_printf("%s ", ast_inst->cmd.data);
 	while (i < ast_inst->nb_ast_params)
 	{
 		print_token(ast_inst->ast_params[i]);

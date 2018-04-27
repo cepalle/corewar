@@ -2,7 +2,7 @@
 #include "libft.h"
 #include "op.h"
 
-int check_ast(t_parser parser_res)
+int check_ast(t_parser parser_res, char **file)
 {
 	int er;
 
@@ -29,9 +29,9 @@ int check_ast(t_parser parser_res)
 		ft_printf("error: The program is empty\n");
 		er = 1;
 	}
-	else if (check_registres(parser_res.ast_prog.ast_inst) ||
-	    check_labels(parser_res, parser_res.ast_prog.ast_inst) ||
-	    check_insts(parser_res.ast_prog.ast_inst))
+	else if (check_registres(parser_res.ast_prog.ast_inst, file) ||
+	    check_labels(parser_res, parser_res.ast_prog.ast_inst, file) ||
+	    check_insts(parser_res.ast_prog.ast_inst, file))
 		er = 1;
 
 	if (er)

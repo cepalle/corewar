@@ -15,9 +15,9 @@ int is_registre(char *label)
 	if (er || reg_num <= 0 || reg_num > REG_NUMBER)
 		return 0;
 	return 1;
-};
+}
 
-int check_registres(t_ast_inst *ast_inst)
+int check_registres(t_ast_inst *ast_inst, char **file)
 {
 	int i;
 
@@ -36,6 +36,5 @@ int check_registres(t_ast_inst *ast_inst)
 		}
 		i++;
 	}
-	return check_registres(ast_inst->next);
-};
-
+	return check_registres(ast_inst->next, file);
+}

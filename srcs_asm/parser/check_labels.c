@@ -15,9 +15,9 @@ int check_label_if_exist(t_ast_inst *ast_inst, const char *to_find)
 		i++;
 	}
 	return check_label_if_exist(ast_inst->next, to_find);
-};
+}
 
-int check_labels(t_parser parser_res, t_ast_inst *ast_inst)
+int check_labels(t_parser parser_res, t_ast_inst *ast_inst, char **file)
 {
 	int i;
 
@@ -37,6 +37,5 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst)
 		}
 		i++;
 	}
-	return check_labels(parser_res, ast_inst->next);
-};
-
+	return check_labels(parser_res, ast_inst->next, file);
+}

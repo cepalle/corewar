@@ -17,7 +17,7 @@ int check_param(int ennum_token, int t_arg)
 		return 0;
 	ft_printf("bad parameter\n");
 	return 1;
-};
+}
 
 int check_cmd(t_ast_inst *inst, t_op op_desc)
 {
@@ -36,38 +36,53 @@ int check_cmd(t_ast_inst *inst, t_op op_desc)
 		i++;
 	}
 	return 0;
-};
+}
 
-int check_inst(t_ast_inst *inst)
+int check_inst(t_ast_inst *inst, char **file)
 {
 	int i;
 
 	i = 0;
-	if (!inst->cmd && inst->next)
+	if (!inst->nb_labels_dec && !inst->cmd.enum_token)
 	{
-		ft_printf("empty cmd and is not in the end\n");
+		ft_printf("Unexpected error: 1\n");
 		return 1;
 	}
-	else if (!inst->cmd && !inst->next)
+	if (!inst->cmd.enum_token && inst->next)
+	{
+		print_local_error(file, &(inst->labels_dec[inst->nb_labels_dec -
+		                                           1].file_pose_col),
+		                  &(inst->labels_dec[inst->nb_labels_dec -
+		                                     1].file_pose_line),
+		                  "error: label as not cmd and is not in the end");
+		return 1;
+	}
+	else if (!inst->cmd.enum_token && !inst->next)
 		return 0;
 	while (i < OP_TAB_LENGTH)
 	{
 		//ft_printf("cmd: '%s', name '%s'\n", inst->cmd, gopt()[i].name);
-		if (ft_strequ(gopt()[i].name, inst->cmd))
+		if (ft_strequ(gopt()[i].name, inst->cmd.data))
 			return check_cmd(inst, gopt()[i]);
 		i++;
 	}
-	ft_printf("error: unknow cmd: %s\n", inst->cmd);
+	/*
+	print_local_error(file, &(inst->cmd),
+	                  &(inst->labels_dec[inst->nb_labels_dec -
+	                                     1].file_pose_line),
+	                  "error: label as not cmd and is not in the end");
+	*/
+	ft_printf("error: un know cmd: %s\n", inst->cmd.data);
 	return 1;
-};
+}
 
-int check_insts(t_ast_inst *inst)
+int check_insts(t_ast_inst *inst, char **file)
 {
 	//ft_printf("### check_insts\n");
 
 	if (!inst)
 		return 0;
-	if (check_inst(inst))
+	if (check_inst(inst, file))
 		return 1;
-	return check_insts(inst->next);
-};
+	return check_insts(inst->next, file);
+}
