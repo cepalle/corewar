@@ -19,4 +19,4 @@ void ast_to_byte(t_parser parser_res, char *file_name)
 	ft_printf("write_insts\n");
 	write_insts(fd, parser_res.ast_prog.ast_inst, 0);
 	ft_printf("end\n");
-};
+}

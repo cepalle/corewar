@@ -30,4 +30,4 @@ void ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i)
 	else
 		parser_res->ast_prog.prog_name = ft_strdup(lexer_res.tab_token.tokens[*i + 1].data);
 	*i = *i + 3;
-};
+}

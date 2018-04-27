@@ -44,4 +44,4 @@ t_token get_string(int *i_line, char **file, int *i_col)
 	//ft_printf(token.data);
 	(*i_col)++;
 	return token;
-};
+}

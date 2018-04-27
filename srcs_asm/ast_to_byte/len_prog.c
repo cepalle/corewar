@@ -10,7 +10,7 @@ int len_param(int enum_token, char *cmd)
 	if (enum_token == TOKEN_LABEL)
 		return 1;
 	return 2 + !get_op(cmd).dir_size_2 * 2;
-};
+}
 
 int inst_len(t_ast_inst *ast_inst)
 {
@@ -28,11 +28,11 @@ int inst_len(t_ast_inst *ast_inst)
 		i++;
 	}
 	return len;
-};
+}
 
 unsigned prog_len(t_ast_inst *ast_inst)
 {
 	if (!ast_inst)
 		return 0;
 	return inst_len(ast_inst) + prog_len(ast_inst->next);
-};
+}

@@ -14,7 +14,7 @@ t_token get_separator_char(int *i_line, char **file, int *i_col)
 
 	(*i_col)++;
 	return (token);
-};
+}
 
 t_token get_comment(int *i_line, char **file, int *i_col)
 {
@@ -26,4 +26,4 @@ t_token get_comment(int *i_line, char **file, int *i_col)
 	token.data = ft_strdup(file[*i_line] + *i_col);
 	*i_col = *i_col + (int) ft_strlen(token.data);
 	return (token);
-};
+}

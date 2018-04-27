@@ -23,4 +23,4 @@ int open_new_file(char *file_name)
 		//write(fd, "test\n", 5);
 	}
 	return fd;
-};
+}

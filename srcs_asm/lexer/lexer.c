@@ -65,4 +65,4 @@ t_lexer lexer(t_cmdl cmdl)
 		lexer_res.er = 1;
 	}
 	return lexer_res;
-};
+}

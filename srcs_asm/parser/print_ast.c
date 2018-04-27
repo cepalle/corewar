@@ -22,11 +22,11 @@ void print_ast_inst(t_ast_inst *ast_inst)
 	}
 	ft_printf("\n");
 	print_ast_inst(ast_inst->next);
-};
+}
 
 void print_ast_prog(t_ast_prog ast_prog)
 {
 	ft_printf(".name: %s\n", ast_prog.prog_name);
 	ft_printf(".comment: %s\n", ast_prog.prog_comment);
 	print_ast_inst(ast_prog.ast_inst);
-};
+}

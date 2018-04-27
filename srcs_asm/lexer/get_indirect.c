@@ -26,7 +26,7 @@ t_token get_indirect_label(int *i_line, char **file, int *i_col)
 	}
 	*i_col = *i_col + i;
 	return (token);
-};
+}
 
 t_token get_indirect_number(int *i_line, char **file, int *i_col)
 {
@@ -59,4 +59,4 @@ t_token get_indirect_number(int *i_line, char **file, int *i_col)
 	}
 	*i_col = *i_col + i;
 	return (token);
-};
+}

@@ -89,7 +89,7 @@ void write_param(int fd, t_token token, int dir_size_2, int pos)
 	ft_printf("write_param, tokem ennum not valide\n");
 	print_token(token);
 	ft_printf("\n");
-};
+}
 
 void write_params(int fd, t_ast_inst *ast_inst, int dir_size_2, int pos)
 {
@@ -101,7 +101,7 @@ void write_params(int fd, t_ast_inst *ast_inst, int dir_size_2, int pos)
 		write_param(fd, ast_inst->ast_params[i], dir_size_2, pos);
 		i++;
 	}
-};
+}
 
 void write_inst(int fd, t_ast_inst *ast_inst, int pos)
 {
@@ -115,7 +115,7 @@ void write_inst(int fd, t_ast_inst *ast_inst, int pos)
 	if (op.octet_param)
 		write_octet_param(fd, ast_inst);
 	write_params(fd, ast_inst, op.dir_size_2, pos);
-};
+}
 
 void write_insts(int fd, t_ast_inst *ast_inst, int pos)
 {
@@ -123,4 +123,4 @@ void write_insts(int fd, t_ast_inst *ast_inst, int pos)
 		return;
 	write_inst(fd, ast_inst, pos);
 	write_insts(fd, ast_inst->next, pos + inst_len(ast_inst));
-};
+}

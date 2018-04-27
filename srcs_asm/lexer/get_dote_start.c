@@ -23,4 +23,4 @@ t_token get_dote_start(int *i_line, char **file, int *i_col)
 	                  "lexer: Dote start, unexpected word after '.'");
 	token.er = 1;
 	return (token);
-};
+}

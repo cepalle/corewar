@@ -16,5 +16,5 @@ void write_header(int fd, t_parser parser_res)
 	ft_strcpy(header.comment, parser_res.ast_prog.prog_comment);
 
 	write(fd, &header, sizeof(t_header));
-};
+}
 

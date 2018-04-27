@@ -34,7 +34,7 @@ t_token get_direct_number(int *i_line, char **file, int *i_col)
 	token.data[i] = '\0';
 	*i_col = *i_col + i;
 	return (token);
-};
+}
 
 t_token get_direct_label(int *i_line, char **file, int *i_col)
 {
@@ -59,7 +59,7 @@ t_token get_direct_label(int *i_line, char **file, int *i_col)
 	}
 	*i_col = *i_col + i;
 	return (token);
-};
+}
 
 t_token get_direct(int *i_line, char **file, int *i_col)
 {
@@ -80,4 +80,4 @@ t_token get_direct(int *i_line, char **file, int *i_col)
 		                  "lexer: excepted ':' or digit");
 	}
 	return token;
-};
+}
