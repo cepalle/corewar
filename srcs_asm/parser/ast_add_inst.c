@@ -24,7 +24,7 @@ void inst_add_labels_dec(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
                 lexer_res.tab_token.tokens[*i].enum_token == TOKEN_COMMENT)
 			(*i)++;
 	}
-};
+}
 
 void inst_add_params(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
 {
@@ -60,7 +60,7 @@ void inst_add_params(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
 		(*i)++;
 		inst_add_params(ast_inst, lexer_res, i);
 	}
-};
+}
 
 void add_inst_to_parser_res(t_parser *parser_res, t_ast_inst ast_inst)
 {
@@ -114,4 +114,4 @@ void ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
 	if (ast_inst.er)
 		parser_res->er = 1;
 	add_inst_to_parser_res(parser_res, ast_inst);
-};
+}
