@@ -68,4 +68,6 @@ void line_to_token(t_token *ltken, char **file, int *i_line)
 		i_tken++;
 	}
 	ltken[i_tken].enum_token = TOKEN_EOL;
+	ltken[i_tken].file_pose_line = *i_line;
+	ltken[i_tken].file_pose_col = i_col;
 }

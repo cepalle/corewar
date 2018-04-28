@@ -33,8 +33,8 @@ void inst_add_params(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
             lexer_res.tab_token.tokens[*i].enum_token != TOKEN_INDIRECT_LABEL &&
             lexer_res.tab_token.tokens[*i].enum_token != TOKEN_LABEL)
 	{
-        print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
-                          &(lexer_res.tab_token.tokens[*i].file_pose_line),
+		print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
+						  &(lexer_res.tab_token.tokens[*i].file_pose_line),
                           "parser: Need a param");
 		ast_inst->er = 1;
 		return;
@@ -91,7 +91,6 @@ void ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
 	}
 	if (ast_inst.nb_labels_dec > 0 && lexer_res.tab_token.i < (*i))
 	{
-		print_token(lexer_res.tab_token.tokens[*i]);
 		add_inst_to_parser_res(parser_res, ast_inst);
 		return;
 	};
@@ -100,7 +99,6 @@ void ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
 	    print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
                           &(lexer_res.tab_token.tokens[*i].file_pose_line),
                           "parser: Need a command");
-		ft_printf("\n");
 		parser_res->er = 1;
 		add_inst_to_parser_res(parser_res, ast_inst);
 		return;
