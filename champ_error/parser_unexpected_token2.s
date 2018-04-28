@@ -161,7 +161,19 @@ p1:	zjmp	%:infi
 
         live    %0              # pour boucher l'entree
 copie:  ld      %1,r1
-"""""""""""""
+
+
+"
+
+
+
+:
+
+'
+
+"
+
+
 tart:	sti	r1,%:p64li,%1
 	or	r2,r2,r2	# selection vers les modules
 	zjmp	%:p64

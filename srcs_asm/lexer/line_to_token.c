@@ -54,7 +54,7 @@ void line_to_token(t_token *ltken, char **file, int *i_line)
 
 	while (file[*i_line][i_col] == '\t' || file[*i_line][i_col] == ' ')
 		i_col++;
-	while (file[*i_line][i_col] && !ltken[0].er)
+	while (file[*i_line] && file[*i_line][i_col] && !ltken[0].er)
 	{
 		ltken[i_tken] = get_token(i_line, file, &i_col);
 		if (i_tken + 2 >= LEN_LTOKEN)

@@ -51,7 +51,7 @@ tirop:	ld	%368,r2
 
 tirb:	live	%1
 	sti	r10,%-510,r2
-	sti	r10,%-510,r3
+	sti	r10,%-510,r3,r1
 	add	r4,r5,r4
 	add	r3,r4,r3
 	sub	r2,r4,r2
@@ -161,7 +161,8 @@ p1:	zjmp	%:infi
 
         live    %0              # pour boucher l'entree
 copie:  ld      %1,r1
-"""""""""""""
+
+
 tart:	sti	r1,%:p64li,%1
 	or	r2,r2,r2	# selection vers les modules
 	zjmp	%:p64
