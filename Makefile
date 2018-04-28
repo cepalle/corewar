@@ -33,6 +33,7 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	lexer/get_indirect.c \
 	lexer/get_label.c \
 	lexer/get_string.c \
+	lexer/free_lexer.c \
 	parser/ast_add_next.c \
 	parser/check_ast.c \
 	parser/check_insts.c \
@@ -41,6 +42,7 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	parser/parser.c \
 	parser/ast_add_inst.c \
 	parser/ast_dote_start.c \
+	parser/free_parser.c \
 	print/print_ast.c \
 	print/print_error.c \
 	print/print_tab_token.c \

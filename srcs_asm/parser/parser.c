@@ -14,14 +14,16 @@ t_parser parser(t_lexer lexer_res)
 
 	if (parser_res.er || check_ast(parser_res, lexer_res.file))
 	{
-		//free
+		free_parser(parser_res);
 		parser_res.er = 1;
+		return parser_res;
 	}
 	if (!parser_res.er && !prog_len(parser_res.ast_prog.ast_inst))
 	{
 		ft_printf("error: The program is len is 0");
-		//free
+		free_parser(parser_res);
 		parser_res.er = 1;
+		return parser_res;
 	}
 	return parser_res;
 }

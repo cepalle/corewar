@@ -32,10 +32,5 @@ int check_ast(t_parser parser_res, char **file)
 	    check_labels(parser_res, parser_res.ast_prog.ast_inst, file) ||
 	    check_insts(parser_res.ast_prog.ast_inst, file))
 		er = 1;
-
-	if (er)
-	{
-		// free
-	}
 	return (er);
 }

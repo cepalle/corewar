@@ -12,7 +12,6 @@ void inst_add_labels_dec(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
                               &(lexer_res.tab_token.tokens[*i].file_pose_line),
                               "paser: Too many label befor one cmd");
 			ast_inst->er = 1;
-			// free inst
 			return;
 		}
 		ast_inst->labels_dec[ast_inst->nb_labels_dec] = lexer_res.tab_token.tokens[*i];
@@ -38,7 +37,6 @@ void inst_add_params(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
                           &(lexer_res.tab_token.tokens[*i].file_pose_line),
                           "parser: Need a param");
 		ast_inst->er = 1;
-		// free inst
 		return;
 	}
 	if (ast_inst->nb_ast_params >= MAX_PARAMS)
@@ -47,7 +45,6 @@ void inst_add_params(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
                           &(lexer_res.tab_token.tokens[*i].file_pose_line),
                           "parser: command can't have more than 3 param");
 		ast_inst->er = 1;
-		// free inst
 		return;
 	}
 	ast_inst->ast_params[ast_inst->nb_ast_params] = lexer_res.tab_token.tokens[*i];
@@ -104,7 +101,6 @@ void ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
                           "parser: Need a command");
 		ft_printf("\n");
 		parser_res->er = 1;
-		// free inst
 		return;
 	}
 	ast_inst.cmd = lexer_res.tab_token.tokens[*i];

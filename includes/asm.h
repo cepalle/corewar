@@ -170,6 +170,10 @@ t_token get_comment(int *i_line, char **file, int *i_col);
 
 void print_tab_token(t_tab_token tab_token);
 
+void free_parser(t_parser parser_res);
+
+void free_lexer(t_lexer lexer_res);
+
 
 
 #endif

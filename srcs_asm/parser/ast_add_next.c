@@ -20,8 +20,4 @@ void ast_add_next(t_parser *parser_res, t_lexer lexer_res, int *i)
         "parser: Unexpected token");
 		parser_res->er = 1;
 	}
-	if (parser_res->er)
-	{
-		// free parser_res
-	}
 }
