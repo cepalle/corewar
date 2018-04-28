@@ -1,6 +1,7 @@
 #include "libft.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 int open_new_file(char *file_name)
 {
@@ -18,5 +19,6 @@ int open_new_file(char *file_name)
 	fd = open(new_file_name, O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO);
 	if (fd > 0)
 		ft_printf("result write in %s\n", new_file_name);
+	free(new_file_name);
 	return fd;
 }
