@@ -47,13 +47,13 @@ t_lexer lexer(t_cmdl cmdl)
 	{
 		ft_bzero(ltken, sizeof(t_token) * LEN_LTOKEN);
 		line_to_token(ltken, lexer_res.file, &i_line);
+		tab_token_multi_add(&(lexer_res.tab_token), ltken);
 		if (ltken[0].er)
 		{
 			free_lexer(lexer_res);
 			lexer_res.er = 1;
 			return lexer_res;
 		}
-		tab_token_multi_add(&(lexer_res.tab_token), ltken);
 		i_line++;
 	}
 	if (!lexer_res.file[0] || lexer_res.tab_token.i < 0)

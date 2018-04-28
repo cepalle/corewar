@@ -19,14 +19,12 @@ t_token get_direct_number(int *i_line, char **file, int *i_col)
 		i++;
 	if (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
 	{
-		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
 		                  "lexer: Direct number, unexpected char");
 	}
 	if (i == 1 && token.data[i] == '-')
 	{
-		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
 		                  "lexer: Direct_number, no number found after '-'");
@@ -52,7 +50,6 @@ t_token get_direct_label(int *i_line, char **file, int *i_col)
 	token.data[i] = '\0';
 	if (!ft_strlen(token.data))
 	{
-		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
 		                  "lexer: Direct label, unexpected char after ':'");

@@ -18,15 +18,11 @@ test11:#coucou
 test12:#coucou
 test13:#coucou
 test14:#coucou
-test15:#coucou
-test16:#coucou
-test17:#coucou
-test18:#coucou
 
 entree:	live	%42#, %3		# entree
 	ld	%0,r5#
 	ld	%0,r5
-	zjmp %:bite
+	zjmp %:bite2
 
 tir:	sti	r1,%:tirb,%1
 	ld	%2304,r10
