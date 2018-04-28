@@ -23,7 +23,7 @@ int find_label_pos(t_ast_inst *ast_inst, char *label)
 
 	if (!ast_inst)
 	{
-		ft_printf("find_label_pos, label not found\n");
+		ft_printf("Unexcepted error: 2\n");
 		return 0;
 	}
 	i = 0;

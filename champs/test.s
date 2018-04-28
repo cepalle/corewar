@@ -5,14 +5,13 @@
 #%1
 
 test:   #la
-test:
 
-test:
-test: #ici
 
-test:#coucou
+test2: #ici
 
-test:#%45
+test3:#coucou
+
+test4:#%45
 entree:	live	%42#, %3		# entree
 	ld	%0,r5#
 	ld	%0,r5
@@ -253,10 +252,4 @@ tird:	live	%42
 fin:	live	%633
 
 fin1:
-fin2:
-fin1:
-fin2:
-fin1:
-fin2:
-fin1:
-fin2:
+p64li:

@@ -19,5 +19,11 @@ t_parser parser(t_lexer lexer_res)
 		//free
 		parser_res.er = 1;
 	}
+	if (!parser_res.er && !prog_len(parser_res.ast_prog.ast_inst))
+	{
+		ft_printf("error: The program is len is 0");
+		//free
+		parser_res.er = 1;
+	}
 	return parser_res;
 }

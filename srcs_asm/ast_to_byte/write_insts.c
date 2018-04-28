@@ -86,7 +86,7 @@ void write_param(int fd, t_token token, int dir_size_2, int pos)
 		write(fd, &to_write_2, 2);
 		return;
 	}
-	ft_printf("write_param, tokem ennum not valide\n");
+	ft_printf("Unexcepted error: 3\n");
 	print_token(token);
 	ft_printf("\n");
 }
