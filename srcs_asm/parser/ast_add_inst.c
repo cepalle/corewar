@@ -6,7 +6,7 @@ void inst_add_labels_dec(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
 	while (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_LABEL_DECLARATION &&
 	       !ast_inst->er)
 	{
-		if (ast_inst->nb_labels_dec >= LABELS_DEC_LEN)
+		if (ast_inst->nb_labels_dec + 1 >= LABELS_DEC_LEN)
 		{
 		    print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
                               &(lexer_res.tab_token.tokens[*i].file_pose_line),
@@ -86,6 +86,7 @@ void ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
 	if (ast_inst.er)
 	{
 		parser_res->er = 1;
+		add_inst_to_parser_res(parser_res, ast_inst);
 		return;
 	}
 	if (ast_inst.nb_labels_dec > 0 && lexer_res.tab_token.i < (*i))
@@ -101,6 +102,7 @@ void ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
                           "parser: Need a command");
 		ft_printf("\n");
 		parser_res->er = 1;
+		add_inst_to_parser_res(parser_res, ast_inst);
 		return;
 	}
 	ast_inst.cmd = lexer_res.tab_token.tokens[*i];

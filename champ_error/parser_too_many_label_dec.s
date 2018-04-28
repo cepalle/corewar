@@ -1,4 +1,5 @@
-#.name           "42" #.name           "422"
+.name           "42"
+#.name           "422"
 #.comment        "Just a basic Winner Program"
 .comment        "2Just a basic Winner Program"
 #%1
@@ -9,6 +10,20 @@ test:   #la
 test2: #ici
 
 test3:#coucou
+test5:#coucou
+test6:#coucou
+test7:#coucou
+test8:#coucou
+test9:#coucou
+test10:#coucou
+test11:#coucou
+test12:#coucou
+test13:#coucou
+test14:#coucou
+test15:#coucou
+test16:#coucou
+test17:#coucou
+test18:#coucou
 
 test4:#%45
 entree:	live	%42#, %3		# entree
