@@ -49,7 +49,7 @@ static	t_op    g_op_tab[17] =
 	{"aff"  , 1, {T_REG}                                             ,
 		16, 2, "aff", 1, 0},
 	{0, 0, {0}, 0, 0, 0, 0, 0}
-}
+};
 
 t_op	*gopt(void)
 {
