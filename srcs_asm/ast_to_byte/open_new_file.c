@@ -19,6 +19,8 @@ int open_new_file(char *file_name)
 	fd = open(new_file_name, O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO);
 	if (fd > 0)
 		ft_printf("result write in %s\n", new_file_name);
+	else
+		ft_printf("Unexpected error, can't write the file.cor\n");
 	free(new_file_name);
 	return fd;
 }
