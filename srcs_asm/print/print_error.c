@@ -1,4 +1,4 @@
-#include "../libft/includes/libft.h"
+#include "libft.h"
 
 int asm_usage(void)
 {

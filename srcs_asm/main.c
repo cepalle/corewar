@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	if (parser_res.er)
 		return (1);
 	if (cmdl.opt_a)
-		display_ast(parser_res);
+		print_ast_prog(parser_res.ast_prog);
 	else
 		ast_to_byte(parser_res, cmdl.file_name);
 	// free parser

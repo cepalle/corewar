@@ -106,8 +106,6 @@ t_lexer lexer(t_cmdl cmdl);
 
 t_parser parser(t_lexer lexer_res);
 
-void display_ast(t_parser parser_res);
-
 void ast_to_byte(t_parser parser_res, char *file_name);
 
 void ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i);
@@ -170,6 +168,7 @@ t_token get_separator_char(int *i_line, char **file, int *i_col);
 
 t_token get_comment(int *i_line, char **file, int *i_col);
 
+void print_tab_token(t_tab_token tab_token);
 
 
 

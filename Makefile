@@ -38,14 +38,14 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	parser/check_insts.c \
 	parser/check_labels.c \
 	parser/check_registres.c \
-	parser/display_ast.c \
 	parser/parser.c \
-	parser/print_ast.c \
 	parser/ast_add_inst.c \
 	parser/ast_dote_start.c \
+	print/print_ast.c \
+	print/print_error.c \
+	print/print_tab_token.c \
 	cmd_input.c \
-	main.c \
-	print_error.c
+	main.c
 
 C_FILES_NAMES_COREWAR = main.c
 
@@ -69,6 +69,7 @@ $(OBJDIR_ASM)%.o: $(DIR_ASM)%.c $(INCLUDE_H)
 	@mkdir -p $(OBJDIR_ASM)/ast_to_byte
 	@mkdir -p $(OBJDIR_ASM)/lexer
 	@mkdir -p $(OBJDIR_ASM)/parser
+	@mkdir -p $(OBJDIR_ASM)/print
 	$(CC) -c $< $(CFLAGS) -o $@ -I $(INCLUDE_DIR) -I $(INCLUDEDIR_LIBFT)
 
 $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)
