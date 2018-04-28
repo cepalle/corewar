@@ -32,7 +32,9 @@ int check_labels(t_parser parser_res, t_ast_inst *ast_inst, char **file)
 		     ast_inst->ast_params[i].enum_token == TOKEN_INDIRECT_LABEL) &&
 		    check_label_if_exist(parser_res.ast_prog.ast_inst, ast_inst->ast_params[i].data))
 		{
-			ft_printf("label is not declare '%s'\n", ast_inst->ast_params[i].data);
+			print_local_error(file, &(ast_inst->ast_params[i].file_pose_col),
+					&(ast_inst->ast_params[i].file_pose_line),
+							  "label is not declare");
 			return 1;
 		}
 		i++;

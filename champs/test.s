@@ -13,7 +13,7 @@ test: #ici
 test:#coucou
 
 test:#%45
-entree:	live	%42		# entree
+entree:	live	%42#, %3		# entree
 	ld	%0,r5#
 	ld	%0,r5
 	zjmp	%:bite
@@ -24,8 +24,8 @@ tir:	sti	r1,%:tirb,%1
 	ld	%0,r11
 
 	ld	%4,r3
-tirf:	live	%42
-	fork	%:tirop
+tirf:	live	%42 # :test
+	fork	%:tirop#999
 	live	%742
 	sub	r3,r5,r3#,#%4
 	zjmp	%:top

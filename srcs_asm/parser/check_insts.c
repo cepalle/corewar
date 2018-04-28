@@ -2,36 +2,40 @@
 #include "op.h"
 #include "libft.h"
 
-int check_param(int ennum_token, int t_arg)
+int check_param(t_token token, int t_arg, char **file)
 {
 	if ((t_arg & T_DIR) &&
-	    (ennum_token == TOKEN_DIRECT_LABEL ||
-	     ennum_token == TOKEN_DIRECT_NUMBER))
+	    (token.enum_token == TOKEN_DIRECT_LABEL ||
+		token.enum_token == TOKEN_DIRECT_NUMBER))
 		return 0;
 	if ((t_arg & T_IND) &&
-	    (ennum_token == TOKEN_INDIRECT_LABEL ||
-	     ennum_token == TOKEN_INDIRECT_NUMBER))
+	    (token.enum_token == TOKEN_INDIRECT_LABEL ||
+		token.enum_token == TOKEN_INDIRECT_NUMBER))
 		return 0;
 	if ((t_arg & T_REG) &&
-	    ennum_token == TOKEN_LABEL)
+		token.enum_token == TOKEN_LABEL)
 		return 0;
-	ft_printf("bad parameter\n");
+	print_local_error(file, &(token.file_pose_col),
+					  &(token.file_pose_line),
+					  "error: bad parameter");
 	return 1;
 }
 
-int check_cmd(t_ast_inst *inst, t_op op_desc)
+int check_cmd(t_ast_inst *inst, t_op op_desc, char **file)
 {
 	int i;
 
 	if (inst->nb_ast_params != op_desc.nb_arg)
 	{
-		ft_printf("bad number of param for cmd %s\n", op_desc.name);
+		print_local_error(file, &(inst->cmd.file_pose_col),
+						  &(inst->cmd.file_pose_line),
+						  "error: bad number of param");
 		return 1;
 	}
 	i = 0;
 	while (i < inst->nb_ast_params)
 	{
-		if (check_param(inst->ast_params[i].enum_token, op_desc.args[i]))
+		if (check_param(inst->ast_params[i], op_desc.args[i], file))
 			return 1;
 		i++;
 	}
@@ -63,7 +67,7 @@ int check_inst(t_ast_inst *inst, char **file)
 	{
 		//ft_printf("cmd: '%s', name '%s'\n", inst->cmd, gopt()[i].name);
 		if (ft_strequ(gopt()[i].name, inst->cmd.data))
-			return check_cmd(inst, gopt()[i]);
+			return check_cmd(inst, gopt()[i], file);
 		i++;
 	}
 	/*
