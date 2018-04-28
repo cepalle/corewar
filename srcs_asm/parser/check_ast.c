@@ -7,7 +7,6 @@ int check_ast(t_parser parser_res, char **file)
 	int er;
 
 	er = 0;
-	// ft_printf("### check_ast\n");
 
 	if(!ft_strlen(parser_res.ast_prog.prog_name))
 	{

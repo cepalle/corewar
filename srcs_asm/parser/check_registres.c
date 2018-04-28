@@ -21,8 +21,6 @@ int check_registres(t_ast_inst *ast_inst, char **file)
 {
 	int i;
 
-	//ft_printf("## check_registres\n");
-
 	if (!ast_inst)
 		return 0;
 	i = 0;

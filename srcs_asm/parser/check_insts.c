@@ -65,24 +65,18 @@ int check_inst(t_ast_inst *inst, char **file)
 		return 0;
 	while (i < OP_TAB_LENGTH)
 	{
-		//ft_printf("cmd: '%s', name '%s'\n", inst->cmd, gopt()[i].name);
 		if (ft_strequ(gopt()[i].name, inst->cmd.data))
 			return check_cmd(inst, gopt()[i], file);
 		i++;
 	}
-	/*
-	print_local_error(file, &(inst->cmd),
-	                  &(inst->labels_dec[inst->nb_labels_dec -
-	                                     1].file_pose_line),
-	                  "error: label as not cmd and is not in the end");
-	*/
-	ft_printf("error: un know cmd: %s\n", inst->cmd.data);
+	print_local_error(file, &(inst->cmd.file_pose_col),
+					  &(inst->cmd.file_pose_line),
+					  "error: unknow command");
 	return 1;
 }
 
 int check_insts(t_ast_inst *inst, char **file)
 {
-	//ft_printf("### check_insts\n");
 
 	if (!inst)
 		return 0;

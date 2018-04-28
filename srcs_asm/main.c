@@ -16,7 +16,6 @@ int main(int argc, char **argv)
 		return (1);
 	parser_res = parser(lexer_res);
 	// free lexer
-	//display_ast(parser_res);
 	if (parser_res.er)
 		return (1);
 	if (cmdl.opt_a)

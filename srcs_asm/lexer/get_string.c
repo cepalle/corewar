@@ -34,14 +34,12 @@ t_token get_string(int *i_line, char **file, int *i_col)
 			tmp = token.data;
 			token.data = ft_strjoin(token.data, file[*i_line]);
 			free(tmp);
-			//ft_printf("%s\n", token.data);
 			continue;
 		}
 		(*i_col)++;
 		i++;
 	}
 	token.data[i] = '\0';
-	//ft_printf(token.data);
 	(*i_col)++;
 	return token;
 }

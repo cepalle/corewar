@@ -55,9 +55,6 @@ t_lexer lexer(t_cmdl cmdl)
 		tab_token_multi_add(&(lexer_res.tab_token), ltken);
 		i_line++;
 	}
-	//ft_printf("\n### LEXER\n\n");
-	//print_tab_token(lexer_res.tab_token);
-
 	if (lexer_res.tab_token.i < 0)
 	{
 		// free();

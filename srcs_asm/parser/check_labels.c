@@ -21,8 +21,6 @@ int check_labels_params(t_parser parser_res, t_ast_inst *ast_inst, char **file)
 {
 	int i;
 
-	//ft_printf("### check_labels\n");
-
 	if (!ast_inst)
 		return 0;
 	i = 0;
@@ -69,8 +67,6 @@ int check_inst_label_dec(t_ast_inst *ast_inst, char **file)
 int check_labels_dec(t_parser parser_res, t_ast_inst *ast_inst, char **file)
 {
 	int i;
-
-	//ft_printf("### check_labels\n");
 
 	if (!ast_inst)
 		return 0;
