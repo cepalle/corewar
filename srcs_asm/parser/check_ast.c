@@ -8,9 +8,9 @@ int check_ast(t_parser parser_res, char **file)
 
 	er = 0;
 
-	if(!ft_strlen(parser_res.ast_prog.prog_name))
+	if(!parser_res.ast_prog.prog_name || !ft_strlen(parser_res.ast_prog.prog_name))
 	{
-		ft_printf("error: Program name can't be empty\n");
+		ft_printf("error: The program must have a name\n");
 		er = 1;
 	}
 	else if (ft_strlen(parser_res.ast_prog.prog_name) > PROG_NAME_LENGTH)
@@ -18,7 +18,8 @@ int check_ast(t_parser parser_res, char **file)
 		ft_printf("error: Program name can't be contain more than 128 char\n");
 		er = 1;
 	}
-	else if (ft_strlen(parser_res.ast_prog.prog_comment) > COMMENT_LENGTH)
+	else if (parser_res.ast_prog.prog_comment &&
+			 ft_strlen(parser_res.ast_prog.prog_comment) > COMMENT_LENGTH)
 	{
 		ft_printf("error: Program comment can't be contain more than 2048 char\n");
 		er = 1;

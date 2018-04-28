@@ -6,12 +6,12 @@ void ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i)
 	char *error_msg;
 
 	error_msg = NULL;
-	if (*i + 2 > lexer_res.tab_token.i)
+	if (*i + 1 > lexer_res.tab_token.i)
 		error_msg = "parser: Dote start, not String found";
 	else if (lexer_res.tab_token.tokens[*i + 1].enum_token != TOKEN_STRING)
 		error_msg = "parser: Dote start, not String found";
-	else if (lexer_res.tab_token.tokens[*i + 2].enum_token != TOKEN_EOL)
-		error_msg = "parser: Dote start, not Eol found after String";
+	//else if (lexer_res.tab_token.tokens[*i + 2].enum_token != TOKEN_EOL &&)
+	//	error_msg = "parser: Dote start, not Eol found after String";
 	else if (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_PROG_NAME &&
 	         parser_res->ast_prog.prog_name)
 		error_msg = "parser: Dote start, you can use only one '.name'";
