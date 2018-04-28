@@ -38,6 +38,7 @@ t_lexer lexer(t_cmdl cmdl)
 	int i_line;
 
 	ft_bzero(&lexer_res, sizeof(t_lexer));
+	lexer_res.tab_token.i = -1;
 	i_line = 0;
 	feed_lexer_files(&lexer_res, cmdl.fd);
 	if (lexer_res.er)
@@ -55,7 +56,7 @@ t_lexer lexer(t_cmdl cmdl)
 		tab_token_multi_add(&(lexer_res.tab_token), ltken);
 		i_line++;
 	}
-	if (lexer_res.tab_token.i < 0)
+	if (!lexer_res.file[0] || lexer_res.tab_token.i < 0)
 	{
 		ft_printf("lexer: the program is empty\n");
 		free_lexer(lexer_res);
