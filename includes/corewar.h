@@ -18,6 +18,7 @@
 # define REG_CONTENT_SIZE 4
 #include <stdlib.h>
 #include <unistd.h>
+#include "op.h"
 
 typedef	struct		s_proc
 {
@@ -28,17 +29,17 @@ typedef	struct		s_proc
 
 typedef	struct 		s_player
 {
-	char			*name;
+	t_header		head;
 	unsigned int	last_live;
 	unsigned int	live;
 	t_proc			*PC;
-	char			comment[COMMENT_LENGTH + 1];
-	unsigned int	prog_size;
+	char			*prog;
 }					t_player;
 
 typedef	struct 		s_vm
 {
 	unsigned char 	tab[MEM_SIZE];
+	int 			nb_p;
 	t_player 		*player;
 	unsigned int 	nb_process;
 	unsigned int 	cycle;
