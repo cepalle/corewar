@@ -63,8 +63,8 @@ int 	main(int argc, char **argv)
 	if (ft_check_error(argc, argv) == 0)
 		return (0);
 	ft_create_player(argv, vm);
-	//ft_create_map(vm);
-	//ft_print_vm(vm);
+//	ft_create_map(vm);
+//	ft_print_vm(vm);
 
 	return (0);
 }
