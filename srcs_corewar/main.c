@@ -19,29 +19,19 @@ void	ft_print_vm(t_vm *vm)
 	int a;
 	int b;
 
-	a = 0;
+	a = -1;
 	ft_printf("ft_print_vm\n");
-	while (a < vm->nb_p)
+	while (++a < vm->nb_p)
 	{
-		//	nb magic code sur 4 octet pour lire en int il faut reverse
-//		swap_4(&vm->player[a].head.magic);
 		ft_printf("%x\n", vm->player[a].head.magic);
 		ft_printf("%s\n", vm->player[a].head.prog_name);
-
-		//	nb code sur 4 octet a swap pour lire bon nombre
-//		swap_4(&vm->player[a].head.prog_size);
 		ft_printf("%u\n", vm->player[a].head.prog_size);
 		ft_printf("%s\n", vm->player[a].head.comment);
-		b = 0;
-		while (b < vm->player[a].head.prog_size)
-		{
+		b = -1;
+		while (++b < vm->player[a].head.prog_size)
 			ft_printf("%0.2hhx ", vm->player[a].prog[b]);
-			b++;
-		}
 		ft_printf("\n\n\n\n");
-		a++;
 	}
-
 	b = 1;
 	a = -1;
 	while (++a < MEM_SIZE)
@@ -53,10 +43,8 @@ void	ft_print_vm(t_vm *vm)
 	}
 }
 
-
-int 	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-
 	t_vm		*vm;
 
 	vm = malloc(sizeof(vm));
@@ -65,6 +53,5 @@ int 	main(int argc, char **argv)
 	ft_create_player(argv, vm);
 	ft_create_map(vm);
 	ft_print_vm(vm);
-
 	return (0);
 }
