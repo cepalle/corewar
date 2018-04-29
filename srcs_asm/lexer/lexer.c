@@ -38,31 +38,29 @@ t_lexer lexer(t_cmdl cmdl)
 	int i_line;
 
 	ft_bzero(&lexer_res, sizeof(t_lexer));
-	ft_bzero(ltken, sizeof(t_token) * LEN_LTOKEN);
+	lexer_res.tab_token.i = -1;
 	i_line = 0;
 	feed_lexer_files(&lexer_res, cmdl.fd);
 	if (lexer_res.er)
 		return lexer_res;
 	while (lexer_res.file[i_line])
 	{
+		ft_bzero(ltken, sizeof(t_token) * LEN_LTOKEN);
 		line_to_token(ltken, lexer_res.file, &i_line);
+		tab_token_multi_add(&(lexer_res.tab_token), ltken);
 		if (ltken[0].er)
 		{
-			//free
+			free_lexer(lexer_res);
 			lexer_res.er = 1;
 			return lexer_res;
 		}
-		tab_token_multi_add(&(lexer_res.tab_token), ltken);
 		i_line++;
 	}
-	//ft_printf("\n### LEXER\n\n");
-	//print_tab_token(lexer_res.tab_token);
-
-	if (lexer_res.tab_token.i < 0)
+	if (!lexer_res.file[0] || lexer_res.tab_token.i < 0)
 	{
-		// free();
 		ft_printf("lexer: the program is empty\n");
+		free_lexer(lexer_res);
 		lexer_res.er = 1;
 	}
 	return lexer_res;
-};
+}

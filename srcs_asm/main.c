@@ -15,14 +15,13 @@ int main(int argc, char **argv)
 	if (lexer_res.er)
 		return (1);
 	parser_res = parser(lexer_res);
-	// free lexer
-	//display_ast(parser_res);
+    free_lexer(lexer_res);
 	if (parser_res.er)
 		return (1);
 	if (cmdl.opt_a)
-		display_ast(parser_res);
+		print_ast_prog(parser_res.ast_prog);
 	else
 		ast_to_byte(parser_res, cmdl.file_name);
-	// free parser
+	free_parser(parser_res);
 	return (0);
 }

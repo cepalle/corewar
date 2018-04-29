@@ -1,11 +1,11 @@
-#include "../libft/includes/libft.h"
+#include "libft.h"
 
 int asm_usage(void)
 {
 	ft_printf("Usage: ./bin_ref/asm [-a] <sourcefile.s>\n");
 	ft_printf("    -a : Display AST\n");
 	return (-1);
-};
+}
 
 int
 print_local_error(char **files, const int *i_col, const int *i_line, char *msg)
@@ -34,4 +34,4 @@ print_local_error(char **files, const int *i_col, const int *i_line, char *msg)
 	else if (i_line)
 		ft_printf("line: %d\n", *i_line + 1);
 	return (-1);
-};
+}

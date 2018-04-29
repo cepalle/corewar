@@ -19,14 +19,13 @@ t_token get_indirect_label(int *i_line, char **file, int *i_col)
 	token.data[i] = '\0';
 	if (!ft_strlen(token.data))
 	{
-		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
-		                  "lexer: Indirect label expected a label after ':'");
+		                  "lexer: Indirect label, expected a label after ':'");
 	}
 	*i_col = *i_col + i;
 	return (token);
-};
+}
 
 t_token get_indirect_number(int *i_line, char **file, int *i_col)
 {
@@ -44,7 +43,6 @@ t_token get_indirect_number(int *i_line, char **file, int *i_col)
 		i++;
 	if (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
 	{
-		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
 		                  "lexer: Indirect number, unexpected char");
@@ -52,11 +50,10 @@ t_token get_indirect_number(int *i_line, char **file, int *i_col)
 	token.data[i] = '\0';
 	if (i == 1 && token.data[i] == '-')
 	{
-		free(token.data);
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
 		                  "lexer: Indirect number, no number found after '-'");
 	}
 	*i_col = *i_col + i;
 	return (token);
-};
+}

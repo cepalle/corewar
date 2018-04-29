@@ -6,7 +6,7 @@
 
 # define TAB_TOKEN_LEN_INIT 4
 # define LEN_LTOKEN 16
-# define LABELS_DEC_LEN 8
+# define LABELS_DEC_LEN 16
 # define MAX_PARAMS 3
 # define LEN_INIT_FILES 4
 
@@ -77,7 +77,7 @@ struct s_ast_inst
     int er;
     int nb_labels_dec;
     t_token labels_dec[LABELS_DEC_LEN];
-    char *cmd;
+    t_token cmd;
     int nb_ast_params;
     t_token ast_params[MAX_PARAMS];
     struct s_ast_inst *next;
@@ -106,9 +106,13 @@ t_lexer lexer(t_cmdl cmdl);
 
 t_parser parser(t_lexer lexer_res);
 
-void display_ast(t_parser parser_res);
-
 void ast_to_byte(t_parser parser_res, char *file_name);
+
+void ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i);
+
+void ast_add_inst(t_parser *parser_res,  t_lexer lexer_res, int *i);
+
+void ast_add_next(t_parser *parser_res, t_lexer lexer_res, int *i);
 
 int asm_usage(void);
 
@@ -122,11 +126,15 @@ void print_tab_token(t_tab_token tab_token);
 
 void print_token(t_token token);
 
-void ast_add_next(t_parser *parser_res, t_tab_token tab_token, int *i);
-
 void print_ast_prog(t_ast_prog ast_prog);
 
-int check_ast(t_parser parser_res);
+int check_ast(t_parser parser_res, char **file);
+
+int check_registres(t_ast_inst *ast_inst, char **file);
+
+int check_labels(t_parser parser_res, t_ast_inst *ast_inst, char **file);
+
+int check_insts(t_ast_inst *inst, char **file);
 
 int open_new_file(char *file_name);
 
@@ -144,12 +152,6 @@ void insts_feed_label(t_parser parser_res, t_ast_inst *ast_inst);
 
 void write_insts(int fd, t_ast_inst *ast_inst, int pos);
 
-int check_registres(t_ast_inst *ast_inst);
-
-int check_labels(t_parser parser_res, t_ast_inst *ast_inst);
-
-int check_insts(t_ast_inst *inst);
-
 t_token get_direct(int *i_line, char **file, int *i_col);
 
 t_token get_indirect_number(int *i_line, char **file, int *i_col);
@@ -165,5 +167,13 @@ t_token get_dote_start(int *i_line, char **file, int *i_col);
 t_token get_separator_char(int *i_line, char **file, int *i_col);
 
 t_token get_comment(int *i_line, char **file, int *i_col);
+
+void print_tab_token(t_tab_token tab_token);
+
+void free_parser(t_parser parser_res);
+
+void free_lexer(t_lexer lexer_res);
+
+
 
 #endif

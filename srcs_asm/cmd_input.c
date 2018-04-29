@@ -34,4 +34,4 @@ t_cmdl cmd_input(int argc, char **argv)
 	}
 	cmdl.file_name = argv[0 + cmdl.opt_a];
 	return cmdl;
-};
+}

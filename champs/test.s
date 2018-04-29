@@ -1,8 +1,19 @@
 .name           "42"
+#.name           "422"
 .comment        "Just a basic Winner Program"
+#.comment        "2Just a basic Winner Program"
+#%1
 
-entree:	live	%42		# entree
-	ld	%0,r5
+test:   #la
+
+
+test2: #ici
+
+test3:#coucou
+
+test4:#%45
+entree:	live	%42#, %3		# entree
+	ld	%0,r5#
 	ld	%0,r5
 	zjmp	%:bite
 
@@ -12,10 +23,10 @@ tir:	sti	r1,%:tirb,%1
 	ld	%0,r11
 
 	ld	%4,r3
-tirf:	live	%42
-	fork	%:tirop
+tirf:	live	%42 # :test
+	fork	%:tirop#999
 	live	%742
-	sub	r3,r5,r3
+	sub	r3,r5,r3#,#%4
 	zjmp	%:top
 	ld	%0,r11
 	fork	%:tirvd
@@ -239,3 +250,6 @@ tird:	live	%42
 	zjmp	%:p1
 
 fin:	live	%633
+
+fin1:
+#p64li:

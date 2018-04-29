@@ -22,4 +22,4 @@ t_token get_label(int *i_line, char **file, int *i_col)
 	}
 	*i_col = *i_col + i;
 	return (token);
-};
+}
