@@ -163,6 +163,7 @@ int		ft_check_error(int argc, char **argv)
 
 void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 {
+	int a;
 	int fd;
 	ssize_t	ret;
 
@@ -179,7 +180,6 @@ void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 
 //	nb magic code sur 4 octet pour lire en int il faut reverse
 	swap_4(&vm->player[num_player].head.magic);
-	
 	ft_printf("%x\n", vm->player[num_player].head.magic);
 	ft_printf("%s\n", vm->player[num_player].head.prog_name);
 
@@ -189,24 +189,21 @@ void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 
 //	nb code sur 4 octet a swap pour lire bon nombre
 	swap_4(&vm->player[num_player].head.prog_size);
-
 	ft_printf("%u\n", vm->player[num_player].head.prog_size);
 	ft_printf("%s\n", vm->player[num_player].head.comment);
+
+
+	vm->player[num_player].prog = malloc(sizeof(char) * vm->player[num_player].head.prog_size);
+	ret = read(fd, vm->player[num_player].prog, vm->player[num_player].head.prog_size);
+
+	a = 0;
+	while (a < vm->player[num_player].head.prog_size)
+	{
+		printf("%0.2hhx ", vm->player[num_player].prog[a]);
+		a++;
+	}
+	ft_printf("\n\n\n\n");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void	ft_create_player(char **argv, t_vm *vm)
 {
@@ -233,10 +230,16 @@ void	ft_create_player(char **argv, t_vm *vm)
 
 }
 
-/*void	ft_create_map(t_vm *vm)
+void	ft_create_map(t_vm *vm)
 {
+	int placement;
 
-}*/
+	placement = MEM_SIZE / vm->nb_p;
+	ft_printf("placement = %d\n", placement);
+	ft_memset(vm->tab, 0, MEM_SIZE);
+
+
+}
 
 int 	main(int argc, char **argv)
 {
@@ -247,44 +250,12 @@ int 	main(int argc, char **argv)
 	if (ft_check_error(argc, argv) == 0)
 		return (0);
 	ft_create_player(argv, vm);
-//	ft_create_map(vm);
+	ft_create_map(vm);
 
 
 /*
  	ssize_t		ret;
-	t_header	header;
 
-	ret = read(0, &header, sizeof(t_header));
-	if (ret == sizeof(t_header))
-	{
-		ft_printf("si c'est possible\n");
-	}
-	else
-		ft_printf("non c'est pas possible\n");
-
-//	nb magic code sur 4 octet pour lire en int il faut reverse
-	swap_4(&header.magic);
-	ft_printf("%x\n", header.magic);
-	ft_printf("%s\n", header.prog_name);
-//	nb code sur 4 octet a swap pour lire bon nombre
-	swap_4(&header.prog_size);
-	ft_printf("%u\n", header.prog_size);
-	ft_printf("%s\n", header.comment);
-
-	char *buffer_prog;
-
-	buffer_prog = (char *)malloc(header.prog_size);
-
-	read(0, buffer_prog, header.prog_size);
-
-	unsigned int a;
-
-	a = 0;
-//	while (a < header.prog_size)
-//	{
-//		printf("%0.2hhx ", buffer_prog[a]);
-//		a++;
-//	}
 
 	a = -1;
 	ft_memset(vm.tab, 0, MEM_SIZE);
