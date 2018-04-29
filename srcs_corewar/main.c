@@ -199,7 +199,7 @@ void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 	a = 0;
 	while (a < vm->player[num_player].head.prog_size)
 	{
-		printf("%0.2hhx ", vm->player[num_player].prog[a]);
+		ft_printf("%0.2hhx ", vm->player[num_player].prog[a]);
 		a++;
 	}
 	ft_printf("\n\n\n\n");
@@ -232,13 +232,31 @@ void	ft_create_player(char **argv, t_vm *vm)
 
 void	ft_create_map(t_vm *vm)
 {
+	int a;
+	int res;
 	int placement;
 
+	a = 0;
+	res = 0;
 	placement = MEM_SIZE / vm->nb_p;
 	ft_printf("placement = %d\n", placement);
 	ft_memset(vm->tab, 0, MEM_SIZE);
-
-
+	while (a < vm->nb_p)
+	{
+		ft_memcpy(vm->tab + res, vm->player[a].prog, vm->player[a].head.prog_size);
+		res = res + placement;
+		a++;
+	}
+	int b;
+	b = 1;
+	a = -1;
+	while (++a < MEM_SIZE)
+	{
+		printf("%0.2hhx ", vm->tab[a]);
+		if (b % 64 == 0)
+			printf("\n");
+		b++;
+	}
 }
 
 int 	main(int argc, char **argv)
@@ -252,38 +270,6 @@ int 	main(int argc, char **argv)
 	ft_create_player(argv, vm);
 	ft_create_map(vm);
 
-
-/*
- 	ssize_t		ret;
-
-
-	a = -1;
-	ft_memset(vm.tab, 0, MEM_SIZE);
-	ft_memcpy(vm.tab, buffer_prog, header.prog_size);
-
-	int b;
-	b = 1;
-	while (++a < MEM_SIZE)
-	{
-		printf("%0.2hhx ", vm.tab[a]);
-		if (b % 64 == 0)
-			printf("\n");
-		b++;
-	}
-
-	char *pt_head;
-
-	pt_head = (char *)&header;
-	a = 0;
-
-//	printf("\n\n");
-//
-//	while (a < sizeof(header))
-//	{
-//		printf("%0.2hhx ", pt_head[a]);
-//		a++;
-//	}
- */
 	return (0);
 }
 
