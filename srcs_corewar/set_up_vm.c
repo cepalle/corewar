@@ -50,15 +50,32 @@ static	void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 	ssize_t	ret;
 
 	ft_printf("ft_fill_player\n");
+
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		ft_printf("erreur ouverture fd\n");
+
 	ret = read(fd, &vm->player[num_player].head, sizeof(t_header));
+
+	swap_4(&vm->player[num_player].head.magic);
+	swap_4(&vm->player[num_player].head.prog_size);
+
+	ft_printf("\n\n\n head.prog.size = %d\n",vm->player[num_player].head.prog_size );
+
 	if (ret == sizeof(t_header))
 		ft_printf("j'ai cree le header du joueur\n");
-	vm->player[num_player].prog = malloc(sizeof(char) * vm->player[num_player].head.prog_size);
-	ret = read(fd, &vm->player[num_player].prog, vm->player[num_player].head.prog_size);
-	ft_printf("prog = %s\n", vm->player[num_player].prog);
+
+	vm->player[num_player].prog = malloc(sizeof(char*) * vm->player[num_player].head.prog_size);
+
+	ret = read(fd, vm->player[num_player].prog, vm->player[num_player].head.prog_size);
+
+	a = 0;
+	while (a < vm->player[num_player].head.prog_size)
+	{
+		ft_printf("%c", vm->player[num_player].prog[a]);
+		a++;
+	}
+	ft_printf("\n");
 //	close(fd);
 
 
@@ -99,7 +116,6 @@ void	ft_create_map(t_vm *vm)
 	placement = MEM_SIZE / vm->nb_p;
 	ft_printf("placement = %d\n", placement);
 	ft_memset(vm->tab, 0, MEM_SIZE);
-	ft_printf("nombre de joueur = %d\n", vm->nb_p);
 	while (a < vm->nb_p)
 	{
 		ft_printf("name = %s\n", vm->player[a].head.prog_name);
