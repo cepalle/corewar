@@ -148,29 +148,65 @@ int		ft_check_error(int argc, char **argv)
 	return (1);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 {
 	int fd;
 	ssize_t	ret;
 
-	vm.player[num_player]->head = malloc(sizeof(t_header));
 
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		ft_printf("erreur ouverture fd\n");
+
+
+
 	ret = read(fd, &vm->player[num_player].head, sizeof(t_header));
 	if (ret == sizeof(t_header))
 		ft_printf("j'ai cree le header du joueur\n");
 
 //	nb magic code sur 4 octet pour lire en int il faut reverse
 	swap_4(&vm->player[num_player].head.magic);
-	ft_printf("%x\n", &vm->player[num_player].head.magic);
-	ft_printf("%s\n", &vm->player[num_player].head.prog_name);
+	
+	ft_printf("%x\n", vm->player[num_player].head.magic);
+	ft_printf("%s\n", vm->player[num_player].head.prog_name);
+
+
+
+
+
 //	nb code sur 4 octet a swap pour lire bon nombre
 	swap_4(&vm->player[num_player].head.prog_size);
-	ft_printf("%u\n", &vm->player[num_player].head.prog_size);
-	ft_printf("%s\n", &vm->player[num_player].head.comment);
+
+	ft_printf("%u\n", vm->player[num_player].head.prog_size);
+	ft_printf("%s\n", vm->player[num_player].head.comment);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void	ft_create_player(char **argv, t_vm *vm)
 {
