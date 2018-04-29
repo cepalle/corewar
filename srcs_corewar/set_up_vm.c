@@ -72,7 +72,7 @@ static	void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 	a = 0;
 	while (a < vm->player[num_player].head.prog_size)
 	{
-		ft_printf("%c", vm->player[num_player].prog[a]);
+		ft_printf("%0.2hhx ", vm->player[num_player].prog[a]);
 		a++;
 	}
 	ft_printf("\n");
@@ -118,10 +118,6 @@ void	ft_create_map(t_vm *vm)
 	ft_memset(vm->tab, 0, MEM_SIZE);
 	while (a < vm->nb_p)
 	{
-		ft_printf("name = %s\n", vm->player[a].head.prog_name);
-		ft_printf("prog = %s\n", vm->player[a].prog);
-		ft_printf("size = %d\n", vm->player[a].head.prog_size);
-		ft_printf("a = %d \n", a);
 		ft_memcpy(vm->tab + res, vm->player[a].prog, vm->player[a].head.prog_size);
 		res = res + placement;
 		a++;
