@@ -40,17 +40,17 @@ int 	ft_sub(t_player player ,int num_reg1,int num_reg2)
 	return (player.PC->reg[num_reg1] - player.PC->reg[num_reg2]);
 }
 
-int 	ft_and(t_player player, int param_1, int param_2)
+int 	ft_and(t_player *player, int param_1, int param_2)
 {
 	return (param_1 & param_2);
 }
 
-int 	ft_or(t_player player, int param_1, int param_2)
+int 	ft_or(t_player *player, int param_1, int param_2)
 {
 	return (param_1 | param_2);
 }
 
-int 	ft_xor(t_player player, int param_1, int param_2)
+int 	ft_xor(t_player *player, int param_1, int param_2)
 {
 	return (param_1 ^ param_2);
 }

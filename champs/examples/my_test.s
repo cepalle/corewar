@@ -1,4 +1,6 @@
-.name "zork"
-.comment "I'M ALIIIIVE"
+.name "my_test"
+.comment "C EST MON TEST"
 
-l2:		and r1, %0, r1
+l2:		and %12, %4, r1 
+
+print:	st r1, 200

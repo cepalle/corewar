@@ -32,7 +32,7 @@ typedef	struct 		s_player
 	t_header		head;
 	unsigned int	last_live;
 	unsigned int	live;
-	t_proc			*PC;
+	t_proc			*process;
 	char			*prog;
 }					t_player;
 
@@ -45,10 +45,19 @@ typedef	struct 		s_vm
 	unsigned int 	cycle;
 }					t_vm;
 
+
+void	ft_print_vm(t_vm *vm);
+
+
 int					ft_check_error(int argc, char **argv);
 void				ft_usage(void);
 int					ft_count_player(char ** argv);
 void				ft_create_map(t_vm *vm);
 void				ft_create_player(char **argv, t_vm *vm);
+
+
+/* PPICHIER */
+
+void	ft_test_ppichier(t_vm *vm);
 
 #endif

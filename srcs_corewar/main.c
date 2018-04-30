@@ -45,13 +45,17 @@ void	ft_print_vm(t_vm *vm)
 
 int		main(int argc, char **argv)
 {
-	t_vm		*vm;
+	t_vm		vm;
 
-	vm = malloc(sizeof(vm));
+	ft_bzero(&vm, sizeof(t_vm));
 	if (ft_check_error(argc, argv) == 0)
 		return (0);
-	ft_create_player(argv, vm);
-	ft_create_map(vm);
-	ft_print_vm(vm);
+	ft_create_player(argv, &vm);
+	ft_create_map(&vm);
+	ft_print_vm(&vm);
+	ft_test_ppichier(&vm); // TEST PPICHIER
+
 	return (0);
 }
+
+//TODO NE PAS OUBLIER DE FREE
