@@ -2,11 +2,11 @@
 #include "op.h"
 #include "libft.h"
 
-t_token get_token(int *i_line, char **file, int *i_col)
+t_token		get_token(int *i_line, char **file, int *i_col)
 {
-	t_token token;
-	int i_line_sav;
-	int i_col_sav;
+	t_token	token;
+	int		i_line_sav;
+	int		i_col_sav;
 
 	i_line_sav = *i_line;
 	i_col_sav = *i_col;
@@ -44,14 +44,13 @@ t_token get_token(int *i_line, char **file, int *i_col)
 	return token;
 }
 
-void line_to_token(t_token *ltken, char **file, int *i_line)
+void		line_to_token(t_token *ltken, char **file, int *i_line)
 {
-	int i_tken;
-	int i_col;
+	int		i_tken;
+	int		i_col;
 
 	i_tken = 0;
 	i_col = 0;
-
 	while (file[*i_line][i_col] == '\t' || file[*i_line][i_col] == ' ')
 		i_col++;
 	while (file[*i_line] && file[*i_line][i_col] && !ltken[0].er)

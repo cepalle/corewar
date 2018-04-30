@@ -18,7 +18,7 @@ entree:	live	%42#, %3		# entree
 	zjmp %:bite
 
 tir:	sti	r1,%:tirb,%1
-	ld	- ,r10
+	ld	%2304,r10
 	ld	%1,r5
 	ld	%0,r11
 
@@ -125,7 +125,7 @@ top:	live	%42
 
 
 infi:	sti	r1,%:l0,%1
-	sti	r1,%:l1,%1
+	sti	r1,%:l1,%-a
 	sti	r1,%:l2,%1
 	sti	r1,%:l3,%1
 	sti	r1,%:l4,%1

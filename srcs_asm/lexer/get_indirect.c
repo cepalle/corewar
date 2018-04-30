@@ -2,7 +2,6 @@
 #include "libft.h"
 #include "op.h"
 
-
 t_token get_indirect_label(int *i_line, char **file, int *i_col)
 {
 	t_token token;
@@ -21,10 +20,28 @@ t_token get_indirect_label(int *i_line, char **file, int *i_col)
 	{
 		token.er = 1;
 		print_local_error(file, i_col, i_line,
-		                  "lexer: Indirect label, expected a label after ':'");
+						"lexer: Indirect label, expected a label after ':'");
 	}
 	*i_col = *i_col + i;
 	return (token);
+}
+
+void check_indirect_number(t_token *token, int i, char **file, int *i_col, int *i_line)
+{
+	if (i == 1 && token->data[0] == '-')
+	{
+		token->er = 1;
+		print_local_error(file, i_col, i_line,
+						"lexer: Direct_number, no number found after '-'");
+		return ;
+	}
+	if (token->data[i] && ft_strchr(LABEL_CHARS, token->data[i]))
+	{
+		token->er = 1;
+		print_local_error(file, i_col, i_line,
+						"lexer: Direct number, unexpected char");
+		return ;
+	}
 }
 
 t_token get_indirect_number(int *i_line, char **file, int *i_col)
@@ -36,24 +53,12 @@ t_token get_indirect_number(int *i_line, char **file, int *i_col)
 	i = 0;
 	token.enum_token = TOKEN_INDIRECT_NUMBER;
 	token.data = ft_strdup(file[*i_line] + *i_col);
-
 	if (token.data[i] == '-')
 		i++;
 	while (ft_isdigit(token.data[i]))
 		i++;
-	if (token.data[i] && ft_strchr(LABEL_CHARS, token.data[i]))
-	{
-		token.er = 1;
-		print_local_error(file, i_col, i_line,
-		                  "lexer: Indirect number, unexpected char");
-	}
+	check_indirect_number(&token, i, file, i_col, i_line);
 	token.data[i] = '\0';
-	if (i == 1 && token.data[i] == '-')
-	{
-		token.er = 1;
-		print_local_error(file, i_col, i_line,
-		                  "lexer: Indirect number, no number found after '-'");
-	}
 	*i_col = *i_col + i;
 	return (token);
 }

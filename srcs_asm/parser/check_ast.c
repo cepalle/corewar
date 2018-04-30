@@ -4,10 +4,9 @@
 
 int check_ast(t_parser parser_res, char **file)
 {
-	int er;
+	int		er;
 
 	er = 0;
-
 	if(!parser_res.ast_prog.prog_name || !ft_strlen(parser_res.ast_prog.prog_name))
 	{
 		ft_printf("error: The program must have a name\n");
@@ -30,8 +29,8 @@ int check_ast(t_parser parser_res, char **file)
 		er = 1;
 	}
 	else if (check_registres(parser_res.ast_prog.ast_inst, file) ||
-	    check_labels(parser_res, parser_res.ast_prog.ast_inst, file) ||
-	    check_insts(parser_res.ast_prog.ast_inst, file))
+			 check_labels(parser_res, parser_res.ast_prog.ast_inst, file) ||
+			 check_insts(parser_res.ast_prog.ast_inst, file))
 		er = 1;
 	return (er);
 }
