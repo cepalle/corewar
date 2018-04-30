@@ -45,10 +45,17 @@ typedef	struct 		s_vm
 	unsigned int 	cycle;
 }					t_vm;
 
+/* AUROLLAN */
+
 int					ft_check_error(int argc, char **argv);
 void				ft_usage(void);
 int					ft_count_player(char ** argv);
 void				ft_create_map(t_vm *vm);
 void				ft_create_player(char **argv, t_vm *vm);
+
+
+/* PPICHIER */
+
+void	ft_test_ppichier(int a);
 
 #endif
