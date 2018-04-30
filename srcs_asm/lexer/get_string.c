@@ -7,6 +7,11 @@ t_token get_string(int *i_line, char **file, int *i_col)
 	t_token token;
 	int i;
 	char *tmp;
+	int i_line_sav;
+	int i_col_sav;
+
+	i_line_sav = *i_line;
+	i_col_sav = *i_col;
 
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
@@ -24,7 +29,7 @@ t_token get_string(int *i_line, char **file, int *i_col)
 			{
 				token.er = 1;
 
-				print_local_error(file, i_col, i_line,
+				print_local_error(file, &(i_col_sav), &(i_line_sav),
 				                  "lexer: Unclosed string");
 				return (token);
 			}

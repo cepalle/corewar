@@ -3,9 +3,9 @@ cmake-build-debug/
 corewar.iml
 *.[oa]
 *~
+*.cor
+*.swp
 asm
 corewar
-*.cor
-/test
 a.out
-*.swp
+/test
