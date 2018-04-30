@@ -24,7 +24,7 @@ et ne pas produire de fichier .cor
 
 #### Symbols:
 
-`,`, separateur des parametres, TOKEN_SEPARATOR_CHAR
+`,`, params separator, TOKEN_SEPARATOR_CHAR
 
 #### White characters:
 
