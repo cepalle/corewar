@@ -53,7 +53,7 @@ int		main(int argc, char **argv)
 	ft_create_player(argv, vm);
 	ft_create_map(vm);
 	ft_print_vm(vm);
-	//ft_test_ppichier(0); // TEST PPICHIER
+	ft_test_ppichier(vm); // TEST PPICHIER
 	return (0);
 }
 
