@@ -1,37 +1,57 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   cmd_input.c                                      .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/04/30 12:45:31 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/04/30 12:53:28 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 #include <fcntl.h>
 
-t_cmdl cmd_input(int argc, char **argv)
+int		check_arg(t_cmdl *cmdl, int argc, char **argv)
 {
-	t_cmdl cmdl;
-	size_t len;
-
-	ft_bzero(&cmdl, sizeof(t_cmdl));
 	if ((argc != 2 && argc != 1) ||
-	    (argc == 2 && !ft_strequ("-a", argv[0])) ||
-	    (argc == 1 && ft_strequ("-a", argv[0])))
+		(argc == 2 && !ft_strequ("-a", argv[0])) ||
+		(argc == 1 && ft_strequ("-a", argv[0])))
 	{
 		asm_usage();
-		cmdl.er = 1;
-		return cmdl;
+		cmdl->er = 1;
+		return (1);
 	}
-	cmdl.opt_a = argc == 2;
+	return (0);
+}
+
+t_cmdl	cmd_input(int argc, char **argv)
+{
+	t_cmdl	cmdl;
+	size_t	len;
+
+	ft_bzero(&cmdl, sizeof(t_cmdl));
+	if (check_arg(&cmdl, argc, argv))
+		return (cmdl);
 	len = ft_strlen(argv[0 + cmdl.opt_a]);
 	if (len < 3 ||
-	    argv[0 + cmdl.opt_a][len - 1] != 's' ||
-	    argv[0 + cmdl.opt_a][len - 2] != '.')
+		argv[0 + cmdl.opt_a][len - 1] != 's' ||
+		argv[0 + cmdl.opt_a][len - 2] != '.')
 	{
 		ft_printf("file name must finish with .s and not be empty\n");
 		cmdl.er = 1;
-		return cmdl;
+		return (cmdl);
 	}
 	cmdl.fd = open(argv[0 + cmdl.opt_a], O_RDONLY);
+	cmdl.opt_a = argc == 2;
 	if (cmdl.fd < 0)
 	{
 		ft_printf("No file name %s\n", argv[0 + cmdl.opt_a]);
 		cmdl.er = 1;
 	}
 	cmdl.file_name = argv[0 + cmdl.opt_a];
-	return cmdl;
+	return (cmdl);
 }
