@@ -1,5 +1,7 @@
 .idea/
 cmake-build-debug/
+asm.dSYM/
+corewar.dSYM/
 corewar.iml
 *.[oa]
 *~
@@ -9,3 +11,5 @@ asm
 corewar
 a.out
 /test
+asm.dSYM/
+corewar.dSYM/
