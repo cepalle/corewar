@@ -25,6 +25,7 @@ typedef	struct		s_proc
 	int				PC;
 	int				carry;
 	int 			reg[REG_NUMBER];
+	int				params_size[3];
 }					t_proc;
 
 typedef	struct 		s_player
@@ -47,7 +48,6 @@ typedef	struct 		s_vm
 
 
 void				ft_print_vm(t_vm *vm);
-void 				ft_run_vm(t_vm *vm);
 int					ft_check_error(int argc, char **argv);
 void				ft_usage(void);
 int					ft_count_player(char ** argv);
@@ -58,5 +58,6 @@ void				ft_create_player(char **argv, t_vm *vm);
 /* PPICHIER */
 
 void	ft_test_ppichier(t_vm *vm);
+void 	ft_run_vm(t_vm *vm, int start);
 
 #endif

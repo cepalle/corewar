@@ -58,7 +58,7 @@ int		main(int argc, char **argv)
 	ft_create_map(&vm);
 	ft_print_vm(&vm);
 //	ft_test_ppichier(&vm); // TEST PPICHIER
-	ft_run_vm(&vm);
+	ft_run_vm(&vm, 0);
 	return (0);
 }
 

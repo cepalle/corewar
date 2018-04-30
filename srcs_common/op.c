@@ -12,7 +12,7 @@
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-#include "libft.h"
+#include "../libft/includes/libft.h"
 
 static	t_op    g_op_tab[17] =
 {
