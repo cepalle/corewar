@@ -53,16 +53,15 @@ static	void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 	if (fd == -1)
 		ft_printf("erreur ouverture fd\n");
 	ret = read(fd, &vm->player[num_player].head, sizeof(t_header));
-//	swap obligatoire pour reconstruire la bonne information
-	swap_4(&vm->player[num_player].head.magic);
-	swap_4(&vm->player[num_player].head.prog_size);
+	swap_4(&(vm->player[num_player].head.magic));
+	swap_4(&(vm->player[num_player].head.prog_size));
 	if (ret == sizeof(t_header))
 		ft_printf("j'ai cree le header du joueur\n");
-	vm->player[num_player].prog = malloc(sizeof(char*) *
-								vm->player[num_player].head.prog_size);
+	vm->player[num_player].prog = ft_memalloc(sizeof(char) *
+									vm->player[num_player].head.prog_size);
 	ret = read(fd, vm->player[num_player].prog,
 		vm->player[num_player].head.prog_size);
-//	close(fd); double free si il est mis
+	close(fd);
 }
 
 void			ft_create_player(char **argv, t_vm *vm)
@@ -74,8 +73,7 @@ void			ft_create_player(char **argv, t_vm *vm)
 	a = 1;
 	num_player = 0;
 	vm->nb_p = ft_count_player(argv);
-	if (!(vm->player = malloc(sizeof(t_player) * vm->nb_p)))
-		return ;
+	vm->player = ft_memalloc(sizeof(t_player) * vm->nb_p);
 	while (argv[a])
 	{
 		len = ft_strlen(argv[a]);
