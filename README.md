@@ -20,16 +20,11 @@ l’extension .s par .cor .
 - En cas d’erreur, vous devrez afficher un message pertinent sur la sortie d’erreur,
 et ne pas produire de fichier .cor
 
-### 1) Lexical Specifications /!\\ NEED UPDATE /!\\
-
-#### Keywords:
-
-`live`, `ld`, `st`, `add`, `or`, `xor`, `zjmp`, `ldi`, `sti`, `fork`, `lld`,
-`lldi`, `lfork`, `aff`, `.name`, `.comment`
+### 1) Lexical Specifications
 
 #### Symbols:
 
-`,`, `%`, `-`.
+`,`, separateur des parametres, TOKEN_SEPARATOR_CHAR
 
 #### White characters:
 
@@ -37,13 +32,11 @@ Space and tabulations are the only white space characters supported. Both count 
 
 #### End-of-line:
 
-End of lines are `\n`.
+End of lines are `\n`, TOKEN_EOL.
 
 #### Strings:
 
-The strings are ASCII strings: enclosed by `"`.
-
-**TODO ? add escape character**
+The strings are ASCII strings: enclosed by `"`, don't support escape character.
 
 #### Comments:
 
@@ -53,31 +46,47 @@ In line comment start with `#` or `;`.
 
 Labels start with a letter, followed by any number of alphanumeric characters plus the underscore.
 ```
-label_ref ::= : letter { letter | digit | _ }
+label_ref_direct ::= : % label_ref_indirect
+label_ref_indirect ::= : letter { letter | digit | _ }
 label_dec ::= letter { letter | digit | _ } :
+
 letter ::=
     a | b | c | d | e | f | g | h | i | j | k | l |
     m | n | o | p | q | r | s | t | u | v | w | x |
     y | z |
+
 digit ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
 ```
 
 #### Numbers:
 
 ```
-integer ::= digit { digit }
+number_indirect ::= digit { digit }
+number_direct ::= % number_indirect
 ```
+
+#### Header:
+
+`.name`, TOKEN_PROG_NAME.
+
+`.comment`, TOKEN_PROG_COMMENT.
+
 
 #### Invalid characters:
 
 Any other character is invalid.
 
-### 2) Syntactic Specifications /!\\ NEED UPDATE /!\\
+### 2) Syntactic Specifications
 
 We use Extended BNF, with `[` and `]` for zero or once, and `{` and `}` for any number of repetition including zero.
 
 ```
-inst ::= [label :] opcode [params]
+programe ::= champion_name champion_description {inst}
+```
+
+```
+inst ::= {label :} opcode params
 ```
 
 ```
@@ -99,11 +108,11 @@ registre ::= r integer
 ```
 
 ```
-direct ::= % integer | % : label
+direct ::= label_ref_direct | number_direct
 ```
 
 ```
-indirect ::= integer | : label
+indirect ::= label_ref_indirect | number_indirect
 ```
 
 ```
