@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   write_header.c                                   .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/04/30 13:21:35 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/04/30 13:21:41 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "op.h"
 #include "libft.h"
 #include <unistd.h>
 
-void write_header(int fd, t_parser parser_res)
+void	write_header(int fd, t_parser parser_res)
 {
 	t_header header;
 

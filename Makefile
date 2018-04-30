@@ -24,6 +24,7 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	ast_to_byte/open_new_file.c \
 	ast_to_byte/write_header.c \
 	ast_to_byte/write_insts.c \
+	ast_to_byte/write_param.c \
 	lexer/lexer.c \
 	lexer/line_to_token.c \
 	lexer/tab_token.c \
