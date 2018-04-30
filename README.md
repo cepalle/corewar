@@ -472,11 +472,5 @@ de préciser davantage, vous couvrir de gloire et de chatons.
 
 ## IV NOTES
 
-useful documents:
-- https://docs.google.com/spreadsheets/d/1pFwSCne-mh-u5ZLsjZS8VI9QvecYk-gWTyNaPstjpLE/edit#gid=0
-
 Carry: La VM mets le carry à 1, si l'instruction fonctionne et que le paramètre donné est 0.
 Si tu mets une autre valeur, la VM mettra le carry à 0.
-
-Label: Un label peut n’avoir aucune instruction à sa suite, ou être placé sur la ligne
-d’avant l’instruction qu’il concerne

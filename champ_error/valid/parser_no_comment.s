@@ -1,7 +1,6 @@
-.name           ""
-#.name           "422"
+.name           "" #.name           "422"
 #.comment        "Just a basic Winner Program"
-#.comment        "2Just a basic Winner Program"
+#.comment        ""
 #%1
 
 test:   #la
