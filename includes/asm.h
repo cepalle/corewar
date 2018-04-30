@@ -6,7 +6,7 @@
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/30 12:09:30 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/30 12:40:07 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/30 13:26:26 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -153,9 +153,10 @@ unsigned					prog_len(t_ast_inst *ast_inst);
 int							inst_len(t_ast_inst *ast_inst);
 int							len_param(int enum_token, char *cmd);
 void						write_header(int fd, t_parser parser_res);
+void						write_insts(int fd, t_ast_inst *ast_inst, int pos);
+void						write_param(int f, t_token t, int d, int p);
 void						inst_feed_label_dec(t_ast_inst *ast_inst, int pos);
 void						insts_feed_label(t_parser p, t_ast_inst *a);
-void						write_insts(int fd, t_ast_inst *ast_inst, int pos);
 t_token						get_direct(int *i_line, char **file, int *i_col);
 t_token						get_indirect_number(int *il, char **f, int *ic);
 t_token						get_indirect_label(int *il, char **f, int *ic);
