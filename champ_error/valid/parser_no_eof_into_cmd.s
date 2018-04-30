@@ -1,27 +1,37 @@
-.name           ""
+.name           "42"
 #.name           "422"
 #.comment        "Just a basic Winner Program"
-#.comment        "2Just a basic Winner Program"
+.comment        "2Just a basic Winner Program"
 #%1
 
-test:   #la
-
-
+test1:   #la
 test2: #ici
-
 test3:#coucou
-
 test4:#%45
+test5:#coucou
+test6:#coucou
+test7:#coucou
+test8:#coucou
+test9:#coucou
+test10:#coucou
+test11:#coucou
+test12:#coucou
+test13:#coucou
+test14:#coucou
+
 entree:	live	%42#, %3		# entree
 	ld	%0,r5#
-	ld	%0,r5
-	zjmp %:bite
+	ld	%0,r5 	zjmp %:bite
+
+
+#,,,,,,
+#add
+
 
 tir:	sti	r1,%:tirb,%1
 	ld	%2304,r10
 	ld	%1,r5
 	ld	%0,r11
-
 	ld	%4,r3
 tirf:	live	%42 # :test
 	fork	%:tirop#999
@@ -154,7 +164,6 @@ p1:	zjmp	%:infi
 
         live    %0              # pour boucher l'entree
 copie:  ld      %1,r1
-
 
 tart:	sti	r1,%:p64li,%1
 	or	r2,r2,r2	# selection vers les modules

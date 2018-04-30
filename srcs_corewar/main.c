@@ -6,7 +6,7 @@
 /*   By: aurollan <aurollan@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/17 17:14:37 by aurollan     #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/26 15:30:11 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/30 09:52:27 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,15 +45,16 @@ void	ft_print_vm(t_vm *vm)
 
 int		main(int argc, char **argv)
 {
-	t_vm		*vm;
+	t_vm		vm;
 
-	vm = malloc(sizeof(vm));
+	ft_bzero(&vm, sizeof(t_vm));
 	if (ft_check_error(argc, argv) == 0)
 		return (0);
 	ft_create_player(argv, vm);
 	ft_create_map(vm);
 	ft_print_vm(vm);
 	ft_test_ppichier(vm); // TEST PPICHIER
+
 	return (0);
 }
 
