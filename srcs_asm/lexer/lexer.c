@@ -2,12 +2,12 @@
 #include "libft.h"
 
 
-void feed_lexer_files(t_lexer *lexer_res, int fd)
+void		feed_lexer_files(t_lexer *lexer_res, int fd)
 {
-	int len_files;
-	int i;
-	char *line;
-	int res;
+	int		len_files;
+	int		i;
+	char	*line;
+	int		res;
 
 	i = 0;
 	len_files = LEN_INIT_FILES;
@@ -31,11 +31,11 @@ void feed_lexer_files(t_lexer *lexer_res, int fd)
 	}
 }
 
-t_lexer lexer(t_cmdl cmdl)
+t_lexer		lexer(t_cmdl cmdl)
 {
-	t_lexer lexer_res;
-	t_token ltken[LEN_LTOKEN];
-	int i_line;
+	t_lexer		lexer_res;
+	t_token		ltken[LEN_LTOKEN];
+	int			i_line;
 
 	ft_bzero(&lexer_res, sizeof(t_lexer));
 	lexer_res.tab_token.i = -1;
@@ -52,7 +52,7 @@ t_lexer lexer(t_cmdl cmdl)
 		{
 			free_lexer(lexer_res);
 			lexer_res.er = 1;
-			return lexer_res;
+			return (lexer_res);
 		}
 		i_line++;
 	}
@@ -62,5 +62,5 @@ t_lexer lexer(t_cmdl cmdl)
 		free_lexer(lexer_res);
 		lexer_res.er = 1;
 	}
-	return lexer_res;
+	return (lexer_res);
 }

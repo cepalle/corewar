@@ -1,9 +1,9 @@
 #include "asm.h"
 #include "libft.h"
 
-void print_ast_inst(t_ast_inst *ast_inst)
+void	print_ast_inst(t_ast_inst *ast_inst)
 {
-	int i;
+	int	i;
 
 	if (!ast_inst)
 		return;
@@ -24,7 +24,7 @@ void print_ast_inst(t_ast_inst *ast_inst)
 	print_ast_inst(ast_inst->next);
 }
 
-void print_ast_prog(t_ast_prog ast_prog)
+void	print_ast_prog(t_ast_prog ast_prog)
 {
 	ft_printf(".name: %s\n", ast_prog.prog_name);
 	ft_printf(".comment: %s\n", ast_prog.prog_comment);
