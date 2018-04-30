@@ -22,22 +22,22 @@ void 	ft_st(t_player player, int nbr, int num_reg, t_vm *vm)
 {
 	int addr;
 
-	addr = vm->tab[player.PC->PC] + (nbr % IDX_MOD);
-	ft_memcpy(vm->tab + addr, player.PC->reg + num_reg, REG_CONTENT_SIZE);
+	addr = vm->tab[player.process->PC] + (nbr % IDX_MOD);
+	ft_memcpy(vm->tab + addr, player.process->reg + num_reg, REG_CONTENT_SIZE);
 }
 
 int 	ft_add(t_player player ,int num_reg1,int num_reg2)
 {
 //	% 4294967295
 //	pas de message d'erreur en cas de depassement
-	return (player.PC->reg[num_reg1] + player.PC->reg[num_reg2]);
+	return (player.process->reg[num_reg1] + player.process->reg[num_reg2]);
 }
 
 int 	ft_sub(t_player player ,int num_reg1,int num_reg2)
 {
 //	penser a modifier carry si erreur ou pas
 //	erreur potentiel : depassement int max
-	return (player.PC->reg[num_reg1] - player.PC->reg[num_reg2]);
+	return (player.process->reg[num_reg1] - player.process->reg[num_reg2]);
 }
 
 int 	ft_and(t_player *player, int param_1, int param_2)
@@ -100,5 +100,5 @@ void	ft_fork(t_vm *vm, int num_player, int num_process)
 
 void 	ft_zjmp(t_player *player, int num_player, int num_proc, int index)
 {
-	player[num_player].PC[num_proc].PC = index;
+	player[num_player].process[num_proc].process = index;
 }

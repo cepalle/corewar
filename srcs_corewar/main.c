@@ -34,11 +34,15 @@ void	ft_print_vm(t_vm *vm)
 	}
 	b = 1;
 	a = -1;
+	//TODO: warning utilisation printf
 	while (++a < MEM_SIZE)
 	{
-		ft_printf("%0.2hhx ", vm->tab[a]);
+		if (vm->tab[a] == 0)
+			printf("%0.2hhx ", vm->tab[a]);
+		else
+			printf("\x1b[38;2;255;00;00m%0.2hhx \x1b[0m", vm->tab[a]);
 		if (b % 64 == 0)
-			ft_printf("\n");
+			printf("\n");
 		b++;
 	}
 }
@@ -53,8 +57,8 @@ int		main(int argc, char **argv)
 	ft_create_player(argv, &vm);
 	ft_create_map(&vm);
 	ft_print_vm(&vm);
-	ft_test_ppichier(&vm); // TEST PPICHIER
-
+//	ft_test_ppichier(&vm); // TEST PPICHIER
+	ft_run_vm(&vm);
 	return (0);
 }
 

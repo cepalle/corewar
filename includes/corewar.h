@@ -46,9 +46,8 @@ typedef	struct 		s_vm
 }					t_vm;
 
 
-void	ft_print_vm(t_vm *vm);
-
-
+void				ft_print_vm(t_vm *vm);
+void 				ft_run_vm(t_vm *vm);
 int					ft_check_error(int argc, char **argv);
 void				ft_usage(void);
 int					ft_count_player(char ** argv);

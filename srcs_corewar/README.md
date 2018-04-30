@@ -13,11 +13,20 @@ live:	live %1
  fork    10     sti    1+2+2    1      pc + 7      1       live       1      zjmp   %4096
 
 
-- **aff** : L’opcode est 10 en hexadécimal. Il y a un octet de codage des paramètres,
-même si c’est un peu bête car il n’y a qu’un paramètre, qui est un registre, dont
-le contenu est interprété comme la valeur ASCII d’un caractère à afficher sur la
-sortie standard. Ce code est modulo 256.
+numero du joueur fourni via registre r1 de leur premeir processus au demarrage
+tous cycle to die, verifier que chaque processus a realise au moins 1 live
 
+
+-dump nbr_cycles
+Au bout de nbr_cycles cycles d’exécution, dump la mémoire sur la sortie standard,
+puis quitte la partie. La mémoire doit être dumpée au format hexadécimal,
+avec 32 octets par ligne.
+
+
+ -n number
+Fixe le numéro du prochain joueur. Si absent, le joueur aura le prochain numéro
+libre dans l’ordre des paramètres. Le dernier joueur aura le premier processus dans
+l’ordre d’exécution
 
 
  |  NOM   |  op  |  oc_param |     ecriture         | ecriture bytecode                                | operation                                      |       remarque
