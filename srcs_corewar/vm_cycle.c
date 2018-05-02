@@ -3,6 +3,7 @@
 void proc_exec(t_vm *vm, t_proc *proc)
 {
 	t_cmd cmd;
+	/*
 	if (!proc->cmd_save.cmd &&
 		!ft_stock_cmd(vm, proc))
 	{
@@ -10,6 +11,7 @@ void proc_exec(t_vm *vm, t_proc *proc)
 		proc->PC %= MEM_SIZE;
 		return ;
 	}
+	 */
 	proc->cmd_save.cycle_wating--;
 	if (proc->cmd_save.cycle_wating <= 0)
 	{
@@ -20,7 +22,7 @@ void proc_exec(t_vm *vm, t_proc *proc)
 
 void vm_cycle(t_vm *vm)
 {
-	int		i;
+	unsigned int		i;
 
 	i = 0;
 	while (i < vm->nb_process)

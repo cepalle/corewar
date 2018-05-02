@@ -27,7 +27,7 @@ void 	vm_run(t_vm *vm)
 		{
 			if (check_end(vm))
 				break ; // TODO END
-			if (check_nb_live_player(vm) || nb_no_decr >= MAX_CHECKS))
+			if (check_nb_live_player(vm) || nb_no_decr >= MAX_CHECKS)
 			{
 				cycle_to_die -= CYCLE_DELTA;
 				if (cycle_to_die <= 0)

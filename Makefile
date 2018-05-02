@@ -50,7 +50,12 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	cmd_input.c \
 	main.c
 
-C_FILES_NAMES_COREWAR = main.c
+C_FILES_NAMES_COREWAR = check_error.c \
+    set_up_vm.c \
+    vm_run.c \
+    vm_cycle.c \
+    main.c
+
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))
