@@ -6,7 +6,7 @@
 #    By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2017/12/04 10:38:00 by cepalle      #+#   ##    ##    #+#        #
-#    Updated: 2018/01/18 08:49:39 by cepalle     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/30 16:37:49 by ppichier    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -116,7 +116,8 @@ CFILENAME= ft_atoi.c \
 	ft_free_tabchar.c \
 	ft_lentabchar.c \
 	ft_free_print_exit.c \
-	ft_atoi_only.c
+	ft_atoi_only.c \
+	ft_itoa_base_ppichier.c
 
 SRCDIR=srcs/
 SRC=$(addprefix $(SRCDIR), $(CFILENAME))

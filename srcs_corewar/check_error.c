@@ -120,3 +120,4 @@ int				ft_check_error(int argc, char **argv)
 		return (0);
 	return (1);
 }
+//TODO: penser a gerer limite de 4 joueurs max et quelles options gerer

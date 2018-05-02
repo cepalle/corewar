@@ -1,8 +1,7 @@
 #include "asm.h"
 #include "libft.h"
 
-
-t_token get_separator_char(int *i_line, char **file, int *i_col)
+t_token	get_separator_char(int *i_line, char **file, int *i_col)
 {
 	t_token token;
 
@@ -16,7 +15,7 @@ t_token get_separator_char(int *i_line, char **file, int *i_col)
 	return (token);
 }
 
-t_token get_comment(int *i_line, char **file, int *i_col)
+t_token	get_comment(int *i_line, char **file, int *i_col)
 {
 	t_token token;
 

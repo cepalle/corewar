@@ -6,13 +6,13 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:48 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/25 16:37:56 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/30 09:52:27 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-#include "libft.h"
+#include "../libft/includes/libft.h"
 
 static	t_op    g_op_tab[17] =
 {

@@ -6,7 +6,7 @@
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/04 10:37:50 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/15 11:35:04 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/30 16:40:36 by ppichier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,6 +85,7 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char const *s, int fd);
 void		ft_putendl_fd(char const *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
+char		*ft_itoa_base(int value, int base);
 
 int			get_next_line(int fd, char **line);
 

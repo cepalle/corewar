@@ -2,18 +2,33 @@
 #include "libft.h"
 
 
-t_token get_string(int *i_line, char **file, int *i_col)
+char	*join_new_line(char *data, char *new_line)
 {
-	t_token token;
-	int i;
-	char *tmp;
+	char	*tmp;
 
+	tmp = data;
+	data = ft_strjoin(data, "\n");
+	free(tmp);
+	tmp = data;
+	data = ft_strjoin(data, new_line);
+	free(tmp);
+	return (data);
+}
+
+t_token	get_string(int *i_line, char **file, int *i_col)
+{
+	t_token	token;
+	int		i;
+	int		i_line_sav;
+	int		i_col_sav;
+
+	i_line_sav = *i_line;
+	i_col_sav = *i_col;
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
 	token.enum_token = TOKEN_STRING;
 	(*i_col)++;
 	token.data = ft_strdup(file[*i_line] + *i_col);
-
 	while (token.data[i] != '"')
 	{
 		if (!token.data[i])
@@ -23,23 +38,17 @@ t_token get_string(int *i_line, char **file, int *i_col)
 			if (!file[*i_line])
 			{
 				token.er = 1;
-
-				print_local_error(file, i_col, i_line,
+				print_local_error(file, &(i_col_sav), &(i_line_sav),
 				                  "lexer: Unclosed string");
 				return (token);
 			}
-			tmp = token.data;
-			token.data = ft_strjoin(token.data, "\n");
-			free(tmp);
-			tmp = token.data;
-			token.data = ft_strjoin(token.data, file[*i_line]);
-			free(tmp);
-			continue;
+			token.data = join_new_line(token.data, file[*i_line]);
+			continue ;
 		}
 		(*i_col)++;
 		i++;
 	}
 	token.data[i] = '\0';
 	(*i_col)++;
-	return token;
+	return (token);
 }

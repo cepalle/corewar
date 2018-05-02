@@ -1,7 +1,6 @@
-.name           ""
-#.name           "422"
+.name           "" #.name           "422"
 #.comment        "Just a basic Winner Program"
-#.comment        "2Just a basic Winner Program"
+#.comment        ""
 #%1
 
 test:   #la
@@ -18,7 +17,7 @@ entree:	live	%42#, %3		# entree
 	zjmp %:bite
 
 tir:	sti	r1,%:tirb,%1
-	ld	- ,r10
+	ld	%2304,r10
 	ld	%1,r5
 	ld	%0,r11
 

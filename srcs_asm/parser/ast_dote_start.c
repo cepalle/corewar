@@ -1,9 +1,9 @@
 #include "asm.h"
 #include "libft.h"
 
-void ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i)
+void	ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i)
 {
-	char *error_msg;
+	char	*error_msg;
 
 	error_msg = NULL;
 	if (*i + 1 > lexer_res.tab_token.i)
@@ -13,10 +13,10 @@ void ast_add_dote_start(t_parser *parser_res, t_lexer lexer_res, int *i)
 	//else if (lexer_res.tab_token.tokens[*i + 2].enum_token != TOKEN_EOL &&)
 	//	error_msg = "parser: Dote start, not Eol found after String";
 	else if (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_PROG_NAME &&
-	         parser_res->ast_prog.prog_name)
+			 parser_res->ast_prog.prog_name)
 		error_msg = "parser: Dote start, you can use only one '.name'";
 	else if (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_PROG_COMMENT &&
-	         parser_res->ast_prog.prog_comment)
+			 parser_res->ast_prog.prog_comment)
 		error_msg = "parser: Dote start, you can use only one '.comment'";
 	if (error_msg)
 	{
