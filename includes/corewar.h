@@ -16,6 +16,7 @@
 # define COREWAR_H
 
 # define REG_CONTENT_SIZE 4
+
 #include <stdlib.h>
 #include <unistd.h>
 #include "op.h"
@@ -39,6 +40,7 @@ typedef	struct 		s_player
 
 typedef	struct 		s_vm
 {
+	tab[16]
 	unsigned char 	tab[MEM_SIZE];
 	int 			nb_p;
 	t_player 		*player;

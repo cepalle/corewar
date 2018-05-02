@@ -36,7 +36,6 @@ while (1)
 		CYCLE_TO_DIE = CYCLE_TO_DIE - CYCLE_DELTA;
 	if (MAX_CHECKS == nb_checks)
 		CYCLE_TO_DIE = CYCLE_TO_DIE - CYCLE_DELTA;
-
 */
 
 static int 	ft_analyze_oct_params(t_vm *vm, int *index, int i)
