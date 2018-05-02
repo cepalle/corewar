@@ -28,8 +28,13 @@ void	ft_print_vm(t_vm vm)
 		ft_printf("%u\n", vm.player[a].head.prog_size);
 		ft_printf("%s\n", vm.player[a].head.comment);
 		b = -1;
+<<<<<<< HEAD
 		while (++b < vm.player[a].head.prog_size)
 			ft_printf("%0.2hhx ", vm.input.prog[a][b]);
+=======
+		while ((unsigned int)++b < vm->player[a].head.prog_size)
+			ft_printf("%0.2hhx ", vm->player[a].prog[b]);
+>>>>>>> 80bbf114806ebd2e7745019aadf680fdcde00102
 		ft_printf("\n\n\n\n");
 	}
 	b = 1;
@@ -63,7 +68,6 @@ int		main(int argc, char **argv)
 	ft_create_map(&vm); // initialiser vm (t_iniput_cmd, &vm);
 	// if error free(input)
 	ft_print_vm(&vm);
-//	ft_test_ppichier(&vm); // TEST PPICHIER
 	ft_run_vm(&vm, input_cmd);
 	//free
 	return (0);

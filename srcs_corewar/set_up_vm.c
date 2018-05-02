@@ -19,7 +19,6 @@
 
 static	void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 {
-	int		a;
 	int		fd;
 	ssize_t	ret;
 

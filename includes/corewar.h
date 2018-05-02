@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include "op.h"
 
+
 typedef	struct		s_input
 {
 	int				n;
@@ -29,11 +30,22 @@ typedef	struct		s_input
 
 }					t_input;
 
+
+
+typedef	struct		s_cmd_save
+{
+	t_cmd			cmd;
+	char			codage_param;
+	int				params[3];
+	int				cycle_wating;
+}					t_cmd_save;
+
 typedef	struct		s_proc
 {
 	int				PC;
 	int				carry;
 	int 			reg[REG_NUMBER];
+	t_cmd_save		cmd_save;
 }					t_proc;
 
 typedef	struct 		s_player
@@ -42,6 +54,8 @@ typedef	struct 		s_player
 	unsigned int	last_live;
 	unsigned int	live;
 	t_proc			*process; // TODO test ref
+//	char			*prog; // rm -> tab vm
+	int				id;
 }					t_player;
 
 typedef	struct 		s_vm
@@ -52,6 +66,10 @@ typedef	struct 		s_vm
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
 //	unsigned int 	nb_process;
+	t_player 		*player;
+	t_proc			*process; // TODO test ref
+	unsigned int 	nb_process;
+	unsigned int 	len_process;
 	unsigned int 	cycle;
 }					t_vm;
 

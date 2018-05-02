@@ -24,6 +24,6 @@ t_op		get_cmd(char *cmd)
 			return (gopt()[i]);
 		i++;
 	}
-	ft_printf("get_op cmd no found\n");
+	ft_printf("get_op_name cmd no found\n");
 	return (gopt()[OP_TAB_LENGTH]);
 }
