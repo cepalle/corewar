@@ -1,9 +1,24 @@
 #include "corewar.h"
+#include "../libft/includes/libft.h"
 
 static t_cmd	g_cmd_tab[17] =
 {
-	&ft_ld,
 	&ft_live,
+	&ft_ld,
+	&ft_st,
+	&ft_add,
+	&ft_sub,
+	&ft_and,
+	&ft_or,
+	&ft_xor,
+	&ft_ldi,
+	&ft_sti,
+	&ft_lld,
+	&ft_lldi,
+	&ft_aff,
+	&ft_lfork,
+	&ft_fork,
+	&ft_zjmp,
 	NULL,
 };
 

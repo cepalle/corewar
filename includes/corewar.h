@@ -24,7 +24,7 @@
 
 typedef	struct		s_cmd_save
 {
-	t_cmd			cmd;
+	//t_cmd			cmd; //TODO A CREER TAB DE POINT SUR FONCTIONS
 	char			codage_param;
 	int				params[3];
 	int				cycle_wating;

@@ -12,7 +12,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "../libft/includes/libft.h"
+#include "libft.h"
 
 void	ft_print_vm(t_vm *vm)
 {
@@ -63,7 +63,8 @@ int		main(int argc, char **argv)
 	ft_create_map(&vm); // initialiser vm (t_iniput_cmd, &vm);
 	// if error free(input)
 	ft_print_vm(&vm);
-	ft_run_vm(&vm, input_cmd);
+	//
+	// ft_run_vm(&vm, input_cmd);
 	//free
 	return (0);
 }

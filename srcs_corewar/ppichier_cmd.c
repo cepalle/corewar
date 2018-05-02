@@ -5,12 +5,13 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ppichier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/04/30 11:34:40 by ppichier     #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/30 11:34:41 by ppichier    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/02 17:09:52 by ppichier     #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 17:09:56 by ppichier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+/*FICHIER TEST POUR COMPRENDRE LES 16 OPERATIONS*/
 
 #include "../includes/corewar.h"
 #include "../includes/op.h"
