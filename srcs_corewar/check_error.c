@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include "corewar.h"
 
-static	int		ft_check_player(char *argv)
+static	int		ft_check_player(char *argv, t_vm *vm)
 {
 	int		fd;
 	size_t	len;
@@ -41,13 +41,14 @@ static	int		ft_check_player(char *argv)
 	return (1);
 }
 
-static	int		ft_check_option(char *argv)
+static	int		ft_check_option(char *argv, t_vm *vm)
 {
 	ft_printf("ft_check_option\n");
 //	TODO: penser a choisir les options que l'on va mettre en place
 	if (ft_strcmp(argv, "-n") == 0)
 	{
 		ft_printf("Ncurses output mode\n");
+
 		return (1);
 	}
 	if (ft_strcmp(argv, "-a") == 0)
@@ -90,7 +91,7 @@ void			ft_usage(void)
 	"########################################################################");
 }
 
-static	int		ft_check_arg(char **argv)
+static	int		ft_check_arg(char **argv, t_vm *vm)
 {
 	int a;
 
@@ -98,7 +99,7 @@ static	int		ft_check_arg(char **argv)
 	a = 1;
 	while (argv[a])
 	{
-		if (ft_check_option(argv[a]) == 0 && ft_check_player(argv[a]) == 0)
+		if (ft_check_option(argv[a], vm) == 0 && ft_check_player(argv[a], vm) == 0)
 		{
 			ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
@@ -108,16 +109,21 @@ static	int		ft_check_arg(char **argv)
 	return (1);
 }
 
-int				ft_check_error(int argc, char **argv)
+int				ft_check_error(int argc, char **argv, t_vm *vm)
 {
 	ft_printf("ft_check_error\n");
-	if (argc == 1 || ft_count_player(argv) == 0)
+	if (argc == 1)
 	{
 		ft_usage();
 		return (0);
 	}
 	if (ft_check_arg(argv) == 0)
 		return (0);
+	if (vm->input.nb_p <= 0 || vm->input.nb_p > 4)
+	{
+		ft_printf("nombre de joueur excessif ou insuffisant\n");
+		return (0);
+	}
 	return (1);
 }
 //TODO: penser a gerer limite de 4 joueurs max et quelles options gerer

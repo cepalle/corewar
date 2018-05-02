@@ -21,12 +21,19 @@
 #include <unistd.h>
 #include "op.h"
 
+typedef	struct		s_input
+{
+	int				n;
+	int				a;
+	char			*prog[4];
+
+}					t_input;
+
 typedef	struct		s_proc
 {
 	int				PC;
 	int				carry;
 	int 			reg[REG_NUMBER];
-	int				params_size[3];
 }					t_proc;
 
 typedef	struct 		s_player
@@ -34,25 +41,25 @@ typedef	struct 		s_player
 	t_header		head;
 	unsigned int	last_live;
 	unsigned int	live;
-	t_proc			*process;
-	char			*prog;
+	t_proc			*process; // TODO test ref
 }					t_player;
 
 typedef	struct 		s_vm
 {
-	tab[16]
-	unsigned char 	tab[MEM_SIZE];
+	t_input			input;
 	int 			nb_p;
-	t_player 		*player;
-	unsigned int 	nb_process;
+	int				d;
+	unsigned char 	tab[MEM_SIZE];
+	t_player 		player[4];
+//	unsigned int 	nb_process;
 	unsigned int 	cycle;
 }					t_vm;
 
+typedef void (*t_cmd)(t_vm *vm, int num_player, int num_process);
 
 void				ft_print_vm(t_vm *vm);
-int					ft_check_error(int argc, char **argv);
+int					ft_check_error(int argc, char **argv, t_vm *vm);
 void				ft_usage(void);
-int					ft_count_player(char ** argv);
 void				ft_create_map(t_vm *vm);
 void				ft_create_player(char **argv, t_vm *vm);
 

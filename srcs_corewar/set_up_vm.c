@@ -16,29 +16,6 @@
 #include "corewar.h"
 #include <fcntl.h>
 
-int				ft_count_player(char **argv)
-{
-	int		a;
-	size_t	len;
-	int		count;
-
-	ft_printf("ft_count_player\n");
-	a = 1;
-	count = 0;
-	while (argv[a])
-	{
-		len = ft_strlen(argv[a]);
-		if (len > 4 && ft_strncmp(argv[a] + (len - 4), ".cor", 4) == 0)
-		{
-			ft_printf("%s est un champion\n", argv[a]);
-			count++;
-		}
-		a++;
-	}
-	if (count == 0)
-		ft_printf("aucun champion trouve\n");
-	return (count++);
-}
 
 static	void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 {
@@ -55,7 +32,7 @@ static	void	ft_fill_player(char *argv, t_vm *vm, int num_player)
 	swap_4(&(vm->player[num_player].head.prog_size));
 	if (ret == sizeof(t_header))
 		ft_printf("j'ai cree le header du joueur\n");
-	vm->player[num_player].prog = ft_memalloc(sizeof(char) *
+	vm->input.prog[num_player] = ft_memalloc(sizeof(char) *
 									vm->player[num_player].head.prog_size);
 	ret = read(fd, vm->player[num_player].prog,
 		vm->player[num_player].head.prog_size);

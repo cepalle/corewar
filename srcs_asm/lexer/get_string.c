@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   get_string.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/02 10:38:50 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 10:38:52 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
-
 
 char	*join_new_line(char *data, char *new_line)
 {
@@ -39,7 +51,7 @@ t_token	get_string(int *i_line, char **file, int *i_col)
 			{
 				token.er = 1;
 				print_local_error(file, &(i_col_sav), &(i_line_sav),
-				                  "lexer: Unclosed string");
+				"lexer: Unclosed string");
 				return (token);
 			}
 			token.data = join_new_line(token.data, file[*i_line]);

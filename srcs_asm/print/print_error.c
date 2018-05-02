@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   print_error.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/02 10:41:53 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 10:41:54 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	asm_usage(void)
@@ -8,7 +21,7 @@ int	asm_usage(void)
 }
 
 int	print_local_error(char **files,
-						 const int *i_col, const int *i_line, char *msg)
+						const int *i_col, const int *i_line, char *msg)
 {
 	int i;
 

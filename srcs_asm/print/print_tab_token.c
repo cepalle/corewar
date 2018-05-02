@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   print_tab_token.c                                .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/02 10:41:59 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 10:42:00 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
@@ -35,10 +48,10 @@ void	print_tab_token(t_tab_token tab_token)
 
 	i = 0;
 	if (tab_token.i < 0)
-		return;
+		return ;
 	while (i <= tab_token.i)
 	{
 		print_token(tab_token.tokens[i]);
 		i++;
-	};
+	}
 }

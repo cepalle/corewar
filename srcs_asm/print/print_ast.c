@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   print_ast.c                                      .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/02 10:41:47 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 10:41:49 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
@@ -6,7 +19,7 @@ void	print_ast_inst(t_ast_inst *ast_inst)
 	int	i;
 
 	if (!ast_inst)
-		return;
+		return ;
 	i = 0;
 	while (i < ast_inst->nb_labels_dec)
 	{
