@@ -47,18 +47,25 @@ void	ft_print_vm(t_vm *vm)
 	}
 }
 
+// -n
+
 int		main(int argc, char **argv)
 {
 	t_vm		vm;
+//	t_inpu_cmd input_cmd;
 
 	ft_bzero(&vm, sizeof(t_vm));
 	if (ft_check_error(argc, argv) == 0)
 		return (0);
+//	input_cmd(argc, argv);
+
 	ft_create_player(argv, &vm);
-	ft_create_map(&vm);
+	ft_create_map(&vm); // initialiser vm (t_iniput_cmd, &vm);
+	// if error free(input)
 	ft_print_vm(&vm);
 //	ft_test_ppichier(&vm); // TEST PPICHIER
-	ft_run_vm(&vm, 0);
+	ft_run_vm(&vm, input_cmd);
+	//free
 	return (0);
 }
 

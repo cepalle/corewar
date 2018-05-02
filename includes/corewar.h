@@ -33,8 +33,8 @@ typedef	struct 		s_player
 	t_header		head;
 	unsigned int	last_live;
 	unsigned int	live;
-	t_proc			*process;
-	char			*prog;
+	t_proc			*process; // TODO test ref
+	char			*prog; // rm -> input
 }					t_player;
 
 typedef	struct 		s_vm
@@ -42,10 +42,11 @@ typedef	struct 		s_vm
 	unsigned char 	tab[MEM_SIZE];
 	int 			nb_p;
 	t_player 		*player;
-	unsigned int 	nb_process;
+//	unsigned int 	nb_process;
 	unsigned int 	cycle;
 }					t_vm;
 
+typedef void (*t_cmd)(t_vm *vm, int num_player, int num_process);
 
 void				ft_print_vm(t_vm *vm);
 int					ft_check_error(int argc, char **argv);

@@ -16,30 +16,36 @@
 #include "../libft/includes/libft.h"
 
 /*
-int a;
-int nb_checks;
-int MAX_CYCLE;
-int count;
+int cycle_current = 0;
+int nb_check_no_decr = 0;
+int cycle_last_check_die = 0;
+int cycle_to_die = CYCLE_TO_DIE;
 
-a = 0;
-count = 0;
-MAX_CYCLE = CYCLE_TO_DIE;
 while (1)
 {
-	count++;
-	vm->cycle = vm->cycle + 1;
-	if (count == MAX_CYCLE)
+	nb_check_no_decr++;
+	cycle_last_check_die++;
+	ft_vm_cycle(vm);
+	if (cycle_last_check_die >=  cycle_to_die
+		&& !check_end(vm))
 	{
-		count = 0;
-		MAX_CYCLE = MAX_CYCLE - CYCLE_DELTA;
+		// TODO END
 	}
-	if (nb_live_depuis_der_verif > NBR_LIVE)
-		CYCLE_TO_DIE = CYCLE_TO_DIE - CYCLE_DELTA;
-	if (MAX_CHECKS == nb_checks)
-		CYCLE_TO_DIE = CYCLE_TO_DIE - CYCLE_DELTA;
-
+ 	else if (cycle_last_check_die >=  cycle_to_die
+ 		&& (check_nb_live_player(vm) ||
+ 		nb_check_no_decr + 1 >= MAX_CHECKS))
+	{
+		cycle_to_die -= CYCLE_DELTA;
+		cycle_to_die = ft_max(0, cycle_to_die);
+		if cycle_to_die == 0 -> END
+		nb_check_no_decr = 0;
+	}
 }
 */
+
+
+
+
 
 static int 	ft_analyze_oct_params(t_vm *vm, int *index, int i)
 {
@@ -138,10 +144,23 @@ static int ft_get_op_ppichier(t_vm *vm, int opcode, int *index)
 	return (0);
 }
 
+void 	ft_choose_cmd(t_vm *vm, int num_player, int num_process)
+{
+	while()
+	{
+		if ()
+		{
+			t_cmd(vm, num_player, num_process);
+		}
+	}
+	// nothing avencer
+}
+
 void 	ft_run_vm(t_vm *vm, int start)
 {
 	int cpt;
 	int index;
+
 
 	cpt = start;
 	vm->player->process->PC = 0;
