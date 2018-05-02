@@ -28,7 +28,7 @@ void	ft_print_vm(t_vm *vm)
 		ft_printf("%u\n", vm->player[a].head.prog_size);
 		ft_printf("%s\n", vm->player[a].head.comment);
 		b = -1;
-		while (++b < vm->player[a].head.prog_size)
+		while ((unsigned int)++b < vm->player[a].head.prog_size)
 			ft_printf("%0.2hhx ", vm->player[a].prog[b]);
 		ft_printf("\n\n\n\n");
 	}

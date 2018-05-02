@@ -41,11 +41,11 @@ while (1)
 }
 */
 
-static int 	ft_analyze_oct_params(t_vm *vm, int *index, int i)
+/*static int	ft_analyze_oct_params(t_vm *vm, int *index, int i)
 {
-	char *oc_param_binary;
-	unsigned int cpt;
-	char *octet;
+	char	*oc_param_binary;
+	int		cpt;
+	char	*octet;
 
 	cpt = 0;
 	oc_param_binary = ft_itoa_base(vm->tab[*index],2);
@@ -69,42 +69,48 @@ static int 	ft_analyze_oct_params(t_vm *vm, int *index, int i)
 	*index = vm->player->process->params_size[0] + vm->player->process->params_size[1] + vm->player->process->params_size[2];
 
 	return (1);
-}
+}*/
 
-/*static int 	ft_analyze_oct_params(t_vm *vm, int *index, int i)
+static int 	ft_analyze_oct_params(t_vm *vm, int *index, int i)
 {
-	unsigned int cpt;
-	int right;
+	int cpt;
 	int left;
 	short tmp;
 	short tmp_dec;
 
 	cpt = 0;
-	right = 6;
 	left = 0;
 	ft_bzero(vm->player->process->params_size, 3);
 	while (cpt < gopt()[i].nb_arg)
 	{
 		tmp = vm->tab[*index];
 		ft_printf("mon tmp = %x\n", vm->tab[*index]);
-		tmp_dec = tmp << left >> right;
-		//tmp_dec = tmp_dec >> right;
+		tmp_dec = tmp << left;
+		tmp_dec = tmp_dec >> 6;
 		ft_printf("mon tmp_dec = %d\n", tmp_dec);
 		if (tmp_dec == 2)
+		{
+			ft_printf("mon stock vaut 2\n");
 			vm->player->process->params_size[cpt] = 4;
+		}
 		if (tmp_dec == 1)
+		{
+			ft_printf("mon stock vaut 2\n");
 			vm->player->process->params_size[cpt] = 1;
+		}
 		if (tmp_dec == 3)
+		{
+			ft_printf("mon stock vaut 2\n");
 			vm->player->process->params_size[cpt] = 2;
+		}
 		cpt++;
-		right = right - 2;
 		left = left + 2;
 	}
 	ft_printf("cpt = %d\n", cpt);
 	ft_printf("tab[0] = %d , tab[1] = %d, tab[2]= %d\n", vm->player->process->params_size[0], vm->player->process->params_size[1], vm->player->process->params_size[2]);
-	*index = vm->player->process->params_size[0] + vm->player->process->params_size[1] + vm->player->process->params_size[2];
+	//*index = vm->player->process->params_size[0] + vm->player->process->params_size[1] + vm->player->process->params_size[2];
 	return (1);
-}*/
+}
 
 
 static int ft_calculate_next_index(t_vm *vm, int *index, int i)
@@ -144,6 +150,7 @@ void 	ft_run_vm(t_vm *vm, int start)
 	int index;
 
 	cpt = start;
+	vm->player->process = malloc(sizeof(int)); // TODO malloc selon nbr de processus
 	vm->player->process->PC = 0;
 	index = vm->player->process->PC;
 	while (index < MEM_SIZE)
