@@ -48,10 +48,10 @@ void	print_tab_token(t_tab_token tab_token)
 
 	i = 0;
 	if (tab_token.i < 0)
-		return;
+		return ;
 	while (i <= tab_token.i)
 	{
 		print_token(tab_token.tokens[i]);
 		i++;
-	};
+	}
 }

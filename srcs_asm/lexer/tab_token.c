@@ -28,7 +28,8 @@ void	tab_token_add(t_tab_token *tab_token, t_token tken)
 	tab_token->i++;
 	if (tab_token->i >= tab_token->len)
 	{
-		tab_token->tokens = ft_realloc(tab_token->tokens, sizeof(t_token) * tab_token->len, sizeof(t_token) * tab_token->len * 2);
+		tab_token->tokens = ft_realloc(tab_token->tokens,
+		sizeof(t_token) * tab_token->len, sizeof(t_token) * tab_token->len * 2);
 		tab_token->len = tab_token->len * 2;
 	}
 	tab_token->tokens[tab_token->i] = tken;

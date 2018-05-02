@@ -40,11 +40,11 @@ int		check_registres(t_ast_inst *ast_inst, char **file)
 	while (i < ast_inst->nb_ast_params)
 	{
 		if (ast_inst->ast_params[i].enum_token == TOKEN_LABEL &&
-		    !is_registre(ast_inst->ast_params[i].data))
+			!is_registre(ast_inst->ast_params[i].data))
 		{
 			print_local_error(file, &(ast_inst->ast_params[i].file_pose_col),
-							  &(ast_inst->ast_params[i].file_pose_line),
-							  "no valid param register");
+							&(ast_inst->ast_params[i].file_pose_line),
+							"no valid param register");
 			return (1);
 		}
 		i++;

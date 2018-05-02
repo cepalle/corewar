@@ -30,7 +30,8 @@ int		check_label_if_exist(t_ast_inst *ast_inst, const char *to_find)
 	return (check_label_if_exist(ast_inst->next, to_find));
 }
 
-int		check_labels_params(t_parser parser_res, t_ast_inst *ast_inst, char **file)
+int		check_labels_params(t_parser parser_res,
+							t_ast_inst *ast_inst, char **file)
 {
 	int		i;
 
@@ -40,12 +41,13 @@ int		check_labels_params(t_parser parser_res, t_ast_inst *ast_inst, char **file)
 	while (i < ast_inst->nb_ast_params)
 	{
 		if ((ast_inst->ast_params[i].enum_token == TOKEN_DIRECT_LABEL ||
-			 ast_inst->ast_params[i].enum_token == TOKEN_INDIRECT_LABEL) &&
-			check_label_if_exist(parser_res.ast_prog.ast_inst, ast_inst->ast_params[i].data))
+			ast_inst->ast_params[i].enum_token == TOKEN_INDIRECT_LABEL) &&
+			check_label_if_exist(parser_res.ast_prog.ast_inst,
+								ast_inst->ast_params[i].data))
 		{
 			print_local_error(file, &(ast_inst->ast_params[i].file_pose_col),
-							  &(ast_inst->ast_params[i].file_pose_line),
-							  "label is not declare");
+							&(ast_inst->ast_params[i].file_pose_line),
+							"label is not declare");
 			return (1);
 		}
 		i++;
@@ -59,15 +61,18 @@ int		check_inst_label_dec(t_ast_inst *ast_inst, char **file)
 	int		j;
 
 	i = 0;
-	while (i < ast_inst->nb_labels_dec) {
+	while (i < ast_inst->nb_labels_dec)
+	{
 		j = i + 1;
 		while (j < ast_inst->nb_labels_dec)
 		{
-			if (ft_strequ(ast_inst->labels_dec[i].data, ast_inst->labels_dec[j].data))
+			if (ft_strequ(ast_inst->labels_dec[i].data,
+						ast_inst->labels_dec[j].data))
 			{
-				print_local_error(file, &(ast_inst->labels_dec[j].file_pose_col),
-								  &(ast_inst->labels_dec[j].file_pose_line),
-								  "label already declared");
+				print_local_error(file,
+								&(ast_inst->labels_dec[j].file_pose_col),
+								&(ast_inst->labels_dec[j].file_pose_line),
+								"label already declared");
 				return (1);
 			}
 			j++;
@@ -91,8 +96,8 @@ int		check_labels_dec(t_parser parser_res, t_ast_inst *ast_inst, char **file)
 		if (!check_label_if_exist(ast_inst->next, ast_inst->labels_dec[i].data))
 		{
 			print_local_error(file, &(ast_inst->labels_dec[i].file_pose_col),
-							  &(ast_inst->labels_dec[i].file_pose_line),
-							  "label is declared more than on times");
+							&(ast_inst->labels_dec[i].file_pose_line),
+							"label is declared more than on times");
 			return (1);
 		}
 		i++;

@@ -19,7 +19,7 @@ void	print_ast_inst(t_ast_inst *ast_inst)
 	int	i;
 
 	if (!ast_inst)
-		return;
+		return ;
 	i = 0;
 	while (i < ast_inst->nb_labels_dec)
 	{

@@ -21,7 +21,7 @@ int	asm_usage(void)
 }
 
 int	print_local_error(char **files,
-						 const int *i_col, const int *i_line, char *msg)
+						const int *i_col, const int *i_line, char *msg)
 {
 	int i;
 
