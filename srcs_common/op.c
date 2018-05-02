@@ -56,7 +56,7 @@ t_op		*gopt(void)
 	return (g_op_tab);
 }
 
-t_op		get_op(char *cmd)
+t_op		get_op_name(char *cmd)
 {
 	int i;
 
@@ -67,6 +67,21 @@ t_op		get_op(char *cmd)
 			return (gopt()[i]);
 		i++;
 	}
-	ft_printf("get_op cmd no found\n");
+	ft_printf("get_op_name cmd no found\n");
+	return (gopt()[OP_TAB_LENGTH]);
+}
+
+t_op		get_op_opcode(char *cmd)
+{
+	int i;
+
+	i = 0;
+	while (i < OP_TAB_LENGTH)
+	{
+		if (ft_strequ(gopt()[i].name, cmd))
+			return (gopt()[i]);
+		i++;
+	}
+	ft_printf("get_op_name cmd no found\n");
 	return (gopt()[OP_TAB_LENGTH]);
 }
