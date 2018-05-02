@@ -1,26 +1,41 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ast_add_inst.c                                   .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/02 10:39:43 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 10:39:45 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 
 void	inst_add_labels_dec(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
 {
-	while (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_LABEL_DECLARATION &&
-	       !ast_inst->er)
+	while (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_LABEL_DECLARATION
+		&& !ast_inst->er)
 	{
 		if (ast_inst->nb_labels_dec + 1 >= LABELS_DEC_LEN)
 		{
-			print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
-							  &(lexer_res.tab_token.tokens[*i].file_pose_line),
-							  "paser: Too many label befor one cmd");
+			print_local_error(lexer_res.file,
+							&(lexer_res.tab_token.tokens[*i].file_pose_col),
+							&(lexer_res.tab_token.tokens[*i].file_pose_line),
+							"paser: Too many label befor one cmd");
 			ast_inst->er = 1;
 			return ;
 		}
-		ast_inst->labels_dec[ast_inst->nb_labels_dec] = lexer_res.tab_token.tokens[*i];
+		ast_inst->labels_dec[ast_inst->nb_labels_dec] =
+				lexer_res.tab_token.tokens[*i];
 		ast_inst->labels_dec[ast_inst->nb_labels_dec].data = ft_strdup(
 				lexer_res.tab_token.tokens[*i].data);
 		ast_inst->nb_labels_dec++;
 		(*i)++;
 		while (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_EOL ||
-			   lexer_res.tab_token.tokens[*i].enum_token == TOKEN_COMMENT)
+			lexer_res.tab_token.tokens[*i].enum_token == TOKEN_COMMENT)
 			(*i)++;
 	}
 }
@@ -33,21 +48,24 @@ void	inst_add_params(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
 		lexer_res.tab_token.tokens[*i].enum_token != TOKEN_INDIRECT_LABEL &&
 		lexer_res.tab_token.tokens[*i].enum_token != TOKEN_LABEL)
 	{
-		print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
-						  &(lexer_res.tab_token.tokens[*i].file_pose_line),
-						  "parser: Need a param");
+		print_local_error(lexer_res.file,
+						&(lexer_res.tab_token.tokens[*i].file_pose_col),
+						&(lexer_res.tab_token.tokens[*i].file_pose_line),
+						"parser: Need a param");
 		ast_inst->er = 1;
 		return ;
 	}
 	if (ast_inst->nb_ast_params >= MAX_PARAMS)
 	{
-		print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
-						  &(lexer_res.tab_token.tokens[*i].file_pose_line),
-						  "parser: command can't have more than 3 param");
+		print_local_error(lexer_res.file,
+						&(lexer_res.tab_token.tokens[*i].file_pose_col),
+						&(lexer_res.tab_token.tokens[*i].file_pose_line),
+						"parser: command can't have more than 3 param");
 		ast_inst->er = 1;
 		return ;
 	}
-	ast_inst->ast_params[ast_inst->nb_ast_params] = lexer_res.tab_token.tokens[*i];
+	ast_inst->ast_params[ast_inst->nb_ast_params] =
+			lexer_res.tab_token.tokens[*i];
 	ast_inst->ast_params[ast_inst->nb_ast_params].data = ft_strdup(
 			lexer_res.tab_token.tokens[*i].data);
 	ast_inst->nb_ast_params++;
@@ -93,10 +111,11 @@ void	ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
 	{
 		add_inst_to_parser_res(parser_res, ast_inst);
 		return ;
-	};
+	}
 	if (lexer_res.tab_token.tokens[*i].enum_token != TOKEN_LABEL)
 	{
-		print_local_error(lexer_res.file, &(lexer_res.tab_token.tokens[*i].file_pose_col),
+		print_local_error(lexer_res.file,
+						&(lexer_res.tab_token.tokens[*i].file_pose_col),
 						&(lexer_res.tab_token.tokens[*i].file_pose_line),
 						"parser: Need a command");
 		parser_res->er = 1;

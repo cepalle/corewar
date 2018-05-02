@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   check_insts.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/02 10:40:34 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 10:40:35 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "op.h"
 #include "libft.h"
@@ -16,8 +29,8 @@ int		check_param(t_token token, int t_arg, char **file)
 		token.enum_token == TOKEN_LABEL)
 		return (0);
 	print_local_error(file, &(token.file_pose_col),
-					  &(token.file_pose_line),
-					  "error: bad parameter");
+					&(token.file_pose_line),
+					"error: bad parameter");
 	return (1);
 }
 
@@ -28,8 +41,8 @@ int		check_cmd(t_ast_inst *inst, t_op op_desc, char **file)
 	if (inst->nb_ast_params != op_desc.nb_arg)
 	{
 		print_local_error(file, &(inst->cmd.file_pose_col),
-						  &(inst->cmd.file_pose_line),
-						  "error: bad number of param");
+						&(inst->cmd.file_pose_line),
+						"error: bad number of param");
 		return (1);
 	}
 	i = 0;
@@ -54,9 +67,10 @@ int		check_inst(t_ast_inst *inst, char **file)
 	}
 	if (!inst->cmd.enum_token && inst->next)
 	{
-		print_local_error(file, &(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_col),
-						  &(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_line),
-						  "error: label as not cmd and is not in the end");
+		print_local_error(file,
+			&(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_col),
+			&(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_line),
+			"error: label as not cmd and is not in the end");
 		return (1);
 	}
 	else if (!inst->cmd.enum_token && !inst->next)
@@ -68,8 +82,8 @@ int		check_inst(t_ast_inst *inst, char **file)
 		i++;
 	}
 	print_local_error(file, &(inst->cmd.file_pose_col),
-					  &(inst->cmd.file_pose_line),
-					  "error: unknow command");
+					&(inst->cmd.file_pose_line),
+					"error: unknow command");
 	return (1);
 }
 

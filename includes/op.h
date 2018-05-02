@@ -98,7 +98,7 @@ struct					s_op
 typedef struct s_op		t_op;
 
 t_op					*gopt(void);
-t_op					get_op(char *cmd);
+t_op					get_op_name(char *cmd);
 void					swap_4(unsigned int *to_swap);
 void					swap_2(unsigned short int *to_swap);
 

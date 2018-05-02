@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   get_direct.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/05/02 10:38:19 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/02 10:38:21 by cepalle     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
 #include "asm.h"
 #include "libft.h"
 #include "op.h"
 
-void check_direct_number(t_token *token, int i, char **file, int *i_col, int *i_line)
+void	check_direct_number(t_token *token, int i, t_file cfile)
 {
 	if (i == 1 && token->data[0] == '-')
 	{
 		token->er = 1;
-		print_local_error(file, i_col, i_line,
-						  "lexer: Direct_number, no number found after '-'");
+		print_local_error(cfile.file, cfile.i_col, cfile.i_line,
+						"lexer: Direct_number, no number found after '-'");
 		return ;
 	}
 	if (token->data[i] && ft_strchr(LABEL_CHARS, token->data[i]))
 	{
 		token->er = 1;
-		print_local_error(file, i_col, i_line,
+		print_local_error(cfile.file, cfile.i_col, cfile.i_line,
 						"lexer: Direct number, unexpected char");
 		return ;
 	}
@@ -24,16 +37,20 @@ t_token	get_direct_number(int *i_line, char **file, int *i_col)
 {
 	t_token	token;
 	int		i;
+	t_file	cfile;
 
 	ft_bzero(&token, sizeof(t_token));
 	i = 0;
+	cfile.file = file;
+	cfile.i_col = i_col;
+	cfile.i_line = i_line;
 	token.enum_token = TOKEN_DIRECT_NUMBER;
 	token.data = ft_strdup(file[*i_line] + *i_col);
 	if (token.data[i] == '-')
 		i++;
 	while (ft_isdigit(token.data[i]))
 		i++;
-	check_direct_number(&token, i, file, i_col, i_line);
+	check_direct_number(&token, i, cfile);
 	token.data[i] = '\0';
 	*i_col = *i_col + i;
 	return (token);

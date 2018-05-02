@@ -55,7 +55,7 @@ void		write_inst(int fd, t_ast_inst *ast_inst, int pos)
 
 	if (!ast_inst->cmd.enum_token)
 		return ;
-	op = get_op(ast_inst->cmd.data);
+	op = get_op_name(ast_inst->cmd.data);
 	write(fd, &op.opcode, 1);
 	if (op.octet_param)
 		write_octet_param(fd, ast_inst);

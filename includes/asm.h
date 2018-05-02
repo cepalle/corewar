@@ -129,6 +129,14 @@ struct						s_parser
 };
 typedef struct s_parser		t_parser;
 
+struct						s_file
+{
+	char					**file;
+	int 					*i_col;
+	int						*i_line;
+};
+typedef struct s_file		t_file;
+
 t_cmdl						cmd_input(int argc, char **argv);
 t_lexer						lexer(t_cmdl cmdl);
 t_parser					parser(t_lexer lexer_res);
