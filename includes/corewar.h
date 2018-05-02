@@ -25,16 +25,16 @@
 typedef	struct		s_input
 {
 	int				n;
-	int				a;
 	char			*prog[4];
+	int 			nb_p;
+	int				d;
+	t_header 		head[4];
 
 }					t_input;
 
-
-
 typedef	struct		s_cmd_save
 {
-	t_cmd			cmd;
+//	t_cmd			cmd;
 	char			codage_param;
 	int				params[3];
 	int				cycle_wating;
@@ -53,20 +53,17 @@ typedef	struct 		s_player
 	t_header		head;
 	unsigned int	last_live;
 	unsigned int	live;
-	t_proc			*process; // TODO test ref
-//	char			*prog; // rm -> tab vm
+	t_proc			*process; // TODO test refg
 	int				id;
 }					t_player;
 
 typedef	struct 		s_vm
 {
-	t_input			input;
 	int 			nb_p;
 	int				d;
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
 //	unsigned int 	nb_process;
-	t_player 		*player;
 	t_proc			*process; // TODO test ref
 	unsigned int 	nb_process;
 	unsigned int 	len_process;
@@ -76,10 +73,9 @@ typedef	struct 		s_vm
 typedef void (*t_cmd)(t_vm *vm, int num_player, int num_process);
 
 void				ft_print_vm(t_vm *vm);
-int					ft_check_error(int argc, char **argv, t_vm *vm);
+int					ft_check_error(int argc, char **argv, t_input *input);
 void				ft_usage(void);
-void				ft_create_map(t_vm *vm);
-void				ft_create_player(char **argv, t_vm *vm);
+void				ft_create_map(t_vm *vm, t_input input);
 
 
 /* PPICHIER */

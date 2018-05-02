@@ -14,27 +14,24 @@
 #include "corewar.h"
 #include "../libft/includes/libft.h"
 
-void	ft_print_vm(t_vm vm)
+/*void	ft_print_vm(t_vm vm)
 {
 	int a;
 	int b;
 
 	a = -1;
 	ft_printf("ft_print_vm\n");
-	while (++a < vm.input.nb_p)
+	while (++a < vm.nb_p)
 	{
 		ft_printf("%x\n", vm.player[a].head.magic);
 		ft_printf("%s\n", vm.player[a].head.prog_name);
 		ft_printf("%u\n", vm.player[a].head.prog_size);
 		ft_printf("%s\n", vm.player[a].head.comment);
 		b = -1;
-<<<<<<< HEAD
-		while (++b < vm.player[a].head.prog_size)
-			ft_printf("%0.2hhx ", vm.input.prog[a][b]);
-=======
+
 		while ((unsigned int)++b < vm->player[a].head.prog_size)
 			ft_printf("%0.2hhx ", vm->player[a].prog[b]);
->>>>>>> 80bbf114806ebd2e7745019aadf680fdcde00102
+
 		ft_printf("\n\n\n\n");
 	}
 	b = 1;
@@ -51,24 +48,44 @@ void	ft_print_vm(t_vm vm)
 		b++;
 	}
 }
+*/
 
-// -n
 
 int		main(int argc, char **argv)
 {
+	int b = -1;
 	t_vm		vm;
 	t_input		input;
 
 	ft_bzero(&vm, sizeof(t_vm));
-	if (ft_check_error(argc, argv, &vm0) == 0)
+	if (ft_check_error(argc, argv, &input) == 0)
 		return (0);
+
+	/*ft_printf("%x\n", input.head[0].magic);
+	ft_printf("%s\n", input.head[0].prog_name);
+	ft_printf("%u\n", input.head[0].prog_size);
+	ft_printf("%s\n", input.head[0].comment);
+
+	while ((unsigned int)++b < input.head[0].prog_size)
+		ft_printf("%0.2hhx ",  input.prog[0][b]);
+
+	b = -1;
+
+	ft_printf("%x\n", input.head[1].magic);
+	ft_printf("%s\n", input.head[1].prog_name);
+	ft_printf("%u\n", input.head[1].prog_size);
+	ft_printf("%s\n", input.head[1].comment);
+	while ((unsigned int)++b < input.head[1].prog_size)
+		ft_printf("%0.2hhx ",  input.prog[1][b]);
+*/
+
+
 //	input = input_cmd(argc, argv);
 
-	ft_create_player(argv, &vm);
-	ft_create_map(&vm); // initialiser vm (t_iniput_cmd, &vm);
+//	ft_create_map(&vm, input); // initialiser vm (t_iniput_cmd, &vm);
 	// if error free(input)
-	ft_print_vm(&vm);
-	ft_run_vm(&vm, input_cmd);
+//	ft_print_vm(&vm);
+//	ft_run_vm(&vm, input_cmd);
 	//free
 	return (0);
 }

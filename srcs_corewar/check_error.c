@@ -18,7 +18,52 @@
 #include <unistd.h>
 #include "corewar.h"
 
-static	int		ft_check_player(char *argv, t_vm *vm)
+
+static	void	ft_fill_player(char *argv, t_input *input, int fd)
+{
+
+	ssize_t	ret;
+
+	ft_printf("ft_fill_player\n");
+
+
+	ret = read(fd, &input[input->nb_p].head, sizeof(t_header));
+
+
+	swap_4(&input[input->nb_p].head->magic);
+	swap_4(&input[input->nb_p].head->prog_size);
+
+
+	if (ret == sizeof(t_header))
+		ft_printf("j'ai cree le header du joueur\n");
+
+	ft_printf("input->nb_joueur = %d\n",input->nb_p);
+	ft_printf("%x\n", input->head[input->nb_p].magic);
+	ft_printf("%s\n", input->head[input->nb_p].prog_name);
+	ft_printf("%u\n", input->head[input->nb_p].prog_size);
+	ft_printf("%s\n", input->head[input->nb_p].comment);
+
+	input->prog[input->nb_p] = ft_memalloc(sizeof(char) * input[input->nb_p].head->prog_size +1);
+
+
+
+	ret = read(fd, input[input->nb_p].prog[input->nb_p],
+			   input[input->nb_p].head->prog_size);
+
+	if (ret == input[input->nb_p].head[input->nb_p].prog_size)
+		ft_printf("ca devrait etre bon\n");
+
+	int b = -1;
+	while ((unsigned int)++b < input->head[input->nb_p].prog_size)
+		ft_printf("%0.2hhx ",  input->prog[input->nb_p][b]);
+}
+
+
+
+
+
+
+static	int		ft_check_player(char *argv, t_input *input)
 {
 	int		fd;
 	size_t	len;
@@ -36,34 +81,62 @@ static	int		ft_check_player(char *argv, t_vm *vm)
 		ft_printf("fichier inexistant\n");
 		return (0);
 	}
-	close(fd);
+
+	ft_printf("je vais travailler sur le joueur %d\n", input->nb_p);
+	ft_fill_player(argv, input, fd);
+	input->nb_p = input->nb_p + 1;
+	ft_printf("j'ai fini travailler sur le joueur %d\n", input->nb_p);
 	ft_printf("%s est bien un champion\n", argv);
+	close(fd);
 	return (1);
 }
 
-static	int		ft_check_option(char *argv, t_vm *vm)
+
+
+static	int ft_str_is_digit(char *str)
+{
+	int a;
+
+	a = 0;
+	while (str[a])
+	{
+		if (!ft_isdigit(str[a]))
+			return (0);
+		a++;
+	}
+	return (1);
+}
+
+
+
+static	int		ft_check_option(char *argv, t_input *input, int *a)
 {
 	ft_printf("ft_check_option\n");
 //	TODO: penser a choisir les options que l'on va mettre en place
+
 	if (ft_strcmp(argv, "-n") == 0)
 	{
+		*a = *a + 1;
 		ft_printf("Ncurses output mode\n");
-
-		return (1);
+		if (!(ft_str_is_digit(argv + *a)))
+		{
+			ft_printf("mauvais argument apres -d\n");
+			ft_usage();
+			return (0);
+		}
+		input->n = ft_atoi(argv + *a);
 	}
-	if (ft_strcmp(argv, "-a") == 0)
+	if (ft_strcmp(argv, "-d") == 0)
 	{
-		ft_printf("Prints output from \"aff\" (Default is to hide it)\n");
-		return (1);
-	}
-	if (ft_strcmp(argv, "-b") == 0)
-	{
+		input->d = 1;
 		ft_printf("Binary output mode for corewar.42.fr\n");
 		return (1);
 	}
 	ft_printf("option non reconnue\n");
 	return (0);
 }
+
+
 
 void			ft_usage(void)
 {
@@ -91,15 +164,16 @@ void			ft_usage(void)
 	"########################################################################");
 }
 
-static	int		ft_check_arg(char **argv, t_vm *vm)
+static	int		ft_check_arg(char **argv, t_input *input)
 {
 	int a;
 
 	ft_printf("ft_check_arg\n");
 	a = 1;
+
 	while (argv[a])
 	{
-		if (ft_check_option(argv[a], vm) == 0 && ft_check_player(argv[a], vm) == 0)
+		if (ft_check_option(argv[a], input, &a) == 0 && ft_check_player(argv[a], input) == 0)
 		{
 			ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
@@ -109,17 +183,20 @@ static	int		ft_check_arg(char **argv, t_vm *vm)
 	return (1);
 }
 
-int				ft_check_error(int argc, char **argv, t_vm *vm)
+int				ft_check_error(int argc, char **argv, t_input *input)
 {
 	ft_printf("ft_check_error\n");
+	input->nb_p = 0;
 	if (argc == 1)
 	{
 		ft_usage();
 		return (0);
 	}
-	if (ft_check_arg(argv) == 0)
+
+	if (ft_check_arg(argv, input) == 0)
 		return (0);
-	if (vm->input.nb_p <= 0 || vm->input.nb_p > 4)
+
+	if (input->nb_p <= 0 || input->nb_p > 4)
 	{
 		ft_printf("nombre de joueur excessif ou insuffisant\n");
 		return (0);
