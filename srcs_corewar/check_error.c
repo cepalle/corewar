@@ -18,49 +18,80 @@
 #include <unistd.h>
 #include "corewar.h"
 
-static	int		ft_check_player(char *argv)
+static	void	ft_fill_player(char *argv, t_input *input, int fd)
+{
+	ssize_t	ret;
+
+	(void)argv;
+	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
+	swap_4(&input->head[input->nb_p].magic);
+	swap_4(&input->head[input->nb_p].prog_size);
+	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
+							input->head[input->nb_p].prog_size);
+	ret = read(fd, input->prog[input->nb_p],
+			   input->head[input->nb_p].prog_size);
+}
+
+static	int		ft_check_player(char *argv, t_input *input)
 {
 	int		fd;
 	size_t	len;
 
-	ft_printf("ft_check_player\n");
-	len = ft_strlen(argv);
-	if (len > 4 && ((ft_strncmp(argv + (len - 4), ".cor", 4) != 0)))
+	if (input->nb_p >= 4)
 	{
-		ft_printf("%s n'est pas un champion\n", argv);
+		ft_printf("too many player\n");
 		return (0);
 	}
+	len = ft_strlen(argv);
+	if (len > 4 && ((ft_strncmp(argv + (len - 4), ".cor", 4) != 0)))
+		return (0);
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("fichier inexistant\n");
+		ft_printf("Unreachable file\n");
 		return (0);
 	}
+	ft_fill_player(argv, input, fd);
+	input->nb_p = input->nb_p + 1;
 	close(fd);
-	ft_printf("%s est bien un champion\n", argv);
 	return (1);
 }
 
-static	int		ft_check_option(char *argv)
+static	int ft_str_is_digit(char *str)
 {
-	ft_printf("ft_check_option\n");
-//	TODO: penser a choisir les options que l'on va mettre en place
-	if (ft_strcmp(argv, "-n") == 0)
+	int a;
+
+	a = 0;
+	while (str[a])
 	{
+		if (!ft_isdigit(str[a]))
+			return (0);
+		a++;
+	}
+	return (1);
+}
+
+static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
+{
+	if (ft_strcmp(argv[*a], "-d") == 0)
+	{
+		ft_printf("-d option enable\n");
+		if (*a + 1 < argc)
+			*a = *a + 1;
+		if (*a >= argc || (ft_str_is_digit(argv[*a]) == 0))
+		{
+			input->d = 0;
+			return (1);
+		}
+		input->d = ft_atoi(argv[*a]);
+		return (1);
+	}
+	if (ft_strcmp(argv[*a], "-n") == 0)
+	{
+		input->n = 1;
 		ft_printf("Ncurses output mode\n");
 		return (1);
 	}
-	if (ft_strcmp(argv, "-a") == 0)
-	{
-		ft_printf("Prints output from \"aff\" (Default is to hide it)\n");
-		return (1);
-	}
-	if (ft_strcmp(argv, "-b") == 0)
-	{
-		ft_printf("Binary output mode for corewar.42.fr\n");
-		return (1);
-	}
-	ft_printf("option non reconnue\n");
 	return (0);
 }
 
@@ -90,15 +121,14 @@ void			ft_usage(void)
 	"########################################################################");
 }
 
-static	int		ft_check_arg(char **argv)
+static	int		ft_check_arg(char **argv, t_input *input, int argc)
 {
 	int a;
 
-	ft_printf("ft_check_arg\n");
 	a = 1;
 	while (argv[a])
 	{
-		if (ft_check_option(argv[a]) == 0 && ft_check_player(argv[a]) == 0)
+		if (ft_check_option(argv, input, &a, argc) == 0 && ft_check_player(argv[a], input) == 0)
 		{
 			ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
@@ -108,16 +138,15 @@ static	int		ft_check_arg(char **argv)
 	return (1);
 }
 
-int				ft_check_error(int argc, char **argv)
+int				input_cmd(int argc, char **argv, t_input *input)
 {
-	ft_printf("ft_check_error\n");
-	if (argc == 1 || ft_count_player(argv) == 0)
+	input->nb_p = 0;
+	if (argc == 1)
 	{
 		ft_usage();
 		return (0);
 	}
-	if (ft_check_arg(argv) == 0)
+	if (ft_check_arg(argv, input, argc) == 0)
 		return (0);
 	return (1);
 }
-//TODO: penser a gerer limite de 4 joueurs max et quelles options gerer

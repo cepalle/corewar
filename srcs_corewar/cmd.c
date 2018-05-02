@@ -1,18 +1,19 @@
 
 
 #include "../includes/corewar.h"
-#include "../includes/op.h"
+//#include "../includes/op.h"
 #include "../libft/includes/libft.h"
 
 
-void 	ft_live(t_vm *vm, int num_player)
+void 	ft_live(t_vm *vm, int num_player, int num_process)
 {
 //	penser a ajouter le numero du process?
+//	process mis en place pour gerer une liste de fonction
 	vm->player[num_player].live = vm->player[num_player].live + 1;
 	vm->player[num_player].last_live = vm->player[num_player].last_live + 1;
 }
 
-int 	ft_ld(t_vm *vm, int num_player, int num_process)
+void 	ft_ld(t_vm *vm, int num_player, int num_process)
 {
 	int *tab;
 
@@ -23,15 +24,32 @@ int 	ft_ld(t_vm *vm, int num_player, int num_process)
 	ft_memcpy(&vm->player[num_player].process[num_process].reg[tab[0]],
 			  &vm->tab[vm->player[num_player].process[num_process].PC], (size_t)tab[1]);
 //			  tab[2] % IDX_MOD;
+//	est ce qu'il faut faire un swap[2] ou swap[4]?
+//	changement de carry? passage de 1 a 0 ou  1 a 1
+//	vm->player[num_player].process[num_process].carry = 1;
 }
+
+
+
 
 void 	ft_st(t_vm *vm, int num_player, int num_process)
 {
 	int addr;
+	int *tab;
 
-	addr = vm->tab[player.process->PC] + (nbr % IDX_MOD);
-	ft_memcpy(vm->tab + addr, player.process->reg + num_reg, REG_CONTENT_SIZE);
+	tab = vm->player[num_player].process[num_process].params_size;
+
+	addr = vm->tab[vm->[num_player].process[num_process]->PC] + (tab[1] % IDX_MOD);
+	ft_memcpy(vm->tab + addr, &vm->[num_player].process[num_process].reg[tab[0]], REG_CONTENT_SIZE);
+//	est ce qu'il faut faire un swap[2] ou swap[4]?
+// 	changement de carry? passage de 1 a 0 ou  1 a 1
+//	vm->player[num_player].process[num_process].carry = 1;
 }
+
+
+
+
+
 
 int 	ft_add(t_vm *vm, int num_player, int num_process)
 {
@@ -89,7 +107,7 @@ int 	ft_lldi(t_vm *vm, int num_player, int num_process)
 	return (vm->tab[param_1 + param_2]);
 }
 
-void 	ft_aff(t_vm *vm, int num_player)
+void 	ft_aff(t_vm *vm, int num_player, int num_process)
 {
 	ft_putchar(vm->tab[index]);
 }
@@ -105,8 +123,8 @@ void	ft_fork(t_vm *vm, int num_player, int num_process)
 	return;
 }
 
-void 	ft_zjmp(t_vm *vm, int num_player, int num_proc)
+void 	ft_zjmp(t_vm *vm, int num_player, int num_process)
 {
-	ft_run_vm(vm, );
-	player[num_player].process[num_proc].process = index;
+	ft_vm_run(vm,);
+	player[num_player].process[num_process].process = index;
 }
