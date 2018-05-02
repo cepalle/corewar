@@ -104,6 +104,8 @@ void			ft_create_map(t_vm *vm)
 	{
 		ft_memcpy(vm->tab + res, vm->player[a].prog,
 				vm->player[a].head.prog_size);
+		vm->player[a].PC = malloc(sizeof(t_proc));
+		vm->player[a].PC->PC = res;
 		res = res + placement;
 		a++;
 	}

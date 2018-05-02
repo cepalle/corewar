@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_putchar.c                                     .::    .:/ .      .::   */
+/*   run_vm.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: aurollan <aurollan@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/22 21:04:08 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/23 10:39:08 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/04/29 18:39:00 by aurollan     #+#   ##    ##    #+#       */
+/*   Updated: 2018/04/29 18:39:02 by aurollan    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "corewar.h"
 
-void	pf_putchar(char c)
+void 	ft_run_PC(t_vm *vm)
 {
-	write(1, &c, 1);
+	vm->cycle = 0;
+
+
 }
