@@ -125,6 +125,6 @@ void	ft_fork(t_vm *vm, int num_player, int num_process)
 
 void 	ft_zjmp(t_vm *vm, int num_player, int num_process)
 {
-	ft_run_vm(vm, );
+	ft_vm_run(vm,);
 	player[num_player].process[num_process].process = index;
 }

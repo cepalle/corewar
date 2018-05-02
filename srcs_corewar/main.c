@@ -58,34 +58,14 @@ int		main(int argc, char **argv)
 	t_input		input;
 
 	ft_bzero(&vm, sizeof(t_vm));
-	if (ft_check_error(argc, argv, &input) == 0)
-		return (0);
+	ft_bzero(&input, sizeof(t_input));
 
-	/*ft_printf("%x\n", input.head[0].magic);
-	ft_printf("%s\n", input.head[0].prog_name);
-	ft_printf("%u\n", input.head[0].prog_size);
-	ft_printf("%s\n", input.head[0].comment);
-
-	while ((unsigned int)++b < input.head[0].prog_size)
-		ft_printf("%0.2hhx ",  input.prog[0][b]);
-
-	b = -1;
-
-	ft_printf("%x\n", input.head[1].magic);
-	ft_printf("%s\n", input.head[1].prog_name);
-	ft_printf("%u\n", input.head[1].prog_size);
-	ft_printf("%s\n", input.head[1].comment);
-	while ((unsigned int)++b < input.head[1].prog_size)
-		ft_printf("%0.2hhx ",  input.prog[1][b]);
-*/
-
-
-//	input = input_cmd(argc, argv);
+	input = input_cmd(argc, argv);
 
 //	ft_create_map(&vm, input); // initialiser vm (t_iniput_cmd, &vm);
 	// if error free(input)
 //	ft_print_vm(&vm);
-//	ft_run_vm(&vm, input_cmd);
+//	ft_vm_run(&vm, input_cmd);
 	//free
 	return (0);
 }

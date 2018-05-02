@@ -146,18 +146,6 @@ static int ft_get_op_ppichier(t_vm *vm, int opcode, int *index)
 	return (0);
 }
 
-void 	ft_choose_cmd(t_vm *vm, int num_player, int num_process)
-{
-	while()
-	{
-		if ()
-		{
-			t_cmd(vm, num_player, num_process);
-		}
-	}
-	// nothing avencer
-}
-
 void 	ft_run_vm(t_vm *vm, int start)
 {
 	int cpt;
