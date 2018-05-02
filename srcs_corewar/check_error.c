@@ -18,80 +18,43 @@
 #include <unistd.h>
 #include "corewar.h"
 
-
 static	void	ft_fill_player(char *argv, t_input *input, int fd)
 {
-
 	ssize_t	ret;
 
-	ft_printf("ft_fill_player\n");
-
-
-	ret = read(fd, &input[input->nb_p].head, sizeof(t_header));
-
-
-	swap_4(&input[input->nb_p].head->magic);
-	swap_4(&input[input->nb_p].head->prog_size);
-
-
-	if (ret == sizeof(t_header))
-		ft_printf("j'ai cree le header du joueur\n");
-
-	ft_printf("input->nb_joueur = %d\n",input->nb_p);
-	ft_printf("%x\n", input->head[input->nb_p].magic);
-	ft_printf("%s\n", input->head[input->nb_p].prog_name);
-	ft_printf("%u\n", input->head[input->nb_p].prog_size);
-	ft_printf("%s\n", input->head[input->nb_p].comment);
-
-	input->prog[input->nb_p] = ft_memalloc(sizeof(char) * input[input->nb_p].head->prog_size +1);
-
-
-
-	ret = read(fd, input[input->nb_p].prog[input->nb_p],
-			   input[input->nb_p].head->prog_size);
-
-	if (ret == input[input->nb_p].head[input->nb_p].prog_size)
-		ft_printf("ca devrait etre bon\n");
-
-	int b = -1;
-	while ((unsigned int)++b < input->head[input->nb_p].prog_size)
-		ft_printf("%0.2hhx ",  input->prog[input->nb_p][b]);
+	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
+	swap_4(&input->head[input->nb_p].magic);
+	swap_4(&input->head[input->nb_p].prog_size);
+	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
+							input->head[input->nb_p].prog_size);
+	ret = read(fd, input->prog[input->nb_p],
+			   input->head[input->nb_p].prog_size);
 }
-
-
-
-
-
 
 static	int		ft_check_player(char *argv, t_input *input)
 {
 	int		fd;
 	size_t	len;
 
-	ft_printf("ft_check_player\n");
-	len = ft_strlen(argv);
-	if (len > 4 && ((ft_strncmp(argv + (len - 4), ".cor", 4) != 0)))
+	if (input->nb_p >= 4)
 	{
-		ft_printf("%s n'est pas un champion\n", argv);
+		ft_printf("too many player\n");
 		return (0);
 	}
+	len = ft_strlen(argv);
+	if (len > 4 && ((ft_strncmp(argv + (len - 4), ".cor", 4) != 0)))
+		return (0);
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("fichier inexistant\n");
+		ft_printf("Unreachable file\n");
 		return (0);
 	}
-
-	ft_printf("je vais travailler sur le joueur %d\n", input->nb_p);
 	ft_fill_player(argv, input, fd);
 	input->nb_p = input->nb_p + 1;
-	ft_printf("j'ai fini travailler sur le joueur %d\n", input->nb_p);
-	ft_printf("%s est bien un champion\n", argv);
 	close(fd);
 	return (1);
 }
-
-
 
 static	int ft_str_is_digit(char *str)
 {
@@ -107,36 +70,29 @@ static	int ft_str_is_digit(char *str)
 	return (1);
 }
 
-
-
-static	int		ft_check_option(char *argv, t_input *input, int *a)
+static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 {
-	ft_printf("ft_check_option\n");
-//	TODO: penser a choisir les options que l'on va mettre en place
-
-	if (ft_strcmp(argv, "-n") == 0)
+	if (ft_strcmp(argv[*a], "-d") == 0)
 	{
-		*a = *a + 1;
-		ft_printf("Ncurses output mode\n");
-		if (!(ft_str_is_digit(argv + *a)))
+		ft_printf("-d option enable\n");
+		if (*a + 1 < argc)
+			*a = *a + 1;
+		if (*a >= argc || (ft_str_is_digit(argv[*a]) == 0))
 		{
-			ft_printf("mauvais argument apres -d\n");
-			ft_usage();
-			return (0);
+			input->d = 0;
+			return (1);
 		}
-		input->n = ft_atoi(argv + *a);
-	}
-	if (ft_strcmp(argv, "-d") == 0)
-	{
-		input->d = 1;
-		ft_printf("Binary output mode for corewar.42.fr\n");
+		input->d = ft_atoi(argv[*a]);
 		return (1);
 	}
-	ft_printf("option non reconnue\n");
+	if (ft_strcmp(argv[*a], "-n") == 0)
+	{
+		input->n = 1;
+		ft_printf("Ncurses output mode\n");
+		return (1);
+	}
 	return (0);
 }
-
-
 
 void			ft_usage(void)
 {
@@ -164,16 +120,14 @@ void			ft_usage(void)
 	"########################################################################");
 }
 
-static	int		ft_check_arg(char **argv, t_input *input)
+static	int		ft_check_arg(char **argv, t_input *input, int argc)
 {
 	int a;
 
-	ft_printf("ft_check_arg\n");
 	a = 1;
-
 	while (argv[a])
 	{
-		if (ft_check_option(argv[a], input, &a) == 0 && ft_check_player(argv[a], input) == 0)
+		if (ft_check_option(argv, input, &a, argc) == 0 && ft_check_player(argv[a], input) == 0)
 		{
 			ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
@@ -185,22 +139,13 @@ static	int		ft_check_arg(char **argv, t_input *input)
 
 int				ft_check_error(int argc, char **argv, t_input *input)
 {
-	ft_printf("ft_check_error\n");
 	input->nb_p = 0;
 	if (argc == 1)
 	{
 		ft_usage();
 		return (0);
 	}
-
-	if (ft_check_arg(argv, input) == 0)
+	if (ft_check_arg(argv, input, argc) == 0)
 		return (0);
-
-	if (input->nb_p <= 0 || input->nb_p > 4)
-	{
-		ft_printf("nombre de joueur excessif ou insuffisant\n");
-		return (0);
-	}
 	return (1);
 }
-//TODO: penser a gerer limite de 4 joueurs max et quelles options gerer

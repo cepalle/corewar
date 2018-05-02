@@ -72,7 +72,7 @@ typedef	struct 		s_vm
 
 typedef void (*t_cmd)(t_vm *vm, int num_player, int num_process);
 
-void				ft_print_vm(t_vm *vm);
+void				ft_print_vm(t_vm vm);
 int					ft_check_error(int argc, char **argv, t_input *input);
 void				ft_usage(void);
 void				ft_create_map(t_vm *vm, t_input input);

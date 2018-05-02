@@ -17,8 +17,6 @@
 #include <fcntl.h>
 
 
-
-
 void			ft_create_map(t_vm *vm, t_input input)
 {
 	int a;
@@ -27,15 +25,20 @@ void			ft_create_map(t_vm *vm, t_input input)
 
 	a = 0;
 	res = 0;
-	placement = MEM_SIZE / vm->nb_p;
-	ft_printf("placement = %d\n", placement);
+	placement = MEM_SIZE / input.nb_p;
+
+	vm->d = input.d;
+	vm->nb_p = input.nb_p;
+
 	ft_memset(vm->tab, 0, MEM_SIZE);
-	while (a < vm->nb_p)
+
+	while (a < input.nb_p)
 	{
-		ft_memcpy(vm->tab + res, vm->player[a].prog,
-				vm->player[a].head.prog_size);
-		vm->player[a].PC = malloc(sizeof(t_proc));
-		vm->player[a].PC->PC = res;
+		vm->player[a].head.prog_size = input.head[a].prog_size;
+		vm->player[a].head.magic  = input.head[a].magic;
+		ft_strncpy(vm->player[a].head.prog_name, input.head[a].prog_name, input.head->prog_size);
+		ft_strncpy(vm->player[a].head.comment, input.head[a].comment, COMMENT_LENGTH + 1);
+		ft_memcpy(vm->tab + res, input.prog[a], input.head[a].prog_size);
 		res = res + placement;
 		a++;
 	}
