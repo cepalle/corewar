@@ -44,7 +44,8 @@ struct 		s_player
 {
 	t_header		head;
 	unsigned int	last_live;
-	unsigned int	live;
+	unsigned int	live; // rename nb_live
+	unsigned int	is_alive; // init 1
 	int				id;
 };
 typedef struct		s_player t_player;

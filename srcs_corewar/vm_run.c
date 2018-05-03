@@ -15,24 +15,44 @@
 
 int check_end(t_vm *vm)
 {
-	(void)vm;
-	return 0;
+	unsigned int i;
+	int nb_player_alive;
+
+	nb_player_alive = 0;
+	i = 0;
+	while (i < vm->nb_p)
+	{
+		if (vm->player[i].is_alive && vm->player[i].live > 0)
+			nb_player_alive++;
+		i++;
+	}
+	return (nb_player_alive > 1);
 }
 
 int check_nb_live_player(t_vm *vm)
 {
-	(void)vm;
-	return 0;
+	unsigned int i;
+	int nb_live;
+
+	nb_live = 0;
+	i = 0;
+	while (i < vm->nb_p)
+	{
+		if (vm->player[i].is_alive)
+			nb_live += vm->player[i].live;
+		i++;
+	}
+	return (nb_live >= NBR_LIVE);
 }
 
-void 	vm_run(t_vm *vm)
+void	vm_run(t_vm *vm)
 {
 	int		nb_cycle = 0;
 	int		cycke_last_check = nb_cycle;
 	int		cycle_to_check = CYCLE_TO_DIE;
 	int		nb_no_decr = 0;
 
-	while (1)
+	while (!vm->d || vm->nb_p >= nb_cycle)
 	{
 		vm_cycle(vm);
 		nb_cycle++;
@@ -43,15 +63,10 @@ void 	vm_run(t_vm *vm)
 			if (check_nb_live_player(vm) || nb_no_decr >= MAX_CHECKS)
 			{
 				cycle_to_check -= CYCLE_DELTA;
-				if (cycle_to_check <= 0)
-					break ;
 				nb_no_decr = 0;
 			}
 		}
-		if (vm->d > 0 && nb_cycle >= vm->d)
-		{
-			vm_print(vm);
-			break ;
-		}
 	}
+	if (vm->d)
+		vm_print(vm);
 }
