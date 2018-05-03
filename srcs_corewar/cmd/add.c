@@ -13,27 +13,22 @@
 
 #include <corewar.h>
 
-static int	check_params(const unsigned int	*params)
-{
-	return (!(params[0] <= 0 || params[0] >= REG_NUMBER ||
-		params[1] <= 0 || params[1] >= REG_NUMBER ||
-		params[2] <= 0 || params[2] >= REG_NUMBER));
-}
-
 int		cmd_add(t_vm *vm, t_proc *proc)
 {
-	int		p1;
-	int		p2;
-	int		p3;
+	int		er;
+	int		ri1;
+	int		ri2;
+	int		ri3;
 
+	er = 0;
 	(void)vm;
 	proc->PC += proc->cmd_save.cmd_len;
 	proc->PC %= MEM_SIZE;
-	if (!check_params(proc->cmd_save.params))
+	ri1 = get_i_reg(proc, 0, &er);
+	ri2 = get_i_reg(proc, 1, &er);
+	ri3 = get_i_reg(proc, 2, &er);
+	if (er)
 		return (0);
-	p1 = proc->cmd_save.params[0];
-	p2 = proc->cmd_save.params[1];
-	p3 = proc->cmd_save.params[2];
-	proc->reg[p3] = proc->reg[p1] + proc->reg[p2];
+	proc->reg[ri3] = proc->reg[ri1] + proc->reg[ri2];
 	return (1);
 }

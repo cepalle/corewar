@@ -21,12 +21,14 @@
 # include <unistd.h>
 # include "op.h"
 
+typedef unsigned char t_bool;
+
 struct		s_input
 {
-	char			n;
+	t_bool			n;
 	unsigned char	*prog[4];
 	int				nb_p;
-	unsigned char	d;
+	t_bool			d;
 	int				d_nb;
 	t_header 		head[4];
 };
@@ -48,7 +50,7 @@ struct 		s_player
 	t_header		head;
 	unsigned int	last_live;
 	unsigned int	live; // rename nb_live
-	unsigned int	is_alive; // init 1
+	t_bool			is_alive; // init 1
 	unsigned int	id;
 };
 typedef struct		s_player t_player;
@@ -56,7 +58,7 @@ typedef struct		s_player t_player;
 struct		s_proc
 {
 	unsigned int	PC;
-	unsigned char	carry;
+	t_bool			carry;
 	int				reg[REG_NUMBER];
 	t_cmd_save		cmd_save;
 };
@@ -65,7 +67,7 @@ typedef struct		s_proc t_proc;
 struct		s_vm
 {
 	int				nb_p;
-	unsigned char	d;
+	t_bool			d;
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
 	t_proc			*process; // TODO test ref
