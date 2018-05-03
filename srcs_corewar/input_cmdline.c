@@ -38,7 +38,7 @@ static	int		ft_check_player(char *argv, t_input *input)
 	int		fd;
 	size_t	len;
 
-	if (input->nb_p >= 4)
+	if (input->nb_p >= MAX_PLAYERS)
 	{
 		ft_printf("too many player\n");
 		return (0);
@@ -58,8 +58,18 @@ static	int		ft_check_player(char *argv, t_input *input)
 	return (1);
 }
 
+
+static	int 	ft_check_champ_nb(char **argv, t_input *input, int *a, int argc)
+{
+
+
+}
+
 static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 {
+	if (ft_strcmp(argv[*a], "-n"))
+		if (ft_check_champ_nb(argv, input, a, argc) == 0)
+			return (1);
 	if (ft_strcmp(argv[*a], "-d") == 0)
 	{
 		ft_printf("-d option enable\n");
@@ -75,7 +85,7 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 		ft_printf("nb_d option = %d, d = %d\n", input->d_nb, input->d);
 		return (1);
 	}
-	if (ft_strcmp(argv[*a], "-n") == 0)
+	if (ft_strcmp(argv[*a], "-nc") == 0)
 	{
 		input->n = 1;
 		ft_printf("Ncurses output mode\n");
@@ -104,9 +114,14 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 
 int				input_cmdline(int argc, char **argv, t_input *input)
 {
+	int a;
+
+	a = -1;
 	input->nb_p = 0;
 	input->d = 0;
 	input->d_nb = 0;
+	while (++a < MAX_PLAYERS)
+		input->num_player[a] = -1;
 	if (argc == 1)
 	{
 		ft_usage();

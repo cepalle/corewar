@@ -24,10 +24,11 @@
 struct		s_input
 {
 	unsigned char	n;
+	int				num_player[4];
 	unsigned char	*prog[4];
 	unsigned int	nb_p;
 	unsigned char	d;
-	unsigned int	d_nb;
+	int				d_nb;
 	t_header 		head[4];
 };
 typedef struct		s_input t_input;
