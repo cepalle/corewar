@@ -73,6 +73,7 @@ C_FILES_NAMES_COREWAR = main.c \
     proc_exec.c \
     vm_cycle.c \
     ppichier_cmd_init.c \
+    vm_read.c \
     vm_init.c \
     vm_print.c \
     vm_run.c \

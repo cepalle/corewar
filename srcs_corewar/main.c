@@ -26,7 +26,6 @@ int		main(int argc, char **argv)
 		return (1);
 	vm_init(&vm, input);
 	vm_print(&vm);
-	vm.process = malloc(sizeof(t_proc)); // test ppichier temporaire
 	stock_cmd(&vm, vm.process);
 	//input_free(&input);
 	//vm_print(&vm);
