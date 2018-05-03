@@ -32,7 +32,7 @@ unsigned short 	vm_read_2(t_vm *vm, unsigned int PC)
 	{
 		stock = stock << left;
 		stock = stock + vm->tab[(PC + i) % MEM_SIZE];
-		left = left + 4;
+		left = left + 8;
 		i++;
 	}
 	swap_2(&stock);
@@ -52,7 +52,7 @@ unsigned int	vm_read_4(t_vm *vm, unsigned int PC)
 	{
 		stock = stock << left;
 		stock = stock + vm->tab[(PC + i) % MEM_SIZE];
-		left = left + 4;
+		left = left + 8;
 		i++;
 	}
 	swap_4(&stock);
