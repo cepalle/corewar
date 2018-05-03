@@ -72,13 +72,13 @@ t_op		get_op_name(char *cmd)
 	return (gopt()[OP_TAB_LENGTH]);
 }
 
-t_op		get_op_cmd(int cmd)
+t_op		get_op_cmd(int opcode)
 {
-	if (cmd > 16 || cmd < 1)
+	if (opcode > 16 || opcode < 1)
 	{
 		ft_printf("get_op_cmd : cmd not found\n");
 		return (gopt()[OP_TAB_LENGTH]);
 	}
-	return (gopt()[cmd - 1]);
+	return (gopt()[opcode - 1]);
 }
 

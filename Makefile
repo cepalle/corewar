@@ -151,7 +151,3 @@ fclean_not_lib: clean
 	rm -f $(COREWAR_NAME)
 
 .PHONY: all clean re fclean
-
-test:
-	make re_asm && ./asm champs/examples/bee_gees.s && hexdump -C champs/examples/bee_gees.cor && echo "----------" && hexdump -C champs/examples/bee_gees_sav.cor
-
