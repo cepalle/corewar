@@ -17,7 +17,28 @@ DIR_COMMON = srcs_common/
 DIR_ASM = srcs_asm/
 DIR_COREWAR = srcs_corewar/
 
-C_FILES_NAMES_COMMON = op.c swap_char.c
+C_FILES_NAMES_COMMON = op.c swap_char.c \
+    cmd/add.c \
+    cmd/aff.c \
+    cmd/and.c \
+    cmd/fork.c \
+    cmd/ld.c \
+    cmd/ldi.c \
+    cmd/lfork.c \
+    cmd/live.c \
+    cmd/lld.c \
+    cmd/lldi.c \
+    cmd/or.c \
+    cmd/st.c \
+    cmd/sti.c \
+    cmd/sub.c \
+    cmd/xor.c \
+    cmd/zjmp.c \
+    get_param.c \
+    vm_read.c \
+    vm_write.c
+
+
 C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	ast_to_byte/feed_label.c \
 	ast_to_byte/len_prog.c \
@@ -51,38 +72,19 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	main.c
 
 C_FILES_NAMES_COREWAR = main.c \
-    cmd/add.c \
-    cmd/aff.c \
-    cmd/and.c \
-    cmd/fork.c \
-    cmd/ld.c \
-    cmd/ldi.c \
-    cmd/lfork.c \
-    cmd/live.c \
-    cmd/lld.c \
-    cmd/lldi.c \
-    cmd/or.c \
-    cmd/st.c \
-    cmd/sti.c \
-    cmd/sub.c \
-    cmd/xor.c \
-    cmd/zjmp.c \
     input_cmdline.c \
     ft_str_is_digit.c \
     ft_usage.c \
     proc_exec.c \
     vm_cycle.c \
     ppichier_cmd_init.c \
-    vm_read.c \
     vm_init.c \
     vm_print.c \
     vm_run.c \
     vm_free.c \
     input_free.c \
     header_print.c \
-    vm_dump_mem.c \
-    get_param.c \
-    vm_write.c
+    vm_dump_mem.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))
@@ -97,6 +99,7 @@ OBJ_COREWAR = $(addprefix $(OBJDIR_COREWAR), $(C_FILES_NAMES_COREWAR:.c=.o))
 
 $(OBJDIR_COMMON)%.o: $(DIR_COMMON)%.c $(INCLUDE_H)
 	@mkdir -p $(OBJDIR_COMMON)
+	@mkdir -p $(OBJDIR_COMMON)/cmd
 	$(CC) -c $< $(CFLAGS) -o $@ -I $(INCLUDE_DIR) -I $(INCLUDEDIR_LIBFT)
 
 $(OBJDIR_ASM)%.o: $(DIR_ASM)%.c $(INCLUDE_H)
@@ -118,6 +121,7 @@ $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)
 $(LIBFT):
 	make -C $(LIBFTDIR) all
 
+# TO CHANGE OBJ_COREWARE
 $(ASM_NAME): $(LIBFT) $(OBJ_ASM) $(OBJ_COMMON)
 	$(CC) $(CFLAGS) -o $@ $(OBJ_ASM) $(OBJ_COMMON) -L./$(LIBFTDIR) -lft
 

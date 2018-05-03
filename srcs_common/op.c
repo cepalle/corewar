@@ -81,4 +81,3 @@ t_op		get_op_cmd(int opcode)
 	}
 	return (gopt()[opcode - 1]);
 }
-
