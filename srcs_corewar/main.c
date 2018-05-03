@@ -25,11 +25,9 @@ int		main(int argc, char **argv)
 	if (input_cmdline(argc, argv, &input) == 0)
 		return (1);
 	vm_init(&vm, input);
-	// free imput
+	input_free(&input);
 	vm_print(&vm);
 	vm_run(&vm);
-	// free vm
+	vm_free(&vm);
 	return (0);
 }
-
-//TODO NE PAS OUBLIER DE FREE

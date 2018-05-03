@@ -75,7 +75,9 @@ C_FILES_NAMES_COREWAR = main.c \
     vm_cycle.c \
     vm_init.c \
     vm_print.c \
-    vm_run.c
+    vm_run.c \
+    vm_free.c \
+    input_free.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))

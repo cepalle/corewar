@@ -89,6 +89,8 @@ void		proc_exec(t_vm *vm, t_proc *proc);
 
 int			ft_str_is_digit(char *str);
 void		ft_usage(void);
+void		input_free(t_input *input);
+void		vm_free(t_vm *vm);
 
 /*
 ** CMD
