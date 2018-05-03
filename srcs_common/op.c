@@ -15,7 +15,6 @@
 #include "libft.h"
 #include "corewar.h"
 
-// TODO add pt fonction add update struct in .h
 static t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR},
@@ -73,19 +72,13 @@ t_op		get_op_name(char *cmd)
 	return (gopt()[OP_TAB_LENGTH]);
 }
 
-
-// TODO renvoiyer l'objet correspondant a l'opcode
-t_op		get_op_opcode(char *cmd)
+t_op		get_op_cmd(int cmd)
 {
-	int i;
-
-	i = 0;
-	while (i < OP_TAB_LENGTH)
+	if (cmd > 16 || cmd < 1)
 	{
-		if (ft_strequ(gopt()[i].name, cmd))
-			return (gopt()[i]);
-		i++;
+		ft_printf("get_op_cmd : cmd not found\n");
+		return (gopt()[OP_TAB_LENGTH]);
 	}
-	ft_printf("get_op_name cmd no found\n");
-	return (gopt()[OP_TAB_LENGTH]);
+	return (gopt()[cmd - 1]);
 }
+
