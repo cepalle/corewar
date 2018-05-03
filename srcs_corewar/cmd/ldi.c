@@ -11,8 +11,6 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
-
 #include <corewar.h>
 
 int		cmd_ldi(t_vm *vm, t_proc *proc)
@@ -31,6 +29,7 @@ int		cmd_ldi(t_vm *vm, t_proc *proc)
 	ri3 = get_i_reg(proc, 2, &er);
 	if (er)
 		return (0);
-	proc->reg[ri3] = vm_read_4(vm, proc->PC + p1 + p2); // IDX_MOD ?
+	// READ a l'exec ?
+	proc->reg[ri3] = vm_read_4(vm, proc->PC + (p1 + p2) % IDX_MOD);
 	return (1);
 }
