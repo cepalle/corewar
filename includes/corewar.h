@@ -99,9 +99,9 @@ void		input_free(t_input *input);
 void		vm_free(t_vm *vm);
 void		header_print(t_header head);
 void		vm_dump_mem(t_vm *vm);
-void		vm_write_1(t_vm *vm, int PC, unsigned char data);
-void		vm_write_2(t_vm *vm,  int PC, unsigned short data);
-void		vm_write_4(t_vm *vm, int PC, unsigned int data);
+void		vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
+void		vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
+void		vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
 
 /*
 ** CMD
