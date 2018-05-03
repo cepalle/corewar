@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   live.c                                           .::    .:/ .      .::   */
+/*   sub.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:43:09 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:43:10 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 08:43:48 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 08:43:51 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,14 +14,23 @@
 
 #include <corewar.h>
 
-int		cmd_live(t_vm *vm, t_proc *proc)
+// TODO carry
+int		cmd_sub(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
+	int		er;
+	int		ri1;
+	int		ri2;
+	int		ri3;
 
-//	penser a ajouter le numero du process?
-//	process mis en place pour gerer une liste de fonction
-//	vm->player[num_player].live = vm->player[num_player].live + 1;
-//	vm->player[num_player].last_live = vm->player[num_player].last_live + 1;
+	er = 0;
+	(void)vm;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	ri1 = get_i_reg(proc, 0, &er);
+	ri2 = get_i_reg(proc, 1, &er);
+	ri3 = get_i_reg(proc, 2, &er);
+	if (er)
+		return (0);
+	proc->reg[ri3] = proc->reg[ri1] - proc->reg[ri2]; // order ?
+	return (1);
 }
