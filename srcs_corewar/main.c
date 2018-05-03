@@ -25,11 +25,11 @@ int		main(int argc, char **argv)
 	if (input_cmdline(argc, argv, &input) == 0)
 		return (1);
 	vm_init(&vm, input);
-	//vm.process = malloc(sizeof(t_proc)); // test ppichier temporaire
-	//ft_stock_cmd(&vm, vm.process)
-	input_free(&input);
 	vm_print(&vm);
-	vm_run(&vm);
-	vm_free(&vm);
+	stock_cmd(&vm, vm.process);
+	//input_free(&input);
+	//vm_print(&vm);
+	//vm_run(&vm);
+	//vm_free(&vm);
 	return (0);
 }

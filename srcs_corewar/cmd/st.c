@@ -16,7 +16,7 @@
 
 int		cmd_st(t_vm *vm, t_proc *proc)
 {
-	int addr;
+	unsigned int addr;
 	int reg;
 
 	reg = proc->cmd_save.params[0];
@@ -26,7 +26,7 @@ int		cmd_st(t_vm *vm, t_proc *proc)
 		return (0);
 	}
 	addr = proc->PC + (proc->cmd_save.params[1] % IDX_MOD);
-	vm_write_4(vm, proc->PC, proc->reg[reg]);
+	vm_write_4(vm, addr, (unsigned int)proc->reg[reg]);
 	proc->carry = 1;
 	return(1);
 }

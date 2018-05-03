@@ -73,13 +73,16 @@ C_FILES_NAMES_COREWAR = main.c \
     proc_exec.c \
     vm_cycle.c \
     ppichier_cmd_init.c \
+    vm_read.c \
     vm_init.c \
     vm_print.c \
     vm_run.c \
     vm_free.c \
     input_free.c \
     header_print.c \
-    vm_dump_mem.c
+    vm_dump_mem.c \
+    get_param.c \
+    vm_write.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))

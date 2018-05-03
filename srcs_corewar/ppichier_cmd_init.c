@@ -15,68 +15,52 @@
 #include "libft.h"
 #include "op.h"
 
+/** fct erreur : //Cas d erreur oct params non valide : pas bon argument ou pas assez par ex)  ou si octet final different de 00 **/
 
-/*static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor)
+static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 {
-	int cpt;
-	int left;
-	short tmp;
-	short tmp_dec;
 
-	cpt = 0;
+	unsigned char 	tmp;
+	int 			left;
+	unsigned int	cpt;
+	int				i;
+
 	left = 0;
-	ft_bzero(vm->player->process->params_size, 3);
-	while (cpt < gopt()[i].nb_arg)
+	i = 0;
+	cpt = 1;
+	while (i < gopt()[op].nb_arg)
 	{
-		tmp = vm->tab[*index];
-		ft_printf("mon tmp = %x\n", vm->tab[*index]);
-		tmp_dec = tmp << left;
-		tmp_dec = tmp_dec >> 6;
-		ft_printf("mon tmp_dec = %d\n", tmp_dec);
-		if (tmp_dec == 2)
+		tmp = vm->tab[processor->PC + 1];
+		tmp  = tmp << left;
+		tmp  = tmp >> 6;
+		if (tmp == REG_CODE)
 		{
-			ft_printf("mon stock vaut 2\n");
-			vm->player->process->params_size[cpt] = 4;
+			cpt = cpt + 1;
+			processor->cmd_save.params_type[i] = 1;
+			processor->cmd_save.params_size[i] = 1;
+			processor->cmd_save.params[i] = vm_read_1(vm, vm->process->PC + cpt);
 		}
-		if (tmp_dec == 1)
+		if (tmp == DIR_CODE)
 		{
-			ft_printf("mon stock vaut 2\n");
-			vm->player->process->params_size[cpt] = 1;
+			cpt = cpt + 4;
+			processor->cmd_save.params_type[i] = 2;
+			processor->cmd_save.params_size[i] = 4;
+			processor->cmd_save.params[i] = vm_read_2(vm, vm->process->PC + cpt);
 		}
-		if (tmp_dec == 3)
+		if (tmp == IND_CODE)
 		{
-			ft_printf("mon stock vaut 2\n");
-			vm->player->process->params_size[cpt] = 2;
+			cpt = cpt + 2;
+			processor->cmd_save.params_type[i] = 3;
+			processor->cmd_save.params_size[i] = 2;
+			processor->cmd_save.params[i] = vm_read_4(vm, vm->process->PC + cpt);
 		}
-		cpt++;
 		left = left + 2;
+		i++;
 	}
-	ft_printf("cpt = %d\n", cpt);
-	ft_printf("tab[0] = %d , tab[1] = %d, tab[2]= %d\n", vm->player->process->params_size[0], vm->player->process->params_size[1], vm->player->process->params_size[2]);
-
-}*/
-
-/*static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
-{
-	//Cas d erreur oct params non valide : pas bon argument ou pas assez par ex)
-	short 	tmp;
-	short 	tmp_sec;
-	int 	left;
-	int		cpt;
-
-	cpt = 0;
-	left = 0;
-	(void)vm;
-	while (cpt < gopt()[op].nb_arg)
-	{
-		tmp = processor->cmd_save.codage_param;
-		tmp_sec = tmp<< left >> 6;
-		ft_printf("tmp_sec = %d", tmp_sec);
-		left += 2;
-		cpt++;
-	}
+	processor->cmd_save.cmd_len = cpt + 1;
+	ft_printf("len = %d\n", processor->cmd_save.cmd_len);
 	return (1);
-}*/
+}
 
 static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 {
@@ -86,11 +70,7 @@ static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 	while (i < OP_TAB_LENGTH)
 	{
 		if (gopt()[i].opcode == vm->tab[processor->PC])
-		{
-			//ft_printf("nom de l op : %s\n", gopt()[i].name);
-			//ft_printf("opcode : %x\n", gopt()[i].opcode);
 			return (i);
-		}
 		i++;
 	}
 	return (-1);
@@ -98,29 +78,19 @@ static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 
 int 		stock_cmd(t_vm *vm, t_proc *processor)
 {
-
-	/*if (vm->tab[processor->PC] <= 0 || vm->tab[processor->PC] > 16)
-		return (0);*/
 	int op;
 
-
-	vm->process->cmd_save.cmd = malloc(sizeof(char) * 1000);
-	if ((op = ft_get_op_ppichier(vm, processor) == -1))
+	if ((op = ft_get_op_ppichier(vm, processor)) == -1)
 	{
 		ft_printf("op vaut %d\n", op);
 		return (0);
 	}
-	if (gopt()[op].octet_param == 0)
+	if (gopt()[op].octet_param == 1)
 	{
 		ft_printf("op vaut %d\n", op);
 		ft_printf("op correspond a %s\n", gopt()[op].name);
-		processor->cmd_save.codage_param = vm->tab[processor->PC + 1];
+		ft_analyze_oct_params(vm, processor, op);
 	}
-	else
-	{
-		processor->cmd_save.codage_param = 0;
-	} //si pas d octet de params ou deja initialise ?
-	//ft_analyze_oct_params(vm, processor, op);
+	processor->cmd_save.cmd = gopt()[op].op_fct;
 	return (1);
-
 }

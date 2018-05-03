@@ -16,12 +16,15 @@
 
 int		cmd_aff(t_vm *vm, t_proc *proc)
 {
-	unsigned char c;
+	unsigned char	c;
+	int				er;
 
 	(void)vm;
 	proc->PC += proc->cmd_save.cmd_len;
 	proc->PC %= MEM_SIZE;
-	c = (unsigned char)(proc->cmd_save.params[0] % 256);
+	c = (unsigned char)(get_param(proc, 0, &er) % 256);
+	if (er)
+		return (0);
 	ft_printf("%c", c);
 	return (1);
 }

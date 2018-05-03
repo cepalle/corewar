@@ -19,7 +19,7 @@
 static	void	process_init(t_vm *vm, t_input input)
 {
 	int a;
-	int res;
+	unsigned int res;
 	int placement;
 
 	a = 0;
@@ -38,7 +38,7 @@ static	void	process_init(t_vm *vm, t_input input)
 
 static	void	player_init(t_vm *vm, t_input input)
 {
-	int a;
+	unsigned int a;
 
 	a = 0;
 	while (a < input.nb_p)

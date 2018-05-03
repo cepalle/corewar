@@ -59,17 +59,17 @@ static	int		ft_check_player(char *argv, t_input *input)
 }
 
 
-static	int 	ft_check_champ_nb(char **argv, t_input *input, int *a, int argc)
+/*static	int 	ft_check_champ_nb(char **argv, t_input *input, int *a, int argc)
 {
 
 
-}
+}*/
 
 static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 {
-	if (ft_strcmp(argv[*a], "-n"))
-		if (ft_check_champ_nb(argv, input, a, argc) == 0)
-			return (1);
+//	if (ft_strcmp(argv[*a], "-n"))
+//		if (ft_check_champ_nb(argv, input, a, argc) == 0)
+//			return (1);
 	if (ft_strcmp(argv[*a], "-d") == 0)
 	{
 		ft_printf("-d option enable\n");
@@ -87,7 +87,7 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 	}
 	if (ft_strcmp(argv[*a], "-nc") == 0)
 	{
-		input->n = 1;
+		input->nc = 1;
 		ft_printf("Ncurses output mode\n");
 		return (1);
 	}
