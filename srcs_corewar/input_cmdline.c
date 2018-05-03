@@ -12,24 +12,28 @@
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include "corewar.h"
 
-static	void	ft_fill_player(char *argv, t_input *input, int fd)
+static	void	ft_fill_player(t_input *input, int fd)
 {
 	ssize_t	ret;
 
-	(void)argv;
 	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
+
+	if (ret != sizeof(t_header))
+		ft_printf("Error read\n");
+
 	swap_4(&input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].prog_size);
 	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
 							input->head[input->nb_p].prog_size);
 	ret = read(fd, input->prog[input->nb_p],
-			   input->head[input->nb_p].prog_size);
+		input->head[input->nb_p].prog_size);
+
+	if (ret != sizeof(input->head[input->nb_p].prog_size))
+		ft_printf("Error read\n");
 }
 
 static	int		ft_check_player(char *argv, t_input *input)
@@ -51,23 +55,9 @@ static	int		ft_check_player(char *argv, t_input *input)
 		ft_printf("Unreachable file\n");
 		return (0);
 	}
-	ft_fill_player(argv, input, fd);
+	ft_fill_player(input, fd);
 	input->nb_p = input->nb_p + 1;
 	close(fd);
-	return (1);
-}
-
-static	int ft_str_is_digit(char *str)
-{
-	int a;
-
-	a = 0;
-	while (str[a])
-	{
-		if (!ft_isdigit(str[a]))
-			return (0);
-		a++;
-	}
 	return (1);
 }
 
@@ -76,15 +66,16 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 	if (ft_strcmp(argv[*a], "-d") == 0)
 	{
 		ft_printf("-d option enable\n");
+		input->d = 1;
+		input->d_nb = 0;
 		if (*a + 1 < argc)
-			*a = *a + 1;
-		if (*a >= argc || (ft_str_is_digit(argv[*a]) == 0))
 		{
-			input->d = 0;
+			*a = *a + 1;
+			input->d_nb = ft_atoi(argv[*a]);
+			if (input->d_nb < 0)
+				input->d = 0;
 			return (1);
 		}
-		input->d = ft_atoi(argv[*a]);
-		return (1);
 	}
 	if (ft_strcmp(argv[*a], "-n") == 0)
 	{
@@ -95,32 +86,6 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 	return (0);
 }
 
-void			ft_usage(void)
-{
-	ft_printf("ft_usage\n");
-	ft_printf(
-	"Usage: ./corewar [-d N -s N -v N | -b --stealth | -n --stealth] [-a] "
-			"<champion1.cor> <...>\n"
-	"    -a       : Prints output from \"aff\" (Default is to hide it)\n"
-	"#### TEXT OUTPUT MODE ##################################################\n"
-	"    -d N     : Dumps memory after N cycles then exits\n"
-	"    -s N     : Runs N cycles, dumps memory, pauses, then repeats\n"
-	"    -v N     : Verbosity levels, can be added together to enable several\n"
-	"                - 0 : Show only essentials\n"
-	"                - 1 : Show lives\n"
-	"                - 2 : Show cycles\n"
-	"                - 4 : Show operations (Params are NOT litteral ...)\n"
-	"                - 8 : Show deaths\n"
-	"                - 16 : Show PC movements (Except for jumps)\n"
-	"#### BINARY OUTPUT MODE ################################################\n"
-	"    -b       : Binary output mode for corewar.42.fr\n"
-	"    --stealth: Hides the real contents of the memory\n"
-	"#### NCURSES OUTPUT MODE ###############################################\n"
-	"    -n       : Ncurses output mode\n"
-	"    --stealth: Hides the real contents of the memory\n"
-	"########################################################################");
-}
-
 static	int		ft_check_arg(char **argv, t_input *input, int argc)
 {
 	int a;
@@ -128,7 +93,8 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 	a = 1;
 	while (argv[a])
 	{
-		if (ft_check_option(argv, input, &a, argc) == 0 && ft_check_player(argv[a], input) == 0)
+		if (ft_check_option(argv, input, &a, argc) == 0
+			&& ft_check_player(argv[a], input) == 0)
 		{
 			ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
@@ -138,9 +104,11 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 	return (1);
 }
 
-int				input_cmd(int argc, char **argv, t_input *input)
+int				input_cmdline(int argc, char **argv, t_input *input)
 {
 	input->nb_p = 0;
+	input->d = 0;
+	input->d_nb = -1;
 	if (argc == 1)
 	{
 		ft_usage();

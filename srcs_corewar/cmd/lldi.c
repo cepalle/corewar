@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vm_cycle.c                                       .::    .:/ .      .::   */
+/*   lldi.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:50:44 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:50:45 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 08:43:21 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 08:43:21 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+
 #include <corewar.h>
 
-void vm_cycle(t_vm *vm)
+int		cmd_lldi(t_vm *vm, t_proc *proc)
 {
-	unsigned int	i;
+	(void)vm;
+	(void)proc;
+	return (0);
 
-	i = 0;
-	while (i < vm->nb_process)
-	{
-		proc_exec(vm, vm->process + i);
-		i++;
-	}
+//	ldi sans modulo
+//	return (vm->tab[param_1 + param_2]);
 }

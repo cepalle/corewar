@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vm_cycle.c                                       .::    .:/ .      .::   */
+/*   input_free.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:50:44 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:50:45 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 09:52:54 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 09:52:56 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <corewar.h>
+#include "corewar.h"
+#include "libft.h"
 
-void vm_cycle(t_vm *vm)
+void	input_free(t_input *input)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < vm->nb_process)
-	{
-		proc_exec(vm, vm->process + i);
-		i++;
-	}
+	ft_memdel((void **)&(input->prog));
 }

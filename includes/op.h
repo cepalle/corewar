@@ -19,8 +19,6 @@
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
 
-#include "corewar.h"
-
 # define IND_SIZE	2
 # define REG_SIZE	1
 # define DIR_SIZE	4
@@ -96,7 +94,7 @@ struct					s_op
 	char				*descr;
 	int					octet_param;
 	int					dir_size_2;
-	t_cmd 				op_fct;
+	void 				*op_fct;
 };
 typedef struct s_op		t_op;
 

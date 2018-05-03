@@ -96,7 +96,7 @@ static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 	return (-1);
 }
 
-int 		ft_stock_cmd(t_vm *vm, t_proc *processor)
+int 		stock_cmd(t_vm *vm, t_proc *processor)
 {
 
 	/*if (vm->tab[processor->PC] <= 0 || vm->tab[processor->PC] > 16)

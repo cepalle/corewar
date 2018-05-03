@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vm_cycle.c                                       .::    .:/ .      .::   */
+/*   proc_exec.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:50:44 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:50:45 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 09:00:04 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 09:00:05 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include "libft.h"
 
-void vm_cycle(t_vm *vm)
+void proc_exec(t_vm *vm, t_proc *proc)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < vm->nb_process)
+	t_cmd cmd;
+	/*
+	if (!proc->cmd_save.cmd &&
+		!ft_stock_cmd(vm, proc))
 	{
-		proc_exec(vm, vm->process + i);
-		i++;
+		proc->PC++;
+		proc->PC %= MEM_SIZE;
+		return ;
+	}
+	 */
+	proc->cmd_save.cycle_wating--;
+	if (proc->cmd_save.cycle_wating <= 0)
+	{
+		cmd = (t_cmd)proc->cmd_save.cmd;
+		cmd(vm, proc);
+		ft_bzero(&(proc->cmd_save), sizeof(t_cmd_save));
 	}
 }

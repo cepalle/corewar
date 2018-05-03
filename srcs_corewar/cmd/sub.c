@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vm_cycle.c                                       .::    .:/ .      .::   */
+/*   sub.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:50:44 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:50:45 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 08:43:48 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 08:43:51 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+
 #include <corewar.h>
 
-void vm_cycle(t_vm *vm)
+int		cmd_sub(t_vm *vm, t_proc *proc)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < vm->nb_process)
-	{
-		proc_exec(vm, vm->process + i);
-		i++;
-	}
+	(void)vm;
+	(void)proc;
+	return (0);
+/*
+//	penser a modifier carry si erreur ou pas
+//	erreur potentiel : depassement int max
+	return (player.process->reg[num_reg1] - player.process->reg[num_reg2]);
+*/
 }

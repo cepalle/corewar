@@ -11,15 +11,14 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #ifndef COREWAR_H
 # define COREWAR_H
 
 # define REG_CONTENT_SIZE 4
 
-#include <stdlib.h>
-#include <unistd.h>
-#include "op.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include "op.h"
 
 struct		s_input
 {
@@ -27,8 +26,8 @@ struct		s_input
 	char			*prog[4];
 	int 			nb_p;
 	int				d;
+	int 			d_nb;
 	t_header 		head[4];
-
 };
 typedef struct		s_input t_input;
 
@@ -74,23 +73,46 @@ typedef struct s_vm t_vm;
 
 typedef void (*t_cmd)(t_vm *vm, t_proc *proc);
 
+/*
+** ???
+*/
 
-void				ft_print_vm(t_vm vm);
-int					input_cmd(int argc, char **argv, t_input *input);
-void				ft_usage(void);
-void				vm_init(t_vm *vm, t_input input);
-int 				ft_stock_cmd(t_vm *vm, t_proc *processor);
+int			input_cmdline(int argc, char **argv, t_input *input);
+void		vm_init(t_vm *vm, t_input input);
+void		vm_run(t_vm *vm);
+void		vm_cycle(t_vm *vm);
+void		vm_print(t_vm *vm);
+int 		stock_cmd(t_vm *vm, t_proc *processor);
+void		proc_exec(t_vm *vm, t_proc *proc);
 
+/*
+** UTILS
+*/
 
+int			ft_str_is_digit(char *str);
+void		ft_usage(void);
+void		input_free(t_input *input);
+void		vm_free(t_vm *vm);
 
+/*
+** CMD
+*/
 
-
-
-void	vm_run(t_vm *vm);
-void	vm_cycle(t_vm *vm);
-void	proc_exec(t_vm *vm, t_proc *proc);
-
-
-
+int		cmd_add(t_vm *vm, t_proc *proc);
+int		cmd_aff(t_vm *vm, t_proc *proc);
+int		cmd_and(t_vm *vm, t_proc *proc);
+int		cmd_fork(t_vm *vm, t_proc *proc);
+int		cmd_ld(t_vm *vm, t_proc *proc);
+int		cmd_ldi(t_vm *vm, t_proc *proc);
+int		cmd_lfork(t_vm *vm, t_proc *proc);
+int		cmd_live(t_vm *vm, t_proc *proc);
+int		cmd_lld(t_vm *vm, t_proc *proc);
+int		cmd_lldi(t_vm *vm, t_proc *proc);
+int		cmd_or(t_vm *vm, t_proc *proc);
+int		cmd_st(t_vm *vm, t_proc *proc);
+int		cmd_sti(t_vm *vm, t_proc *proc);
+int		cmd_sub(t_vm *vm, t_proc *proc);
+int		cmd_xor(t_vm *vm, t_proc *proc);
+int		cmd_zjmp(t_vm *vm, t_proc *proc);
 
 #endif

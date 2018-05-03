@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vm_cycle.c                                       .::    .:/ .      .::   */
+/*   ft_str_is_digit.c                                .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:50:44 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:50:45 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 09:00:52 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 09:00:53 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <corewar.h>
+#include "libft.h"
 
-void vm_cycle(t_vm *vm)
+int		ft_str_is_digit(char *str)
 {
-	unsigned int	i;
+	int a;
 
-	i = 0;
-	while (i < vm->nb_process)
+	a = 0;
+	while (str[a])
 	{
-		proc_exec(vm, vm->process + i);
-		i++;
+		if (!ft_isdigit(str[a]))
+			return (0);
+		a++;
 	}
+	return (1);
 }
