@@ -18,17 +18,21 @@
 #include <unistd.h>
 #include "corewar.h"
 
-static	void	ft_fill_player(char *argv, t_input *input, int fd)
+static	void	ft_fill_player(t_input *input, int fd)
 {
 	ssize_t	ret;
 
 	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
+	if (ret != sizeof(t_header))
+		ft_printf("Error read\n");
 	swap_4(&input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].prog_size);
 	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
 							input->head[input->nb_p].prog_size);
 	ret = read(fd, input->prog[input->nb_p],
-			   input->head[input->nb_p].prog_size);
+		input->head[input->nb_p].prog_size);
+	if (ret != sizeof(input->head[input->nb_p].prog_size))
+		ft_printf("Error read\n");
 }
 
 static	int		ft_check_player(char *argv, t_input *input)
@@ -50,13 +54,13 @@ static	int		ft_check_player(char *argv, t_input *input)
 		ft_printf("Unreachable file\n");
 		return (0);
 	}
-	ft_fill_player(argv, input, fd);
+	ft_fill_player(input, fd);
 	input->nb_p = input->nb_p + 1;
 	close(fd);
 	return (1);
 }
 
-static	int ft_str_is_digit(char *str)
+static	int		ft_str_is_digit(char *str)
 {
 	int a;
 
@@ -127,7 +131,8 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 	a = 1;
 	while (argv[a])
 	{
-		if (ft_check_option(argv, input, &a, argc) == 0 && ft_check_player(argv[a], input) == 0)
+		if (ft_check_option(argv, input, &a, argc) == 0
+			&& ft_check_player(argv[a], input) == 0)
 		{
 			ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
