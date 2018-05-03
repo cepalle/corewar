@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   aff.c                                            .::    .:/ .      .::   */
+/*   get_param.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:42:36 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:42:37 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 14:50:27 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 14:50:28 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <corewar.h>
-#include "libft.h"
+#include "corewar.h"
 
-int		cmd_aff(t_vm *vm, t_proc *proc)
+unsigned int	get_param(t_proc *proc, int i)
 {
-	unsigned char c;
 
-	(void)vm;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	c = (unsigned char)(proc->cmd_save.params[0] % 256);
-	ft_printf("%c", c);
-	return (1);
 }
