@@ -14,6 +14,7 @@
 
 #include <corewar.h>
 
+// TODO carry
 int		cmd_and(t_vm *vm, t_proc *proc)
 {
 	int 			er;
