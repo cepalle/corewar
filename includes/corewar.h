@@ -57,7 +57,7 @@ struct		s_proc
 {
 	unsigned int	PC;
 	unsigned char	carry;
-	unsigned int	reg[REG_NUMBER];
+	int				reg[REG_NUMBER];
 	t_cmd_save		cmd_save;
 };
 typedef struct		s_proc t_proc;
@@ -106,6 +106,7 @@ void		vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
 void		vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
 void		vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
 int			get_param(t_proc *proc, int i, int *er);
+int			get_i_reg(t_proc *proc, int i, int *er);
 
 /*
 ** CMD

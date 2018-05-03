@@ -24,3 +24,15 @@ int get_param(t_proc *proc, int i, int *er)
 	}
 	return proc->cmd_save.params[i];
 }
+
+int get_i_reg(t_proc *proc, int i, int *er)
+{
+	if (proc->cmd_save.params_type[i] != REG_CODE ||
+		proc->cmd_save.params[i] > 16 ||
+		proc->cmd_save.params[i] < 1)
+	{
+		*er = 1;
+		return (0);
+	}
+	return proc->cmd_save.params[i] - 1;
+}
