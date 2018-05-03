@@ -23,11 +23,11 @@
 
 struct		s_input
 {
-	int				n;
-	char			*prog[4];
-	int 			nb_p;
-	int				d;
-	int 			d_nb;
+	unsigned char	n;
+	unsigned char	*prog[4];
+	unsigned int	nb_p;
+	unsigned char	d;
+	unsigned int	d_nb;
 	t_header 		head[4];
 };
 typedef struct		s_input t_input;
@@ -35,10 +35,11 @@ typedef struct		s_input t_input;
 struct		s_cmd_save
 {
 	void			*cmd;
-	unsigned char	codage_param;
-	int				params[3];
-	int 			cmd_len;
-	int				cycle_wating;
+	unsigned char	params_type[3];
+	unsigned char	params_size[3];
+	unsigned int	params[3];
+	unsigned int	cmd_len;
+	unsigned int	cycle_wating;
 };
 typedef struct		s_cmd_save t_cmd_save;
 
@@ -48,23 +49,23 @@ struct 		s_player
 	unsigned int	last_live;
 	unsigned int	live; // rename nb_live
 	unsigned int	is_alive; // init 1
-	int				id;
+	unsigned int	id;
 };
 typedef struct		s_player t_player;
 
 struct		s_proc
 {
-	int				PC;
-	int				carry;
-	int 			reg[REG_NUMBER];
+	unsigned int	PC;
+	unsigned char	carry;
+	unsigned int	reg[REG_NUMBER];
 	t_cmd_save		cmd_save;
 };
 typedef struct		s_proc t_proc;
 
 struct		s_vm
 {
-	int 			nb_p;
-	int				d;
+	unsigned int	nb_p;
+	unsigned char	d;
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
 	t_proc			*process; // TODO test ref
