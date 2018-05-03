@@ -5,7 +5,7 @@
 .comment	"oh, my, what a scary project"
 
 entry:
-	fork	%12
+	fork	%:coregeni
 	st		r1, 6
 	live	%42
 	fork	%:torpgeni
