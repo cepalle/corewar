@@ -38,11 +38,6 @@ static	int		ft_check_player(char *argv, t_input *input)
 	int		fd;
 	size_t	len;
 
-	if (input->nb_p >= 4)
-	{
-		ft_printf("too many player\n");
-		return (0);
-	}
 	len = ft_strlen(argv);
 	if (len > 4 && ((ft_strncmp(argv + (len - 4), ".cor", 4) != 0)))
 		return (0);
@@ -52,14 +47,48 @@ static	int		ft_check_player(char *argv, t_input *input)
 		ft_printf("Unreachable file\n");
 		return (0);
 	}
+	if (input->nb_p >= MAX_PLAYERS)
+	{
+		ft_printf("too many player\n");
+		return (0);
+	}
 	ft_fill_player(input, fd);
 	input->nb_p = input->nb_p + 1;
 	close(fd);
 	return (1);
 }
 
+
+static	int 	ft_check_champ_num(char **argv, t_input *input, int *a, int argc)
+{
+	if (*a + 1 < argc)
+	{
+		*a = *a + 1;
+		if (input->num_player[input->nb_p] == -1)
+		{
+			if (ft_atoi(argv[*a]) < 0)
+			{
+				ft_printf("nombre negatif non accepte\n");
+				return (0);
+			}
+			input->num_player[input->nb_p] = ft_atoi(argv[*a]);
+			ft_printf("j'ai attribue le numero %d au joueur %d\n", input->num_player[input->nb_p], input->nb_p);
+		}
+	}
+	if (*a + 1 == argc)
+	{
+		ft_printf("c'est meme pas la peine d'essayer tu passes pas\n");
+		return (1);
+	}
+
+	return (1);
+}
+
 static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 {
+	if (ft_strcmp(argv[*a], "-n") == 0)
+		if (ft_check_champ_num(argv, input, a, argc) == 1)
+			return (1);
 	if (ft_strcmp(argv[*a], "-d") == 0)
 	{
 		ft_printf("-d option enable\n");
@@ -72,12 +101,12 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 			if (input->d_nb < 0)
 				input->d = 0;
 		}
-		ft_printf("nb_d option = %d, d = %d\n", input->d_nb, input->d);
+		ft_printf("nb_d = %d, d = %d\n", input->d_nb, input->d);
 		return (1);
 	}
-	if (ft_strcmp(argv[*a], "-n") == 0)
+	if (ft_strcmp(argv[*a], "-nc") == 0)
 	{
-		input->n = 1;
+		input->nc = 1;
 		ft_printf("Ncurses output mode\n");
 		return (1);
 	}
@@ -97,6 +126,30 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 			ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
 		}
+		if (a < argc)
+			a++;
+	}
+	return (1);
+}
+
+static	int 	ft_check_double_num(int *tab, int size)
+{
+	int a;
+	int b;
+
+	a = 0;
+	while(a < size)
+	{
+		b = a + 1;
+		while (b < size)
+		{
+			if (tab[a] == tab[b] && tab[a] != -1)
+			{
+				ft_printf("test pas les doublons ma poule c'est plus fort que toi\n");
+				return (0);
+			}
+			b++;
+		}
 		a++;
 	}
 	return (1);
@@ -104,9 +157,14 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 
 int				input_cmdline(int argc, char **argv, t_input *input)
 {
+	int a;
+
+	a = -1;
 	input->nb_p = 0;
 	input->d = 0;
 	input->d_nb = 0;
+	while (++a < MAX_PLAYERS)
+		input->num_player[a] = -1;
 	if (argc == 1)
 	{
 		ft_usage();
@@ -114,5 +172,15 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 	}
 	if (ft_check_arg(argv, input, argc) == 0)
 		return (0);
+	a = 0;
+	while(input->nb_p + a < 3)
+	{
+		if (input->num_player[input->nb_p] != -1 || ft_check_double_num(input->num_player, MAX_PLAYERS) == 0)
+		{
+			ft_printf("vous avez attribue un numero a un champion qui nexiste pas\n");
+			return (0);
+		}
+		a++;
+	}
 	return (1);
 }

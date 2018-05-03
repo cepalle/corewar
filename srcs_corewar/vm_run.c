@@ -52,7 +52,7 @@ void	vm_run(t_vm *vm)
 	int		cycle_to_check = CYCLE_TO_DIE;
 	int		nb_no_decr = 0;
 
-	while (!vm->d || vm->nb_p >= nb_cycle)
+	while (!vm->d || vm->d_nb >= nb_cycle)
 	{
 		vm_cycle(vm);
 		nb_cycle++;

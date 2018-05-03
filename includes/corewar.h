@@ -21,14 +21,17 @@
 # include <unistd.h>
 # include "op.h"
 
+typedef unsigned char t_bool;
+
 struct		s_input
 {
-	char	n;
+	int				num_player[4];
+	t_bool			d;
+	int				d_nb;
+	t_bool			nc;
 	unsigned char	*prog[4];
-	int	nb_p;
-	unsigned char	d;
-	int	d_nb;
 	t_header 		head[4];
+	unsigned int	nb_p;
 };
 typedef struct		s_input t_input;
 
@@ -37,7 +40,7 @@ struct		s_cmd_save
 	void			*cmd;
 	unsigned char	params_type[3];
 	unsigned char	params_size[3];
-	unsigned int	params[3];
+	int				params[3];
 	unsigned int	cmd_len;
 	unsigned int	cycle_wating;
 };
@@ -48,7 +51,7 @@ struct 		s_player
 	t_header		head;
 	unsigned int	last_live;
 	unsigned int	live; // rename nb_live
-	unsigned int	is_alive; // init 1
+	t_bool			is_alive; // init 1
 	unsigned int	id;
 };
 typedef struct		s_player t_player;
@@ -56,8 +59,8 @@ typedef struct		s_player t_player;
 struct		s_proc
 {
 	unsigned int	PC;
-	unsigned char	carry;
-	unsigned int	reg[REG_NUMBER];
+	t_bool			carry;
+	int				reg[REG_NUMBER];
 	t_cmd_save		cmd_save;
 };
 typedef struct		s_proc t_proc;
@@ -65,7 +68,8 @@ typedef struct		s_proc t_proc;
 struct		s_vm
 {
 	int				nb_p;
-	unsigned char	d;
+	t_bool			d;
+	int				d_nb;
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
 	t_proc			*process; // TODO test ref
@@ -105,6 +109,9 @@ void		vm_dump_mem(t_vm *vm);
 void		vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
 void		vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
 void		vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
+int			get_param(t_proc *proc, int i, int *er);
+int			get_i_reg(t_proc *proc, int i, int *er);
+void		vm_fork(t_vm *vm, t_proc *proc, int add);
 
 /*
 ** CMD

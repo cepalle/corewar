@@ -16,25 +16,18 @@
 
 int		cmd_st(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return 1;
-	/*
-	int addr;
-	int *tab;
+	unsigned int addr;
+	int reg;
 
-//	tab[0] = numero du registre
-//	tab[1] = valeur du parametre
-//	recuperer opcode pour savoir a quoi j'ai affaire
-
+	reg = proc->cmd_save.params[0];
+	if (reg > 16 || reg < 0)
+	{
+//		passer proc->carry = 0; ?
+		return (0);
+	}
 	addr = proc->PC + (proc->cmd_save.params[1] % IDX_MOD);
-
-	vm_write_4(vm + addr, proc->cmd_save, REG_CONTENT_SIZE);
-
-//	est ce qu'il faut faire un swap[2] ou swap[4]?
-
-// 	changement de carry? passage de 1 a 0 ou  1 a 1
-
-	vm->player[num_player].process[num_process].carry = 1;*/
+	vm_write_4(vm, addr, (unsigned int)proc->reg[reg]);
+	proc->carry = 1;
+	return(1);
 }
 

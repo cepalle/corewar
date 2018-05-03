@@ -17,7 +17,28 @@ DIR_COMMON = srcs_common/
 DIR_ASM = srcs_asm/
 DIR_COREWAR = srcs_corewar/
 
-C_FILES_NAMES_COMMON = op.c swap_char.c
+C_FILES_NAMES_COMMON = op.c swap_char.c \
+    cmd/add.c \
+    cmd/aff.c \
+    cmd/and.c \
+    cmd/fork.c \
+    cmd/ld.c \
+    cmd/ldi.c \
+    cmd/lfork.c \
+    cmd/live.c \
+    cmd/lld.c \
+    cmd/lldi.c \
+    cmd/or.c \
+    cmd/st.c \
+    cmd/sti.c \
+    cmd/sub.c \
+    cmd/xor.c \
+    cmd/zjmp.c \
+    get_param.c \
+    vm_read.c \
+    vm_write.c \
+    vm_fork.c
+
 C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	ast_to_byte/feed_label.c \
 	ast_to_byte/len_prog.c \
@@ -51,29 +72,12 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	main.c
 
 C_FILES_NAMES_COREWAR = main.c \
-    cmd/add.c \
-    cmd/aff.c \
-    cmd/and.c \
-    cmd/fork.c \
-    cmd/ld.c \
-    cmd/ldi.c \
-    cmd/lfork.c \
-    cmd/live.c \
-    cmd/lld.c \
-    cmd/lldi.c \
-    cmd/or.c \
-    cmd/st.c \
-    cmd/sti.c \
-    cmd/sub.c \
-    cmd/xor.c \
-    cmd/zjmp.c \
     input_cmdline.c \
     ft_str_is_digit.c \
     ft_usage.c \
     proc_exec.c \
     vm_cycle.c \
     ppichier_cmd_init.c \
-    vm_read.c \
     vm_init.c \
     vm_print.c \
     vm_run.c \
@@ -93,8 +97,11 @@ OBJ_COREWAR = $(addprefix $(OBJDIR_COREWAR), $(C_FILES_NAMES_COREWAR:.c=.o))
 
 # OBJ
 
+all: $(ASM_NAME) $(COREWAR_NAME)
+
 $(OBJDIR_COMMON)%.o: $(DIR_COMMON)%.c $(INCLUDE_H)
 	@mkdir -p $(OBJDIR_COMMON)
+	@mkdir -p $(OBJDIR_COMMON)/cmd
 	$(CC) -c $< $(CFLAGS) -o $@ -I $(INCLUDE_DIR) -I $(INCLUDEDIR_LIBFT)
 
 $(OBJDIR_ASM)%.o: $(DIR_ASM)%.c $(INCLUDE_H)
@@ -116,6 +123,7 @@ $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)
 $(LIBFT):
 	make -C $(LIBFTDIR) all
 
+# TO CHANGE OBJ_COREWARE
 $(ASM_NAME): $(LIBFT) $(OBJ_ASM) $(OBJ_COMMON)
 	$(CC) $(CFLAGS) -o $@ $(OBJ_ASM) $(OBJ_COMMON) -L./$(LIBFTDIR) -lft
 
@@ -123,8 +131,6 @@ $(COREWAR_NAME): $(LIBFT) $(OBJ_COREWAR) $(OBJ_COMMON)
 	$(CC) $(CFLAGS) -o $@ $(OBJ_COREWAR) $(OBJ_COMMON) -L./$(LIBFTDIR) -lft
 
 # REGLE
-
-all: $(ASM_NAME) $(COREWAR_NAME)
 
 clean:
 	rm -rf $(OBJDIR_COMMON)
@@ -149,7 +155,3 @@ fclean_not_lib: clean
 	rm -f $(COREWAR_NAME)
 
 .PHONY: all clean re fclean
-
-test:
-	make re_asm && ./asm champs/examples/bee_gees.s && hexdump -C champs/examples/bee_gees.cor && echo "----------" && hexdump -C champs/examples/bee_gees_sav.cor
-

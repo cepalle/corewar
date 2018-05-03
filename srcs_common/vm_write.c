@@ -21,7 +21,7 @@ void	vm_write_2(t_vm *vm, unsigned int PC, unsigned short data)
 	}
 }
 
-void	vm_write_4(t_vm *vm,unsigned int PC, unsigned int data)
+void	vm_write_4(t_vm *vm, unsigned int PC, unsigned int data)
 {
 	int a;
 	unsigned char *ptr;

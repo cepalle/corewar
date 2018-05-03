@@ -474,3 +474,7 @@ de préciser davantage, vous couvrir de gloire et de chatons.
 
 Carry: La VM mets le carry à 1, si l'instruction fonctionne et que le paramètre donné est 0.
 Si tu mets une autre valeur, la VM mettra le carry à 0.
+
+### TODO
+
+Do a generator of bad champion for test tricky case.

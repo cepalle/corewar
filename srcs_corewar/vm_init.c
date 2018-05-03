@@ -16,10 +16,50 @@
 #include "corewar.h"
 #include <fcntl.h>
 
+static	unsigned	int	ft_check_num_player_input(t_input input, unsigned int nb)
+{
+	int b;
+
+	b = -1;
+	while (++b < MAX_PLAYERS)
+	{
+		if (nb == (unsigned int)input.num_player[b])
+			return (0);
+	}
+	return (1);
+}
+
+static	unsigned	int	ft_check_num_player_vm(t_vm *vm, unsigned int a, unsigned int nb)
+{
+	unsigned int b;
+
+	b = 0;
+	while (b < a)
+	{
+		if (nb == vm->player[b].id)
+			return (0);
+		b++;
+	}
+	return (1);
+}
+
+static	unsigned	int	ft_generate_nb(t_vm *vm, t_input input, unsigned int a)
+{
+	unsigned int nb;
+
+	nb = 0;
+	while (1)
+	{
+		if (ft_check_num_player_input(input, nb) == 1 && ft_check_num_player_vm(vm, a, nb) == 1)
+			return (nb);
+		nb++;
+	}
+}
+
 static	void	process_init(t_vm *vm, t_input input)
 {
 	int a;
-	int res;
+	unsigned int res;
 	int placement;
 
 	a = 0;
@@ -38,14 +78,18 @@ static	void	process_init(t_vm *vm, t_input input)
 
 static	void	player_init(t_vm *vm, t_input input)
 {
-	int a;
+	unsigned int a;
 
 	a = 0;
 	while (a < input.nb_p)
 	{
 		vm->player[a].head.prog_size = input.head[a].prog_size;
 		vm->player[a].head.magic = input.head[a].magic;
-		vm->player[a].id = a;
+		vm->player[a].id = 0;
+		if (input.num_player[a] != -1)
+			vm->player[a].id = (unsigned int)input.num_player[a];
+		else
+			vm->player[a].id = ft_generate_nb(vm, input, a);
 		vm->process[a].reg[0] = vm->player[a].id;
 		vm->player[a].last_live = 0;
 		vm->player[a].live = 0;

@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   lfork.c                                          .::    .:/ .      .::   */
+/*   or.c                                             .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:43:04 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:43:05 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 08:43:26 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 08:43:28 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+
 #include <corewar.h>
 
-int		cmd_lfork(t_vm *vm, t_proc *proc)
+// TODO carry
+int		cmd_or(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
+	int 			er;
+	int				p1;
+	int				p2;
+	int				ri;
 
-//	return;
+	(void)vm;
+	er = 0;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	p1 = get_param(proc, 0, &er);
+	p2 = get_param(proc, 1, &er);
+	ri = get_i_reg(proc, 2, &er);
+	if (er)
+		return (0);
+	proc->reg[ri] = p1 ^ p2;
+	return (1);
 }

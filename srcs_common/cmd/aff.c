@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   live.c                                           .::    .:/ .      .::   */
+/*   aff.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:43:09 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:43:10 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 08:42:36 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 08:42:37 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #include <corewar.h>
+#include "libft.h"
 
-int		cmd_live(t_vm *vm, t_proc *proc)
+int		cmd_aff(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
+	unsigned char	c;
+	int				er;
 
-//	penser a ajouter le numero du process?
-//	process mis en place pour gerer une liste de fonction
-//	vm->player[num_player].live = vm->player[num_player].live + 1;
-//	vm->player[num_player].last_live = vm->player[num_player].last_live + 1;
+	(void)vm;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	c = (unsigned char)(get_param(proc, 0, &er) % 256);
+	if (er)
+		return (0);
+	ft_printf("%c", c);
+	return (1);
 }
