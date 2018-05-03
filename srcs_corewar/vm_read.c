@@ -23,7 +23,7 @@ unsigned short 	vm_read_2(t_vm *vm, unsigned int PC)
 {
 	//ne pas oublier le swap et copier
 
-	swap_2(vm->tab[PC]);
+	//swap_2(vm->tab[PC]);
 	return (vm->tab[PC]);
 
 }
@@ -31,6 +31,6 @@ unsigned short 	vm_read_2(t_vm *vm, unsigned int PC)
 unsigned int	vm_read_4(t_vm *vm, unsigned int PC)
 {
 	//ne pas oublier le swap et copier
-	swap_4(vm->tab[PC]);
+	//swap_4(vm->tab[PC]);
 	return (vm->tab[PC]);
 }

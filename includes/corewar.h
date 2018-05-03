@@ -64,7 +64,7 @@ typedef struct		s_proc t_proc;
 
 struct		s_vm
 {
-	unsigned int	nb_p;
+	int				nb_p;
 	unsigned char	d;
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
