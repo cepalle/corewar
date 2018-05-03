@@ -14,6 +14,7 @@
 #include "op.h"
 #include "libft.h"
 
+// TODO add pt fonction add update struct in .h
 static t_op	g_op_tab[17] =
 {
 	{"live", 1, {T_DIR},
@@ -71,6 +72,8 @@ t_op		get_op_name(char *cmd)
 	return (gopt()[OP_TAB_LENGTH]);
 }
 
+
+// TODO renvoiyer l'objet correspondant a l'opcode
 t_op		get_op_opcode(char *cmd)
 {
 	int i;

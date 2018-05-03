@@ -11,76 +11,106 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #ifndef COREWAR_H
 # define COREWAR_H
 
 # define REG_CONTENT_SIZE 4
 
-#include <stdlib.h>
-#include <unistd.h>
-#include "op.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include "op.h"
 
-
-typedef	struct		s_input
+struct		s_input
 {
 	int				n;
 	char			*prog[4];
 	int 			nb_p;
 	int				d;
 	t_header 		head[4];
+};
+typedef struct		s_input t_input;
 
-}					t_input;
-
-typedef	struct		s_cmd_save
+struct		s_cmd_save
 {
-//	t_cmd			cmd;
+	void			*cmd;
 	char			codage_param;
 	int				params[3];
 	int				cycle_wating;
-}					t_cmd_save;
+};
+typedef struct		s_cmd_save t_cmd_save;
 
-typedef	struct		s_proc
+struct 		s_player
+{
+	t_header		head;
+	unsigned int	last_live;
+	unsigned int	live;
+	int				id;
+};
+typedef struct		s_player t_player;
+
+struct		s_proc
 {
 	int				PC;
 	int				carry;
 	int 			reg[REG_NUMBER];
 	t_cmd_save		cmd_save;
-}					t_proc;
+};
+typedef struct		s_proc t_proc;
 
-typedef	struct 		s_player
-{
-	t_header		head;
-	unsigned int	last_live;
-	unsigned int	live;
-	t_proc			*process; // TODO test refg
-	int				id;
-}					t_player;
-
-typedef	struct 		s_vm
+struct		s_vm
 {
 	int 			nb_p;
 	int				d;
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
-//	unsigned int 	nb_process;
 	t_proc			*process; // TODO test ref
 	unsigned int 	nb_process;
 	unsigned int 	len_process;
 	unsigned int 	cycle;
-}					t_vm;
+};
+typedef struct s_vm t_vm;
 
-typedef void (*t_cmd)(t_vm *vm, int num_player, int num_process);
+typedef void (*t_cmd)(t_vm *vm, t_proc *proc);
 
-void				ft_print_vm(t_vm vm);
-int					ft_check_error(int argc, char **argv, t_input *input);
-void				ft_usage(void);
-void				ft_create_map(t_vm *vm, t_input input);
+/*
+** ???
+*/
 
+int			input_cmdline(int argc, char **argv, t_input *input);
+void		vm_init(t_vm *vm, t_input input);
+void		vm_run(t_vm *vm);
+void		vm_cycle(t_vm *vm);
+void		vm_print(t_vm *vm);
+void		proc_exec(t_vm *vm, t_proc *proc);
 
-/* PPICHIER */
+/*
+** UTILS
+*/
 
-void	ft_test_ppichier(t_vm *vm);
-void 	ft_run_vm(t_vm *vm, int start);
+int			ft_str_is_digit(char *str);
+void		ft_usage(void);
+void		input_free(t_input *input);
+void		vm_free(t_vm *vm);
+
+/*
+** CMD
+*/
+
+int		cmd_add(t_vm *vm, t_proc *proc);
+int		cmd_aff(t_vm *vm, t_proc *proc);
+int		cmd_and(t_vm *vm, t_proc *proc);
+int		cmd_fork(t_vm *vm, t_proc *proc);
+int		cmd_ld(t_vm *vm, t_proc *proc);
+int		cmd_ldi(t_vm *vm, t_proc *proc);
+int		cmd_lfork(t_vm *vm, t_proc *proc);
+int		cmd_live(t_vm *vm, t_proc *proc);
+int		cmd_lld(t_vm *vm, t_proc *proc);
+int		cmd_lldi(t_vm *vm, t_proc *proc);
+int		cmd_or(t_vm *vm, t_proc *proc);
+int		cmd_st(t_vm *vm, t_proc *proc);
+int		cmd_sti(t_vm *vm, t_proc *proc);
+int		cmd_sub(t_vm *vm, t_proc *proc);
+int		cmd_xor(t_vm *vm, t_proc *proc);
+int		cmd_zjmp(t_vm *vm, t_proc *proc);
 
 #endif

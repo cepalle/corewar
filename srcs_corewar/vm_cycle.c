@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   vm_cycle.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: aurollan <aurollan@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/04/17 17:14:37 by aurollan     #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/30 09:52:27 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 08:50:44 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 08:50:45 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "libft.h"
+#include <corewar.h>
 
-int		main(int argc, char **argv)
+void vm_cycle(t_vm *vm)
 {
-	t_vm		vm;
-	t_input		input;
+	unsigned int	i;
 
-	ft_bzero(&vm, sizeof(t_vm));
-	ft_bzero(&input, sizeof(t_input));
-
-	if (input_cmdline(argc, argv, &input) == 0)
-		return (1);
-	vm_init(&vm, input);
-	input_free(&input);
-	vm_print(&vm);
-	vm_run(&vm);
-	vm_free(&vm);
-	return (0);
+	i = 0;
+	while (i < vm->nb_process)
+	{
+		proc_exec(vm, vm->process + i);
+		i++;
+	}
 }

@@ -9,7 +9,7 @@ LIBFT = $(addprefix $(LIBFTDIR), libft.a)
 INCLUDEDIR_LIBFT = $(addprefix $(LIBFTDIR), includes/)
 
 INCLUDE_DIR = includes/
-INCLUDE_FILES = op.h asm.h
+INCLUDE_FILES = op.h asm.h corewar.h
 INCLUDE_H = $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 
 
@@ -50,7 +50,34 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	cmd_input.c \
 	main.c
 
-C_FILES_NAMES_COREWAR = main.c
+C_FILES_NAMES_COREWAR = main.c \
+    cmd/add.c \
+    cmd/aff.c \
+    cmd/and.c \
+    cmd/fork.c \
+    cmd/ld.c \
+    cmd/ldi.c \
+    cmd/lfork.c \
+    cmd/live.c \
+    cmd/lld.c \
+    cmd/lldi.c \
+    cmd/or.c \
+    cmd/st.c \
+    cmd/sti.c \
+    cmd/sub.c \
+    cmd/xor.c \
+    cmd/zjmp.c \
+    input_cmdline.c \
+    ft_str_is_digit.c \
+    ft_test_ppichier.c \
+    ft_usage.c \
+    proc_exec.c \
+    vm_cycle.c \
+    vm_init.c \
+    vm_print.c \
+    vm_run.c \
+    vm_free.c \
+    input_free.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))
@@ -77,6 +104,7 @@ $(OBJDIR_ASM)%.o: $(DIR_ASM)%.c $(INCLUDE_H)
 
 $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)
 	@mkdir -p $(OBJDIR_COREWAR)
+	@mkdir -p $(OBJDIR_COREWAR)/cmd
 	$(CC) -c $< $(CFLAGS) -o $@ -I $(INCLUDE_DIR) -I $(INCLUDEDIR_LIBFT)
 
 # BIN
