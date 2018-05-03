@@ -69,10 +69,10 @@ C_FILES_NAMES_COREWAR = main.c \
     cmd/zjmp.c \
     input_cmdline.c \
     ft_str_is_digit.c \
-    ft_test_ppichier.c \
     ft_usage.c \
     proc_exec.c \
     vm_cycle.c \
+    ppichier_cmd_init.c \
     vm_init.c \
     vm_print.c \
     vm_run.c \

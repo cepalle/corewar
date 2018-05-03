@@ -94,6 +94,7 @@ struct					s_op
 	char				*descr;
 	int					octet_param;
 	int					dir_size_2;
+	void 				*op_fct;
 };
 typedef struct s_op		t_op;
 

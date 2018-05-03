@@ -15,7 +15,7 @@
 
 int check_end(t_vm *vm)
 {
-	unsigned int i;
+	int i;
 	int nb_player_alive;
 
 	nb_player_alive = 0;
@@ -31,7 +31,7 @@ int check_end(t_vm *vm)
 
 int check_nb_live_player(t_vm *vm)
 {
-	unsigned int i;
+	int i;
 	int nb_live;
 
 	nb_live = 0;
