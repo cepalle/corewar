@@ -9,10 +9,10 @@
 /*   Updated: 2018/05/03 12:52:14 by ppichier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
-#include <corewar.h>
-
 /* ************************************************************************** */
 
+
+#include <corewar.h>
 
 unsigned char 	vm_read_1(t_vm *vm, unsigned int PC)
 {
@@ -21,16 +21,40 @@ unsigned char 	vm_read_1(t_vm *vm, unsigned int PC)
 
 unsigned short 	vm_read_2(t_vm *vm, unsigned int PC)
 {
-	//ne pas oublier le swap et copier
+	unsigned short 	stock;
+	int 			i;
+	int 			left;
 
-	//swap_2(vm->tab[PC]);
-	return (vm->tab[PC]);
-
+	i = 0;
+	left = 0;
+	stock = 0;
+	while (i < 2)
+	{
+		stock = stock << left;
+		stock = stock + vm->tab[(PC + i) % MEM_SIZE];
+		left = left + 4;
+		i++;
+	}
+	swap_2(&stock);
+	return (stock);
 }
 
 unsigned int	vm_read_4(t_vm *vm, unsigned int PC)
 {
-	//ne pas oublier le swap et copier
-	//swap_4(vm->tab[PC]);
-	return (vm->tab[PC]);
+	unsigned int 	stock;
+	int 			i;
+	int 			left;
+
+	i = 0;
+	left = 0;
+	stock = 0;
+	while (i < 4)
+	{
+		stock = stock << left;
+		stock = stock + vm->tab[(PC + i) % MEM_SIZE];
+		left = left + 4;
+		i++;
+	}
+	swap_4(&stock);
+	return (stock);
 }
