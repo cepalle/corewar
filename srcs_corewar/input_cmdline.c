@@ -20,7 +20,6 @@ static	void	ft_fill_player(t_input *input, int fd)
 {
 	ssize_t	ret;
 
-	(void)argv;
 	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
 	if (ret != sizeof(t_header))
 		ft_printf("Error read\n");
@@ -104,6 +103,7 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 int				input_cmdline(int argc, char **argv, t_input *input)
 {
 	input->nb_p = 0;
+	input->d = -1;
 	if (argc == 1)
 	{
 		ft_usage();

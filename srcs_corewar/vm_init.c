@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   set_up_vm.c                                      .::    .:/ .      .::   */
+/*   vm_init.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: aurollan <aurollan@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -16,11 +16,7 @@
 #include "corewar.h"
 #include <fcntl.h>
 
-<<<<<<< HEAD:srcs_corewar/set_up_vm.c
-void			ft_create_map(t_vm *vm, t_input input)
-=======
 void	vm_init(t_vm *vm, t_input input)
->>>>>>> bed080a7facbe19c006667df167c378aae06cc15:srcs_corewar/vm_init.c
 {
 	int a;
 	int res;
