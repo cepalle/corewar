@@ -34,7 +34,7 @@ typedef struct		s_input t_input;
 struct		s_cmd_save
 {
 	void			*cmd;
-	char			codage_param;
+	unsigned char	codage_param;
 	int				params[3];
 	int				cycle_wating;
 };
@@ -94,6 +94,7 @@ int			ft_str_is_digit(char *str);
 void		ft_usage(void);
 void		input_free(t_input *input);
 void		vm_free(t_vm *vm);
+void		header_print(t_header head);
 
 /*
 ** CMD
