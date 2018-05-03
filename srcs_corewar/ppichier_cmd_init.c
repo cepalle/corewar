@@ -56,13 +56,13 @@
 
 }*/
 
-/*static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
+static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 {
 	//Cas d erreur oct params non valide : pas bon argument ou pas assez par ex)
-	short 	tmp;
-	short 	tmp_sec;
-	int 	left;
-	int		cpt;
+	unsigned char 	tmp;
+	unsigned char 	tmp_sec;
+	int 			left;
+	int				cpt;
 
 	cpt = 0;
 	left = 0;
@@ -70,13 +70,21 @@
 	while (cpt < gopt()[op].nb_arg)
 	{
 		tmp = processor->cmd_save.codage_param;
-		tmp_sec = tmp<< left >> 6;
-		ft_printf("tmp_sec = %d", tmp_sec);
+		tmp_sec = tmp << left;
+		tmp_sec = tmp_sec >> 6;
+		processor->cmd_save.params[cpt] = tmp_sec;
 		left += 2;
 		cpt++;
 	}
+	int i;
+	i = 0;
+	while (i < 3)
+	{
+		ft_printf("Tab[%d] = %d", i, processor->cmd_save.params[i]);
+		i++;
+	}
 	return (1);
-}*/
+}
 
 static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 {
@@ -86,11 +94,7 @@ static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 	while (i < OP_TAB_LENGTH)
 	{
 		if (gopt()[i].opcode == vm->tab[processor->PC])
-		{
-			//ft_printf("nom de l op : %s\n", gopt()[i].name);
-			//ft_printf("opcode : %x\n", gopt()[i].opcode);
 			return (i);
-		}
 		i++;
 	}
 	return (-1);
@@ -98,29 +102,25 @@ static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 
 int 		stock_cmd(t_vm *vm, t_proc *processor)
 {
-
-	/*if (vm->tab[processor->PC] <= 0 || vm->tab[processor->PC] > 16)
-		return (0);*/
 	int op;
 
-
-	vm->process->cmd_save.cmd = malloc(sizeof(char) * 1000);
-	if ((op = ft_get_op_ppichier(vm, processor) == -1))
+	//vm->process = malloc(sizeof(t_proc)); // test ppichier temporaire
+	if ((op = ft_get_op_ppichier(vm, processor)) == -1)
 	{
 		ft_printf("op vaut %d\n", op);
 		return (0);
 	}
-	if (gopt()[op].octet_param == 0)
+	if (gopt()[op].octet_param == 1)
 	{
 		ft_printf("op vaut %d\n", op);
 		ft_printf("op correspond a %s\n", gopt()[op].name);
-		processor->cmd_save.codage_param = vm->tab[processor->PC + 1];
+		processor->cmd_save.codage_param = (vm->tab[processor->PC + 1]);
+		//ft_printf("oc params = %d\n", processor->cmd_save.codage_param);
+		ft_analyze_oct_params(vm, processor, op);
 	}
 	else
-	{
-		processor->cmd_save.codage_param = 0;
-	} //si pas d octet de params ou deja initialise ?
-	//ft_analyze_oct_params(vm, processor, op);
+		processor->cmd_save.codage_param = 0; //si pas d octet de params ou deja initialise ?
+	processor->cmd_save.cmd = gopt()[op].op_fct;
 	return (1);
 
 }
