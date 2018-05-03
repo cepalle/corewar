@@ -36,8 +36,8 @@ C_FILES_NAMES_COMMON = op.c swap_char.c \
     cmd/zjmp.c \
     get_param.c \
     vm_read.c \
-    vm_write.c
-
+    vm_write.c \
+    vm_fork.c
 
 C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	ast_to_byte/feed_label.c \

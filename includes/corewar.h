@@ -26,18 +26,12 @@ typedef unsigned char t_bool;
 struct		s_input
 {
 	int				num_player[4];
-
 	t_bool			d;
 	int				d_nb;
-
 	t_bool			nc;
-
 	unsigned char	*prog[4];
 	t_header 		head[4];
-
 	unsigned int	nb_p;
-
-
 };
 typedef struct		s_input t_input;
 
