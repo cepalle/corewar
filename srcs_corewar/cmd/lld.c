@@ -14,7 +14,7 @@
 
 #include <corewar.h>
 
-int		lld(t_vm *vm, t_proc *proc)
+int		cmd_lld(t_vm *vm, t_proc *proc)
 {
 //	ajouter % 4096? ou autre limite
 	return (nbr);

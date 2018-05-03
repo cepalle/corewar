@@ -11,15 +11,14 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #ifndef COREWAR_H
 # define COREWAR_H
 
 # define REG_CONTENT_SIZE 4
 
-#include <stdlib.h>
-#include <unistd.h>
-#include "op.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include "op.h"
 
 struct		s_input
 {
@@ -28,7 +27,6 @@ struct		s_input
 	int 			nb_p;
 	int				d;
 	t_header 		head[4];
-
 };
 typedef struct		s_input t_input;
 
@@ -74,10 +72,11 @@ typedef struct s_vm t_vm;
 
 typedef void (*t_cmd)(t_vm *vm, t_proc *proc);
 
+/*
+** ???
+*/
 
-void		vm_print(t_vm vm);
 int			input_cmdline(int argc, char **argv, t_input *input);
-void		ft_usage(void);
 void		vm_init(t_vm *vm, t_input input);
 void		vm_run(t_vm *vm);
 void		vm_cycle(t_vm *vm);
@@ -85,25 +84,31 @@ void		vm_print(t_vm vm);
 void		proc_exec(t_vm *vm, t_proc *proc);
 
 /*
+** UTILS
+*/
+
+int			ft_str_is_digit(char *str);
+void		ft_usage(void);
+
+/*
 ** CMD
 */
 
-int		add(t_vm *vm, t_proc *proc);
-int		aff(t_vm *vm, t_proc *proc);
-int		and(t_vm *vm, t_proc *proc);
-int		fork(t_vm *vm, t_proc *proc);
-int		ld(t_vm *vm, t_proc *proc);
-int		ldi(t_vm *vm, t_proc *proc);
-int		lfork(t_vm *vm, t_proc *proc);
-int		live(t_vm *vm, t_proc *proc);
-int		lld(t_vm *vm, t_proc *proc);
-int		lldi(t_vm *vm, t_proc *proc);
-int		or(t_vm *vm, t_proc *proc);
-int		st(t_vm *vm, t_proc *proc);
-int		sti(t_vm *vm, t_proc *proc);
-int		sub(t_vm *vm, t_proc *proc);
-int		xor(t_vm *vm, t_proc *proc);
-int		zjmp(t_vm *vm, t_proc *proc);
-
+int		cmd_add(t_vm *vm, t_proc *proc);
+int		cmd_aff(t_vm *vm, t_proc *proc);
+int		cmd_and(t_vm *vm, t_proc *proc);
+int		cmd_fork(t_vm *vm, t_proc *proc);
+int		cmd_ld(t_vm *vm, t_proc *proc);
+int		cmd_ldi(t_vm *vm, t_proc *proc);
+int		cmd_lfork(t_vm *vm, t_proc *proc);
+int		cmd_live(t_vm *vm, t_proc *proc);
+int		cmd_lld(t_vm *vm, t_proc *proc);
+int		cmd_lldi(t_vm *vm, t_proc *proc);
+int		cmd_or(t_vm *vm, t_proc *proc);
+int		cmd_st(t_vm *vm, t_proc *proc);
+int		cmd_sti(t_vm *vm, t_proc *proc);
+int		cmd_sub(t_vm *vm, t_proc *proc);
+int		cmd_xor(t_vm *vm, t_proc *proc);
+int		cmd_zjmp(t_vm *vm, t_proc *proc);
 
 #endif

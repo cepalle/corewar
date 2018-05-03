@@ -14,7 +14,7 @@
 
 #include <corewar.h>
 
-int		sub(t_vm *vm, t_proc *proc)
+int		cmd_sub(t_vm *vm, t_proc *proc)
 {
 //	penser a modifier carry si erreur ou pas
 //	erreur potentiel : depassement int max

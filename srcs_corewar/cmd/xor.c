@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-int		xor(t_vm *vm, t_proc *proc)
+int		cmd_xor(t_vm *vm, t_proc *proc)
 {
 	return (param_1 ^ param_2);
 }

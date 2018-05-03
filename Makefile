@@ -50,12 +50,32 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	cmd_input.c \
 	main.c
 
-C_FILES_NAMES_COREWAR = check_error.c \
-    set_up_vm.c \
-    vm_run.c \
+C_FILES_NAMES_COREWAR = main.c \
+    cmd/add.c \
+    cmd/aff.c \
+    cmd/and.c \
+    cmd/fork.c \
+    cmd/ld.c \
+    cmd/ldi.c \
+    cmd/lfork.c \
+    cmd/live.c \
+    cmd/lld.c \
+    cmd/lldi.c \
+    cmd/or.c \
+    cmd/st.c \
+    cmd/sti.c \
+    cmd/sub.c \
+    cmd/xor.c \
+    cmd/zjmp.c \
+    check_error.c \
+    ft_str_is_digit.c \
+    ft_test_ppichier.c \
+    ft_usage.c \
+    proc_exec.c \
     vm_cycle.c \
-    main.c
-
+    vm_init.c \
+    vm_print.c \
+    vm_run.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))

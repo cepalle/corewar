@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-int		ld(t_vm *vm, t_proc *proc)
+int		cmd_ld(t_vm *vm, t_proc *proc)
 {
 	int *tab;
 

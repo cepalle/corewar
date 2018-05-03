@@ -14,7 +14,7 @@
 
 #include <corewar.h>
 
-int		lldi(t_vm *vm, t_proc *proc)
+int		cmd_lldi(t_vm *vm, t_proc *proc)
 {
 //	ldi sans modulo
 	return (vm->tab[param_1 + param_2]);

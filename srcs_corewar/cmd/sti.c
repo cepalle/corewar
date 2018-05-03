@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-int		sti(t_vm *vm, t_proc *proc)
+int		cmd_sti(t_vm *vm, t_proc *proc)
 {
 	int addr;
 

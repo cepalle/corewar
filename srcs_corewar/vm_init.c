@@ -16,8 +16,7 @@
 #include "corewar.h"
 #include <fcntl.h>
 
-
-void			vm_init(t_vm *vm, t_input input)
+void	vm_init(t_vm *vm, t_input input)
 {
 	int a;
 	int res;

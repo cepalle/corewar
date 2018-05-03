@@ -15,7 +15,7 @@
 
 #include <corewar.h>
 
-int		add(t_vm *vm, t_proc *proc)
+int		cmd_add(t_vm *vm, t_proc *proc)
 {
 //	% 4294967295
 //	pas de message d'erreur en cas de depassement

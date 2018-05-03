@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   and.c                                            .::    .:/ .      .::   */
+/*   ft_str_is_digit.c                                .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:42:42 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:42:43 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/03 09:00:52 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/03 09:00:53 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#include <corewar.h>
-
-int		cmd_and(t_vm *vm, t_proc *proc)
+int		ft_str_is_digit(char *str)
 {
-	return (param_1 & param_2);
+	int a;
+
+	a = 0;
+	while (str[a])
+	{
+		if (!ft_isdigit(str[a]))
+			return (0);
+		a++;
+	}
+	return (1);
 }

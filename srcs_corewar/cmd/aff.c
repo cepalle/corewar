@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-int		aff(t_vm *vm, t_proc *proc)
+int		cmd_aff(t_vm *vm, t_proc *proc)
 {
 	ft_putchar(vm->tab[index]);
 }
