@@ -54,6 +54,7 @@ C_FILES_NAMES_COREWAR = check_error.c \
     set_up_vm.c \
     vm_run.c \
     vm_cycle.c \
+    ppichier_cmd_init.c \
     main.c
 
 

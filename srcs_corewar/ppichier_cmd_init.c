@@ -53,13 +53,12 @@
 	}
 	ft_printf("cpt = %d\n", cpt);
 	ft_printf("tab[0] = %d , tab[1] = %d, tab[2]= %d\n", vm->player->process->params_size[0], vm->player->process->params_size[1], vm->player->process->params_size[2]);
-	//*index = vm->player->process->params_size[0] + vm->player->process->params_size[1] + vm->player->process->params_size[2];
-	return (1);
+
 }*/
 
-static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
+/*static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 {
-	/*Cas d erreur oct params non valide : pas bon argument ou pas assez par ex)*/
+	//Cas d erreur oct params non valide : pas bon argument ou pas assez par ex)
 	short 	tmp;
 	short 	tmp_sec;
 	int 	left;
@@ -67,6 +66,7 @@ static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 
 	cpt = 0;
 	left = 0;
+	(void)vm;
 	while (cpt < gopt()[op].nb_arg)
 	{
 		tmp = processor->cmd_save.codage_param;
@@ -76,7 +76,7 @@ static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 		cpt++;
 	}
 	return (1);
-}
+}*/
 
 static int ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 {
@@ -103,13 +103,24 @@ int 		ft_stock_cmd(t_vm *vm, t_proc *processor)
 		return (0);*/
 	int op;
 
+
+	vm->process->cmd_save.cmd = malloc(sizeof(char) * 1000);
 	if ((op = ft_get_op_ppichier(vm, processor) == -1))
+	{
+		ft_printf("op vaut %d\n", op);
 		return (0);
-	if (gopt()[op].octet_param == 1)
+	}
+	if (gopt()[op].octet_param == 0)
+	{
+		ft_printf("op vaut %d\n", op);
+		ft_printf("op correspond a %s\n", gopt()[op].name);
 		processor->cmd_save.codage_param = vm->tab[processor->PC + 1];
+	}
 	else
-		processor->cmd_save.codage_param = 0; //si pas d octet de params ou deja initialise ?
-	ft_analyze_oct_params(vm, processor, op);
+	{
+		processor->cmd_save.codage_param = 0;
+	} //si pas d octet de params ou deja initialise ?
+	//ft_analyze_oct_params(vm, processor, op);
 	return (1);
 
 }

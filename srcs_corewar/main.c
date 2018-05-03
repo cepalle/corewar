@@ -57,7 +57,9 @@ int		main(int argc, char **argv)
 	vm_init(&vm, input);
 	// free imput
 	ft_print_vm(vm);
-	vm_run(&vm);
+	//vm_run(&vm);
+	vm.process = malloc(sizeof(t_proc)); // test ppichier temporaire
+	ft_stock_cmd(&vm, vm.process);
 	// free vm
 	return (0);
 }

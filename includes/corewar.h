@@ -34,11 +34,7 @@ typedef struct		s_input t_input;
 
 struct		s_cmd_save
 {
-<<<<<<< HEAD
-	//t_cmd			cmd; //TODO A CREER TAB DE POINT SUR FONCTIONS
-=======
 	void			*cmd;
->>>>>>> 759f5ee258d6e00ae931fa5bcc543630f089556f
 	char			codage_param;
 	int				params[3];
 	int				cycle_wating;
@@ -83,11 +79,8 @@ void				ft_print_vm(t_vm vm);
 int					input_cmd(int argc, char **argv, t_input *input);
 void				ft_usage(void);
 void				vm_init(t_vm *vm, t_input input);
+int 				ft_stock_cmd(t_vm *vm, t_proc *processor);
 
-
-/* PPICHIER */
-
-void	ft_test_ppichier(t_vm *vm);
 
 
 
