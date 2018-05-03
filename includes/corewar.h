@@ -95,6 +95,7 @@ void		ft_usage(void);
 void		input_free(t_input *input);
 void		vm_free(t_vm *vm);
 void		header_print(t_header head);
+void		vm_dump_mem(t_vm *vm);
 
 /*
 ** CMD
