@@ -16,6 +16,10 @@
 
 int		cmd_lldi(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return (0);
+
 //	ldi sans modulo
-	return (vm->tab[param_1 + param_2]);
+//	return (vm->tab[param_1 + param_2]);
 }

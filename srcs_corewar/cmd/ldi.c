@@ -17,6 +17,10 @@
 
 int		cmd_ldi(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return (0);
+
 //	mettre % 512 ?
-	return (vm->tab[param_1 + param_2]);
+//	return (vm->tab[param_1 + param_2]);
 }

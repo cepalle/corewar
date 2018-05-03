@@ -16,5 +16,9 @@
 
 int		cmd_fork(t_vm *vm, t_proc *proc)
 {
-	return;
+	(void)vm;
+	(void)proc;
+	return (0);
+
+//	return;
 }

@@ -15,8 +15,13 @@
 
 int		cmd_sti(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return (0);
+/*
 	int addr;
 
 	addr = param_1 + param_2;
 	ft_memcpy(vm->tab + addr, &reg, REG_CONTENT_SIZE);
+*/
 }

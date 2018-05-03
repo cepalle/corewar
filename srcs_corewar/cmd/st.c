@@ -31,6 +31,10 @@
 
 int		cmd_st(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return (0);
+/*
 	int addr;
 	int *tab;
 
@@ -41,5 +45,6 @@ int		cmd_st(t_vm *vm, t_proc *proc)
 //	est ce qu'il faut faire un swap[2] ou swap[4]?
 // 	changement de carry? passage de 1 a 0 ou  1 a 1
 //	vm->player[num_player].process[num_process].carry = 1;
+*/
 }
 

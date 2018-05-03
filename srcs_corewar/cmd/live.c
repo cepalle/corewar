@@ -16,8 +16,12 @@
 
 int		cmd_live(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return (0);
+
 //	penser a ajouter le numero du process?
 //	process mis en place pour gerer une liste de fonction
-	vm->player[num_player].live = vm->player[num_player].live + 1;
-	vm->player[num_player].last_live = vm->player[num_player].last_live + 1;
+//	vm->player[num_player].live = vm->player[num_player].live + 1;
+//	vm->player[num_player].last_live = vm->player[num_player].last_live + 1;
 }

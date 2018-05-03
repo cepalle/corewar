@@ -15,5 +15,9 @@
 
 int		cmd_aff(t_vm *vm, t_proc *proc)
 {
-	ft_putchar(vm->tab[index]);
+	(void)vm;
+	(void)proc;
+	return (0);
+
+//	ft_putchar(vm->tab[index]);
 }

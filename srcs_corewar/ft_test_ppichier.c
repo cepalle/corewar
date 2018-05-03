@@ -18,6 +18,10 @@
 
 void	ft_test_ppichier(t_vm *vm)
 {
+	(void)vm;
+	return ;
+
+	/*
 	int a = 2;
 
 	vm->player[0].process = ft_memalloc(sizeof(t_proc));
@@ -26,7 +30,7 @@ void	ft_test_ppichier(t_vm *vm)
 	ft_st(&vm->player[0], 200, 0, vm);
 	vm_print(vm);
 	ft_vm_run(vm, 0);
-
+	*/
 }
 
 //TODO MALLOC DE STRUCT PC POUR TEST

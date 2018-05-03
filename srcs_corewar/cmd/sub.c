@@ -16,7 +16,12 @@
 
 int		cmd_sub(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return (0);
+/*
 //	penser a modifier carry si erreur ou pas
 //	erreur potentiel : depassement int max
 	return (player.process->reg[num_reg1] - player.process->reg[num_reg2]);
+*/
 }

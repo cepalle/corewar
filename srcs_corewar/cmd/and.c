@@ -16,5 +16,9 @@
 
 int		cmd_and(t_vm *vm, t_proc *proc)
 {
-	return (param_1 & param_2);
+	(void)vm;
+	(void)proc;
+	return (0);
+
+//	return (param_1 & param_2);
 }

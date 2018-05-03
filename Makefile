@@ -9,7 +9,7 @@ LIBFT = $(addprefix $(LIBFTDIR), libft.a)
 INCLUDEDIR_LIBFT = $(addprefix $(LIBFTDIR), includes/)
 
 INCLUDE_DIR = includes/
-INCLUDE_FILES = op.h asm.h
+INCLUDE_FILES = op.h asm.h corewar.h
 INCLUDE_H = $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
 
 
@@ -102,6 +102,7 @@ $(OBJDIR_ASM)%.o: $(DIR_ASM)%.c $(INCLUDE_H)
 
 $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)
 	@mkdir -p $(OBJDIR_COREWAR)
+	@mkdir -p $(OBJDIR_COREWAR)/cmd
 	$(CC) -c $< $(CFLAGS) -o $@ -I $(INCLUDE_DIR) -I $(INCLUDEDIR_LIBFT)
 
 # BIN

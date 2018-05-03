@@ -17,7 +17,10 @@
 
 int		cmd_add(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return (0);
 //	% 4294967295
 //	pas de message d'erreur en cas de depassement
-	return (player.process->reg[num_reg1] + player.process->reg[num_reg2]);
+//	return (player.process->reg[num_reg1] + player.process->reg[num_reg2]);
 }
