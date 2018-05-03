@@ -14,7 +14,7 @@ void	vm_write_2(t_vm *vm,  int PC, unsigned short data)
 	swap_2(data);
 	while (a < 2)
 	{
-		tab[(PC + a) % MEM_SIZE] = (char)data[a];
+		vm->tab[(PC + a) % MEM_SIZE] = (char)data[a];
 		a++;
 	}
 }
@@ -27,7 +27,7 @@ void	vm_write_4(t_vm *vm, int PC, unsigned char data)
 	swap_4(data);
 	while (a < 4)
 	{
-		tab[(PC + a) % MEM_SIZE] = (char)data[a];
+		vm->tab[(PC + a) % MEM_SIZE] = (char)data[a];
 		a++;
 	}
 }
