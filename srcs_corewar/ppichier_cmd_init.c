@@ -32,6 +32,7 @@ static void 	ft_debug(t_proc *processor, int op)
 fct erreur : //Cas d erreur oct params non valide : pas bon argument ou pas assez par ex)  ou si octet final different de 00
 }*/
 
+
 static int 	ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
 {
 	if (gopt()[op].opcode == 1)
@@ -70,7 +71,7 @@ static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 		{
 			processor->cmd_save.params_type[i] = 1;
 			processor->cmd_save.params_size[i] = 1;
-			processor->cmd_save.params[i] = vm_read_1(vm, (vm->process->PC + cpt) % MEM_SIZE);
+			processor->cmd_save.params[i] = vm_read_1(vm, (vm->process->PC + cpt) % MEM_SIZE); //TODO a checker si modulo bien formatte
 			cpt = cpt + 1;
 		}
 		else if (tmp == DIR_CODE && gopt()[op].dir_size_2 == 0)
@@ -90,8 +91,11 @@ static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 		else if (tmp == IND_CODE)
 		{
 			processor->cmd_save.params_type[i] = 3;
-			processor->cmd_save.params_size[i] = 2; //TODO a checker si size = 2 ou 4 !!
+			processor->cmd_save.params_size[i] = 2; 							//TODO a checker si size = 2 ou 4 !!
 			ind_value = vm_read_2(vm, (vm->process->PC + cpt) % MEM_SIZE);
+			ft_printf("ind value = %x\n", ind_value);
+			//swap_2(ind_value);
+			ft_printf("ind value = %x\n", ind_value);
 			processor->cmd_save.params[i] = vm_read_4(vm, (vm->process->PC + ind_value) % MEM_SIZE);
 			cpt = cpt + 2;
 		}
