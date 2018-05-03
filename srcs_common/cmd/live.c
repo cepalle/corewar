@@ -11,17 +11,38 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #include <corewar.h>
 
-int		cmd_live(t_vm *vm, t_proc *proc)
+static void	player_add_live(t_vm *vm, int id)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
+	unsigned int	idp;
+	int				i;
 
-//	penser a ajouter le numero du process?
-//	process mis en place pour gerer une liste de fonction
-//	vm->player[num_player].live = vm->player[num_player].live + 1;
-//	vm->player[num_player].last_live = vm->player[num_player].last_live + 1;
+	idp = (unsigned int)id;
+	i = 0;
+	while (i < vm->nb_p)
+	{
+		if (vm->player[i].id == idp)
+		{
+			vm->player[i].live++;
+			return ;
+		}
+		i++;
+	}
+}
+
+int			cmd_live(t_vm *vm, t_proc *proc)
+{
+	int		er;
+	int		p1;
+
+	er = 0;
+	(void)vm;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	p1 = get_param(proc, 0, &er);
+	if (er)
+		return (0);
+	player_add_live(vm, p1);
+	return (1);
 }
