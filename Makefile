@@ -97,6 +97,8 @@ OBJ_COREWAR = $(addprefix $(OBJDIR_COREWAR), $(C_FILES_NAMES_COREWAR:.c=.o))
 
 # OBJ
 
+all: $(ASM_NAME) $(COREWAR_NAME)
+
 $(OBJDIR_COMMON)%.o: $(DIR_COMMON)%.c $(INCLUDE_H)
 	@mkdir -p $(OBJDIR_COMMON)
 	@mkdir -p $(OBJDIR_COMMON)/cmd
@@ -129,8 +131,6 @@ $(COREWAR_NAME): $(LIBFT) $(OBJ_COREWAR) $(OBJ_COMMON)
 	$(CC) $(CFLAGS) -o $@ $(OBJ_COREWAR) $(OBJ_COMMON) -L./$(LIBFTDIR) -lft
 
 # REGLE
-
-all: $(ASM_NAME) $(COREWAR_NAME)
 
 clean:
 	rm -rf $(OBJDIR_COMMON)
