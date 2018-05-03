@@ -16,9 +16,16 @@
 
 int		cmd_fork(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
+	int 			er;
+	int				p1;
 
-//	return;
+	(void)vm;
+	er = 0;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	p1 = get_param(proc, 0, &er);
+	if (er)
+		return (0);
+	vm_fork(vm, proc, p1 % IDX_MOD);
+	return (1);
 }
