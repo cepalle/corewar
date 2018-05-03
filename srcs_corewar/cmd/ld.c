@@ -13,23 +13,21 @@
 
 #include <corewar.h>
 
+// TODO carry
 int		cmd_ld(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
-/*
-	int *tab;
+	int		er;
+	int		ri;
+	int		p;
 
-	tab = vm->player[num_player].process[num_process].params_size;
-//	ld prend 2 parametre
-//	tab[0] correspond a un registre code sur 1 octet = on recupere direcement la ref du registre
-//	tab[2] correspond a la taille du prochain argument code sur 1 ou 2 octet
-	ft_memcpy(&vm->player[num_player].process[num_process].reg[tab[0]],
-			  &vm->tab[vm->player[num_player].process[num_process].PC], (size_t)tab[1]);
-//			  tab[2] % IDX_MOD;
-//	est ce qu'il faut faire un swap[2] ou swap[4]?
-//	changement de carry? passage de 1 a 0 ou  1 a 1
-//	vm->player[num_player].process[num_process].carry = 1;
- */
+	er = 0;
+	(void)vm;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	p = get_param(proc, 0, &er);
+	ri = get_i_reg(proc, 1, &er);
+	if (er)
+		return (0);
+	proc->reg[ri] = p;
+	return (1);
 }

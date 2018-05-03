@@ -17,10 +17,20 @@
 
 int		cmd_ldi(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
+	int		er;
+	int		p1;
+	int		p2;
+	int		ri3;
 
-//	mettre % 512 ?
-//	return (vm->tab[param_1 + param_2]);
+	er = 0;
+	(void)vm;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	p1 = get_param(proc, 0, &er);
+	p2 = get_param(proc, 1, &er);
+	ri3 = get_i_reg(proc, 2, &er);
+	if (er)
+		return (0);
+	proc->reg[ri3] = vm_read_4(vm, proc->PC + p1 + p2); // IDX_MOD ?
+	return (1);
 }
