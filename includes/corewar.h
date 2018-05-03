@@ -26,6 +26,7 @@ struct		s_input
 	char			*prog[4];
 	int 			nb_p;
 	int				d;
+	int 			d_nb;
 	t_header 		head[4];
 };
 typedef struct		s_input t_input;
