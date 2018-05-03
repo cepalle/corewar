@@ -67,7 +67,7 @@ C_FILES_NAMES_COREWAR = main.c \
     cmd/sub.c \
     cmd/xor.c \
     cmd/zjmp.c \
-    check_error.c \
+    input_cmdline.c \
     ft_str_is_digit.c \
     ft_test_ppichier.c \
     ft_usage.c \

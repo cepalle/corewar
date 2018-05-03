@@ -15,7 +15,7 @@
 
 void vm_cycle(t_vm *vm)
 {
-	unsigned int		i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < vm->nb_process)
