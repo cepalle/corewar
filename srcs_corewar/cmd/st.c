@@ -16,6 +16,9 @@
 
 int		cmd_st(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	/*
 	int addr;
 	int *tab;
 
@@ -31,6 +34,6 @@ int		cmd_st(t_vm *vm, t_proc *proc)
 
 // 	changement de carry? passage de 1 a 0 ou  1 a 1
 
-	vm->player[num_player].process[num_process].carry = 1;
+	vm->player[num_player].process[num_process].carry = 1;*/
 }
 
