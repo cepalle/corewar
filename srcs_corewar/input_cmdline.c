@@ -74,8 +74,9 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 			input->d_nb = ft_atoi(argv[*a]);
 			if (input->d_nb < 0)
 				input->d = 0;
-			return (1);
 		}
+		ft_printf("nb_d option = %d, d = %d\n", input->d_nb, input->d);
+		return (1);
 	}
 	if (ft_strcmp(argv[*a], "-n") == 0)
 	{
@@ -108,7 +109,7 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 {
 	input->nb_p = 0;
 	input->d = 0;
-	input->d_nb = -1;
+	input->d_nb = 0;
 	if (argc == 1)
 	{
 		ft_usage();
