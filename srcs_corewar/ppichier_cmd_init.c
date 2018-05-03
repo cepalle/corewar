@@ -30,22 +30,28 @@ static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 	cpt = 1;
 	while (i < gopt()[op].nb_arg)
 	{
-		tmp = processor->cmd_save.codage_param;
+		tmp = vm->tab[processor->PC + 1];
 		tmp  = tmp << left;
 		tmp  = tmp >> 6;
 		if (tmp == REG_CODE)
 		{
 			cpt = cpt + 1;
+			processor->cmd_save.params_type[i] = 1;
+			processor->cmd_save.params_size[i] = 1;
 			processor->cmd_save.params[i] = vm_read_1(vm, vm->process->PC + cpt);
 		}
 		if (tmp == DIR_CODE)
 		{
 			cpt = cpt + 4;
+			processor->cmd_save.params_type[i] = 2;
+			processor->cmd_save.params_size[i] = 4;
 			processor->cmd_save.params[i] = vm_read_2(vm, vm->process->PC + cpt);
 		}
 		if (tmp == IND_CODE)
 		{
 			cpt = cpt + 2;
+			processor->cmd_save.params_type[i] = 3;
+			processor->cmd_save.params_size[i] = 2;
 			processor->cmd_save.params[i] = vm_read_4(vm, vm->process->PC + cpt);
 		}
 		left = left + 2;
@@ -83,7 +89,6 @@ int 		stock_cmd(t_vm *vm, t_proc *processor)
 	{
 		ft_printf("op vaut %d\n", op);
 		ft_printf("op correspond a %s\n", gopt()[op].name);
-		processor->cmd_save.codage_param = (vm->tab[processor->PC + 1]);
 		ft_analyze_oct_params(vm, processor, op);
 	}
 	processor->cmd_save.cmd = gopt()[op].op_fct;

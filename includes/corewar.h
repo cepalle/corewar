@@ -35,7 +35,6 @@ typedef struct		s_input t_input;
 struct		s_cmd_save
 {
 	void			*cmd;
-	unsigned char	codage_param;
 	unsigned char	params_type[3];
 	unsigned char	params_size[3];
 	unsigned int	params[3];
