@@ -16,28 +16,29 @@
 
 void	vm_print(t_vm *vm)
 {
-	int a;
-	int b;
+	int i;
+	int j;
 
-	a = -1;
-	while (++a < vm->nb_p)
+	i = 0;
+	while (i < vm->nb_p)
 	{
-		ft_printf("%x\n", vm->player[a].head.magic);
-		ft_printf("%s\n", vm->player[a].head.prog_name);
-		ft_printf("%u\n", vm->player[a].head.prog_size);
-		ft_printf("%s\n", vm->player[a].head.comment);
-		ft_printf("\n\n\n\n");
+		header_print(vm->player[i].head);
+		i++;
 	}
-	b = 1;
-	a = -1;
-	while (++a < MEM_SIZE)
+	i = 0;
+	while (i < MEM_SIZE / 32)
 	{
-		if (vm->tab[a] == 0)
-			ft_printf("%0.2hhx ", vm->tab[a]);
+		j = 0;
+		if (i)
+			ft_printf("%#.4x: ", i * 32); // prtinf ?
 		else
-			ft_printf("\x1b[38;2;255;00;00m%0.2hhx \x1b[0m", vm->tab[a]);
-		if (b % 64 == 0)
-			ft_printf("\n");
-		b++;
+			ft_printf("0x0000: ");
+		while (j < 32)
+		{
+			ft_printf("%.2hhx ", vm->tab[i * 32 + j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
 	}
 }

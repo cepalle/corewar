@@ -35,7 +35,7 @@ typedef struct		s_input t_input;
 struct		s_cmd_save
 {
 	void			*cmd;
-	char			codage_param;
+	unsigned char	codage_param;
 	int				params[3];
 	int				cycle_wating;
 };
@@ -45,7 +45,8 @@ struct 		s_player
 {
 	t_header		head;
 	unsigned int	last_live;
-	unsigned int	live;
+	unsigned int	live; // rename nb_live
+	unsigned int	is_alive; // init 1
 	int				id;
 };
 typedef struct		s_player t_player;
@@ -94,6 +95,7 @@ int			ft_str_is_digit(char *str);
 void		ft_usage(void);
 void		input_free(t_input *input);
 void		vm_free(t_vm *vm);
+void		header_print(t_header head);
 
 /*
 ** CMD

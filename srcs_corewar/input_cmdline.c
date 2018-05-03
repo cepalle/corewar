@@ -21,17 +21,14 @@ static	void	ft_fill_player(t_input *input, int fd)
 	ssize_t	ret;
 
 	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
-
 	if (ret != sizeof(t_header))
 		ft_printf("Error read\n");
-
 	swap_4(&input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].prog_size);
 	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
 							input->head[input->nb_p].prog_size);
 	ret = read(fd, input->prog[input->nb_p],
 		input->head[input->nb_p].prog_size);
-
 	if (ret != sizeof(input->head[input->nb_p].prog_size))
 		ft_printf("Error read\n");
 }

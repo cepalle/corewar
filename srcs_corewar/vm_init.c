@@ -49,7 +49,7 @@ static	void	player_init(t_vm *vm, t_input input)
 		vm->process[a].reg[0] = vm->player[a].id;
 		vm->player[a].last_live = 0;
 		vm->player[a].live = 0;
-//		vm->player[a].is_alive = 1;
+		vm->player[a].is_alive = 1;
 		ft_strncpy(vm->player[a].head.prog_name, input.head[a].prog_name,
 			input.head->prog_size);
 		ft_strncpy(vm->player[a].head.comment, input.head[a].comment,
