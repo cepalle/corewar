@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-void	lfork(t_vm *vm, t_proc *proc)
+int		lfork(t_vm *vm, t_proc *proc)
 {
 	return;
 }

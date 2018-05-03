@@ -14,7 +14,7 @@
 
 #include <corewar.h>
 
-void	live(t_vm *vm, t_proc *proc)
+int		live(t_vm *vm, t_proc *proc)
 {
 //	penser a ajouter le numero du process?
 //	process mis en place pour gerer une liste de fonction

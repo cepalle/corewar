@@ -14,7 +14,7 @@
 #include "corewar.h"
 #include "libft.h"
 
-void	st(t_vm *vm, t_proc *proc)
+int		st(t_vm *vm, t_proc *proc)
 {
 	int addr;
 	int *tab;

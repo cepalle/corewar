@@ -15,7 +15,7 @@
 
 #include <corewar.h>
 
-int 	ldi(t_vm *vm, t_proc *proc)
+int		ldi(t_vm *vm, t_proc *proc)
 {
 //	mettre % 512 ?
 	return (vm->tab[param_1 + param_2]);

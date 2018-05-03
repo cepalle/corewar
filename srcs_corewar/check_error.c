@@ -138,7 +138,7 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 	return (1);
 }
 
-int				input_cmd(int argc, char **argv, t_input *input)
+int				input_cmdline(int argc, char **argv, t_input *input)
 {
 	input->nb_p = 0;
 	if (argc == 1)

@@ -75,25 +75,35 @@ typedef struct s_vm t_vm;
 typedef void (*t_cmd)(t_vm *vm, t_proc *proc);
 
 
-void				ft_print_vm(t_vm vm);
-int					input_cmd(int argc, char **argv, t_input *input);
-void				ft_usage(void);
-void				vm_init(t_vm *vm, t_input input);
+void		vm_print(t_vm vm);
+int			input_cmdline(int argc, char **argv, t_input *input);
+void		ft_usage(void);
+void		vm_init(t_vm *vm, t_input input);
+void		vm_run(t_vm *vm);
+void		vm_cycle(t_vm *vm);
+void		vm_print(t_vm vm);
+void		proc_exec(t_vm *vm, t_proc *proc);
 
+/*
+** CMD
+*/
 
-/* PPICHIER */
-
-void	ft_test_ppichier(t_vm *vm);
-
-
-
-
-
-void	vm_run(t_vm *vm);
-void	vm_cycle(t_vm *vm);
-void	proc_exec(t_vm *vm, t_proc *proc);
-
-
+int		add(t_vm *vm, t_proc *proc);
+int		aff(t_vm *vm, t_proc *proc);
+int		and(t_vm *vm, t_proc *proc);
+int		fork(t_vm *vm, t_proc *proc);
+int		ld(t_vm *vm, t_proc *proc);
+int		ldi(t_vm *vm, t_proc *proc);
+int		lfork(t_vm *vm, t_proc *proc);
+int		live(t_vm *vm, t_proc *proc);
+int		lld(t_vm *vm, t_proc *proc);
+int		lldi(t_vm *vm, t_proc *proc);
+int		or(t_vm *vm, t_proc *proc);
+int		st(t_vm *vm, t_proc *proc);
+int		sti(t_vm *vm, t_proc *proc);
+int		sub(t_vm *vm, t_proc *proc);
+int		xor(t_vm *vm, t_proc *proc);
+int		zjmp(t_vm *vm, t_proc *proc);
 
 
 #endif

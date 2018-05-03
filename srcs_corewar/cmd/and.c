@@ -14,7 +14,7 @@
 
 #include <corewar.h>
 
-int 	and(t_vm *vm, t_proc *proc)
+int		and(t_vm *vm, t_proc *proc)
 {
 	return (param_1 & param_2);
 }

@@ -50,7 +50,7 @@ void	ft_test_ppichier(t_vm *vm)
 	vm->player[0].process->reg[0] = ft_and(&vm->player[0],12, 4);
 	ft_printf("le res = %d ", vm->player[0].process->reg[a]);
 	ft_st(&vm->player[0], 200, 0, vm);
-	ft_print_vm(vm);
+	vm_print(vm);
 	ft_vm_run(vm, 0);
 
 }
