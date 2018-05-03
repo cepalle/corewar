@@ -16,6 +16,10 @@
 
 int		cmd_aff(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return 1;
+	/*
 	unsigned char c;
 
 	(void)vm;
@@ -24,4 +28,5 @@ int		cmd_aff(t_vm *vm, t_proc *proc)
 	c = (unsigned char)(proc->cmd_save.params[0] % 256);
 	ft_printf("%c", c);
 	return (1);
+	*/
 }

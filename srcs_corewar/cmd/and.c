@@ -16,6 +16,10 @@
 
 int		cmd_and(t_vm *vm, t_proc *proc)
 {
+	(void)vm;
+	(void)proc;
+	return 1;
+	/*
 	unsigned int	p1;
 	unsigned int	p2;
 	unsigned int	reg;
@@ -27,4 +31,5 @@ int		cmd_and(t_vm *vm, t_proc *proc)
 	p2 = get_param(proc, 1);
 	proc->reg[reg] = p1 & p2;
 	return (1);
+	 */
 }

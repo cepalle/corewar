@@ -23,11 +23,11 @@
 
 struct		s_input
 {
-	unsigned char	n;
+	char	n;
 	unsigned char	*prog[4];
-	unsigned int	nb_p;
+	int	nb_p;
 	unsigned char	d;
-	unsigned int	d_nb;
+	int	d_nb;
 	t_header 		head[4];
 };
 typedef struct		s_input t_input;
@@ -102,6 +102,9 @@ void		input_free(t_input *input);
 void		vm_free(t_vm *vm);
 void		header_print(t_header head);
 void		vm_dump_mem(t_vm *vm);
+void		vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
+void		vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
+void		vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
 
 /*
 ** CMD
