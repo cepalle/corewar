@@ -80,7 +80,7 @@ int			input_cmdline(int argc, char **argv, t_input *input);
 void		vm_init(t_vm *vm, t_input input);
 void		vm_run(t_vm *vm);
 void		vm_cycle(t_vm *vm);
-void		vm_print(t_vm vm);
+void		vm_print(t_vm *vm);
 void		proc_exec(t_vm *vm, t_proc *proc);
 
 /*

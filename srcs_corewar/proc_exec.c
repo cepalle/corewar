@@ -12,6 +12,7 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include "libft.h"
 
 void proc_exec(t_vm *vm, t_proc *proc)
 {
@@ -30,5 +31,6 @@ void proc_exec(t_vm *vm, t_proc *proc)
 	{
 		cmd = (t_cmd)proc->cmd_save.cmd;
 		cmd(vm, proc);
+		ft_bzero(&(proc->cmd_save), sizeof(t_cmd_save));
 	}
 }

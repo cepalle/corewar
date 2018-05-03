@@ -14,18 +14,18 @@
 #include "corewar.h"
 #include "libft.h"
 
-void	vm_print(t_vm vm)
+void	vm_print(t_vm *vm)
 {
 	int a;
 	int b;
 
 	a = -1;
-	while (++a < vm.nb_p)
+	while (++a < vm->nb_p)
 	{
-		ft_printf("%x\n", vm.player[a].head.magic);
-		ft_printf("%s\n", vm.player[a].head.prog_name);
-		ft_printf("%u\n", vm.player[a].head.prog_size);
-		ft_printf("%s\n", vm.player[a].head.comment);
+		ft_printf("%x\n", vm->player[a].head.magic);
+		ft_printf("%s\n", vm->player[a].head.prog_name);
+		ft_printf("%u\n", vm->player[a].head.prog_size);
+		ft_printf("%s\n", vm->player[a].head.comment);
 
 		ft_printf("\n\n\n\n");
 	}
@@ -34,10 +34,10 @@ void	vm_print(t_vm vm)
 	//TODO: warning utilisation printf
 	while (++a < MEM_SIZE)
 	{
-		if (vm.tab[a] == 0)
-			printf("%0.2hhx ", vm.tab[a]);
+		if (vm->tab[a] == 0)
+			printf("%0.2hhx ", vm->tab[a]);
 		else
-			printf("\x1b[38;2;255;00;00m%0.2hhx \x1b[0m", vm.tab[a]);
+			printf("\x1b[38;2;255;00;00m%0.2hhx \x1b[0m", vm->tab[a]);
 		if (b % 64 == 0)
 			printf("\n");
 		b++;

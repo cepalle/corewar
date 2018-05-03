@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 		return (1);
 	vm_init(&vm, input);
 	// free imput
-	vm_print(vm);
+	vm_print(&vm);
 	vm_run(&vm);
 	// free vm
 	return (0);
