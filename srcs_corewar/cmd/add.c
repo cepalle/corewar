@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-static int	check_params(const int	*params)
+static int	check_params(const unsigned int	*params)
 {
 	return (!(params[0] <= 0 || params[0] >= REG_NUMBER ||
 		params[1] <= 0 || params[1] >= REG_NUMBER ||

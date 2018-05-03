@@ -18,6 +18,7 @@ int		cmd_st(t_vm *vm, t_proc *proc)
 {
 	(void)vm;
 	(void)proc;
+	return 1;
 	/*
 	int addr;
 	int *tab;

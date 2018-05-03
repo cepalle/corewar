@@ -23,11 +23,11 @@
 
 struct		s_input
 {
-	unsigned char	n;
+	char	n;
 	unsigned char	*prog[4];
-	unsigned int	nb_p;
+	int	nb_p;
 	unsigned char	d;
-	unsigned int	d_nb;
+	int	d_nb;
 	t_header 		head[4];
 };
 typedef struct		s_input t_input;
