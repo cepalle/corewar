@@ -22,18 +22,18 @@ static int	check_params(const unsigned int	*params)
 
 int		cmd_add(t_vm *vm, t_proc *proc)
 {
-	int		r1;
-	int		r2;
-	int		r3;
+	int		p1;
+	int		p2;
+	int		p3;
 
 	(void)vm;
 	proc->PC += proc->cmd_save.cmd_len;
 	proc->PC %= MEM_SIZE;
 	if (!check_params(proc->cmd_save.params))
 		return (0);
-	r1 = proc->cmd_save.params[0];
-	r2 = proc->cmd_save.params[1];
-	r3 = proc->cmd_save.params[2];
-	proc->reg[r3] = proc->reg[r1] + proc->reg[r2];
+	p1 = proc->cmd_save.params[0];
+	p2 = proc->cmd_save.params[1];
+	p3 = proc->cmd_save.params[2];
+	proc->reg[p3] = proc->reg[p1] + proc->reg[p2];
 	return (1);
 }

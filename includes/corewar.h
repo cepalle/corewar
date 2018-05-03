@@ -23,11 +23,11 @@
 
 struct		s_input
 {
-	char	n;
+	char			n;
 	unsigned char	*prog[4];
-	int	nb_p;
+	int				nb_p;
 	unsigned char	d;
-	int	d_nb;
+	int				d_nb;
 	t_header 		head[4];
 };
 typedef struct		s_input t_input;
@@ -37,7 +37,7 @@ struct		s_cmd_save
 	void			*cmd;
 	unsigned char	params_type[3];
 	unsigned char	params_size[3];
-	unsigned int	params[3];
+	int				params[3];
 	unsigned int	cmd_len;
 	unsigned int	cycle_wating;
 };
@@ -105,6 +105,7 @@ void		vm_dump_mem(t_vm *vm);
 void		vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
 void		vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
 void		vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
+int			get_param(t_proc *proc, int i, int *er);
 
 /*
 ** CMD
