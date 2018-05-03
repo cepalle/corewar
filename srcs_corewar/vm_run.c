@@ -68,5 +68,5 @@ void	vm_run(t_vm *vm)
 		}
 	}
 	if (vm->d)
-		vm_print(vm);
+		vm_dump_mem(vm);
 }
