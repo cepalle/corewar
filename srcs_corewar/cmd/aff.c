@@ -12,12 +12,16 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include "libft.h"
 
 int		cmd_aff(t_vm *vm, t_proc *proc)
 {
-	(void)vm;
-	(void)proc;
-	return (0);
+	unsigned char c;
 
-//	ft_putchar(vm->tab[index]);
+	(void)vm;
+	proc->PC += proc->cmd_save.cmd_len;
+	proc->PC %= MEM_SIZE;
+	c = (unsigned char)(proc->cmd_save.params[0] % 256);
+	ft_printf("%c", c);
+	return (1);
 }
