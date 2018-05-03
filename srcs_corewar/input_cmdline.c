@@ -21,17 +21,14 @@ static	void	ft_fill_player(t_input *input, int fd)
 	ssize_t	ret;
 
 	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
-
 	if (ret != sizeof(t_header))
 		ft_printf("Error read\n");
-
 	swap_4(&input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].prog_size);
 	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
 							input->head[input->nb_p].prog_size);
 	ret = read(fd, input->prog[input->nb_p],
 		input->head[input->nb_p].prog_size);
-
 	if (ret != sizeof(input->head[input->nb_p].prog_size))
 		ft_printf("Error read\n");
 }
@@ -74,8 +71,9 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 			input->d_nb = ft_atoi(argv[*a]);
 			if (input->d_nb < 0)
 				input->d = 0;
-			return (1);
 		}
+		ft_printf("nb_d option = %d, d = %d\n", input->d_nb, input->d);
+		return (1);
 	}
 	if (ft_strcmp(argv[*a], "-n") == 0)
 	{
@@ -108,7 +106,7 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 {
 	input->nb_p = 0;
 	input->d = 0;
-	input->d_nb = -1;
+	input->d_nb = 0;
 	if (argc == 1)
 	{
 		ft_usage();
