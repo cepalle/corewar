@@ -35,5 +35,3 @@ void	vm_write_4(t_vm *vm, int PC, unsigned int data)
 		a++;
 	}
 }
-
-
