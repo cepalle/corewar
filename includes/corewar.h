@@ -37,6 +37,7 @@ struct		s_cmd_save
 	void			*cmd;
 	unsigned char	codage_param;
 	int				params[3];
+	int 			cmd_len;
 	int				cycle_wating;
 };
 typedef struct		s_cmd_save t_cmd_save;
