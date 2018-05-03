@@ -15,6 +15,7 @@
 # define COREWAR_H
 
 # define REG_CONTENT_SIZE 4
+# define LEN_INIT_PROC 8
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -44,7 +45,8 @@ struct 		s_player
 {
 	t_header		head;
 	unsigned int	last_live;
-	unsigned int	live;
+	unsigned int	live; // rename nb_live
+	unsigned int	is_alive; // init 1
 	int				id;
 };
 typedef struct		s_player t_player;
@@ -93,6 +95,7 @@ int			ft_str_is_digit(char *str);
 void		ft_usage(void);
 void		input_free(t_input *input);
 void		vm_free(t_vm *vm);
+void		header_print(t_header head);
 
 /*
 ** CMD
