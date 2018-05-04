@@ -1,6 +1,6 @@
 .name "my_test"
 .comment "C EST MON TEST"
 
-l2:		ld r1, 2 
+yo:		and 8, %10, r2
 
-print:	st r2, 200
+print:	st r2, 400

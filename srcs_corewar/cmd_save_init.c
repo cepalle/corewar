@@ -27,72 +27,125 @@ static void 	ft_debug(t_proc *processor, int op)
 	}
 }
 
-/*static	int ft_cmd_save_check_error(t_vm *vm, t_proc *processor, int op)
+static int 		ft_cmd_save_check_existence(int op, unsigned char tmp, int i)
 {
-fct erreur : //Cas d erreur oct params non valide : pas bon argument ou pas assez par ex)  ou si octet final different de 00
-}*/
+	unsigned char a;
 
-static int 	ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
+	a = (unsigned char)gopt()[op].args[i];
+	if (tmp == 3)
+		tmp = 4;
+	ft_printf("a[%d] = %d  ", i, a);
+	if ((a & tmp) != 0)
+		return (1);
+	ft_printf("params dans args[%d] non valide", i);
+	return (0);
+}
+
+static	int 	ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
+{
+	unsigned char tmp;
+	unsigned char masque;
+	int i;
+	int right;
+
+	i = 0;
+	masque = 0b11000000;
+	right = 6;
+	while (i < gopt()[op].nb_arg)
+	{
+		tmp = vm->tab[(processor->PC + 1) % MEM_SIZE]; // TODO remplacer par cal_PC_add ?
+		tmp = tmp & masque;
+		tmp = tmp >> right;
+		masque = masque >> 2;
+		right = right - 2;
+		if (ft_cmd_save_check_existence(op, tmp, i) == 0)
+			return (0);
+		ft_printf("tmp_save_right_params[%d] = %d\n", i, tmp);
+		i++;
+	}
+	return (1);
+}
+
+static	int 	ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor)
+{
+	unsigned char tmp;
+	int i;
+
+	i = 0;
+	tmp = vm->tab[(processor->PC + 1) % MEM_SIZE]; // TODO remplacer par cal_PC_add ?
+	tmp = tmp << 6;
+	if (tmp != 0)
+	{
+		ft_printf("erreur : 2 derniers bits non egal a zero = %d \n", tmp);
+		return (0);
+	}
+	return (1);
+}
+
+
+static int 	ft_no_oct_params(t_vm *vm, t_proc *processor, int op) // remplacement de vm_read_x(vm, (vm->process->PC + 1) % MEM_SIZE); par
 {
 	if (gopt()[op].opcode == 1)
 	{
 		processor->cmd_save.params_size[0] = 4;
-		processor->cmd_save.params[0] = vm_read_4(vm, (vm->process->PC + 1) % MEM_SIZE);
+		processor->cmd_save.params[0] = vm_read_4(vm, cal_PC_add(vm->process->PC, 1));
 	}
 	else
 	{
 		processor->cmd_save.params_size[0] = 2;
-		processor->cmd_save.params[0] = vm_read_2(vm, (vm->process->PC + 1) % MEM_SIZE);
+		processor->cmd_save.params[0] = vm_read_2(vm, cal_PC_add(vm->process->PC, 1));
 	}
 	processor->cmd_save.params_type[0] = 2;
 	return (1);
 }
 
-static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
+static int 	ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op) // remplacement de vm_read_x(vm, (vm->process->PC + cpt) % MEM_SIZE) par vm_read_x(vm, cal_PC_add(vm->process->PC, cpt))
 {
 
 	unsigned char 	tmp;
 	int 			left;
 	unsigned int	cpt;
 	int				i;
-	unsigned int 	ind_value;
+	unsigned short 	ind_value;
 
 	left = 0;
 	i = 0;
 	cpt = 2;
 	ind_value = 0;
+	if (ft_cmd_save_error_oct_params(vm, processor) == 0 || ft_cmd_save_right_params(vm, processor, op) == 0)
+		return (0);
 	while (i < gopt()[op].nb_arg)
 	{
-		tmp = vm->tab[(processor->PC + 1) % MEM_SIZE];
+		tmp = vm->tab[(processor->PC + 1) % MEM_SIZE]; // TODO remplacer par cal_PC_add ?
 		tmp  = tmp << left;
 		tmp  = tmp >> 6;
 		if (tmp == REG_CODE)
 		{
 			processor->cmd_save.params_type[i] = 1;
 			processor->cmd_save.params_size[i] = 1;
-			processor->cmd_save.params[i] = vm_read_1(vm, (vm->process->PC + cpt) % MEM_SIZE);
+			processor->cmd_save.params[i] = vm_read_1(vm, cal_PC_add(vm->process->PC, cpt)); //TODO a checker si modulo bien formatte
 			cpt = cpt + 1;
 		}
 		else if (tmp == DIR_CODE && gopt()[op].dir_size_2 == 0)
 		{
 			processor->cmd_save.params_type[i] = 2;
 			processor->cmd_save.params_size[i] = 4;
-			processor->cmd_save.params[i] = vm_read_4(vm, (vm->process->PC + cpt) % MEM_SIZE);
+			processor->cmd_save.params[i] = vm_read_4(vm, cal_PC_add(vm->process->PC, cpt));
 			cpt = cpt + 4;
 		}
 		else if (tmp == DIR_CODE && gopt()[op].dir_size_2 == 1)
 		{
 			processor->cmd_save.params_type[i] = 2;
 			processor->cmd_save.params_size[i] = 2;
-			processor->cmd_save.params[i] = vm_read_2(vm, (vm->process->PC + cpt) % MEM_SIZE);
+			processor->cmd_save.params[i] = vm_read_2(vm, cal_PC_add(vm->process->PC, cpt));
 			cpt = cpt + 2;
 		}
 		else if (tmp == IND_CODE)
 		{
 			processor->cmd_save.params_type[i] = 3;
-			processor->cmd_save.params_size[i] = 2; //TODO a checker si size = 2 ou 4 !!
-			ind_value = vm_read_2(vm, (vm->process->PC + cpt) % MEM_SIZE);
-			processor->cmd_save.params[i] = vm_read_4(vm, (vm->process->PC + ind_value) % MEM_SIZE);
+			processor->cmd_save.params_size[i] = 2; 							//TODO a checker si size = 2 ou 4 !!
+			ind_value = vm_read_2(vm, cal_PC_add(vm->process->PC, cpt));
+			processor->cmd_save.params[i] = ind_value;
 			cpt = cpt + 2;
 		}
 		left = left + 2;

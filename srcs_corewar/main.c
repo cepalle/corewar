@@ -28,20 +28,14 @@ int		main(int argc, char **argv)
 	vm_print(&vm);
 
 
-	int a = 0;
+	/*int a = 0;
 	while (a < vm.nb_p)
 	{
 		ft_printf("num_player = %d pour le joueur %s\n", vm.player[a].id, vm.player[a].head.prog_name);
 		a++;
-	}
+	}*/
 
-
-
-
-
-
-
-//	stock_cmd(&vm, vm.process);
+	stock_cmd(&vm, vm.process);
 	//input_free(&input);
 	//vm_print(&vm);
 	//vm_run(&vm);
