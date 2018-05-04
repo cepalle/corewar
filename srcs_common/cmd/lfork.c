@@ -25,6 +25,6 @@ int		cmd_lfork(t_vm *vm, int ipr)
 	p1 = get_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
-	vm_fork(vm, vm->process + ipr, p1);
+	vm_fork(vm, ipr, p1);
 	return (1);
 }

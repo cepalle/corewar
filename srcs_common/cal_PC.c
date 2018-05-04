@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   fork.c                                           .::    .:/ .      .::   */
+/*   cal_PC.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:42:47 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:42:48 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/04 09:18:41 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/04 09:18:43 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "op.h"
 
-#include <corewar.h>
-
-int		cmd_fork(t_vm *vm, int ipr)
+unsigned int	cal_PC(unsigned int PC, int to_add)
 {
-	int 			er;
-	int				p1;
-
-	(void)vm;
-	er = 0;
-	vm->process[ipr].PC += vm->process[ipr].cmd_save.cmd_len;
-	vm->process[ipr].PC %= MEM_SIZE;
-	p1 = get_param(vm->process + ipr, 0, &er);
-	if (er)
-		return (0);
-	vm_fork(vm, ipr, p1 % IDX_MOD);
-	return (1);
+	return ((PC + MEM_SIZE + to_add) % MEM_SIZE);
 }

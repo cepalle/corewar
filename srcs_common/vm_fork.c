@@ -1,11 +1,11 @@
 #include <corewar.h>
 #include "libft.h"
 
-void	vm_fork(t_vm *vm, t_proc *proc, int add)
+void	vm_fork(t_vm *vm, int ipr, int add)
 {
 	t_proc to_add;
 
-	to_add = *proc;
+	to_add = vm->process[ipr];
 	to_add.PC += add;
 	to_add.PC %= MEM_SIZE;
 	if (vm->nb_process >= vm->len_process)
