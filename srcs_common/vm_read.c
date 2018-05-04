@@ -11,42 +11,41 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #include <corewar.h>
 
-unsigned char 	vm_read_1(t_vm *vm, unsigned int PC)
+unsigned	char	vm_read_1(t_vm *vm, unsigned int pc)
 {
-	return (vm->tab[cal_PC_add(PC, 0)]);
+	return (vm->tab[cal_pc_add(pc, 0)]);
 }
 
-unsigned short 	vm_read_2(t_vm *vm, unsigned int PC)
+unsigned	short	vm_read_2(t_vm *vm, unsigned int pc)
 {
-	unsigned short 	stock;
-	int 			i;
+	unsigned short	stock;
+	int				i;
 
 	i = 0;
 	stock = 0;
 	while (i < 2)
 	{
 		stock = stock << 8;
-		stock = stock + vm->tab[cal_PC_add(PC, i)];
+		stock = stock + vm->tab[cal_pc_add(pc, i)];
 		i++;
 	}
 	swap_2(&stock);
 	return (stock);
 }
 
-unsigned int	vm_read_4(t_vm *vm, unsigned int PC)
+unsigned	int		vm_read_4(t_vm *vm, unsigned int pc)
 {
-	unsigned int 	stock;
-	int 			i;
+	unsigned	int	stock;
+	int				i;
 
 	i = 0;
 	stock = 0;
 	while (i < 4)
 	{
 		stock = stock << 8;
-		stock = stock + vm->tab[cal_PC_add(PC, i)];
+		stock = stock + vm->tab[cal_pc_add(pc, i)];
 		i++;
 	}
 	swap_4(&stock);

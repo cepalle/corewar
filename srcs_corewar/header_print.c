@@ -14,7 +14,7 @@
 #include <op.h>
 #include "libft.h"
 
-void header_print(t_header head)
+void	header_print(t_header head)
 {
 	ft_printf("### HEADER Player\n");
 	ft_printf("%x\n", head.magic);

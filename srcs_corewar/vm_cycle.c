@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-void vm_cycle(t_vm *vm)
+void	vm_cycle(t_vm *vm)
 {
 	unsigned int	i;
 

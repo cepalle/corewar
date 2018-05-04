@@ -16,7 +16,8 @@
 #include "corewar.h"
 #include <fcntl.h>
 
-static	unsigned	int	ft_check_num_player_input(t_input input, unsigned int nb)
+static	unsigned	int	ft_check_num_player_input(t_input input,
+													unsigned int nb)
 {
 	int b;
 
@@ -29,7 +30,8 @@ static	unsigned	int	ft_check_num_player_input(t_input input, unsigned int nb)
 	return (1);
 }
 
-static	unsigned	int	ft_check_num_player_vm(t_vm *vm, unsigned int a, unsigned int nb)
+static	unsigned	int	ft_check_num_player_vm(t_vm *vm, unsigned int a,
+													unsigned int nb)
 {
 	unsigned int b;
 
@@ -50,17 +52,18 @@ static	unsigned	int	ft_generate_nb(t_vm *vm, t_input input, unsigned int a)
 	nb = 0;
 	while (1)
 	{
-		if (ft_check_num_player_input(input, nb) == 1 && ft_check_num_player_vm(vm, a, nb) == 1)
+		if (ft_check_num_player_input(input, nb) == 1
+			&& ft_check_num_player_vm(vm, a, nb) == 1)
 			return (nb);
 		nb++;
 	}
 }
 
-static	void	process_init(t_vm *vm, t_input input)
+static	void			process_init(t_vm *vm, t_input input)
 {
-	int a;
-	unsigned int res;
-	int placement;
+	int				a;
+	unsigned int	res;
+	int				placement;
 
 	a = 0;
 	res = 0;
@@ -76,7 +79,7 @@ static	void	process_init(t_vm *vm, t_input input)
 	}
 }
 
-static	void	player_init(t_vm *vm, t_input input)
+static	void			player_init(t_vm *vm, t_input input)
 {
 	unsigned int a;
 
@@ -103,7 +106,7 @@ static	void	player_init(t_vm *vm, t_input input)
 	process_init(vm, input);
 }
 
-void			vm_init(t_vm *vm, t_input input)
+void					vm_init(t_vm *vm, t_input input)
 {
 	vm->d = input.d;
 	vm->nb_p = input.nb_p;

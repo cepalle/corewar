@@ -11,7 +11,6 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #include <corewar.h>
 
 int		cmd_and(t_vm *vm, int ipr)
@@ -29,7 +28,7 @@ int		cmd_and(t_vm *vm, int ipr)
 	if (vm_proc.er)
 		return (0);
 	vm->process[ipr].carry = 1;
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-									 vm->process[ipr].cmd_save.cmd_len);
+	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+									vm->process[ipr].cmd_save.cmd_len);
 	return (1);
 }

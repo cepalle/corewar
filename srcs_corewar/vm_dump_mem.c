@@ -24,7 +24,7 @@ void	vm_dump_mem(t_vm *vm)
 	{
 		j = 0;
 		if (i)
-			ft_printf("%#.4x: ", i * 32); // test 0 printf
+			ft_printf("%#.4x: ", i * 32);
 		else
 			ft_printf("0x0000: ");
 		while (j < 32)

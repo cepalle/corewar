@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   read_param.c                                      .::    .:/ .      .::   */
+/*   param_handler.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -33,7 +33,7 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 	{
 		if (cmd_sav.params[ipar] > 0 &&
 			cmd_sav.params[ipar] < 17)
-			return vm_proc->vm->process->reg[cmd_sav.params[ipar]];
+			return (vm_proc->vm->process->reg[cmd_sav.params[ipar]]);
 		vm_proc->er = 1;
 		return (0);
 	}
@@ -41,12 +41,12 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 	{
 		if (vm_proc->idx_mod)
 			return (vm_read_4(vm_proc->vm,
-			cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
-			cmd_sav.params[ipar] % IDX_MOD)));
+							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+										cmd_sav.params[ipar] % IDX_MOD)));
 		else
 			return (vm_read_4(vm_proc->vm,
-			cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
-			cmd_sav.params[ipar])));
+							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+										cmd_sav.params[ipar])));
 	}
 	return (cmd_sav.params[ipar]);
 }
@@ -60,8 +60,7 @@ void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
-		if (cmd_sav.params[ipar] > 0 &&
-			cmd_sav.params[ipar] < 17)
+		if (cmd_sav.params[ipar] > 0 && cmd_sav.params[ipar] < 17)
 			vm_proc->vm->process[vm_proc->ipr].reg[cmd_sav.params[ipar]] = data;
 		else
 			vm_proc->er = 1;
@@ -70,13 +69,12 @@ void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 	{
 		if (vm_proc->idx_mod)
 			vm_write_4(vm_proc->vm,
-			cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
-			cmd_sav.params[ipar] % IDX_MOD),
-			(unsigned int)(data));
+			cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+			cmd_sav.params[ipar] % IDX_MOD), (unsigned int)(data));
 		else
 			vm_write_4(vm_proc->vm,
-				cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
-				cmd_sav.params[ipar]),
+					cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+								cmd_sav.params[ipar]),
 				(unsigned int)(data));
 	}
 	vm_proc->er = 1;

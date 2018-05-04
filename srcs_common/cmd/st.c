@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "libft.h"
 
 int		cmd_st(t_vm *vm, int ipr)
 {
@@ -20,15 +19,13 @@ int		cmd_st(t_vm *vm, int ipr)
 	int				ri1;
 
 	init_vm_proc(&vm_proc, vm, ipr, 0);
-
 	ri1 = read_param(&vm_proc, 1);
 	vm_write_4(vm, (vm->process[ipr].PC + ri1) % IDX_MOD,
-			   (unsigned int)(vm->process[ipr].cmd_save.params[0]));
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-									 vm->process[ipr].cmd_save.cmd_len);
+			(unsigned int)(vm->process[ipr].cmd_save.params[0]));
+	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+									vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
 	vm->process[ipr].carry = 1;
 	return (1);
 }
-

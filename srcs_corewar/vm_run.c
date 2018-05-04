@@ -13,7 +13,7 @@
 
 #include "corewar.h"
 
-int check_end(t_vm *vm)
+int		check_end(t_vm *vm)
 {
 	int i;
 	int nb_player_alive;
@@ -31,7 +31,7 @@ int check_end(t_vm *vm)
 	return (nb_player_alive > 1);
 }
 
-int check_nb_live_player(t_vm *vm)
+int		check_nb_live_player(t_vm *vm)
 {
 	int i;
 	int nb_live;
@@ -49,16 +49,20 @@ int check_nb_live_player(t_vm *vm)
 
 void	vm_run(t_vm *vm)
 {
-	int		nb_cycle = 0;
-	int		cycke_last_check = nb_cycle;
-	int		cycle_to_check = CYCLE_TO_DIE;
-	int		nb_no_decr = 0;
+	int		nb_cycle;
+	int		cycle_last_check;
+	int		cycle_to_check;
+	int		nb_no_decr;
 
+	nb_cycle = 0;
+	cycle_last_check = nb_cycle;
+	cycle_to_check = CYCLE_TO_DIE;
+	nb_no_decr = 0;
 	while (!vm->d || vm->d_nb >= nb_cycle)
 	{
 		vm_cycle(vm);
 		nb_cycle++;
-		if (nb_cycle - cycke_last_check >= cycle_to_check)
+		if (nb_cycle - cycle_last_check >= cycle_to_check)
 		{
 			if (check_end(vm))
 				break ;

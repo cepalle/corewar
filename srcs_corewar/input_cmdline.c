@@ -58,8 +58,8 @@ static	int		ft_check_player(char *argv, t_input *input)
 	return (1);
 }
 
-
-static	int 	ft_check_champ_num(char **argv, t_input *input, int *a, int argc)
+static	int		ft_check_champ_num(char **argv, t_input *input,
+									int *a, int argc)
 {
 	if (*a + 1 < argc)
 	{
@@ -72,7 +72,8 @@ static	int 	ft_check_champ_num(char **argv, t_input *input, int *a, int argc)
 				return (0);
 			}
 			input->num_player[input->nb_p] = ft_atoi(argv[*a]);
-			ft_printf("j'ai attribue le numero %d au joueur %d\n", input->num_player[input->nb_p], input->nb_p);
+			ft_printf("j'ai attribue le numero %d au joueur %d\n",
+					input->num_player[input->nb_p], input->nb_p);
 		}
 	}
 	if (*a + 1 == argc)
@@ -80,7 +81,6 @@ static	int 	ft_check_champ_num(char **argv, t_input *input, int *a, int argc)
 		ft_printf("c'est meme pas la peine d'essayer tu passes pas\n");
 		return (1);
 	}
-
 	return (1);
 }
 
@@ -132,20 +132,20 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 	return (1);
 }
 
-static	int 	ft_check_double_num(int *tab, int size)
+static	int		ft_check_double_num(int *tab, int size)
 {
 	int a;
 	int b;
 
 	a = 0;
-	while(a < size)
+	while (a < size)
 	{
 		b = a + 1;
 		while (b < size)
 		{
 			if (tab[a] == tab[b] && tab[a] != -1)
 			{
-				ft_printf("test pas les doublons ma poule c'est plus fort que toi\n");
+				ft_printf("test pas les doublons\n");
 				return (0);
 			}
 			b++;
@@ -165,22 +165,20 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 	input->d_nb = 0;
 	while (++a < MAX_PLAYERS)
 		input->num_player[a] = -1;
-	if (argc == 1)
+	if (argc == 1 || ft_check_arg(argv, input, argc) == 0)
 	{
 		ft_usage();
 		return (0);
 	}
-	if (ft_check_arg(argv, input, argc) == 0)
-		return (0);
-	a = 0;
-	while(input->nb_p + a < 3)
+	a = -1;
+	while (input->nb_p + (++a) < 3)
 	{
-		if (input->num_player[input->nb_p] != -1 || ft_check_double_num(input->num_player, MAX_PLAYERS) == 0)
+		if (input->num_player[input->nb_p] != -1 ||
+				ft_check_double_num(input->num_player, MAX_PLAYERS) == 0)
 		{
-			ft_printf("vous avez attribue un numero a un champion qui nexiste pas\n");
+			ft_printf("Numero attribue a un champion qui nexiste pas\n");
 			return (0);
 		}
-		a++;
 	}
 	return (1);
 }

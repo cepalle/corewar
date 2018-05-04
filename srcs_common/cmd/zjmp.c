@@ -22,10 +22,10 @@ int		cmd_zjmp(t_vm *vm, int ipr)
 	p1 = read_param(&vm_proc, 0);
 	if (vm_proc.er || !vm->process[ipr].carry)
 	{
-		vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-		vm->process[ipr].cmd_save.cmd_len);
+		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+										vm->process[ipr].cmd_save.cmd_len);
 		return (0);
 	}
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC, p1);
+	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, p1);
 	return (1);
 }

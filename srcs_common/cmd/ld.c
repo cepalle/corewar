@@ -21,8 +21,8 @@ int		cmd_ld(t_vm *vm, int ipr)
 	init_vm_proc(&vm_proc, vm, ipr, 1);
 	ri1 = read_param(&vm_proc, 0);
 	load_param(&vm_proc, 1, ri1);
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-									 vm->process[ipr].cmd_save.cmd_len);
+	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+									vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
 	vm->process[ipr].carry = 1;

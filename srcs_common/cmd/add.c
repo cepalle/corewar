@@ -14,7 +14,6 @@
 #include <corewar.h>
 #include "libft.h"
 
-
 int		cmd_add(t_vm *vm, int ipr)
 {
 	t_vm_proc		vm_proc;
@@ -22,14 +21,13 @@ int		cmd_add(t_vm *vm, int ipr)
 	int				ri2;
 	int				res;
 
-
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	ri1 = read_param(&vm_proc, 0);
 	ri2 = read_param(&vm_proc, 1);
 	res = ri1 + ri2;
 	load_param(&vm_proc, 2, res);
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-									 vm->process[ipr].cmd_save.cmd_len);
+	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+									vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
 	vm->process[ipr].carry = 1;

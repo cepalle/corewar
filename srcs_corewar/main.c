@@ -21,30 +21,13 @@ int		main(int argc, char **argv)
 
 	ft_bzero(&vm, sizeof(t_vm));
 	ft_bzero(&input, sizeof(t_input));
-
 	if (input_cmdline(argc, argv, &input) == 0)
 		return (1);
 	vm_init(&vm, input);
 	vm_print(&vm);
-
-
-	int a = 0;
-	while (a < vm.nb_p)
-	{
-		ft_printf("num_player = %d pour le joueur %s\n", vm.player[a].id, vm.player[a].head.prog_name);
-		a++;
-	}
-
-
-
-
-
-
-
 //	stock_cmd(&vm, vm.process);
-	//input_free(&input);
-	//vm_print(&vm);
-	//vm_run(&vm);
-	//vm_free(&vm);
+//	input_free(&input);
+//	vm_run(&vm);
+//	vm_free(&vm);
 	return (0);
 }

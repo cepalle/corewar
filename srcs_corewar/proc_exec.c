@@ -14,9 +14,10 @@
 #include <corewar.h>
 #include "libft.h"
 
-void proc_exec(t_vm *vm, t_proc *proc)
+void	proc_exec(t_vm *vm, t_proc *proc)
 {
 	t_cmd cmd;
+
 	if (!proc->cmd_save.cmd &&
 		!stock_cmd(vm, proc))
 	{
