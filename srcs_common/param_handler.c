@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_param.c                                      .::    .:/ .      .::   */
+/*   read_param.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -13,7 +13,7 @@
 
 #include <corewar.h>
 
-int get_param(t_proc *proc, int i, int *er)
+int read_param(t_proc *proc, int i, int *er)
 {
 	if (proc->cmd_save.params_type[i] == REG_CODE)
 	{
@@ -25,7 +25,7 @@ int get_param(t_proc *proc, int i, int *er)
 	return (proc->cmd_save.params[i]);
 }
 
-int get_i_reg(t_proc *proc, int i, int *er)
+int set_param(t_proc *proc, int i, int *er)
 {
 	if (proc->cmd_save.params_type[i] != REG_CODE ||
 		proc->cmd_save.params[i] > 16 ||
@@ -35,4 +35,5 @@ int get_i_reg(t_proc *proc, int i, int *er)
 		return (0);
 	}
 	return (proc->cmd_save.params[i] - 1);
+
 }

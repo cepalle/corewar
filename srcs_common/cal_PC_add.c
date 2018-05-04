@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   and.c                                            .::    .:/ .      .::   */
+/*   cal_PC_add.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:42:42 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:42:43 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/04 09:18:41 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/04 09:18:43 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "op.h"
 
-#include <corewar.h>
-
-// TODO carry
-int		cmd_and(t_vm *vm, int ipr)
+unsigned int	cal_PC_add(unsigned int PC, int to_add)
 {
-	int 			er;
-	int				p1;
-	int				p2;
-	int				ri;
-
-	(void)vm;
-	er = 0;
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-									 vm->process[ipr].cmd_save.cmd_len);
-	p1 = read_param(vm->process + ipr, 0, &er);
-	p2 = read_param(vm->process + ipr, 1, &er);
-	ri = set_param(vm->process + ipr, 2, &er);
-	if (er)
-		return (0);
-	vm->process[ipr].reg[ri] = p1 & p2;
-	return (1);
+	return ((PC + MEM_SIZE + (to_add % MEM_SIZE)) % MEM_SIZE);
 }

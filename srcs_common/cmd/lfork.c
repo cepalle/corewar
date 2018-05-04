@@ -13,18 +13,22 @@
 
 #include <corewar.h>
 
-int		cmd_lfork(t_vm *vm, t_proc *proc)
+int		cmd_lfork(t_vm *vm, int ipr)
 {
 	int 			er;
 	int				p1;
 
 	(void)vm;
 	er = 0;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	p1 = get_param(proc, 0, &er);
+	p1 = read_param(vm->process + ipr, 0, &er);
 	if (er)
+	{
+		vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+										 vm->process[ipr].cmd_save.cmd_len);
 		return (0);
-	vm_fork(vm, proc, p1);
+	}
+	vm_fork(vm, ipr, p1);
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+									 vm->process[ipr].cmd_save.cmd_len);
 	return (1);
 }

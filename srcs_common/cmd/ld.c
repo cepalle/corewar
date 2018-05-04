@@ -14,7 +14,7 @@
 #include <corewar.h>
 
 // TODO carry
-int		cmd_ld(t_vm *vm, t_proc *proc)
+int		cmd_ld(t_vm *vm, int ipr)
 {
 	int		er;
 	int		ri;
@@ -22,12 +22,13 @@ int		cmd_ld(t_vm *vm, t_proc *proc)
 
 	er = 0;
 	(void)vm;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	p = get_param(proc, 0, &er);
-	ri = get_i_reg(proc, 1, &er);
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+									 vm->process[ipr].cmd_save.cmd_len);
+	p = read_param(vm->process + ipr, 0, &er);
+	ri = set_param(vm->process + ipr, 1, &er);
 	if (er)
 		return (0);
-	proc->reg[ri] = p;
+	vm->process[ipr].carry = 1;
+	vm->process[ipr].reg[ri] = p % IDX_MOD;
 	return (1);
 }
