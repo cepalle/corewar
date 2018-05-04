@@ -25,7 +25,7 @@ int		cmd_and(t_vm *vm, int ipr)
 	ri1 = read_param(&vm_proc, 0);
 	ri2 = read_param(&vm_proc, 1);
 	res = ri1 & ri2;
-	set_param(&vm_proc, 2, res);
+	load_param(&vm_proc, 2, res);
 	if (vm_proc.er)
 		return (0);
 	vm->process[ipr].carry = 1;

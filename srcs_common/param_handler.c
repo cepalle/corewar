@@ -51,7 +51,7 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 	return (cmd_sav.params[ipar]);
 }
 
-void	set_param(t_vm_proc *vm_proc, int ipar, int data)
+void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 {
 	t_cmd_save cmd_sav;
 
