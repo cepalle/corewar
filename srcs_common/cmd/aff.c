@@ -14,15 +14,15 @@
 #include <corewar.h>
 #include "libft.h"
 
-int		cmd_aff(t_vm *vm, t_proc *proc)
+int		cmd_aff(t_vm *vm, int ipr)
 {
 	unsigned char	c;
 	int				er;
 
 	(void)vm;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	c = (unsigned char)(get_param(proc, 0, &er) % 256);
+	vm->process[ipr].PC += vm->process[ipr].cmd_save.cmd_len;
+	vm->process[ipr].PC %= MEM_SIZE;
+	c = (unsigned char)(get_param(vm->process + ipr, 0, &er) % 256);
 	if (er)
 		return (0);
 	ft_printf("%c", c);
