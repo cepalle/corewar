@@ -14,7 +14,7 @@
 
 #include <corewar.h>
 
-int		cmd_fork(t_vm *vm, t_proc *proc)
+int		cmd_fork(t_vm *vm, int ipr)
 {
 	int 			er;
 	int				p1;

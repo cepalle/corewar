@@ -1,7 +1,7 @@
 #include <corewar.h>
 
 // TODO carry
-int		cmd_zjmp(t_vm *vm, t_proc *proc)
+int		cmd_zjmp(t_vm *vm, int ipr)
 {
 	int		er;
 	int		p1;

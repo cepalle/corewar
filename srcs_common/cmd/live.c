@@ -31,7 +31,7 @@ static void	player_add_live(t_vm *vm, int id)
 	}
 }
 
-int			cmd_live(t_vm *vm, t_proc *proc)
+int			cmd_live(t_vm *vm, int ipr)
 {
 	int		er;
 	int		p1;

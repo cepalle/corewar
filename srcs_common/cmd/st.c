@@ -14,7 +14,7 @@
 #include "corewar.h"
 #include "libft.h"
 
-int		cmd_st(t_vm *vm, t_proc *proc)
+int		cmd_st(t_vm *vm, int ipr)
 {
 	unsigned int addr;
 	int reg;
