@@ -22,6 +22,8 @@ int check_end(t_vm *vm)
 	i = 0;
 	while (i < vm->nb_p)
 	{
+		if (vm->player[i].is_alive && vm->player[i].live == 0)
+			vm->player[i].is_alive = 0;
 		if (vm->player[i].is_alive && vm->player[i].live > 0)
 			nb_player_alive++;
 		i++;
