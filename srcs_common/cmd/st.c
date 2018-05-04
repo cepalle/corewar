@@ -16,19 +16,18 @@
 
 int		cmd_st(t_vm *vm, int ipr)
 {
-	unsigned int addr;
-	int reg;
 
-	reg = vm->process[ipr].cmd_save.params[0];
-	if (reg > 16 || reg < 0)
-	{
-//		passer proc->carry = 0; ?
-		return (0);
-	}
-	addr = vm->process[ipr].PC + (vm->process[ipr].cmd_save.params[1] % IDX_MOD);
-	vm_write_4(vm, addr, (unsigned int)vm->process[ipr].reg[reg]);
+	t_vm_proc		vm_proc;
+	int				ri1;
+
+	init_vm_proc(&vm_proc, vm, ipr, 1);
+
+	ri1 = read_param(&vm_proc, 1);
+	set_param(&vm_proc, 0, ri1);
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 									 vm->process[ipr].cmd_save.cmd_len);
+	if (vm_proc.er)
+		return (0);
 	return(1);
 }
 

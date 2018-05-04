@@ -82,6 +82,16 @@ typedef struct s_vm t_vm;
 
 typedef void (*t_cmd)(t_vm *vm, t_proc *proc);
 
+struct		s_vm_proc
+{
+	t_vm	*vm;
+	int		ipr;
+	int		idx_mod;
+	int		er;
+};
+typedef struct		s_vm_proc t_vm_proc;
+
+
 /*
 ** ???
 */
@@ -110,10 +120,11 @@ void			vm_dump_mem(t_vm *vm);
 void			vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
 void			vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
 void			vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
-int				read_param(t_proc *proc, int i, int *er);
-int				set_param(t_proc *proc, int i, int *er);
+int				read_param(t_vm_proc *vm_proc, int ipar);
+void			set_param(t_vm_proc *vm_proc, int ipar, int data);
 void			vm_fork(t_vm *vm, int ipr, int add);
 unsigned int	cal_PC_add(unsigned int PC, int to_add);
+void			init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod);
 
 /*
 ** CMD
