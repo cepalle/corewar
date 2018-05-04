@@ -30,7 +30,6 @@ int		cmd_sti(t_vm *vm, int ipr)
 	addr = vm->process[ipr].PC + (vm->process[ipr].cmd_save.params[1]
 								  + vm->process[ipr].cmd_save.params[2]);
 	vm_write_4(vm, addr, (unsigned int)vm->process[ipr].reg[reg]);
-	vm->process[ipr].carry = 1;
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 									 vm->process[ipr].cmd_save.cmd_len);
 	return(1);

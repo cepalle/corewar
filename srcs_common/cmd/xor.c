@@ -30,6 +30,7 @@ int		cmd_xor(t_vm *vm, int ipr)
 	ri = set_param(vm->process + ipr, 2, &er);
 	if (er)
 		return (0);
+	vm->process[ipr].carry = 1;
 	vm->process[ipr].reg[ri] = p1 ^ p2;
 	return (1);
 }

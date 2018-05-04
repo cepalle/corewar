@@ -35,5 +35,4 @@ int set_param(t_proc *proc, int i, int *er)
 		return (0);
 	}
 	return (proc->cmd_save.params[i] - 1);
-
 }

@@ -13,7 +13,6 @@
 
 #include <corewar.h>
 
-// TODO carry
 int		cmd_ld(t_vm *vm, int ipr)
 {
 	int		er;

@@ -30,6 +30,7 @@ int		cmd_add(t_vm *vm, int ipr)
 	ri3 = set_param(vm->process + ipr, 2, &er);
 	if (er)
 		return (0);
+	vm->process[ipr].carry = 1;
 	vm->process[ipr].reg[ri3] = vm->process[ipr].reg[ri1] + vm->process[ipr].reg[ri2];
 	return (1);
 }
