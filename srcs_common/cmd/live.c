@@ -31,16 +31,16 @@ static void	player_add_live(t_vm *vm, int id)
 	}
 }
 
-int			cmd_live(t_vm *vm, t_proc *proc)
+int			cmd_live(t_vm *vm, int ipr)
 {
 	int		er;
 	int		p1;
 
 	er = 0;
 	(void)vm;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	p1 = get_param(proc, 0, &er);
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+									 vm->process[ipr].cmd_save.cmd_len);
+	p1 = read_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
 	player_add_live(vm, p1);

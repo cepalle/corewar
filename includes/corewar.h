@@ -100,38 +100,39 @@ unsigned int	vm_read_4(t_vm *vm, unsigned int PC);
 ** UTILS
 */
 
-int			ft_str_is_digit(char *str);
-void		ft_usage(void);
-void		input_free(t_input *input);
-void		vm_free(t_vm *vm);
-void		header_print(t_header head);
-void		vm_dump_mem(t_vm *vm);
-void		vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
-void		vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
-void		vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
-int			get_param(t_proc *proc, int i, int *er);
-int			get_i_reg(t_proc *proc, int i, int *er);
-void		vm_fork(t_vm *vm, t_proc *proc, int add);
+int				ft_str_is_digit(char *str);
+void			ft_usage(void);
+void			input_free(t_input *input);
+void			vm_free(t_vm *vm);
+void			header_print(t_header head);
+void			vm_dump_mem(t_vm *vm);
+void			vm_write_1(t_vm *vm, unsigned int PC, unsigned char data);
+void			vm_write_2(t_vm *vm, unsigned int PC, unsigned short data);
+void			vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
+int				read_param(t_proc *proc, int i, int *er);
+int				set_param(t_proc *proc, int i, int *er);
+void			vm_fork(t_vm *vm, int ipr, int add);
+unsigned int	cal_PC_add(unsigned int PC, int to_add);
 
 /*
 ** CMD
 */
 
-int				cmd_add(t_vm *vm, t_proc *proc);
-int				cmd_aff(t_vm *vm, t_proc *proc);
-int				cmd_and(t_vm *vm, t_proc *proc);
-int				cmd_fork(t_vm *vm, t_proc *proc);
-int				cmd_ld(t_vm *vm, t_proc *proc);
-int				cmd_ldi(t_vm *vm, t_proc *proc);
-int				cmd_lfork(t_vm *vm, t_proc *proc);
-int				cmd_live(t_vm *vm, t_proc *proc);
-int				cmd_lld(t_vm *vm, t_proc *proc);
-int				cmd_lldi(t_vm *vm, t_proc *proc);
-int				cmd_or(t_vm *vm, t_proc *proc);
-int				cmd_st(t_vm *vm, t_proc *proc);
-int				cmd_sti(t_vm *vm, t_proc *proc);
-int				cmd_sub(t_vm *vm, t_proc *proc);
-int				cmd_xor(t_vm *vm, t_proc *proc);
-int				cmd_zjmp(t_vm *vm, t_proc *proc);
+int				cmd_add(t_vm *vm, int ipr);
+int				cmd_aff(t_vm *vm, int ipr);
+int				cmd_and(t_vm *vm, int ipr);
+int				cmd_fork(t_vm *vm, int ipr);
+int				cmd_ld(t_vm *vm, int ipr);
+int				cmd_ldi(t_vm *vm, int ipr);
+int				cmd_lfork(t_vm *vm, int ipr);
+int				cmd_live(t_vm *vm, int ipr);
+int				cmd_lld(t_vm *vm, int ipr);
+int				cmd_lldi(t_vm *vm, int ipr);
+int				cmd_or(t_vm *vm, int ipr);
+int				cmd_st(t_vm *vm, int ipr);
+int				cmd_sti(t_vm *vm, int ipr);
+int				cmd_sub(t_vm *vm, int ipr);
+int				cmd_xor(t_vm *vm, int ipr);
+int				cmd_zjmp(t_vm *vm, int ipr);
 
 #endif

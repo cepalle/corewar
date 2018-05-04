@@ -14,10 +14,10 @@
 
 #include <corewar.h>
 
-int		cmd_lldi(t_vm *vm, t_proc *proc)
+int		cmd_lldi(t_vm *vm, int ipr)
 {
 	(void)vm;
-	(void)proc;
+	(void)ipr;
 	return (0);
 
 //	ldi sans modulo

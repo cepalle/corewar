@@ -14,20 +14,22 @@
 #include "corewar.h"
 #include "libft.h"
 
-int		cmd_st(t_vm *vm, t_proc *proc)
+int		cmd_st(t_vm *vm, int ipr)
 {
 	unsigned int addr;
 	int reg;
 
-	reg = proc->cmd_save.params[0];
+	reg = vm->process[ipr].cmd_save.params[0];
 	if (reg > 16 || reg < 0)
 	{
 //		passer proc->carry = 0; ?
 		return (0);
 	}
-	addr = proc->PC + (proc->cmd_save.params[1] % IDX_MOD);
-	vm_write_4(vm, addr, (unsigned int)proc->reg[reg]);
-	proc->carry = 1;
+	addr = vm->process[ipr].PC + (vm->process[ipr].cmd_save.params[1] % IDX_MOD);
+	vm_write_4(vm, addr, (unsigned int)vm->process[ipr].reg[reg]);
+	vm->process[ipr].carry = 1;
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+									 vm->process[ipr].cmd_save.cmd_len);
 	return(1);
 }
 
