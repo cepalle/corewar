@@ -12,8 +12,10 @@
 /* ************************************************************************** */
 
 #include "op.h"
+#include "libft.h" // a supprimer une fois debug termine
 
 unsigned int	cal_pc_add(unsigned int pc, int to_add)
 {
+	ft_printf("get_op_name\n");
 	return ((pc + MEM_SIZE + (to_add % MEM_SIZE)) % MEM_SIZE);
 }

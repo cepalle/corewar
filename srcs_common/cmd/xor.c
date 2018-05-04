@@ -12,7 +12,7 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-
+#include "libft.h" // a supprimer une fois debug termine
 int		cmd_xor(t_vm *vm, int ipr)
 {
 	t_vm_proc	vm_proc;
@@ -20,6 +20,7 @@ int		cmd_xor(t_vm *vm, int ipr)
 	int			ri2;
 	int			res;
 
+	ft_printf("cmd_xor\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	ri1 = read_param(&vm_proc, 0);
 	ri2 = read_param(&vm_proc, 1);

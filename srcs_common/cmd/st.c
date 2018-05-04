@@ -12,12 +12,14 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "libft.h" // a supprimer
 
 int		cmd_st(t_vm *vm, int ipr)
 {
 	t_vm_proc		vm_proc;
 	int				ri1;
 
+	ft_printf("cmd_st\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	ri1 = read_param(&vm_proc, 1);
 	vm_write_4(vm, (vm->process[ipr].PC + ri1) % IDX_MOD,

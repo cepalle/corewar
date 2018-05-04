@@ -12,12 +12,14 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include "libft.h" // a supprimr une fois debug termine
 
 int		cmd_fork(t_vm *vm, int ipr)
 {
 	t_vm_proc		vm_proc;
 	int				p1;
 
+	ft_printf("cmd_fork\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	p1 = read_param(&vm_proc, 0);
 	if (!vm_proc.er)

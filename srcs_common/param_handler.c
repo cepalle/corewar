@@ -16,6 +16,7 @@
 
 void	init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod)
 {
+	ft_printf("init_vm_proc\n");
 	ft_bzero(vm_proc, sizeof(t_vm_proc));
 	vm_proc->vm = vm;
 	vm_proc->ipr = ipr;
@@ -26,6 +27,7 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 {
 	t_cmd_save cmd_sav;
 
+	ft_printf("read_param\n");
 	if (vm_proc->er)
 		return (0);
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
@@ -55,6 +57,7 @@ void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 {
 	t_cmd_save cmd_sav;
 
+	ft_printf("load_param\n");
 	if (vm_proc->er)
 		return ;
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;

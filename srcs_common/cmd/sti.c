@@ -12,6 +12,7 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include "libft.h" // a supprimer une fois debug termine
 
 int		cmd_sti(t_vm *vm, int ipr)
 {
@@ -20,6 +21,7 @@ int		cmd_sti(t_vm *vm, int ipr)
 	int				ri2;
 	int				res;
 
+	ft_printf("cmd_sti\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	ri1 = read_param(&vm_proc, 1);
 	ri2 = read_param(&vm_proc, 2);

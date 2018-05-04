@@ -19,6 +19,7 @@ int		cmd_aff(t_vm *vm, int ipr)
 	t_vm_proc		vm_proc;
 	unsigned char	c;
 
+	ft_printf("cmd_aff\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	c = (unsigned char)(read_param(&vm_proc, 0) % 256);
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,

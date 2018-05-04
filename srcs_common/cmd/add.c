@@ -21,6 +21,7 @@ int		cmd_add(t_vm *vm, int ipr)
 	int				ri2;
 	int				res;
 
+	ft_printf("cmd_add\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	ri1 = read_param(&vm_proc, 0);
 	ri2 = read_param(&vm_proc, 1);
