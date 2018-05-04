@@ -30,7 +30,9 @@ void	proc_exec(t_vm *vm, t_proc *proc)
 	if (proc->cmd_save.cycle_wating <= 0)
 	{
 		cmd = (t_cmd)proc->cmd_save.cmd;
-		cmd(vm, proc);
+		ft_printf("je suis ici\n");
+		cmd(vm, proc); // erreur avec envoi d'une adresse au lieu d'un int
+		vm_dump_mem(vm);
 		ft_bzero(&(proc->cmd_save), sizeof(t_cmd_save));
 	}
 }
