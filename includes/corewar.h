@@ -91,7 +91,6 @@ struct		s_vm_proc
 };
 typedef struct		s_vm_proc t_vm_proc;
 
-
 /*
 ** ???
 */

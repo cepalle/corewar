@@ -16,15 +16,15 @@
 
 int		cmd_aff(t_vm *vm, int ipr)
 {
+	t_vm_proc		vm_proc;
 	unsigned char	c;
-	int				er;
 
-	(void)vm;
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-									 vm->process[ipr].cmd_save.cmd_len);
-	c = (unsigned char)(read_param(vm->process + ipr, 0, &er) % 256);
-	if (er)
+	init_vm_proc(&vm, vm, ipr, 0);
+	c = (unsigned char)(read_param(&vm_proc, 0) % 256);
+	if (vm_proc.er)
 		return (0);
 	ft_printf("%c", c);
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+		vm->process[ipr].cmd_save.cmd_len);
 	return (1);
 }

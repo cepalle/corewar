@@ -26,6 +26,8 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 {
 	t_cmd_save cmd_sav;
 
+	if (vm_proc->er)
+		return (0);
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
@@ -53,6 +55,8 @@ void	set_param(t_vm_proc *vm_proc, int ipar, int data)
 {
 	t_cmd_save cmd_sav;
 
+	if (vm_proc->er)
+		return ;
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
