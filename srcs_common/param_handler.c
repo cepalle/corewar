@@ -26,6 +26,8 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 {
 	t_cmd_save cmd_sav;
 
+	if (vm_proc->er)
+		return (0);
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
@@ -53,17 +55,29 @@ void	set_param(t_vm_proc *vm_proc, int ipar, int data)
 {
 	t_cmd_save cmd_sav;
 
+	if (vm_proc->er)
+		return ;
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
-		*er = 1;
-		return (0);
+		if (cmd_sav.params[ipar] > 0 &&
+			cmd_sav.params[ipar] < 17)
+			vm_proc->vm->process[vm_proc->ipr].reg[cmd_sav.params[ipar]] = data;
+		else
+			vm_proc->er = 1;
 	}
-
-	else if ()
+	else if (cmd_sav.params_type[ipar] == IND_CODE)
 	{
-
+		if (vm_proc->idx_mod)
+			vm_write_4(vm_proc->vm,
+			cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
+			cmd_sav.params[ipar] % IDX_MOD),
+			(unsigned int)(data));
+		else
+			vm_write_4(vm_proc->vm,
+				cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
+				cmd_sav.params[ipar]),
+				(unsigned int)(data));
 	}
 	vm_proc->er = 1;
-	return (0);
 }

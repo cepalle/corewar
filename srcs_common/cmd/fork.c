@@ -16,20 +16,14 @@
 
 int		cmd_fork(t_vm *vm, int ipr)
 {
-	int 			er;
+	t_vm_proc		vm_proc;
 	int				p1;
 
-	(void)vm;
-	er = 0;
-	p1 = read_param(vm->process + ipr, 0, &er);
-	if (er)
-	{
-		vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-										 vm->process[ipr].cmd_save.cmd_len);
-		return (0);
-	}
-	vm_fork(vm, ipr, p1 % IDX_MOD);
+	init_vm_proc(&vm_proc, vm, ipr, 0);
+	p1 = read_param(&vm_proc, 0);
+	if (!vm_proc.er)
+		vm_fork(vm, ipr, p1 % IDX_MOD);
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 									 vm->process[ipr].cmd_save.cmd_len);
-	return (1);
+	return (!vm_proc.er);
 }
