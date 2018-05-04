@@ -16,7 +16,7 @@
 
 unsigned char 	vm_read_1(t_vm *vm, unsigned int PC)
 {
-	return (vm->tab[PC % MEM_SIZE]);
+	return (vm->tab[cal_PC_add(PC, 0)]);
 }
 
 unsigned short 	vm_read_2(t_vm *vm, unsigned int PC)
@@ -29,7 +29,7 @@ unsigned short 	vm_read_2(t_vm *vm, unsigned int PC)
 	while (i < 2)
 	{
 		stock = stock << 8;
-		stock = stock + vm->tab[(PC + i) % MEM_SIZE];
+		stock = stock + vm->tab[cal_PC_add(PC, i)];
 		i++;
 	}
 	swap_2(&stock);
@@ -46,7 +46,7 @@ unsigned int	vm_read_4(t_vm *vm, unsigned int PC)
 	while (i < 4)
 	{
 		stock = stock << 8;
-		stock = stock + vm->tab[(PC + i) % MEM_SIZE];
+		stock = stock + vm->tab[cal_PC_add(PC, i)];
 		i++;
 	}
 	swap_4(&stock);

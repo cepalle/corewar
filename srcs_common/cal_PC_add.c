@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   cal_PC.c                                         .::    .:/ .      .::   */
+/*   cal_PC_add.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -13,7 +13,7 @@
 
 #include "op.h"
 
-unsigned int	cal_PC(unsigned int PC, int to_add)
+unsigned int	cal_PC_add(unsigned int PC, int to_add)
 {
-	return ((PC + MEM_SIZE + to_add) % MEM_SIZE);
+	return ((PC + MEM_SIZE + (to_add % MEM_SIZE)) % MEM_SIZE);
 }

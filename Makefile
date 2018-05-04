@@ -38,7 +38,7 @@ C_FILES_NAMES_COMMON = op.c swap_char.c \
     vm_read.c \
     vm_write.c \
     vm_fork.c \
-    cal_PC.c
+    cal_PC_add.c
 
 C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	ast_to_byte/feed_label.c \

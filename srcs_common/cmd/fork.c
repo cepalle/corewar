@@ -21,11 +21,15 @@ int		cmd_fork(t_vm *vm, int ipr)
 
 	(void)vm;
 	er = 0;
-	vm->process[ipr].PC += vm->process[ipr].cmd_save.cmd_len;
-	vm->process[ipr].PC %= MEM_SIZE;
 	p1 = get_param(vm->process + ipr, 0, &er);
 	if (er)
+	{
+		vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+										 vm->process[ipr].cmd_save.cmd_len);
 		return (0);
+	}
 	vm_fork(vm, ipr, p1 % IDX_MOD);
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+									 vm->process[ipr].cmd_save.cmd_len);
 	return (1);
 }

@@ -112,7 +112,7 @@ void		vm_write_4(t_vm *vm,unsigned int PC, unsigned int data);
 int			get_param(t_proc *proc, int i, int *er);
 int			get_i_reg(t_proc *proc, int i, int *er);
 void		vm_fork(t_vm *vm, int ipr, int add);
-unsigned int	cal_PC(unsigned int PC, int to_add);
+unsigned int	cal_PC_add(unsigned int PC, int to_add);
 
 /*
 ** CMD

@@ -11,7 +11,6 @@ int		cmd_zjmp(t_vm *vm, int ipr)
 	p1 = get_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
-	vm->process[ipr].PC += p1; // IDX_MOD ?
-	vm->process[ipr].PC %= MEM_SIZE;
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC, p1);
 	return (1);
 }

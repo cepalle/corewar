@@ -6,8 +6,7 @@ void	vm_fork(t_vm *vm, int ipr, int add)
 	t_proc to_add;
 
 	to_add = vm->process[ipr];
-	to_add.PC += add;
-	to_add.PC %= MEM_SIZE;
+	to_add.PC = cal_PC_add(to_add.PC, add);
 	if (vm->nb_process >= vm->len_process)
 	{
 		vm->process = ft_realloc(vm->process,
