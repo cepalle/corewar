@@ -11,7 +11,6 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-
 #include <corewar.h>
 
 int		cmd_fork(t_vm *vm, int ipr)
@@ -24,6 +23,6 @@ int		cmd_fork(t_vm *vm, int ipr)
 	if (!vm_proc.er)
 		vm_fork(vm, ipr, p1 % IDX_MOD);
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-									 vm->process[ipr].cmd_save.cmd_len);
+		vm->process[ipr].cmd_save.cmd_len);
 	return (!vm_proc.er);
 }
