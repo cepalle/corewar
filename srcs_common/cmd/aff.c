@@ -21,10 +21,10 @@ int		cmd_aff(t_vm *vm, int ipr)
 
 	init_vm_proc(&vm, vm, ipr, 0);
 	c = (unsigned char)(read_param(&vm_proc, 0) % 256);
+	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
+		vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
 	ft_printf("%c", c);
-	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
-		vm->process[ipr].cmd_save.cmd_len);
 	return (1);
 }
