@@ -18,6 +18,7 @@ void	proc_exec(t_vm *vm, t_proc *proc)
 {
 	t_cmd cmd;
 
+	ft_printf("proc_exec\n");
 	if (!proc->cmd_save.cmd &&
 		!stock_cmd(vm, proc))
 	{

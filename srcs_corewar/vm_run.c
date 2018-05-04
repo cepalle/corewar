@@ -12,12 +12,14 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "libft.h" // a supprimer une fois debug termine
 
 int		check_end(t_vm *vm)
 {
 	int i;
 	int nb_player_alive;
 
+	ft_printf("check_end\n");
 	nb_player_alive = 0;
 	i = 0;
 	while (i < vm->nb_p)
@@ -36,6 +38,7 @@ int		check_nb_live_player(t_vm *vm)
 	int i;
 	int nb_live;
 
+	ft_printf("check_nb_live_player\n");
 	nb_live = 0;
 	i = 0;
 	while (i < vm->nb_p)
@@ -54,6 +57,7 @@ void	vm_run(t_vm *vm)
 	int		cycle_to_check;
 	int		nb_no_decr;
 
+	ft_printf("vm_run\n");
 	nb_cycle = 0;
 	cycle_last_check = nb_cycle;
 	cycle_to_check = CYCLE_TO_DIE;

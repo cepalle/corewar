@@ -26,8 +26,9 @@ int		main(int argc, char **argv)
 	vm_init(&vm, input);
 	vm_print(&vm);
 //	stock_cmd(&vm, vm.process);
-//	input_free(&input);
-//	vm_run(&vm);
-//	vm_free(&vm);
+	//input_free(&input);
+	vm_run(&vm);
+	vm_print(&vm);
+	//vm_free(&vm);
 	return (0);
 }

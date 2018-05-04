@@ -6,7 +6,7 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:27 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/30 11:53:53 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/04 10:43:23 by ppichier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,7 +70,7 @@ typedef char			t_arg_type;
 
 # define PROG_NAME_LENGTH	(128)
 # define COMMENT_LENGTH		(2048)
-# define COREWAR_EXEC_MAGIC	0xea83f3
+# define COREWAR_EXEC_MAGIC	0xa
 
 struct					s_header
 {

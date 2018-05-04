@@ -31,7 +31,6 @@ unsigned	short	vm_read_2(t_vm *vm, unsigned int pc)
 		stock = stock + vm->tab[cal_pc_add(pc, i)];
 		i++;
 	}
-	swap_2(&stock);
 	return (stock);
 }
 
@@ -48,6 +47,5 @@ unsigned	int		vm_read_4(t_vm *vm, unsigned int pc)
 		stock = stock + vm->tab[cal_pc_add(pc, i)];
 		i++;
 	}
-	swap_4(&stock);
 	return (stock);
 }

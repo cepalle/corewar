@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   vm_cycle.c                                       .::    .:/ .      .::   */
+/*   gen_champ.h                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:50:44 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:50:45 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/04 14:34:32 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/04 14:34:33 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <corewar.h>
-#include "libft.h" // a supprimer une fois debug termine
 
-void	vm_cycle(t_vm *vm)
-{
-	unsigned int	i;
+#ifndef GEN_CHAMP_H
+# define GEN_CHAMP_H
 
-	ft_printf("vm_cycle\n");
-	i = vm->nb_process;
-	while (i)
-	{
-		proc_exec(vm, vm->process + i - 1);
-		i--;
-	}
-}
+void		swap_2(unsigned short int *to_swap);
+void		swap_4(unsigned int *to_swap);
+
+#endif
