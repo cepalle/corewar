@@ -28,6 +28,7 @@ int		cmd_ld(t_vm *vm, int ipr)
 	ri = set_param(vm->process + ipr, 1, &er);
 	if (er)
 		return (0);
-	vm->process[ipr].reg[ri] = p;
+	vm->process[ipr].carry = 1;
+	vm->process[ipr].reg[ri] = p % IDX_MOD;
 	return (1);
 }

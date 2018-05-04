@@ -33,6 +33,7 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 			cmd_sav.params[ipar] < 17)
 			return vm_proc->vm->process->reg[cmd_sav.params[ipar]];
 		vm_proc->er = 1;
+		return (0);
 	}
 	if (cmd_sav.params_type[ipar] == IND_CODE)
 	{
@@ -45,10 +46,10 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 			cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
 			cmd_sav.params[ipar])));
 	}
-	return cmd_sav.params[ipar];
+	return (cmd_sav.params[ipar]);
 }
 
-int		set_param(t_vm_proc *vm_proc, int ipar, int data)
+void	set_param(t_vm_proc *vm_proc, int ipar, int data)
 {
 	t_cmd_save cmd_sav;
 
