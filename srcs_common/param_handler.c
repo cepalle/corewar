@@ -12,27 +12,56 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include "libft.h"
 
-int read_param(t_proc *proc, int i, int *er)
+void	init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod)
 {
-	if (proc->cmd_save.params_type[i] == REG_CODE)
-	{
-		if (proc->cmd_save.params[i] > 0 &&
-			proc->cmd_save.params[i] < 17)
-			return proc->reg[proc->cmd_save.params[i] - 1];
-		*er = 1;
-	}
-	return proc->cmd_save.params[i];
+	ft_bzero(vm_proc, sizeof(t_vm_proc));
+	vm_proc->vm = vm;
+	vm_proc->ipr = ipr;
+	vm_proc->idx_mod = idx_mod;
 }
 
-int set_param(t_proc *proc, int i, int *er)
+int		read_param(t_vm_proc *vm_proc, int ipar)
 {
-	if (proc->cmd_save.params_type[i] != REG_CODE ||
-		proc->cmd_save.params[i] > 16 ||
-		proc->cmd_save.params[i] < 1)
+	t_cmd_save cmd_sav;
+
+	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
+	if (cmd_sav.params_type[ipar] == REG_CODE)
+	{
+		if (cmd_sav.params[ipar] > 0 &&
+			cmd_sav.params[ipar] < 17)
+			return vm_proc->vm->process->reg[cmd_sav.params[ipar]];
+		vm_proc->er = 1;
+	}
+	if (cmd_sav.params_type[ipar] == IND_CODE)
+	{
+		if (vm_proc->idx_mod)
+			return (vm_read_4(vm_proc->vm,
+			cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
+			cmd_sav.params[ipar] % IDX_MOD)));
+		else
+			return (vm_read_4(vm_proc->vm,
+			cal_PC_add(vm_proc->vm->process[vm_proc->ipr].PC,
+			cmd_sav.params[ipar])));
+	}
+	return cmd_sav.params[ipar];
+}
+
+int		set_param(t_vm_proc *vm_proc, int ipar, int data)
+{
+	t_cmd_save cmd_sav;
+
+	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
+	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
 		*er = 1;
 		return (0);
 	}
-	return proc->cmd_save.params[i] - 1;
+	else if ()
+	{
+
+	}
+	vm_proc->er = 1;
+	return (0);
 }

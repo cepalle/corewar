@@ -12,19 +12,24 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include "libft.h"
 
 // TODO carry
 int		cmd_add(t_vm *vm, int ipr)
 {
-	int		er;
-	int		ri1;
-	int		ri2;
-	int		ri3;
+	t_param_handl	param_handl;
+	int				ri1;
+	int				ri2;
+	int				ri3;
 
-	er = 0;
 	(void)vm;
+	ft_bzero(&param_handl, sizeof(t_param_handl));
+	param_handl.vm = vm;
+	param_handl.ipr = ipr;
+
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 					vm->process[ipr].cmd_save.cmd_len);
+
 	ri1 = set_param(vm->process + ipr, 0, &er);
 	ri2 = set_param(vm->process + ipr, 1, &er);
 	ri3 = set_param(vm->process + ipr, 2, &er);
