@@ -16,7 +16,7 @@
 int		cmd_sti(t_vm *vm, int ipr)
 {
 	(void)vm;
-	(void)proc;
+	(void)ipr;
 	return (0);
 /*
 	int addr;

@@ -8,10 +8,10 @@ int		cmd_zjmp(t_vm *vm, int ipr)
 
 	er = 0;
 	(void)vm;
-	p1 = get_param(proc, 0, &er);
+	p1 = get_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
-	proc->PC += p1; // IDX_MOD ?
-	proc->PC %= MEM_SIZE;
+	vm->process[ipr].PC += p1; // IDX_MOD ?
+	vm->process[ipr].PC %= MEM_SIZE;
 	return (1);
 }

@@ -24,13 +24,13 @@ int		cmd_or(t_vm *vm, int ipr)
 
 	(void)vm;
 	er = 0;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	p1 = get_param(proc, 0, &er);
-	p2 = get_param(proc, 1, &er);
-	ri = get_i_reg(proc, 2, &er);
+	vm->process[ipr].PC += vm->process[ipr].cmd_save.cmd_len;
+	vm->process[ipr].PC %= MEM_SIZE;
+	p1 = get_param(vm->process + ipr, 0, &er);
+	p2 = get_param(vm->process + ipr, 1, &er);
+	ri = get_i_reg(vm->process + ipr, 2, &er);
 	if (er)
 		return (0);
-	proc->reg[ri] = p1 ^ p2;
+	vm->process[ipr].reg[ri] = p1 ^ p2;
 	return (1);
 }

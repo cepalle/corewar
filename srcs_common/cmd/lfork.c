@@ -20,11 +20,11 @@ int		cmd_lfork(t_vm *vm, int ipr)
 
 	(void)vm;
 	er = 0;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	p1 = get_param(proc, 0, &er);
+	vm->process[ipr].PC += vm->process[ipr].cmd_save.cmd_len;
+	vm->process[ipr].PC %= MEM_SIZE;
+	p1 = get_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
-	vm_fork(vm, proc, p1);
+	vm_fork(vm, vm->process + ipr, p1);
 	return (1);
 }

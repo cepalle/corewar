@@ -38,9 +38,9 @@ int			cmd_live(t_vm *vm, int ipr)
 
 	er = 0;
 	(void)vm;
-	proc->PC += proc->cmd_save.cmd_len;
-	proc->PC %= MEM_SIZE;
-	p1 = get_param(proc, 0, &er);
+	vm->process[ipr].PC += vm->process[ipr].cmd_save.cmd_len;
+	vm->process[ipr].PC %= MEM_SIZE;
+	p1 = get_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
 	player_add_live(vm, p1);

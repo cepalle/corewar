@@ -17,7 +17,7 @@
 int		cmd_lld(t_vm *vm, int ipr)
 {
 	(void)vm;
-	(void)proc;
+	(void)ipr;
 	return (0);
 
 //	ajouter % 4096? ou autre limite

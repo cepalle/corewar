@@ -17,7 +17,7 @@
 int		cmd_lldi(t_vm *vm, int ipr)
 {
 	(void)vm;
-	(void)proc;
+	(void)ipr;
 	return (0);
 
 //	ldi sans modulo
