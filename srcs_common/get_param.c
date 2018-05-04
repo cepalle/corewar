@@ -22,7 +22,7 @@ int get_param(t_proc *proc, int i, int *er)
 			return proc->reg[proc->cmd_save.params[i] - 1];
 		*er = 1;
 	}
-	return proc->cmd_save.params[i];
+	return (proc->cmd_save.params[i]);
 }
 
 int get_i_reg(t_proc *proc, int i, int *er)
@@ -34,5 +34,5 @@ int get_i_reg(t_proc *proc, int i, int *er)
 		*er = 1;
 		return (0);
 	}
-	return proc->cmd_save.params[i] - 1;
+	return (proc->cmd_save.params[i] - 1);
 }
