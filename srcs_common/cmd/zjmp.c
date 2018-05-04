@@ -8,7 +8,7 @@ int		cmd_zjmp(t_vm *vm, int ipr)
 
 	er = 0;
 	(void)vm;
-	p1 = get_param(vm->process + ipr, 0, &er);
+	p1 = read_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC, p1);

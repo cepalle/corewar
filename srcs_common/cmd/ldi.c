@@ -24,9 +24,9 @@ int		cmd_ldi(t_vm *vm, int ipr)
 	(void)vm;
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 									 vm->process[ipr].cmd_save.cmd_len);
-	p1 = get_param(vm->process + ipr, 0, &er);
-	p2 = get_param(vm->process + ipr, 1, &er);
-	ri3 = get_i_reg(vm->process + ipr, 2, &er);
+	p1 = read_param(vm->process + ipr, 0, &er);
+	p2 = read_param(vm->process + ipr, 1, &er);
+	ri3 = set_param(vm->process + ipr, 2, &er);
 	if (er)
 		return (0);
 	// READ a l'exec ?

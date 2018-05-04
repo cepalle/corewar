@@ -40,7 +40,7 @@ int			cmd_live(t_vm *vm, int ipr)
 	(void)vm;
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 									 vm->process[ipr].cmd_save.cmd_len);
-	p1 = get_param(vm->process + ipr, 0, &er);
+	p1 = read_param(vm->process + ipr, 0, &er);
 	if (er)
 		return (0);
 	player_add_live(vm, p1);

@@ -24,8 +24,8 @@ int		cmd_ld(t_vm *vm, int ipr)
 	(void)vm;
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 									 vm->process[ipr].cmd_save.cmd_len);
-	p = get_param(vm->process + ipr, 0, &er);
-	ri = get_i_reg(vm->process + ipr, 1, &er);
+	p = read_param(vm->process + ipr, 0, &er);
+	ri = set_param(vm->process + ipr, 1, &er);
 	if (er)
 		return (0);
 	vm->process[ipr].reg[ri] = p;

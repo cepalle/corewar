@@ -21,7 +21,7 @@ int		cmd_fork(t_vm *vm, int ipr)
 
 	(void)vm;
 	er = 0;
-	p1 = get_param(vm->process + ipr, 0, &er);
+	p1 = read_param(vm->process + ipr, 0, &er);
 	if (er)
 	{
 		vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
