@@ -13,21 +13,18 @@
 
 #include <corewar.h>
 
-// TODO carry
 int		cmd_ld(t_vm *vm, int ipr)
 {
-	int		er;
-	int		ri;
-	int		p;
+	t_vm_proc		vm_proc;
+	int				ri1;
 
-	er = 0;
-	(void)vm;
+	init_vm_proc(&vm_proc, vm, ipr, 1);
+	ri1 = read_param(&vm_proc, 0);
+	load_param(&vm_proc, 1, ri1);
 	vm->process[ipr].PC = cal_PC_add(vm->process[ipr].PC,
 									 vm->process[ipr].cmd_save.cmd_len);
-	p = read_param(vm->process + ipr, 0, &er);
-	ri = set_param(vm->process + ipr, 1, &er);
-	if (er)
+	if (vm_proc.er)
 		return (0);
-	vm->process[ipr].reg[ri] = p;
+	vm->process[ipr].carry = 1;
 	return (1);
 }
