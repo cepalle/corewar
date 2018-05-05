@@ -170,5 +170,4 @@ test1_diff: make_test
 	@./corewar ./champs/examples/my_scnd_test.cor ./champs/examples/my_test.cor -d $(NB_DUMP) | grep "0x0" > test_my
 	diff test_ref test_my
 
-.PHONY: all clean re fclean
-
+.PHONY: all clean re fclean make_test

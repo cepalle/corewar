@@ -8,22 +8,22 @@ Dieu est la plus belle invention.
 Tapis dans l'ombre je veille. - Minou"
 
 start:
-	ld -42, r2
-	zjmp %:begin
+	ld -42, r2              # 5
+#	zjmp %:begin
 first_attack:
-	sti r10, r15, r9
-	live %42
-	zjmp %-410
+	sti r10, r15, r9        # 30
+	live %42                # 40
+#	zjmp %-410
 p2:
-	ld %50986512, r10		# 02 90 03 09 fe 10 0a
-	ld %-392, r9
+	ld %50986512, r10		# 02 90 03 09 fe 10 0a  # 45
+	ld %-392, r9                                    # 50
 	ld %84540929, r2		# 02 90 05 09 fe 01 02
 	ld %-487, r3
 	ld %118095856, r4		# 02 90 07 09 ff f0 04
 	ld %-502, r5
 	ld %-7, r7
 	ld -511, r1
-	zjmp %:first_attack
+#	zjmp %:first_attack
 begin:
 	ld %55575553, r8		# 02 90 03 50 04 01 08
 	st r1, r15				# 03 50 01 0f
@@ -40,7 +40,7 @@ p1:
 	ld %-506, r5
 	ld %-11, r7
 	ld -511, r1
-	zjmp %:first_attack
+#	zjmp %:first_attack
 store_def:
 	st r4, -37
 	st r4, -47
@@ -88,7 +88,7 @@ store_def:
 	st r4, -467
 	st r4, -477
 	live %42
-	zjmp %:store_def
+#	zjmp %:store_def
 def:
 	ld %252645135, r4		# 02 90 0f 0f 0f 0f 04
 	live %42
@@ -97,7 +97,7 @@ def:
 	st r15, -27
 inside:
 	live %42
-	zjmp %:store_def
+#	zjmp %:store_def
 second_attack:
 #	st r15, 6
 	live %42
@@ -113,7 +113,7 @@ s1:
 	ld %190055429, r2		# 0b 54 04 05
 	ld %33554431, r6		# 01 ff ff ff
 	ld 511, r1
-	zjmp %:go_erase
+#	zjmp %:go_erase
 second_bis:
 	live %42
 	fork %:s4
@@ -124,7 +124,7 @@ s2:
 #	st r15, 11
 	ld 17, r6
 	ld 511, r1
-	zjmp %:go_erase
+#	zjmp %:go_erase
 unused:
 	live %42
 	sti r2, r3, r1
@@ -134,13 +134,13 @@ s3:
 	ld %50401039, r2		# 03 01 0f 0f
 	st r2, r6
 	ld 511, r1
-	zjmp %:go_erase
+#	zjmp %:go_erase
 s4:
 	st r15, -42
 	ld %511, r3
 	ld %496, r5
 	st r4, r2
 	st r4, r6				# 0f 0f 0f 0f
-	zjmp%:go_erase			#just for waiting 20 cycles
+#	zjmp%:go_erase			#just for waiting 20 cycles
 go_erase:
 	sti r2, r3, r1
