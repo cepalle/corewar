@@ -20,19 +20,19 @@ void	vm_dump_mem(t_vm *vm)
 	int j;
 
 	i = 0;
-	while (i < MEM_SIZE / 32)
+	while (i < MEM_SIZE / 64)
 	{
 		j = 0;
 		if (i)
-			ft_printf("%#.4x: ", i * 32);
+			ft_printf("%#.4x: ", i * 64);
 		else
 			ft_printf("0x0000: ");
-		while (j < 32)
+		while (j < 64)
 		{
-			if (vm->tab[i * 32 + j])
-				ft_printf("\033[31m%.2hhx\033[0m ", vm->tab[i * 32 + j]);
+			if (vm->tab[i * 64 + j])
+				ft_printf("\033[31m%.2hhx\033[0m ", vm->tab[i * 64 + j]);
 			else
-				ft_printf("%.2hhx ", vm->tab[i * 32 + j]);
+				ft_printf("%.2hhx ", vm->tab[i * 64 + j]);
 			j++;
 		}
 		ft_printf("\n");
