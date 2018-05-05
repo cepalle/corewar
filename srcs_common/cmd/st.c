@@ -20,7 +20,7 @@ int		cmd_st(t_vm *vm, int ipr)
 	int				p1;
 
 	ft_printf("cmd_st\n");
-	init_vm_proc(&vm_proc, vm, ipr, 0);
+	init_vm_proc(&vm_proc, vm, ipr, 1);
 	p1 = read_param(&vm_proc, 0);
 	ft_printf("data: %d\n", p1);
 	load_param(&vm_proc, 1, p1);

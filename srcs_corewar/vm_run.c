@@ -19,7 +19,7 @@ int		check_end(t_vm *vm)
 	int i;
 	int nb_player_alive;
 
-	ft_printf("check_end\n");
+//	ft_printf("check_end\n");
 	nb_player_alive = 0;
 	i = 0;
 	while (i < vm->nb_p)
@@ -38,7 +38,7 @@ int		check_nb_live_player(t_vm *vm)
 	int i;
 	int nb_live;
 
-	ft_printf("check_nb_live_player\n");
+//	ft_printf("check_nb_live_player\n");
 	nb_live = 0;
 	i = 0;
 	while (i < vm->nb_p)
@@ -57,7 +57,7 @@ void	vm_run(t_vm *vm)
 	int		cycle_to_check;
 	int		nb_no_decr;
 
-	ft_printf("vm_run\n");
+//	ft_printf("vm_run\n");
 	nb_cycle = 0;
 	cycle_last_check = nb_cycle;
 	cycle_to_check = CYCLE_TO_DIE;
@@ -65,7 +65,7 @@ void	vm_run(t_vm *vm)
 	while (!vm->d || vm->d_nb >= nb_cycle)
 	{
 		ft_printf("### CYCLE %d\n", nb_cycle);
-		ft_printf("d_nb %d\n", vm->d_nb);
+		//ft_printf("d_nb %d\n", vm->d_nb);
 		vm_cycle(vm);
 		nb_cycle++;
 		if (nb_cycle - cycle_last_check >= cycle_to_check)

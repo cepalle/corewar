@@ -16,6 +16,7 @@
 
 unsigned int	cal_pc_add(unsigned int pc, int to_add)
 {
-	ft_printf("get_op_name\n");
+	ft_printf("cal_pc_add\n");
+	ft_printf("PC: %u to_add: %d res: %u\n", pc, to_add, (pc + MEM_SIZE + (to_add % MEM_SIZE)) % MEM_SIZE);
 	return ((pc + MEM_SIZE + (to_add % MEM_SIZE)) % MEM_SIZE);
 }
