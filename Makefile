@@ -175,7 +175,7 @@ ppichier_test_diff:
 	./bin_ref/asm ./champs/examples/bigzork.s
 	make corewar
 	./bin_ref/corewar ./champs/examples/bigzork.cor ./champs/examples/ppichier_test.cor  -d $(NB_DUMP) | grep "0x0" > ppichier_test_ref
-	./corewar ./champs/examples/bigzork.cor ./champs/examples/ppichier_test.cor -d $(NB_DUMP) | grep "0x0" > ppichier_test_my
+	./corewar ./champs/examples/ppichier_test.cor ./champs/examples/bigzork.cor -d $(NB_DUMP) | grep "0x0" > ppichier_test_my
 	diff ppichier_test_ref ppichier_test_my
 
 .PHONY: all clean re fclean make_test
