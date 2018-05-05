@@ -15,7 +15,8 @@
 # define COREWAR_H
 
 # define REG_CONTENT_SIZE 4
-# define LEN_INIT_PROC 8
+# define LEN_INIT_PROC    8
+# define DUMP_LEN         64
 
 # include <stdlib.h>
 # include <unistd.h>

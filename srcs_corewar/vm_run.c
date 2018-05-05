@@ -64,7 +64,7 @@ void	vm_run(t_vm *vm)
 	nb_no_decr = 0;
 	while (!vm->d || vm->d_nb >= nb_cycle)
 	{
-		ft_printf("### CYCLE %d\n", nb_cycle);
+		//ft_printf("### CYCLE %d\n", nb_cycle);
 		//ft_printf("d_nb %d\n", vm->d_nb);
 		vm_cycle(vm);
 		nb_cycle++;
