@@ -64,6 +64,7 @@ void	vm_run(t_vm *vm)
 	nb_no_decr = 0;
 	while (!vm->d || vm->d_nb >= nb_cycle)
 	{
+		ft_printf("### CYCLE %d\n", nb_cycle);
 		vm_cycle(vm);
 		nb_cycle++;
 		if (nb_cycle - cycle_last_check >= cycle_to_check)
