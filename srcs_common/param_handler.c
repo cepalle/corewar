@@ -30,11 +30,12 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 //	ft_printf("read_param\n");
 	if (vm_proc->er)
 		return (0);
+	ft_printf("vm_proc->ipr = %d\n", vm_proc->ipr);
+	ft_printf("r1 = %d\n", vm_proc->vm->process[0].cmd_save.params[ipar]);
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
 //	ft_printf("cmd_sav.params %d\n", cmd_sav.params[ipar]);
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
-
 		if (cmd_sav.params[ipar] > 0 &&
 			cmd_sav.params[ipar] < 17)
 			return (vm_proc->vm->process[vm_proc->ipr].reg[cmd_sav.params[ipar] - 1]);
@@ -52,7 +53,12 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
 										cmd_sav.params[ipar])));
 	}
-	return (cmd_sav.params[ipar]);
+	else
+	{
+		ft_printf("je suis la ds la commande\n");
+		ft_printf("ipar = %d\n", ipar);
+		return (cmd_sav.params[ipar]);
+	}
 }
 
 void	load_param(t_vm_proc *vm_proc, int ipar, int data)
