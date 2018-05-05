@@ -18,7 +18,7 @@ void	vm_cycle(t_vm *vm)
 {
 	unsigned int	i;
 
-	ft_printf("vm_cycle\n");
+//	ft_printf("vm_cycle\n");
 	i = vm->nb_process;
 	while (i)
 	{

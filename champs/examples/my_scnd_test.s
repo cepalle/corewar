@@ -2,4 +2,4 @@
 .comment "C EST MON TEST"
 
 ld %888888888, r1 
-st r1, -516
+st r1, 400
