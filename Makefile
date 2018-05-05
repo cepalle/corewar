@@ -87,7 +87,8 @@ C_FILES_NAMES_COREWAR = main.c \
     vm_free.c \
     input_free.c \
     header_print.c \
-    vm_dump_mem.c
+    vm_dump_mem.c \
+    player_handler.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))
@@ -166,8 +167,11 @@ test1_corewar: make_test
 	./corewar -n 333333333 ./champs/examples/my_scnd_test.cor -n 2222222 ./champs/examples/my_test.cor -d $(NB_BUMP)
 
 test1_diff: make_test
-	./bin_ref/corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_ref
-	./corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_my
+	./bin_ref/corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_ref || true
+	./corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_my || true
 	diff test_ref test_my
+
+test_all_turn: make_test
+	sh ./test_corewar/test.sh $(NB_DUMP)
 
 .PHONY: all clean re fclean make_test

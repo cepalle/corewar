@@ -106,6 +106,10 @@ void			proc_exec(t_vm *vm, int ipr);
 unsigned char 	vm_read_1(t_vm *vm, unsigned int PC);
 unsigned short 	vm_read_2(t_vm *vm, unsigned int PC);
 unsigned int	vm_read_4(t_vm *vm, unsigned int PC);
+void			reset_live(t_vm *vm);
+int				check_nb_live_player(t_vm *vm);
+int				count_player_alive(t_vm *vm);
+void			kill_player(t_vm *vm);
 
 /*
 ** UTILS
