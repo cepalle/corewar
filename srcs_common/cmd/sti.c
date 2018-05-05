@@ -17,21 +17,22 @@
 int		cmd_sti(t_vm *vm, int ipr)
 {
 	t_vm_proc		vm_proc;
-	int				ri1;
-	int				ri2;
+	int				p1;
+	int				p2;
+	int				p3;
 	int				res;
 
 	ft_printf("cmd_sti\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
-	ri1 = read_param(&vm_proc, 1);
-	ri2 = read_param(&vm_proc, 2);
-	res = ri1 + ri2;
-	vm_write_4(vm, vm->process[ipr].PC + res,
-			(unsigned int)(vm->process[ipr].cmd_save.params[0]));
+	p1 = read_param(&vm_proc, 0);
+	p2 = read_param(&vm_proc, 1);
+	p3 = read_param(&vm_proc, 2);
+	res = p2 + p3;
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
-									vm->process[ipr].cmd_save.cmd_len);
+									 vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
+	vm_write_4(vm, cal_pc_add(vm->process[ipr].PC, res), (unsigned int)p1);
 	vm->process[ipr].carry = 1;
 	return (1);
 }
