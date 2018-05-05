@@ -84,5 +84,6 @@ void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 								cmd_sav.params[ipar]),
 				(unsigned int)(data));
 	}
-	vm_proc->er = 1;
+	else
+		vm_proc->er = 1;
 }
