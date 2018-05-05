@@ -155,4 +155,11 @@ fclean_not_lib: clean
 	rm -f $(ASM_NAME)
 	rm -f $(COREWAR_NAME)
 
+test1_corewar:
+	@./bin_ref/asm ./champs/examples/my_test.s
+	@./bin_ref/asm ./champs/examples/my_scnd_test.s
+	@make corewar
+	./corewar -n 333333333 ./champs/examples/my_scnd_test.cor -n 2222222 ./champs/examples/my_test.cor -d 6
+
 .PHONY: all clean re fclean
+

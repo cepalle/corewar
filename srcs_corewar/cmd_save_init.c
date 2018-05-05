@@ -60,7 +60,7 @@ static	int 	ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
 	right = 6;
 	while (i < gopt()[op].nb_arg)
 	{
-		tmp = vm->tab[(processor->PC + 1) % MEM_SIZE]; // TODO remplacer par cal_PC_add ?
+		tmp = vm->tab[cal_pc_add(processor->PC, 1)]; // TODO remplacer par cal_PC_add ?
 		tmp = tmp & masque;
 		tmp = tmp >> right;
 		masque = masque >> 2;
@@ -80,7 +80,7 @@ static	int 	ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor)
 
 	ft_printf("ft_cmd_save_error_oct_params\n");
 	i = 0;
-	tmp = vm->tab[(processor->PC + 1) % MEM_SIZE]; // TODO remplacer par cal_PC_add ?
+	tmp = vm->tab[cal_pc_add(processor->PC, 1)]; // TODO remplacer par cal_PC_add ? // vm->tab[cal_pc_add(process->PC, 1)]
 	tmp = tmp << 6;
 	if (tmp != 0)
 	{
@@ -157,7 +157,7 @@ static	int		ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op) // rempla
 			processor->cmd_save.params_type[i] = 3;
 			processor->cmd_save.params_size[i] = 2; 							//TODO a checker si size = 2 ou 4 !!
 			ind_value = vm_read_2(vm, cal_pc_add(vm->process->PC, cpt));
-			processor->cmd_save.params[i] = ind_value;
+			processor->cmd_save.params[i] = (signed short)ind_value;
 			cpt = cpt + 2;
 		}
 		left = left + 2;
