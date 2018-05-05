@@ -1,7 +1,9 @@
 ASM_NAME = asm
 COREWAR_NAME = corewar
 
-NB_DUMP = 1
+NB_DUMP = 128
+CHAMP1 = ./champs/examples/my_test.cor
+CHAMP2 = ./champs/examples/my_scnd_test.cor
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -167,11 +169,11 @@ test1_corewar: make_test
 	./corewar -n 333333333 ./champs/examples/my_scnd_test.cor -n 2222222 ./champs/examples/my_test.cor -d $(NB_BUMP)
 
 test1_diff: make_test
-	./bin_ref/corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_ref || true
-	./corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_my || true
+	./bin_ref/corewar $(CHAMP1) $(CHAMP2) -d $(NB_DUMP) | grep "0x0" > test_ref || true
+	./corewar  $(CHAMP1) $(CHAMP2) -d $(NB_DUMP) | grep "0x0" > test_my || true
 	diff test_ref test_my
 
 test_all_turn: make_test
-	sh ./test_corewar/test.sh
+	sh ./test_corewar/test.sh $(CHAMP1) $(CHAMP2) $(NB_DUMP)
 
 .PHONY: all clean re fclean make_test
