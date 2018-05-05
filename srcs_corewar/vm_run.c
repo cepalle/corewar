@@ -58,7 +58,7 @@ void	vm_run(t_vm *vm)
 	int		nb_no_decr;
 
 //	ft_printf("vm_run\n");
-	nb_cycle = 0;
+	nb_cycle = 1;
 	cycle_last_check = nb_cycle;
 	cycle_to_check = CYCLE_TO_DIE;
 	nb_no_decr = 0;
