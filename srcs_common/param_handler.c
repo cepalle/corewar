@@ -31,7 +31,7 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 	if (vm_proc->er)
 		return (0);
 	ft_printf("je fonctionne\n");
-	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save; //segfault
+	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
 	ft_printf("je te jure que c'est ici\n");
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
