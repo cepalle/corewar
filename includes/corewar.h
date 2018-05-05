@@ -101,7 +101,7 @@ void			vm_run(t_vm *vm);
 void			vm_cycle(t_vm *vm);
 void			vm_print(t_vm *vm);
 int 			stock_cmd(t_vm *vm, t_proc *processor);
-void			proc_exec(t_vm *vm, t_proc *proc);
+void			proc_exec(t_vm *vm, int ipr);
 unsigned char 	vm_read_1(t_vm *vm, unsigned int PC);
 unsigned short 	vm_read_2(t_vm *vm, unsigned int PC);
 unsigned int	vm_read_4(t_vm *vm, unsigned int PC);

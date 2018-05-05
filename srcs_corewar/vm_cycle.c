@@ -22,7 +22,7 @@ void	vm_cycle(t_vm *vm)
 	i = vm->nb_process;
 	while (i)
 	{
-		proc_exec(vm, vm->process + i - 1);
+		proc_exec(vm, i - 1);
 		i--;
 	}
 }

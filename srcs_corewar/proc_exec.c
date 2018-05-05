@@ -14,25 +14,24 @@
 #include <corewar.h>
 #include "libft.h"
 
-void	proc_exec(t_vm *vm, t_proc *proc)
+void	proc_exec(t_vm *vm, int ipr)
 {
 	t_cmd cmd;
 
 	ft_printf("proc_exec\n");
-	if (!proc->cmd_save.cmd &&
-		!stock_cmd(vm, proc))
+	if (!vm->process[ipr].cmd_save.cmd &&
+		!stock_cmd(vm, vm->process + ipr))
 	{
-		proc->PC++;
-		proc->PC %= MEM_SIZE;
+		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, 1);
 		return ;
 	}
-	proc->cmd_save.cycle_wating--;
-	if (proc->cmd_save.cycle_wating <= 0)
+	vm->process[ipr].cmd_save.cycle_wating--;
+	if (vm->process[ipr].cmd_save.cycle_wating <= 0)
 	{
-		cmd = (t_cmd)proc->cmd_save.cmd;
+		cmd = (t_cmd)vm->process[ipr].cmd_save.cmd;
 		ft_printf("je suis ici\n");
-		cmd(vm, proc); // erreur avec envoi d'une adresse au lieu d'un int
+		cmd(vm, ipr);
 		vm_dump_mem(vm);
-		ft_bzero(&(proc->cmd_save), sizeof(t_cmd_save));
+		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
 	}
 }
