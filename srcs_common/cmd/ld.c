@@ -22,10 +22,6 @@ int		cmd_ld(t_vm *vm, int ipr)
 	ft_printf("\ncmd_ld %d\n", ipr);
 	init_vm_proc(&vm_proc, vm, ipr, 1);
 	p1 = read_param(&vm_proc, 0);
-
-	ft_printf("read %d == %d\n", p1, vm->process[ipr].cmd_save.params[0]);
-	ft_printf("num reg %d\n" , vm->process[ipr].cmd_save.params[1]);
-
 	load_param(&vm_proc, 1, p1);
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
 		vm->process[ipr].cmd_save.cmd_len);

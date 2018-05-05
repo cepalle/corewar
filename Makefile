@@ -166,8 +166,8 @@ test1_corewar: make_test
 	./corewar -n 333333333 ./champs/examples/my_scnd_test.cor -n 2222222 ./champs/examples/my_test.cor -d $(NB_BUMP)
 
 test1_diff: make_test
-	./bin_ref/corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_ref
-	./corewar ./champs/examples/my_test.cor ./champs/examples/my_scnd_test.cor -d $(NB_DUMP) | grep "0x0" > test_my
+	./bin_ref/corewar ./champs/aurollan.cor ./champs/cepalle.cor -d $(NB_DUMP) | grep "0x0" > test_ref
+	./corewar ./champs/aurollan.cor ./champs/cepalle.cor -d $(NB_DUMP) | grep "0x0" > test_my
 	diff test_ref test_my
 
 ppichier_test_diff:
