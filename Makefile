@@ -172,6 +172,6 @@ test1_diff: make_test
 	diff test_ref test_my
 
 test_all_turn: make_test
-	sh ./test_corewar/test.sh $(NB_DUMP)
+	sh ./test_corewar/test.sh
 
 .PHONY: all clean re fclean make_test
