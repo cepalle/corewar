@@ -24,9 +24,9 @@ void	vm_dump_mem(t_vm *vm)
 	{
 		j = 0;
 		if (i)
-			ft_printf("%#.4x: ", i * DUMP_LEN);
+			ft_printf("%#.4x : ", i * DUMP_LEN);
 		else
-			ft_printf("0x0000: ");
+			ft_printf("0x0000 : ");
 		while (j < DUMP_LEN)
 		{
 			if (vm->tab[i * DUMP_LEN + j])
@@ -40,3 +40,5 @@ void	vm_dump_mem(t_vm *vm)
 		i++;
 	}
 }
+
+

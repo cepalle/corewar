@@ -22,17 +22,17 @@ static	void	ft_fill_player(t_input *input, int fd)
 
 	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
 	if (ret != sizeof(t_header))
-		ft_printf("Error read\n");
-	ft_printf("befor swap: %d\n", input->head[input->nb_p].magic);
+		//ft_printf("Error read\n");
+	//ft_printf("befor swap: %d\n", input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].magic);
-	ft_printf("after swap: %d\n", input->head[input->nb_p].magic);
+	//ft_printf("after swap: %d\n", input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].prog_size);
 	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
 							input->head[input->nb_p].prog_size);
 	ret = read(fd, input->prog[input->nb_p],
 		input->head[input->nb_p].prog_size);
-	if (ret != sizeof(input->head[input->nb_p].prog_size))
-		ft_printf("Error read\n");
+//	if (ret != sizeof(input->head[input->nb_p].prog_size))
+		//ft_printf("Error read\n");
 }
 
 static	int		ft_check_player(char *argv, t_input *input)
@@ -46,12 +46,12 @@ static	int		ft_check_player(char *argv, t_input *input)
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf("Unreachable file\n");
+		//ft_printf("Unreachable file\n");
 		return (0);
 	}
 	if (input->nb_p >= MAX_PLAYERS)
 	{
-		ft_printf("too many player\n");
+		//ft_printf("too many player\n");
 		return (0);
 	}
 	ft_fill_player(input, fd);
@@ -70,17 +70,17 @@ static	int		ft_check_champ_num(char **argv, t_input *input,
 		{
 			if (ft_atoi(argv[*a]) < 0)
 			{
-				ft_printf("nombre negatif non accepte\n");
+				//ft_printf("nombre negatif non accepte\n");
 				return (0);
 			}
 			input->num_player[input->nb_p] = ft_atoi(argv[*a]);
-			ft_printf("j'ai attribue le numero %d au joueur %d\n",
-					input->num_player[input->nb_p], input->nb_p);
+			//ft_printf("j'ai attribue le numero %d au joueur %d\n",
+//					input->num_player[input->nb_p], input->nb_p);
 		}
 	}
 	if (*a + 1 == argc)
 	{
-		ft_printf("c'est meme pas la peine d'essayer tu passes pas\n");
+		//ft_printf("c'est meme pas la peine d'essayer tu passes pas\n");
 		return (1);
 	}
 	return (1);
@@ -93,7 +93,7 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 			return (1);
 	if (ft_strcmp(argv[*a], "-d") == 0)
 	{
-		ft_printf("-d option enable\n");
+		//ft_printf("-d option enable\n");
 		input->d = 1;
 		input->d_nb = 0;
 		if (*a + 1 < argc)
@@ -103,13 +103,13 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 			if (input->d_nb < 0)
 				input->d = 0;
 		}
-		ft_printf("nb_d = %d, d = %d\n", input->d_nb, input->d);
+		//ft_printf("nb_d = %d, d = %d\n", input->d_nb, input->d);
 		return (1);
 	}
 	if (ft_strcmp(argv[*a], "-nc") == 0)
 	{
 		input->nc = 1;
-		ft_printf("Ncurses output mode\n");
+		//ft_printf("Ncurses output mode\n");
 		return (1);
 	}
 	return (0);
@@ -125,7 +125,7 @@ static	int		ft_check_arg(char **argv, t_input *input, int argc)
 		if (ft_check_option(argv, input, &a, argc) == 0
 			&& ft_check_player(argv[a], input) == 0)
 		{
-			ft_printf("Can't read source file %s\n", argv[a]);
+			//ft_printf("Can't read source file %s\n", argv[a]);
 			return (0);
 		}
 		if (a < argc)
@@ -147,7 +147,7 @@ static	int		ft_check_double_num(int *tab, int size)
 		{
 			if (tab[a] == tab[b] && tab[a] != -1)
 			{
-				ft_printf("test pas les doublons\n");
+				//ft_printf("test pas les doublons\n");
 				return (0);
 			}
 			b++;
@@ -178,7 +178,7 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 		if (input->num_player[input->nb_p] != -1 ||
 				ft_check_double_num(input->num_player, MAX_PLAYERS) == 0)
 		{
-			ft_printf("Numero attribue a un champion qui nexiste pas\n");
+			//ft_printf("Numero attribue a un champion qui nexiste pas\n");
 			return (0);
 		}
 	}

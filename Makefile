@@ -1,6 +1,8 @@
 ASM_NAME = asm
 COREWAR_NAME = corewar
 
+NB_DUMP = 1
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -155,11 +157,18 @@ fclean_not_lib: clean
 	rm -f $(ASM_NAME)
 	rm -f $(COREWAR_NAME)
 
-test1_corewar:
+make_test:
 	@./bin_ref/asm ./champs/examples/my_test.s
 	@./bin_ref/asm ./champs/examples/my_scnd_test.s
 	@make corewar
-	./corewar -n 333333333 ./champs/examples/my_scnd_test.cor -n 2222222 ./champs/examples/my_test.cor -d 1
+
+test1_corewar: make_test
+	./corewar -n 333333333 ./champs/examples/my_scnd_test.cor -n 2222222 ./champs/examples/my_test.cor -d $(NB_BUMP)
+
+test1_diff: make_test
+	@./bin_ref/corewar ./champs/examples/my_scnd_test.cor ./champs/examples/my_test.cor -d $(NB_DUMP) | grep "0x0" > test_ref
+	@./corewar ./champs/examples/my_scnd_test.cor ./champs/examples/my_test.cor -d $(NB_DUMP) | grep "0x0" > test_my
+	diff test_ref test_my
 
 .PHONY: all clean re fclean
 
