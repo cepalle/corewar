@@ -72,9 +72,12 @@ void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 	else if (cmd_sav.params_type[ipar] == IND_CODE)
 	{
 		if (vm_proc->idx_mod)
+		{
 			vm_write_4(vm_proc->vm,
-			cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
-			cmd_sav.params[ipar] % IDX_MOD), (unsigned int)(data));
+					   cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+								  cmd_sav.params[ipar] % IDX_MOD),
+					   (unsigned int) (data));
+		}
 		else
 			vm_write_4(vm_proc->vm,
 					cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,

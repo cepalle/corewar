@@ -24,8 +24,8 @@ int		main(int argc, char **argv)
 	if (input_cmdline(argc, argv, &input) == 0)
 		return (1);
 	vm_init(&vm, input);
+
 //	vm_print(&vm);
-//	stock_cmd(&vm, vm.process);
 	input_free(&input);
 	vm_run(&vm);
 	//vm_print(&vm);
