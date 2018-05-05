@@ -23,9 +23,9 @@ static	void	ft_fill_player(t_input *input, int fd)
 	ret = read(fd, &input->head[input->nb_p], sizeof(t_header));
 	if (ret != sizeof(t_header))
 		ft_printf("Error read\n");
-	ft_printf("befor swap: %d\n", input->head[input->nb_p].magic);
+//	ft_printf("befor swap: %d\n", input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].magic);
-	ft_printf("after swap: %d\n", input->head[input->nb_p].magic);
+//	ft_printf("after swap: %d\n", input->head[input->nb_p].magic);
 	swap_4(&input->head[input->nb_p].prog_size);
 	input->prog[input->nb_p] = ft_memalloc(sizeof(char) *
 							input->head[input->nb_p].prog_size);
