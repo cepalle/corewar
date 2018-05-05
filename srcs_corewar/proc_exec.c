@@ -32,6 +32,7 @@ void	proc_exec(t_vm *vm, int ipr)
 		ft_printf("je suis ici\n");
 		cmd(vm, ipr);
 		vm_dump_mem(vm);
+		ft_printf("\n");
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
 	}
 }
