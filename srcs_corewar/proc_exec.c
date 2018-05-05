@@ -30,7 +30,8 @@ void	proc_exec(t_vm *vm, int ipr)
 	{
 		cmd = (t_cmd)vm->process[ipr].cmd_save.cmd;
 //		ft_printf("je suis ici\n");
-		cmd(vm, ipr);
+		if (!((cmd(vm, ipr))))
+			ft_printf("error cmd\n");
 //		vm_dump_mem(vm);
 //		ft_printf("\n");
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));

@@ -72,6 +72,7 @@ static	void			process_init(t_vm *vm, t_input input)
 	{
 		vm->process[a].PC = res;
 		vm->process[a].carry = 0;
+		ft_printf("\n\n\nle numero du pc est de %d \n\n\n\n", res);
 		ft_memcpy(vm->tab + res, input.prog[a], input.head[a].prog_size);
 		res = res + placement;
 		ft_bzero(&vm->process[a].cmd_save, sizeof(t_cmd_save));

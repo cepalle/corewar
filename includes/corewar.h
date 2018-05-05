@@ -81,7 +81,7 @@ struct		s_vm
 };
 typedef struct s_vm t_vm;
 
-typedef void (*t_cmd)(t_vm *vm, int ipr);
+typedef int (*t_cmd)(t_vm *vm, int ipr);
 
 struct		s_vm_proc
 {
