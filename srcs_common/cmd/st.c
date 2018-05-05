@@ -17,12 +17,13 @@
 int		cmd_st(t_vm *vm, int ipr)
 {
 	t_vm_proc		vm_proc;
-	int				ri1;
+	int				p1;
 
 	ft_printf("cmd_st\n");
-	init_vm_proc(&vm_proc, vm, ipr, 0);
-	ri1 = read_param(&vm_proc, 0);
-	load_param(&vm_proc, 1, ri1);
+	init_vm_proc(&vm_proc, vm, ipr, 1);
+	p1 = read_param(&vm_proc, 0);
+	ft_printf("data: %d\n", p1);
+	load_param(&vm_proc, 1, p1);
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
 									vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)

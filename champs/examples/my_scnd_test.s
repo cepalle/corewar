@@ -1,4 +1,5 @@
 .name "my_test"
 .comment "C EST MON TEST"
 
-print:	st r1, 400
+ld %888888888, r1 
+st r1, -4
