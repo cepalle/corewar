@@ -34,6 +34,7 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 //	ft_printf("cmd_sav.params %d\n", cmd_sav.params[ipar]);
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
+
 		if (cmd_sav.params[ipar] > 0 &&
 			cmd_sav.params[ipar] < 17)
 			return (vm_proc->vm->process[vm_proc->ipr].reg[cmd_sav.params[ipar] - 1]);
@@ -73,6 +74,10 @@ void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 	{
 		if (vm_proc->idx_mod)
 		{
+			ft_printf("je vais copier a un indirect\n");
+			ft_printf("le pc auquel on copie est de %d\n", cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+																	  cmd_sav.params[ipar] % IDX_MOD));
+			ft_printf("data = %d\n", data);
 			vm_write_4(vm_proc->vm,
 					   cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
 								  cmd_sav.params[ipar] % IDX_MOD),
