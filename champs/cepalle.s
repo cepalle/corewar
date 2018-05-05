@@ -7,5 +7,11 @@ Pas la pour etre ici. - Silicon Val[list]
 Dieu est la plus belle invention.
 Tapis dans l'ombre je veille. - Minou"
 
-ld %557843875, r1           # 5
+ld %15, r1           # 5
 st r1, 25                   # 10
+and %10, %4, r2
+st r2, -000009
+xor 40, %-100, r3
+st r3, -100000
+xor 100, -10, r5
+st r5, 124012049129
