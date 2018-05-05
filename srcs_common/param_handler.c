@@ -38,9 +38,7 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 	{
 		if (cmd_sav.params[ipar] > 0 &&
 			cmd_sav.params[ipar] < 17)
-		{
 			return (vm_proc->vm->process[vm_proc->ipr].reg[cmd_sav.params[ipar] - 1]);
-		}
 		vm_proc->er = 1;
 		return (0);
 	}
