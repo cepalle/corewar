@@ -148,7 +148,7 @@ static	int		ft_check_double_num(int *tab, int size)
 		b = a + 1;
 		while (b < size)
 		{
-			if (tab[a] == tab[b] && tab[a] != -1)
+			if (tab[a] == tab[b] && tab[a] != 0)
 			{
 				//ft_printf("test pas les doublons\n");
 				return (0);
@@ -169,7 +169,7 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 	input->d = 0;
 	input->d_nb = 0;
 	while (++a < MAX_PLAYERS)
-		input->num_player[a] = -1;
+		input->num_player[a] = 0;
 	if (argc == 1 || ft_check_arg(argv, input, argc) == 0)
 	{
 		ft_usage();
@@ -178,10 +178,10 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 	a = -1;
 	while (input->nb_p + (++a) < 3)
 	{
-		if (input->num_player[input->nb_p] != -1 ||
+		if (input->num_player[input->nb_p] != 0 ||
 				ft_check_double_num(input->num_player, MAX_PLAYERS) == 0)
 		{
-			//ft_printf("Numero attribue a un champion qui nexiste pas\n");
+			ft_printf("Numero attribue a un champion qui nexiste pas\n");
 			return (0);
 		}
 	}

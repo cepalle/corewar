@@ -41,7 +41,7 @@ l’ordre d’exécution
  |	xor   |  08  |     1     | xor X, X, rX         | 08 XX (XX *1 ou *2 ou *4) (XX *1 ou *2 ou *4) XX | registre = param_1 ^ param_2                   | change le carry
  |	zjmp  |  09  |     0     | zjmp %X              | 09 (XX-XX)                                       | PC = INDEX                                     | Est ce bien le PC qui pointe desormais un index? fais le jump SI carry == 1
  |	ldi   |  10  |     1     | ldi INDEX, INDEX, rX | 0a XX (XX *1 ou *2 ou *4) (XX *1 ou *2) XX       | adresse = (index + index) (% IDX_MOD ?)        | lit valeur a cette adresse en (XX) met le resultat dans param_3 (registre)
- |	sti   |  11  |     1     | sti rx, index, index | 0b XX XX (XX *1 ou *2 ou *4) (XX *1 ou *2)       | adresse = (index + index) % (1024*4/8)         | on copie registre a cette adresse en octet depuis le debut
+ |	sti   |  11  |     1     | sti rx, index, index | 0b XX XX (XX *1 ou *4) (XX *1 ou *2)       | adresse = (index + index) % (1024*4/8)         | on copie registre a cette adresse en octet depuis le debut
  |	fork  |  12  |     0     | fork INDEX           | 0c (XX-XX)                                       | fork ?  PC = (PC + (1er paramètre % IDX_MOD))  | nouveau processus, qui hérite des différents états de son père
  |	lld   |  13  |     1     | lld X, rX            | 0d XX (XX *2 ou *4) XX                           | rX = val_param                                 | ld sans modulo change le carry                               
  |	lldi  |  14  |     1     | lldi INDEX, INDEX, rX| 0e XX (XX *1 ou *2 ou *4) (XX *1 ou *2) XX       | adresse = (index + index)                      | ldi sans modulo
