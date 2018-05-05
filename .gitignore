@@ -13,3 +13,5 @@ a.out
 /test
 asm.dSYM/
 corewar.dSYM/
+test_ref
+test_my
