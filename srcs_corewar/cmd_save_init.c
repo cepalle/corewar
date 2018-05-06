@@ -125,7 +125,7 @@ static	int		ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op) // rempla
 	ind_value = 0;
 	if (ft_cmd_save_error_oct_params(vm, processor) == 0 || ft_cmd_save_right_params(vm, processor, op) == 0)
 	{
-		processor->cmd_save.cmd_len = 5;
+		processor->cmd_save.cmd_len = (unsigned int)gopt()[op].default_len;
 		return (0);
 	}
 	while (i < gopt()[op].nb_arg)
