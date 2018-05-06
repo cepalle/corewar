@@ -112,6 +112,7 @@ static	void			player_init(t_vm *vm, t_input input)
 void					vm_init(t_vm *vm, t_input input)
 {
 	vm->d = input.d;
+	vm->db = input.db;
 	vm->nb_p = input.nb_p;
 	vm->d_nb = input.d_nb;
 	vm->process = ft_memalloc(sizeof(t_proc) * LEN_INIT_PROC);

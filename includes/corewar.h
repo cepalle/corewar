@@ -27,6 +27,7 @@ typedef unsigned char t_bool;
 struct		s_input
 {
 	int				num_player[4];
+	t_bool			db;
 	t_bool			d;
 	int				d_nb;
 	t_bool			nc;
@@ -69,6 +70,7 @@ typedef struct		s_proc t_proc;
 
 struct		s_vm
 {
+	t_bool			db;
 	int				nb_p;
 	t_bool			d;
 	int				d_nb;

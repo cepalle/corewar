@@ -115,6 +115,11 @@ static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 		//ft_printf("Ncurses output mode\n");
 		return (1);
 	}
+	if (ft_strcmp(argv[*a], "-db") == 0)
+	{
+		input->db = 1;
+		return (1);
+	}
 	return (0);
 }
 
@@ -166,6 +171,7 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 
 	a = -1;
 	input->nb_p = 0;
+	input->db = 0;
 	input->d = 0;
 	input->d_nb = 0;
 	while (++a < MAX_PLAYERS)
