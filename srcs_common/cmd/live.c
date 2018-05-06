@@ -26,6 +26,7 @@ static void	player_add_live(t_vm *vm, int id)
 		if (vm->player[i].id == idp)
 		{
 			vm->player[i].live++;
+			vm->player[i].last_live = vm->cycle;
 			return ;
 		}
 		i++;
@@ -41,7 +42,7 @@ int			cmd_live(t_vm *vm, int ipr)
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	p1 = read_param(&vm_proc, 0);
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
-									vm->process[ipr].cmd_save.cmd_len);
+		vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
 	player_add_live(vm, p1);

@@ -25,7 +25,7 @@ int		cmd_zjmp(t_vm *vm, int ipr)
 	if (vm_proc.er || !vm->process[ipr].carry)
 	{
 		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
-										vm->process[ipr].cmd_save.cmd_len);
+			vm->process[ipr].cmd_save.cmd_len);
 		return (0);
 	}
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, p1);

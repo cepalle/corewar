@@ -31,6 +31,5 @@ int		cmd_ldi(t_vm *vm, int ipr)
 									vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
-	vm->process[ipr].carry = 1;
 	return (1);
 }
