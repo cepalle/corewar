@@ -20,7 +20,7 @@ goboucle0:	live %66
 finboucle0:	xor r3,r3,r3
 		zjmp %-207
 
-buff:	st r1,r1	
+buff:	st r1,r1
 		
 suite:	sti r1,%:livel,%1
 livel:	live %66

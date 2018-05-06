@@ -25,5 +25,3 @@ do
  error=""
  msg_error=""
 done
-
-
