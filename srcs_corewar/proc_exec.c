@@ -32,3 +32,15 @@ void	proc_exec(t_vm *vm, int ipr)
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
 	}
 }
+
+void	procs_exec(t_vm *vm)
+{
+	unsigned int	i;
+
+	i = vm->nb_process;
+	while (i)
+	{
+		proc_exec(vm, i - 1);
+		i--;
+	}
+}

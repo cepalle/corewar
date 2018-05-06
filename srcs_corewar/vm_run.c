@@ -19,37 +19,13 @@ void	vm_run(t_vm *vm)
 	unsigned int		cycle_last_check;
 	unsigned int		cycle_to_check;
 	unsigned int		nb_no_decr;
-	char				*line;
 
 	vm->cycle = 1;
 	cycle_last_check = vm->cycle;
 	cycle_to_check = CYCLE_TO_DIE;
 	nb_no_decr = 0;
-	if (vm->db)
-		vm_print(vm);
 	while (!vm->d || vm->d_nb >= (int)vm->cycle)
-	{
-		vm_cycle(vm);
-		vm->cycle++;
-		if (vm->db)
-		{
-			vm_print(vm);
-			if (get_next_line(0, &line) > 0)
-				free(line);
-		}
-		if (vm->cycle - cycle_last_check >= cycle_to_check)
-		{
-			cycle_last_check = vm->cycle;
-			kill_player(vm);
-			if (count_player_alive(vm) <= 1)
-				break;
-			reset_live(vm);
-			if (check_nb_live_player(vm) || nb_no_decr >= MAX_CHECKS)
-			{
-				cycle_to_check -= CYCLE_DELTA;
-				nb_no_decr = 0;
-			}
-		}
-	}
+		if (!vm_cycle(vm, &cycle_last_check, &cycle_to_check, &nb_no_decr))
+			break ;
 	vm_display_res(vm);
 }
