@@ -16,16 +16,16 @@
 
 void	vm_run(t_vm *vm)
 {
-	int		cycle_last_check;
-	int		cycle_to_check;
-	int		nb_no_decr;
+	unsigned int		cycle_last_check;
+	unsigned int		cycle_to_check;
+	unsigned int		nb_no_decr;
 
 //	ft_printf("vm_run\n");
 	vm->cycle = 1;
 	cycle_last_check = vm->cycle;
 	cycle_to_check = CYCLE_TO_DIE;
 	nb_no_decr = 0;
-	while (!vm->d || vm->d_nb >= vm->cycle)
+	while (!vm->d || vm->d_nb >= (int)vm->cycle)
 	{
 		//ft_printf("### CYCLE %d\n", nb_cycle);
 		//ft_printf("d_nb %d\n", vm->d_nb);

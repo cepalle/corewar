@@ -82,6 +82,7 @@ struct		s_vm
 typedef struct s_vm t_vm;
 
 typedef int (*t_cmd)(t_vm *vm, int ipr);
+typedef int (*t_cal)(int a, int b);
 
 struct		s_vm_proc
 {
@@ -129,6 +130,7 @@ void			load_param(t_vm_proc *vm_proc, int ipar, int data);
 void			vm_fork(t_vm *vm, int ipr, int add);
 unsigned int	cal_pc_add(unsigned int PC, int to_add);
 void			init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod);
+int				do_op(t_vm *vm, int ipr, t_cal cal);
 
 /*
 ** CMD
