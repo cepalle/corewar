@@ -12,17 +12,26 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include "libft.h" // a supprimer une fois debug termine
 
-void	vm_cycle(t_vm *vm)
+int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check,
+	unsigned int *cycle_to_check, unsigned int *nb_no_decr)
 {
-	unsigned int	i;
-
-//	ft_printf("vm_cycle\n");
-	i = vm->nb_process;
-	while (i)
+	if (vm->db)
+		debug(vm);
+	procs_exec(vm);
+	vm->cycle++;
+	if (vm->cycle - *cycle_last_check >= *cycle_to_check)
 	{
-		proc_exec(vm, i - 1);
-		i--;
+		*cycle_last_check = vm->cycle;
+		kill_player(vm);
+		if (count_player_alive(vm) <= 1)
+			return (0);
+		reset_live(vm);
+		if (check_nb_live_player(vm) || *nb_no_decr >= MAX_CHECKS)
+		{
+			*cycle_to_check -= CYCLE_DELTA;
+			*nb_no_decr = 0;
+		}
 	}
+	return (1);
 }

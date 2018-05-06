@@ -27,3 +27,12 @@ void	vm_print(t_vm *vm)
 		i++;
 	}
 }
+
+void	debug(t_vm *vm)
+{
+	char	*line;
+
+	vm_print(vm);
+	if (get_next_line(0, &line) > 0)
+		free(line);
+}
