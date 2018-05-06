@@ -25,12 +25,12 @@ int		cmd_lldi(t_vm *vm, int ipr)
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	ri1 = read_param(&vm_proc, 0);
 	ri2 = read_param(&vm_proc, 1);
-	res = ri1 + ri2;
+	res = vm_read_4(vm, cal_pc_add(vm->process[ipr].PC, ri1 + ri2));
 	load_param(&vm_proc, 2, res);
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
 									vm->process[ipr].cmd_save.cmd_len);
 	if (vm_proc.er)
 		return (0);
-	vm->process[ipr].carry = 1;
+	vm->process[ipr].carry = (unsigned char)!res;
 	return (1);
 }
