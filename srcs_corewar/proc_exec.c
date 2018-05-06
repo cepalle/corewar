@@ -29,7 +29,6 @@ void	proc_exec(t_vm *vm, int ipr)
 	if (vm->process[ipr].cmd_save.cycle_wating <= 0)
 	{
 		cmd = (t_cmd)vm->process[ipr].cmd_save.cmd;
-//		ft_printf("je suis ici\n");
 		if (!((cmd(vm, ipr))))
 			ft_printf("error cmd\n");
 //		vm_dump_mem(vm);

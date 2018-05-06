@@ -181,7 +181,7 @@ int				input_cmdline(int argc, char **argv, t_input *input)
 		if (input->num_player[input->nb_p] != 0 ||
 				ft_check_double_num(input->num_player, MAX_PLAYERS) == 0)
 		{
-			ft_printf("Numero attribue a un champion qui nexiste pas\n");
+//			ft_printf("Numero attribue a un champion qui nexiste pas\n");
 			return (0);
 		}
 	}
