@@ -90,7 +90,8 @@ C_FILES_NAMES_COREWAR = main.c \
     input_free.c \
     header_print.c \
     vm_dump_mem.c \
-    player_handler.c
+    player_handler.c \
+    display_win.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))

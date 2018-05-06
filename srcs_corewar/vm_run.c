@@ -37,10 +37,7 @@ void	vm_run(t_vm *vm)
 			ft_printf("##################################################\n");
 			kill_player(vm);
 			if (count_player_alive(vm) <= 1)
-			{
-				ft_printf("end\n");
-				return ;
-			}
+				break;
 			reset_live(vm);
 			if (check_nb_live_player(vm) || nb_no_decr >= MAX_CHECKS)
 			{
@@ -49,6 +46,5 @@ void	vm_run(t_vm *vm)
 			}
 		}
 	}
-	if (vm->d)
-		vm_dump_mem(vm);
+	vm_display_res(vm);
 }

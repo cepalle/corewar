@@ -29,12 +29,7 @@ int		main(int argc, char **argv)
 	input_free(&input);
 	vm_run(&vm);
 	//vm_print(&vm);
-	ft_printf("last live joueur 0 = %d\n", vm.player[0].last_live);
-	ft_printf("last live joueur 1 = %d\n", vm.player[1].last_live);
-
-	ft_printf("nb live joueur 0 = %d\n", vm.player[0].live);
-	ft_printf("nb live joueur 1 = %d\n", vm.player[1].live);
-
+	vm_display_res(&vm);
 
 	vm_free(&vm);
 	return (0);
