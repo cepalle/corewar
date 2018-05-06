@@ -27,7 +27,7 @@ void	vm_run(t_vm *vm)
 	nb_no_decr = 0;
 	while (!vm->d || vm->d_nb >= (int)vm->cycle)
 	{
-		ft_printf("### CYCLE %u\n", vm->cycle);
+		//ft_printf("### CYCLE %u\n", vm->cycle);
 //		ft_printf("d_nb %d\n", vm->d_nb);
 		vm_cycle(vm);
 		vm->cycle++;
