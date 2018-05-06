@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include "libft.h" // a supprinmer une fois debug termine
 
 int		cmd_zjmp(t_vm *vm, int ipr)
 {
