@@ -83,6 +83,8 @@ C_FILES_NAMES_COREWAR = main.c \
     proc_exec.c \
     vm_cycle.c \
     cmd_save_init.c \
+    cmd_save_check_error.c \
+    cmd_save_oct_params.c \
     vm_init.c \
     vm_print.c \
     vm_run.c \
@@ -175,11 +177,11 @@ diff_all_turn: make_test
 	sh ./test_corewar/test.sh $(CHAMP1).cor $(CHAMP2).cor $(NB_DUMP)
 
 ppichier_test_diff:
-	./bin_ref/asm ./champs/examples/ppichier_test.s
+	./bin_ref/asm ./champs/examples/turtle.s
 	./bin_ref/asm ./champs/examples/helltrain.s
 	make corewar
-	./bin_ref/corewar ./champs/examples/helltrain.cor ./champs/examples/ppichier_test.cor  -d $(NB_DUMP) | grep "0x0" > ppichier_test_ref
-	./corewar ./champs/examples/helltrain.cor ./champs/examples/ppichier_test.cor -d $(NB_DUMP) | grep "0x0" > ppichier_test_my
+	./bin_ref/corewar ./champs/examples/helltrain.cor ./champs/examples/turtle.cor  -d $(NB_DUMP) | grep "0x0" > ppichier_test_ref
+	./corewar ./champs/examples/helltrain.cor ./champs/examples/turtle.cor -d $(NB_DUMP) | grep "0x0" > ppichier_test_my
 	diff ppichier_test_ref ppichier_test_my
 
 .PHONY: all clean re fclean make_test
