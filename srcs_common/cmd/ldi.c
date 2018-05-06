@@ -26,9 +26,5 @@ int		cmd_ldi(t_vm *vm, int ipr)
 	ri2 = read_param(&vm_proc, 1);
 	res = vm_read_4(vm, cal_pc_add(vm->process[ipr].PC, (ri1 + ri2) % IDX_MOD));
 	load_param(&vm_proc, 2, res);
-	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
-									vm->process[ipr].cmd_save.cmd_len);
-	if (vm_proc.er)
-		return (0);
-	return (1);
+	return (!vm_proc.er);
 }

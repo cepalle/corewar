@@ -27,9 +27,8 @@ void	proc_exec(t_vm *vm, int ipr)
 	{
 		if (vm->process[ipr].cmd_save.cmd)
 			((t_cmd)vm->process[ipr].cmd_save.cmd)(vm, ipr);
-		else
-			vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
-				vm->process[ipr].cmd_save.cmd_len);
+		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+			vm->process[ipr].cmd_save.cmd_len);
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
 	}
 }
