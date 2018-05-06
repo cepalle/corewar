@@ -49,24 +49,24 @@ l’ordre d’exécution
  |	aff   |  16  |     1     | aff rX               | 10 XX XX                                         | interpreter l'octet comme un acii              | pourrait servir a qqc
 
 
-| Op    | Binaire | Hexa |  Cycle | Arg 1                   | Arg 2                   | Arg 3          | carry | octet_param | dir_size_2 |
-| ------|:-------:| :---:| :----: | :---------------------: | :---------------------: | :------------: | :----:| :----------:| :---------:|
-| live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           | 0          |
-| ld    | 0000010 | 0x02 | 5      | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |
-| st    | 0000011 | 0x03 | 5      | T_REG                   | T_IND or T_REG          |                | 0     | 1           | 0          |
-| add   | 0000100 | 0x04 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |
-| sub   | 0000101 | 0x05 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |
-| and   | 0000110 | 0x06 | 6      | T_REG or T_DIR or T_IND | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |
-| or    | 0000111 | 0x07 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |
-| xor   | 0001000 | 0x08 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |
-| zjmp  | 0001001 | 0x09 | 20     | T_DIR                   |                         |                | 0     | 0           | 1          |
-| ldi   | 0001010 | 0x0a | 25     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 0     | 1           | 1          |
-| sti   | 0001011 | 0x0b | 25     | T_REG                   | T_REG or T_IND or T_DIR | T_DIR or T_REG | 0     | 1           | 1          |
-| fork  | 0001100 | 0x0c | 800    | T_DIR                   |                         |                | 0     | 0           | 1          |
-| lld   | 0001101 | 0x0d | 10     | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |
-| lldi  | 0001110 | 0x0e | 50     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 1     | 1           | 1          |
-| lfork | 0001111 | 0x0f | 1000   | T_DIR                   |                         |                | 0     | 0           | 1          |
-| aff   | 0010000 | 0x10 | 2      | T_REG                   |                         |                | 0     | 1           | 0          |
+| Op    | Binaire | Hexa |  Cycle | Arg 1                   | Arg 2                   | Arg 3          | carry | octet_param | dir_size_2 | jmp_err_oc_param |
+| ------|:-------:| :---:| :----: | :---------------------: | :---------------------: | :------------: | :----:| :----------:| :---------:|:----------------:|
+| live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           | 0          |        X         | 
+| ld    | 0000010 | 0x02 | 5      | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |        6         |
+| st    | 0000011 | 0x03 | 5      | T_REG                   | T_IND or T_REG          |                | 0     | 1           | 0          |        6         |
+| add   | 0000100 | 0x04 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |        8         |
+| sub   | 0000101 | 0x05 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |        8         |
+| and   | 0000110 | 0x06 | 6      | T_REG or T_DIR or T_IND | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |        8         |
+| or    | 0000111 | 0x07 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |        8         |
+| xor   | 0001000 | 0x08 | 6      | T_REG or T_IND or T_DIR | T_REG or T_IND or T_DIR | T_REG          | 1     | 1           | 0          |        8         |
+| zjmp  | 0001001 | 0x09 | 20     | T_DIR                   |                         |                | 0     | 0           | 1          |        X         |
+| ldi   | 0001010 | 0x0a | 25     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 0     | 1           | 1          |        8         |
+| sti   | 0001011 | 0x0b | 25     | T_REG                   | T_REG or T_IND or T_DIR | T_DIR or T_REG | 0     | 1           | 1          |        8         |
+| fork  | 0001100 | 0x0c | 800    | T_DIR                   |                         |                | 0     | 0           | 1          |        X         |
+| lld   | 0001101 | 0x0d | 10     | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |        6         |
+| lldi  | 0001110 | 0x0e | 50     | T_REG or T_DIR or T_IND | T_DIR or T_REG          | T_REG          | 1     | 1           | 1          |        8         |
+| lfork | 0001111 | 0x0f | 1000   | T_DIR                   |                         |                | 0     | 0           | 1          |        8         |
+| aff   | 0010000 | 0x10 | 2      | T_REG                   |                         |                | 0     | 1           | 0          |        4         |
 
 
 

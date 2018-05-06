@@ -25,8 +25,10 @@ static void	player_add_live(t_vm *vm, int id)
 	{
 		if (vm->player[i].id == idp)
 		{
-			vm->player[i].live++;
+			//ft_printf("j'add une vie au cycle = %d\n", vm->cycle);
 			vm->player[i].last_live = vm->cycle;
+			//ft_printf("last vie du player = %d\n", vm->cycle);
+			vm->player[i].live++;
 			return ;
 		}
 		i++;

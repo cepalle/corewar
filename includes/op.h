@@ -96,6 +96,7 @@ struct					s_op
 	int					octet_param;
 	int					dir_size_2;
 	void 				*op_fct;
+	int 				default_len;
 };
 typedef struct s_op		t_op;
 
