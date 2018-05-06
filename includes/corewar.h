@@ -113,6 +113,7 @@ void			reset_live(t_vm *vm);
 int				check_nb_live_player(t_vm *vm);
 int				count_player_alive(t_vm *vm);
 void			kill_player(t_vm *vm);
+void			vm_display_res(t_vm *vm);
 
 /*
 ** UTILS
