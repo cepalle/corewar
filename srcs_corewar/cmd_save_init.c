@@ -199,11 +199,12 @@ int			stock_cmd(t_vm *vm, t_proc *processor)
 //		ft_printf("op vaut %d\n", gopt()[op].opcode);   // DEBUG
 //		ft_printf("op correspond a %s\n", gopt()[op].name); //DEBUG
 		ft_analyze_oct_params(vm, processor, op);
+		processor->cmd_save.cmd = gopt()[op].op_fct;
 	}
 	else
 		ft_no_oct_params(vm, processor, op);
 	processor->cmd_save.cycle_wating = (unsigned int)gopt()[op].cycle;
-	processor->cmd_save.cmd = gopt()[op].op_fct;
+	//processor->cmd_save.cmd = gopt()[op].op_fct;
 //	ft_printf("cycle %d\n", processor->cmd_save.cycle_wating); //DEBUG
 //	ft_debug(processor, op);
 	return (1);

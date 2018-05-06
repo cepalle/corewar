@@ -16,9 +16,6 @@
 
 void	proc_exec(t_vm *vm, int ipr)
 {
-	t_cmd cmd;
-
-//	ft_printf("proc_exec\n");
 	if (!vm->process[ipr].cmd_save.cmd &&
 		!stock_cmd(vm, vm->process + ipr))
 	{
@@ -28,8 +25,11 @@ void	proc_exec(t_vm *vm, int ipr)
 	vm->process[ipr].cmd_save.cycle_wating--;
 	if (vm->process[ipr].cmd_save.cycle_wating <= 0)
 	{
-		cmd = (t_cmd)vm->process[ipr].cmd_save.cmd;
-		cmd(vm, ipr);
+		if (vm->process[ipr].cmd_save.cmd)
+			((t_cmd)vm->process[ipr].cmd_save.cmd)(vm, ipr);
+		else
+			vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+				vm->process[ipr].cmd_save.cmd_len);
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
 	}
 }
