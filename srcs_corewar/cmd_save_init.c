@@ -31,6 +31,33 @@
 		i++;
 	}
 }*/
+static int		ft_cmd_save_add_len_params(t_vm *vm, t_proc *processor, int op)
+{
+	unsigned char 	tmp;
+	int 			i;
+	int 			left;
+
+	i = 0;
+	left = 0;
+	while(i < gopt()[op].nb_arg)
+	{
+		tmp = vm->tab[cal_pc_add(processor->PC, 1)];
+		tmp = tmp << left;
+		tmp = tmp >> 6;
+		if (tmp == REG_CODE)
+			processor->cmd_save.cmd_len += 1;
+		else if (tmp == DIR_CODE && gopt()[op].dir_size_2 == 1)
+			processor->cmd_save.cmd_len += 2;
+		else if (tmp == DIR_CODE && gopt()[op].dir_size_2 == 0)
+			processor->cmd_save.cmd_len += 4;
+		else if (tmp == IND_CODE)
+			processor->cmd_save.cmd_len += 2;
+		left = left + 2;
+		i++;
+	}
+	processor->cmd_save.cmd_len += 2;
+	return (1);
+}
 
 static int 		ft_cmd_save_check_existence(int op, unsigned char tmp, int i)
 {
@@ -125,7 +152,8 @@ static	int		ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op) // rempla
 	ind_value = 0;
 	if (ft_cmd_save_error_oct_params(vm, processor) == 0 || ft_cmd_save_right_params(vm, processor, op) == 0)
 	{
-		processor->cmd_save.cmd_len = (unsigned int)gopt()[op].default_len;
+		//processor->cmd_save.cmd_len = (unsigned int)gopt()[op].default_len;
+		ft_cmd_save_add_len_params(vm, processor, op);
 		return (0);
 	}
 	while (i < gopt()[op].nb_arg)
