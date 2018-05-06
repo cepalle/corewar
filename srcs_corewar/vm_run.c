@@ -16,25 +16,24 @@
 
 void	vm_run(t_vm *vm)
 {
-	int		nb_cycle;
 	int		cycle_last_check;
 	int		cycle_to_check;
 	int		nb_no_decr;
 
 //	ft_printf("vm_run\n");
-	nb_cycle = 1;
-	cycle_last_check = nb_cycle;
+	vm->cycle = 1;
+	cycle_last_check = vm->cycle;
 	cycle_to_check = CYCLE_TO_DIE;
 	nb_no_decr = 0;
-	while (!vm->d || vm->d_nb >= nb_cycle)
+	while (!vm->d || vm->d_nb >= vm->cycle)
 	{
 		//ft_printf("### CYCLE %d\n", nb_cycle);
 		//ft_printf("d_nb %d\n", vm->d_nb);
 		vm_cycle(vm);
-		nb_cycle++;
-		if (nb_cycle - cycle_last_check >= cycle_to_check)
+		vm->cycle++;
+		if (vm->cycle - cycle_last_check >= cycle_to_check)
 		{
-			cycle_last_check = nb_cycle;
+			cycle_last_check = vm->cycle;
 			ft_printf("##################################################\n");
 			kill_player(vm);
 			if (count_player_alive(vm) <= 1)
