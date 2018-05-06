@@ -59,6 +59,8 @@ static				int	ft_generate_nb(t_vm *vm, t_input input, unsigned int a)
 	}
 }
 
+//static	void			process_swap(t_vm *vm, t_input input);
+
 static	void			process_init(t_vm *vm, t_input input)
 {
 	int				a;
@@ -70,12 +72,12 @@ static	void			process_init(t_vm *vm, t_input input)
 	placement = MEM_SIZE / input.nb_p;
 	while (a < vm->nb_p)
 	{
-		vm->process[a].PC = res;
-		vm->process[a].carry = 0;
+		vm->process[vm->nb_p - 1 - a].PC = res;
+		vm->process[vm->nb_p - 1 - a].carry = 0;
 		ft_printf("\n\n\nle numero du pc est de %d \n\n\n\n", res);
 		ft_memcpy(vm->tab + res, input.prog[a], input.head[a].prog_size);
 		res = res + placement;
-		ft_bzero(&vm->process[a].cmd_save, sizeof(t_cmd_save));
+		ft_bzero(&vm->process[vm->nb_p - 1 - a].cmd_save, sizeof(t_cmd_save));
 		a++;
 	}
 }
@@ -94,7 +96,7 @@ static	void			player_init(t_vm *vm, t_input input)
 			vm->player[a].id = (unsigned int)input.num_player[a];
 		else
 			vm->player[a].id = (unsigned int)ft_generate_nb(vm, input, a);
-		vm->process[a].reg[0] = vm->player[a].id;
+		vm->process[vm->nb_p - 1 - a].reg[0] = vm->player[a].id;
 		vm->player[a].last_live = 0;
 		vm->player[a].live = 0;
 		vm->player[a].is_alive = 1;
