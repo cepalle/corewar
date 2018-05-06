@@ -14,6 +14,20 @@
 #include "corewar.h"
 #include "libft.h"
 
+int		will_exec(t_vm *vm)
+{
+	unsigned int i;
+
+	i = 0;
+	while (i < vm->nb_process)
+	{
+		if (!vm->process[i].cmd_save.cycle_wating)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	vm_print(t_vm *vm)
 {
 	unsigned int i;
@@ -32,7 +46,10 @@ void	debug(t_vm *vm)
 {
 	char	*line;
 
-	vm_print(vm);
-	if (get_next_line(0, &line) > 0)
-		free(line);
+	if (will_exec(vm))
+	{
+		vm_print(vm);
+		if (get_next_line(0, &line) > 0)
+			free(line);
+	}
 }
