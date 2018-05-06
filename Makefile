@@ -1,7 +1,9 @@
 ASM_NAME = asm
 COREWAR_NAME = corewar
 
-NB_DUMP = 1
+NB_DUMP = 128
+CHAMP1 = ./champs/examples/my_test
+CHAMP2 = ./champs/examples/my_scnd_test
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -13,7 +15,6 @@ INCLUDEDIR_LIBFT = $(addprefix $(LIBFTDIR), includes/)
 INCLUDE_DIR = includes/
 INCLUDE_FILES = op.h asm.h corewar.h
 INCLUDE_H = $(addprefix $(INCLUDE_DIR), $(INCLUDE_FILES))
-
 
 DIR_COMMON = srcs_common/
 DIR_ASM = srcs_asm/
@@ -87,7 +88,8 @@ C_FILES_NAMES_COREWAR = main.c \
     vm_free.c \
     input_free.c \
     header_print.c \
-    vm_dump_mem.c
+    vm_dump_mem.c \
+    player_handler.c
 
 OBJDIR_COMMON = objs_common/
 OBJ_COMMON = $(addprefix $(OBJDIR_COMMON), $(C_FILES_NAMES_COMMON:.c=.o))
@@ -158,24 +160,24 @@ fclean_not_lib: clean
 	rm -f $(COREWAR_NAME)
 
 make_test:
-	./bin_ref/asm ./champs/examples/my_test.s
-	./bin_ref/asm ./champs/examples/my_scnd_test.s
+	./bin_ref/asm $(CHAMP1).s
+	./bin_ref/asm $(CHAMP2).s
 	@make corewar
 
-test1_corewar: make_test
-	./corewar -n 333333333 ./champs/examples/my_scnd_test.cor -n 2222222 ./champs/examples/my_test.cor -d $(NB_BUMP)
-
-test1_diff: make_test
-	./bin_ref/corewar ./champs/aurollan.cor ./champs/cepalle.cor -d $(NB_DUMP) | grep "0x0" > test_ref
-	./corewar ./champs/aurollan.cor ./champs/cepalle.cor -d $(NB_DUMP) | grep "0x0" > test_my
+diff_corewar: make_test
+	./bin_ref/corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep "0x0" > test_ref || true
+	./corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep "0x0" > test_my || true
 	diff test_ref test_my
+
+diff_all_turn: make_test
+	sh ./test_corewar/test.sh $(CHAMP1).cor $(CHAMP2).cor $(NB_DUMP)
 
 ppichier_test_diff:
 	./bin_ref/asm ./champs/examples/ppichier_test.s
-	./bin_ref/asm ./champs/examples/bigzork.s
+	./bin_ref/asm ./champs/examples/helltrain.s
 	make corewar
-	./bin_ref/corewar ./champs/examples/bigzork.cor ./champs/examples/ppichier_test.cor  -d $(NB_DUMP) | grep "0x0" > ppichier_test_ref
-	./corewar ./champs/examples/bigzork.cor ./champs/examples/ppichier_test.cor -d $(NB_DUMP) | grep "0x0" > ppichier_test_my
+	./bin_ref/corewar ./champs/examples/helltrain.cor ./champs/examples/ppichier_test.cor  -d $(NB_DUMP) | grep "0x0" > ppichier_test_ref
+	./corewar ./champs/examples/helltrain.cor ./champs/examples/ppichier_test.cor -d $(NB_DUMP) | grep "0x0" > ppichier_test_my
 	diff ppichier_test_ref ppichier_test_my
 
 .PHONY: all clean re fclean make_test
