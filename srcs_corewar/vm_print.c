@@ -16,13 +16,14 @@
 
 void	vm_print(t_vm *vm)
 {
-	int i;
+	unsigned int i;
 
 	i = 0;
-	while (i < vm->nb_p)
+	vm_dump_mem_color(vm);
+	ft_printf("CYCLE: %d: \n", vm->cycle);
+	while (i < vm->nb_process)
 	{
-		header_print(vm->player[i].head);
+		ft_printf("proc %d wait: %d\n", i, vm->process[i].cmd_save.cycle_wating);
 		i++;
 	}
-	vm_dump_mem(vm);
 }

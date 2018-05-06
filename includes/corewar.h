@@ -133,6 +133,7 @@ void			vm_fork(t_vm *vm, int ipr, int add);
 unsigned int	cal_pc_add(unsigned int PC, int to_add);
 void			init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod);
 int				do_op(t_vm *vm, int ipr, t_cal cal);
+void			vm_dump_mem_color(t_vm *vm);
 
 /*
 ** CMD

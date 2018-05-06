@@ -25,9 +25,7 @@ static void	player_add_live(t_vm *vm, int id)
 	{
 		if (vm->player[i].id == idp)
 		{
-			//ft_printf("j'add une vie au cycle = %d\n", vm->cycle);
 			vm->player[i].last_live = vm->cycle;
-			//ft_printf("last vie du player = %d\n", vm->cycle);
 			vm->player[i].live++;
 			return ;
 		}
@@ -40,7 +38,6 @@ int			cmd_live(t_vm *vm, int ipr)
 	t_vm_proc	vm_proc;
 	int			p1;
 
-	ft_printf("cmd_live\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	p1 = read_param(&vm_proc, 0);
 	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,

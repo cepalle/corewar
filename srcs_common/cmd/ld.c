@@ -19,7 +19,6 @@ int		cmd_ld(t_vm *vm, int ipr)
 	t_vm_proc		vm_proc;
 	int				p1;
 
-	ft_printf("\ncmd_ld %d\n", ipr);
 	init_vm_proc(&vm_proc, vm, ipr, 1);
 	p1 = read_param(&vm_proc, 0);
 	load_param(&vm_proc, 1, p1);

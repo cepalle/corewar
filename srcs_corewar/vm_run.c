@@ -19,22 +19,27 @@ void	vm_run(t_vm *vm)
 	unsigned int		cycle_last_check;
 	unsigned int		cycle_to_check;
 	unsigned int		nb_no_decr;
+	char				*line;
 
-//	ft_printf("vm_run\n");
 	vm->cycle = 1;
 	cycle_last_check = vm->cycle;
 	cycle_to_check = CYCLE_TO_DIE;
 	nb_no_decr = 0;
+	if (vm->db)
+		vm_print(vm);
 	while (!vm->d || vm->d_nb >= (int)vm->cycle)
 	{
-		ft_printf("### CYCLE %u\n", vm->cycle);
-//		ft_printf("d_nb %d\n", vm->d_nb);
 		vm_cycle(vm);
 		vm->cycle++;
+		if (vm->db)
+		{
+			vm_print(vm);
+			if (get_next_line(0, &line) > 0)
+				free(line);
+		}
 		if (vm->cycle - cycle_last_check >= cycle_to_check)
 		{
 			cycle_last_check = vm->cycle;
-			ft_printf("##################################################\n");
 			kill_player(vm);
 			if (count_player_alive(vm) <= 1)
 			{

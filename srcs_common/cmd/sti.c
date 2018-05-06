@@ -21,7 +21,6 @@ int		cmd_sti(t_vm *vm, int ipr)
 	int				p2;
 	int				p3;
 
-	ft_printf("cmd_sti\n");
 	init_vm_proc(&vm_proc, vm, ipr, 0);
 	p1 = read_param(&vm_proc, 0);
 	p2 = read_param(&vm_proc, 1);

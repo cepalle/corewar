@@ -169,7 +169,6 @@ static	int		ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op) // rempla
 		i++;
 	}
 	processor->cmd_save.cmd_len = cpt;
-	ft_printf("len = %d\n", processor->cmd_save.cmd_len);
 	return (1);
 }
 

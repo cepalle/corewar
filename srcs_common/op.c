@@ -61,7 +61,6 @@ t_op		get_op_name(char *cmd)
 {
 	int i;
 
-	ft_printf("get_op_name\n");
 	i = 0;
 	while (i < OP_TAB_LENGTH)
 	{
@@ -69,16 +68,13 @@ t_op		get_op_name(char *cmd)
 			return (gopt()[i]);
 		i++;
 	}
-	ft_printf("get_op_name cmd no found\n");
 	return (gopt()[OP_TAB_LENGTH]);
 }
 
 t_op		get_op_cmd(int opcode)
 {
-	ft_printf("get_op_cmd\n");
 	if (opcode > 16 || opcode < 1)
 	{
-		ft_printf("get_op_cmd : cmd not found\n");
 		return (gopt()[OP_TAB_LENGTH]);
 	}
 	return (gopt()[opcode - 1]);

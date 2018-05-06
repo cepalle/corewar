@@ -24,18 +24,8 @@ int		main(int argc, char **argv)
 	if (input_cmdline(argc, argv, &input) == 0)
 		return (1);
 	vm_init(&vm, input);
-
-//	vm_print(&vm);
 	input_free(&input);
 	vm_run(&vm);
-	//vm_print(&vm);
-	ft_printf("last live joueur 0 = %d\n", vm.player[0].last_live);
-	ft_printf("last live joueur 1 = %d\n", vm.player[1].last_live);
-
-	ft_printf("nb live joueur 0 = %d\n", vm.player[0].live);
-	ft_printf("nb live joueur 1 = %d\n", vm.player[1].live);
-
-
 	vm_free(&vm);
 	return (0);
 }
