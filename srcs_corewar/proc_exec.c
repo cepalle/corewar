@@ -13,22 +13,32 @@
 
 #include <corewar.h>
 #include "libft.h"
+#include "op.h"
 
 void	proc_exec(t_vm *vm, int ipr)
 {
-//	ft_printf("in %p\n",vm->process[ipr].cmd_save.cmd);
-	if (!vm->process[ipr].cmd_save.cmd &&
-		!stock_cmd(vm, vm->process + ipr))
+	char	opcode;
+
+	if (!vm->process[ipr].cmd_save.cmd)
 	{
-//		ft_printf("ici\n");
-		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, 1);
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
-		return ;
+		opcode = vm_read_1(vm, vm->process[ipr].PC);
+		if (opcode < 1 || opcode > 16)
+		{
+			vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, 1);
+			return ;
+		}
+		else
+		{
+			vm->process[ipr].cmd_save.cycle_wating = get_op_cmd(opcode).cycle;
+			vm->process[ipr].cmd_save.opcode = opcode;
+			vm->process[ipr].cmd_save.cmd = get_op_cmd(opcode).op_fct;
+		}
 	}
-//	ft_printf("out %p\n",vm->process[ipr].cmd_save.cmd);
 	vm->process[ipr].cmd_save.cycle_wating--;
 	if (vm->process[ipr].cmd_save.cycle_wating <= 0)
 	{
+		stock_cmd(vm, vm->process + ipr);
 		if (vm->process[ipr].cmd_save.cmd)
 			((t_cmd)vm->process[ipr].cmd_save.cmd)(vm, ipr);
 		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
@@ -39,7 +49,7 @@ void	proc_exec(t_vm *vm, int ipr)
 
 void	procs_exec(t_vm *vm)
 {
-	unsigned int	i;
+	int	i;
 
 	i = vm->nb_process;
 	while (i)

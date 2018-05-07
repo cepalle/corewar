@@ -104,5 +104,6 @@ t_op					*gopt(void);
 t_op					get_op_name(char *cmd);
 void					swap_4(unsigned int *to_swap);
 void					swap_2(unsigned short int *to_swap);
+t_op					get_op_cmd(int opcode);
 
 #endif

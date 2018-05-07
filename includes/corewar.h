@@ -45,7 +45,8 @@ struct		s_cmd_save
 	unsigned char	params_size[3];
 	int				params[3];
 	unsigned int	cmd_len;
-	unsigned int	cycle_wating;
+	int				cycle_wating;
+	int				opcode;
 };
 typedef struct		s_cmd_save t_cmd_save;
 
@@ -106,7 +107,7 @@ void			vm_init(t_vm *vm, t_input input);
 void			vm_run(t_vm *vm);
 int				vm_cycle(t_vm *vm, int *n);
 void			vm_print(t_vm *vm);
-int 			stock_cmd(t_vm *vm, t_proc *processor);
+int				stock_cmd(t_vm *vm, t_proc *processor);
 int 			ft_cmd_save_central_error(t_vm *vm, t_proc *processor, int op);
 int 			ft_cmd_save_check_existence(int op, unsigned char tmp, int i);
 int				ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op);
