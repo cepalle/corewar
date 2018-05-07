@@ -38,7 +38,7 @@ void	vm_print(t_vm *vm)
 	vm_dump_mem_color(vm);
 	ft_printf("CYCLE: %d: \n", vm->cycle);
 	ft_printf("CYCLE_TO_DIE: %d\n", vm->cycle_to_die);
-	ft_printf("NEXT_DIE: %d\n", vm->cycle_to_die);
+	ft_printf("NEXT_DIE: %d\n", vm->cycle_to_die - (vm->cycle - vm->cycle_last_check));
 	while (i < vm->nb_process)
 	{
 		ft_printf("proc %d wait: %d nb_live: %d\n", i, vm->process[i].cmd_save.cycle_wating, vm->process[i].nb_live);
