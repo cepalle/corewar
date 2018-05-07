@@ -72,11 +72,11 @@ static	void			process_init(t_vm *vm, t_input input)
 	placement = MEM_SIZE / input.nb_p;
 	while (a < vm->nb_p)
 	{
-		vm->process[vm->nb_p - 1 - a].PC = res;
-		vm->process[vm->nb_p - 1 - a].carry = 0;
+		vm->process[a].PC = res;
+		vm->process[a].carry = 0;
 		ft_memcpy(vm->tab + res, input.prog[a], input.head[a].prog_size);
 		res = res + placement;
-		ft_bzero(&vm->process[vm->nb_p - 1 - a].cmd_save, sizeof(t_cmd_save));
+		ft_bzero(&vm->process[a].cmd_save, sizeof(t_cmd_save));
 		a++;
 	}
 }
@@ -95,7 +95,7 @@ static	void			player_init(t_vm *vm, t_input input)
 			vm->player[a].id = (unsigned int)input.num_player[a];
 		else
 			vm->player[a].id = (unsigned int)ft_generate_nb(vm, input, a);
-		vm->process[vm->nb_p - 1 - a].reg[0] = vm->player[a].id;
+		vm->process[a].reg[0] = vm->player[a].id;
 		vm->player[a].last_live = 0;
 		vm->player[a].nb_live = 0;
 		ft_strncpy(vm->player[a].head.prog_name, input.head[a].prog_name,

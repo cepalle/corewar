@@ -32,7 +32,17 @@
 	}
 }*/
 
-static int	ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
+unsigned char	ft_analyze_code(t_vm *vm, t_proc *processor, int left)
+{
+	unsigned char	tmp;
+
+	tmp = vm->tab[cal_pc_add(processor->PC, 1)];
+	tmp = tmp << left;
+	tmp = tmp >> 6;
+	return (tmp);
+}
+
+static int		ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
 {
 //	ft_printf("ft_no_oct_params\n");
 	if (gopt()[op].opcode == 1)
@@ -53,7 +63,7 @@ static int	ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
 	return (1);
 }
 
-static	int	ft_get_op_ppichier(t_vm *vm, t_proc *processor)
+static	int		ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 {
 	int i;
 
@@ -68,7 +78,7 @@ static	int	ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 	return (-1);
 }
 
-int			stock_cmd(t_vm *vm, t_proc *processor)
+int				stock_cmd(t_vm *vm, t_proc *processor)
 {
 	int op;
 
