@@ -12,21 +12,17 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include "libft.h" // a supprinmer une fois debug termine
 
 int		cmd_zjmp(t_vm *vm, int ipr)
 {
 	t_vm_proc	vm_proc;
 	int			p1;
 
-	init_vm_proc(&vm_proc, vm, ipr, 0);
+	init_vm_proc(&vm_proc, vm, ipr, 1);
 	p1 = read_param(&vm_proc, 0);
 	if (vm_proc.er || !vm->process[ipr].carry)
-	{
-		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
-			vm->process[ipr].cmd_save.cmd_len);
 		return (0);
-	}
-	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, p1);
+	vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+		(p1 % IDX_MOD) - vm->process[ipr].cmd_save.cmd_len);
 	return (1);
 }

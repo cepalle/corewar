@@ -18,7 +18,7 @@ static int	op_add(int a, int b)
 	return a + b;
 }
 
-int		cmd_add(t_vm *vm, int ipr)
+int			cmd_add(t_vm *vm, int ipr)
 {
 	return do_op(vm, ipr, &op_add);
 }

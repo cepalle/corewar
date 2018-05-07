@@ -14,17 +14,16 @@
 #include <corewar.h>
 #include "libft.h" // a suprimer une fois debug termine
 
-unsigned	char	vm_read_1(t_vm *vm, unsigned int pc)
+signed	char	vm_read_1(t_vm *vm, unsigned int pc)
 {
 //	ft_printf("vm_read_1\n");
 	return (vm->tab[cal_pc_add(pc, 0)]);
 }
 
-unsigned	short	vm_read_2(t_vm *vm, unsigned int pc)
+signed	short	vm_read_2(t_vm *vm, unsigned int pc)
 {
 	unsigned short	stock;
 	int				i;
-
 //	ft_printf("vm_read_2\n");
 	i = 0;
 	stock = 0;
@@ -37,11 +36,10 @@ unsigned	short	vm_read_2(t_vm *vm, unsigned int pc)
 	return (stock);
 }
 
-unsigned	int		vm_read_4(t_vm *vm, unsigned int pc)
+signed	int		vm_read_4(t_vm *vm, unsigned int pc)
 {
 	unsigned	int	stock;
 	int				i;
-
 //	ft_printf("vm_read_4\n");
 	i = 0;
 	stock = 0;

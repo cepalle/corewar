@@ -102,13 +102,22 @@ typedef struct		s_vm_proc t_vm_proc;
 int				input_cmdline(int argc, char **argv, t_input *input);
 void			vm_init(t_vm *vm, t_input input);
 void			vm_run(t_vm *vm);
-void			vm_cycle(t_vm *vm);
+int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check,
+	unsigned int *cycle_to_check, unsigned int *nb_no_decr);
 void			vm_print(t_vm *vm);
 int 			stock_cmd(t_vm *vm, t_proc *processor);
+int 			ft_cmd_save_central_error(t_vm *vm, t_proc *processor, int op);
+int 			ft_cmd_save_check_existence(int op, unsigned char tmp, int i);
+int				ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op);
+int 			ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor);
+int				ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op);
+int				ft_cmd_save_add_len_params(t_vm *vm, t_proc *processor, int op);
+unsigned char	ft_analyze_code(t_vm * vm, t_proc *processor, int left);
 void			proc_exec(t_vm *vm, int ipr);
-unsigned char 	vm_read_1(t_vm *vm, unsigned int PC);
-unsigned short 	vm_read_2(t_vm *vm, unsigned int PC);
-unsigned int	vm_read_4(t_vm *vm, unsigned int PC);
+void			procs_exec(t_vm *vm);
+signed char 	vm_read_1(t_vm *vm, unsigned int PC);
+signed short 	vm_read_2(t_vm *vm, unsigned int PC);
+signed int		vm_read_4(t_vm *vm, unsigned int PC);
 void			reset_live(t_vm *vm);
 int				check_nb_live_player(t_vm *vm);
 int				count_player_alive(t_vm *vm);
@@ -135,6 +144,7 @@ unsigned int	cal_pc_add(unsigned int PC, int to_add);
 void			init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod);
 int				do_op(t_vm *vm, int ipr, t_cal cal);
 void			vm_dump_mem_color(t_vm *vm);
+void			debug(t_vm *vm);
 
 /*
 ** CMD
