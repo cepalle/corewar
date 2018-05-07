@@ -24,7 +24,7 @@ static int	ft_params_is_ind(t_vm *vm, t_proc *processor,
 	processor->cmd_save.params_type[i] = 3;
 	processor->cmd_save.params_size[i] = 2;
 	ind_value = vm_read_2(vm, cal_pc_add(processor->PC, *cpt));
-	processor->cmd_save.params[i] = (signed short)ind_value;
+	processor->cmd_save.params[i] = ind_value;
 	*cpt = *cpt + 2;
 	return (1);
 }
@@ -34,7 +34,7 @@ static int	ft_params_is_dir_2(t_vm *vm, t_proc *processor,
 {
 	processor->cmd_save.params_type[i] = 2;
 	processor->cmd_save.params_size[i] = 2;
-	processor->cmd_save.params[i] = (signed short)vm_read_2(vm,
+	processor->cmd_save.params[i] = vm_read_2(vm,
 			cal_pc_add(processor->PC, *cpt));
 	*cpt = *cpt + 2;
 	return (1);
@@ -45,7 +45,7 @@ static int	ft_params_is_dir_4(t_vm *vm, t_proc *processor,
 {
 	processor->cmd_save.params_type[i] = 2;
 	processor->cmd_save.params_size[i] = 4;
-	processor->cmd_save.params[i] = (signed int)vm_read_4(vm,
+	processor->cmd_save.params[i] = vm_read_4(vm,
 			cal_pc_add(processor->PC, *cpt));
 	*cpt = *cpt + 4;
 	return (1);
@@ -56,7 +56,7 @@ static int	ft_params_is_reg(t_vm *vm, t_proc *processor,
 {
 	processor->cmd_save.params_type[i] = 1;
 	processor->cmd_save.params_size[i] = 1;
-	processor->cmd_save.params[i] = (signed char)vm_read_1(vm,
+	processor->cmd_save.params[i] = vm_read_1(vm,
 			cal_pc_add(processor->PC, *cpt));
 	*cpt = *cpt + 1;
 	return (1);
