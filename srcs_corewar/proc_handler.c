@@ -36,6 +36,7 @@ void	kill_proc(t_vm *vm)
 		if (vm->process[i].nb_live == 0)
 		{
 			sup_proc(vm, i);
+			continue ;
 		}
 		i++;
 	}

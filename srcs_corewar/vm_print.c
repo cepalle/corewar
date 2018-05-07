@@ -37,6 +37,7 @@ void	vm_print(t_vm *vm)
 	i = 0;
 	vm_dump_mem_color(vm);
 	ft_printf("CYCLE: %d: \n", vm->cycle);
+	ft_printf("CYCLe_TO_DIE: %d\n", vm->cycle_to_die);
 	while (i < vm->nb_process)
 	{
 		ft_printf("proc %d wait: %d\n", i, vm->process[i].cmd_save.cycle_wating);

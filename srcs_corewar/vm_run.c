@@ -16,15 +16,14 @@
 void	vm_run(t_vm *vm)
 {
 	unsigned int	cycle_last_check;
-	unsigned int	cycle_to_check;
 	unsigned int	nb_no_decr;
 
 	vm->cycle = 0;
 	cycle_last_check = vm->cycle;
-	cycle_to_check = CYCLE_TO_DIE;
+	vm->cycle_to_die = CYCLE_TO_DIE;
 	nb_no_decr = 0;
 	while (!vm->d || vm->d_nb > (int)vm->cycle)
-		if (!vm_cycle(vm, &cycle_last_check, &cycle_to_check, &nb_no_decr))
+		if (!vm_cycle(vm, &cycle_last_check, &nb_no_decr))
 			return ;
 	vm_display_res(vm);
 }

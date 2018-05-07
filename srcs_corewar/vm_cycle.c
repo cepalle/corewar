@@ -13,14 +13,13 @@
 
 #include <corewar.h>
 
-int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check,
-	unsigned int *cycle_to_check, unsigned int *nb_no_decr)
+int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check, unsigned int *nb_no_decr)
 {
 	if (vm->db)
 		debug(vm);
 	procs_exec(vm);
 	vm->cycle++;
-	if (vm->cycle - *cycle_last_check >= *cycle_to_check)
+	if (vm->cycle - *cycle_last_check >= vm->cycle_to_die)
 	{
 		*cycle_last_check = vm->cycle;
 		kill_proc(vm);
@@ -28,7 +27,7 @@ int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check,
 			return (0);
 		if (check_nb_live_proc(vm) || *nb_no_decr >= MAX_CHECKS)
 		{
-			*cycle_to_check -= CYCLE_DELTA;
+			vm->cycle_to_die -= CYCLE_DELTA;
 			*nb_no_decr = 0;
 		}
 		reset_live(vm);
