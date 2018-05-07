@@ -16,5 +16,12 @@
 
 void	input_free(t_input *input)
 {
-	ft_memdel((void **)&(input->prog));
+	int a;
+
+	a = 0;
+	while (a < input->nb_p)
+	{
+		ft_memdel((void **) &(input->prog));
+		a++;
+	}
 }
