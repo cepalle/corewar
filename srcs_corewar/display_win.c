@@ -46,14 +46,15 @@ void	vm_display_res(t_vm *vm)
 	}
 	if (vm->d && vm->cycle >= (unsigned)vm->d_nb)
 	{
-		vm_dump_mem(vm);
+		//vm_dump_mem(vm);
+		vm_print(vm);
 		return ;
 	}
 	a = 0;
 	while (a < vm->nb_p)
 	{
-		if (vm->player[a].is_alive)
-			ft_printf("Contestant %d, '%s' has won !\n", a + 1, vm->player[a].head.prog_name);
+		//if (vm->player[a].is_alive)
+		//	ft_printf("Contestant %d, '%s' has won !\n", a + 1, vm->player[a].head.prog_name);
 		a++;
 	}
 	ft_find_last_live(vm);

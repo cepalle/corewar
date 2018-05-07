@@ -23,7 +23,7 @@ test16:#coucou
 test17:#coucou
 test18:#coucou
 
-entree:	live	%42#, %3		# entree
+entree:	nb_live	%42#, %3		# entree
 	ld	%0,r5#
 	ld	%0,r5
 	zjmp %:bite
@@ -34,14 +34,14 @@ tir:	sti	r1,%:tirb,%1
 	ld	%0,r11
 
 	ld	%4,r3
-tirf:	live	%42 # :test
+tirf:	nb_live	%42 # :test
 	fork	%:tirop#999
-	live	%742
+	nb_live	%742
 	sub	r3,r5,r3#,#%4
 	zjmp	%:top
 	ld	%0,r11
 	fork	%:tirvd
-	live	%42
+	nb_live	%42
 	sti	r10,%-0 ,%0
 	sti	r10,%-404,%0
 	sti	r10,%-303,%0
@@ -53,7 +53,7 @@ tirop:	ld	%368,r2
 	ld	%0,r3
 	ld	%4,r4
 
-tirb:	live	%1
+tirb:	nb_live	%1
 	sti	r10,%-510,r2
 	sti	r10,%-510,r3
 	add	r4,r5,r4
@@ -88,7 +88,7 @@ p32:	sub	r6,r4,r6
 	add	r6,r6,r11
 	ldi	%:p32deb,r6,r7
 	sti	r7,%-510,r11
-p32li:	live	%1
+p32li:	nb_live	%1
 	ld	%0,r10
 	sti	r7,%-250,r6
 	zjmp	%-192
@@ -109,7 +109,7 @@ bite:	sti     r1,%:copie,%2
 	ld	%1,r4
 	ld	%0,r6
 
-b0:	live	%1		# boucle fork
+b0:	nb_live	%1		# boucle fork
 	sub	r3,r4,r3
 	zjmp	%:tart
 	fork	%:b1
@@ -126,7 +126,7 @@ b1:	add	r2,r4,r2
 	zjmp	%:b0
 
 
-top:	live	%42
+top:	nb_live	%42
 	ld	%9,r3
 	sti	r3,%:p32deb,%-6
 	ld	%2,r3
@@ -147,23 +147,23 @@ infi:	sti	r1,%:l0,%1
 	sti	r1,%:l9,%1
 	sti	r1,%:l10,%1
 
-l0:	live	%1
-l1:	live	%1
-l2:	live	%1
-l3:	live	%1
-l4:	live	%1
-l5:	live	%1
-l6:	live	%1
-l7:	live	%1
-l8:	live	%1
-l9:	live	%1
-l10:	live	%1
+l0:	nb_live	%1
+l1:	nb_live	%1
+l2:	nb_live	%1
+l3:	nb_live	%1
+l4:	nb_live	%1
+l5:	nb_live	%1
+l6:	nb_live	%1
+l7:	nb_live	%1
+l8:	nb_live	%1
+l9:	nb_live	%1
+l10:	nb_live	%1
 	zjmp	%:l0
 
 
 p1:	zjmp	%:infi
 
-        live    %0              # pour boucher l'entree
+        nb_live    %0              # pour boucher l'entree
 copie:  ld      %1,r1
 
 
@@ -241,7 +241,7 @@ cont:	add	r6,r6,r6
 	ldi	%:p64deb,r6,r7
 	sti	r7,r8,r6
 	sti	r7,r9,r6
-p64li:	live	%1
+p64li:	nb_live	%1
 	ld	%0,r10
 	zjmp	%186
 
@@ -249,7 +249,7 @@ tirdow:	ld	%425,r2
 	ld	%0,r3
 	ld	%4,r4
 
-tird:	live	%42
+tird:	nb_live	%42
 	sti	r10,%:fin,r2
 	sti	r10,%:fin,r3
 	add	r4,r5,r4
@@ -260,7 +260,7 @@ tird:	live	%42
 	zjmp	%:tird
 	zjmp	%:p1
 
-fin:	live	%633
+fin:	nb_live	%633
 
 fin1:
 #p64li:

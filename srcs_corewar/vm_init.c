@@ -97,8 +97,7 @@ static	void			player_init(t_vm *vm, t_input input)
 			vm->player[a].id = (unsigned int)ft_generate_nb(vm, input, a);
 		vm->process[vm->nb_p - 1 - a].reg[0] = vm->player[a].id;
 		vm->player[a].last_live = 0;
-		vm->player[a].live = 0;
-		vm->player[a].is_alive = 1;
+		vm->player[a].nb_live = 0;
 		ft_strncpy(vm->player[a].head.prog_name, input.head[a].prog_name,
 			input.head->prog_size);
 		ft_strncpy(vm->player[a].head.comment, input.head[a].comment,

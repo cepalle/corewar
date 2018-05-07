@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "libft.h" // a supprimer une fois debug termine
 
 void	vm_run(t_vm *vm)
 {

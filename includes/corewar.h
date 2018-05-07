@@ -53,8 +53,7 @@ struct 		s_player
 {
 	t_header		head;
 	unsigned int	last_live;
-	unsigned int	live; // rename nb_live
-	t_bool			is_alive; // init 1
+	unsigned int	nb_live;
 	unsigned int	id;
 };
 typedef struct		s_player t_player;
@@ -64,6 +63,7 @@ struct		s_proc
 	unsigned int	PC;
 	t_bool			carry;
 	int				reg[REG_NUMBER];
+	unsigned int	nb_live;
 	t_cmd_save		cmd_save;
 };
 typedef struct		s_proc t_proc;
@@ -118,9 +118,9 @@ signed char 	vm_read_1(t_vm *vm, unsigned int PC);
 signed short 	vm_read_2(t_vm *vm, unsigned int PC);
 signed int		vm_read_4(t_vm *vm, unsigned int PC);
 void			reset_live(t_vm *vm);
-int				check_nb_live_player(t_vm *vm);
+int				check_nb_live_proc(t_vm *vm);
 int				count_player_alive(t_vm *vm);
-void			kill_player(t_vm *vm);
+void			kill_proc(t_vm *vm);
 void			vm_display_res(t_vm *vm);
 
 /*

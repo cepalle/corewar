@@ -92,7 +92,7 @@ C_FILES_NAMES_COREWAR = main.c \
     input_free.c \
     header_print.c \
     vm_dump_mem.c \
-    player_handler.c \
+    proc_handler.c \
     display_win.c
 
 OBJDIR_COMMON = objs_common/
@@ -169,8 +169,8 @@ make_test:
 	@make corewar
 
 diff_corewar: make_test
-	./bin_ref/corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep "0x0" > test_ref || true
-	./corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep "0x0" > test_my || true
+	./bin_ref/corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep -a "0x0" > test_ref || true
+	./corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep -a "0x0" > test_my || true
 	diff test_ref test_my
 
 diff_all_turn: make_test

@@ -23,15 +23,15 @@ int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check,
 	if (vm->cycle - *cycle_last_check >= *cycle_to_check)
 	{
 		*cycle_last_check = vm->cycle;
-		kill_player(vm);
-		if (count_player_alive(vm) <= 1)
+		kill_proc(vm);
+		if (!vm->nb_process)
 			return (0);
-		reset_live(vm);
-		if (check_nb_live_player(vm) || *nb_no_decr >= MAX_CHECKS)
+		if (check_nb_live_proc(vm) || *nb_no_decr >= MAX_CHECKS)
 		{
 			*cycle_to_check -= CYCLE_DELTA;
 			*nb_no_decr = 0;
 		}
+		reset_live(vm);
 	}
 	return (1);
 }

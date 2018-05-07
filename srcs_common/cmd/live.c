@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   live.c                                           .::    .:/ .      .::   */
+/*   nb_live.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -26,7 +26,7 @@ static void	player_add_live(t_vm *vm, int id)
 		if (vm->player[i].id == idp)
 		{
 			vm->player[i].last_live = vm->cycle;
-			vm->player[i].live++;
+			vm->player[i].nb_live++;
 			return ;
 		}
 		i++;
@@ -43,5 +43,6 @@ int			cmd_live(t_vm *vm, int ipr)
 	if (vm_proc.er)
 		return (0);
 	player_add_live(vm, p1);
+	vm->process[ipr].nb_live++;
 	return (1);
 }

@@ -1,8 +1,8 @@
-l2:		fork %:live
-		sti r1, %:live, %1
+l2:		fork %:nb_live
+		sti r1, %:nb_live, %1
 
-live:	live %1
-		zjmp %:live
+nb_live:	nb_live %1
+		zjmp %:nb_live
 
 0c 00 0a 0b 68 01 00 07 00 01 01 00 00 00 01 09 ff fb
 
@@ -10,11 +10,11 @@ live:	live %1
 
  [op] [index]   [op]  [ocod]  [reg]   [index]   [valeur]   [op]    [param]   [op]   [index]
 
- fork    10     sti    1+2+2    1      pc + 7      1       live       1      zjmp   %4096
+ fork    10     sti    1+2+2    1      pc + 7      1       nb_live       1      zjmp   %4096
 
 
 numero du joueur fourni via registre r1 de leur premeir processus au demarrage
-tous cycle to die, verifier que chaque processus a realise au moins 1 live
+tous cycle to die, verifier que chaque processus a realise au moins 1 nb_live
 
 
 -dump nbr_cycles
@@ -31,7 +31,7 @@ l’ordre d’exécution
 
  |  NOM   |  op  |  oc_param |     ecriture         | ecriture bytecode                                | operation                                      |       remarque
  |:------:|:----:|:---------:|:--------------------:|:------------------------------------------------:|:----------------------------------------------:|:-----------------------------------------------------------------------------
- |  live  |  01  |     0     | live %X              | 01 (XX-XX-XX-XX)                                 | player_live = live + 1                         |                                                    
+ |  nb_live  |  01  |     0     | nb_live %X              | 01 (XX-XX-XX-XX)                                 | player_live = nb_live + 1                         |                                                    
  |	ld    |  02  |     1     | ld X, rX             | 02 XX (XX *2 ou *4) XX                           | rX = val_param % IDX_MOD                       | change le carry
  |	st    |  03  |     1     | st rX, NBR           | 03 XX XX (XX *1 ou *4)                           | adresse = **PC** + (NBR % **IDX_MOD**))        | stock le registre a cette adresse
  |	add   |  04  |     1     | add rX, rX, rX       | 04 XX XX XX XX                                   | param_3 = param_1 + param_2                    | change le carry ensuite
@@ -51,7 +51,7 @@ l’ordre d’exécution
 
 | Op    | Binaire | Hexa |  Cycle | Arg 1                   | Arg 2                   | Arg 3          | carry | octet_param | dir_size_2 | jmp_err_oc_param |
 | ------|:-------:| :---:| :----: | :---------------------: | :---------------------: | :------------: | :----:| :----------:| :---------:|:----------------:|
-| live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           | 0          |        X         | 
+| nb_live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           | 0          |        X         | 
 | ld    | 0000010 | 0x02 | 5      | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |        6         |
 | st    | 0000011 | 0x03 | 5      | T_REG                   | T_IND or T_REG          |                | 0     | 1           | 0          |        6         |
 | add   | 0000100 | 0x04 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |        8         |

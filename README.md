@@ -91,7 +91,7 @@ inst ::= {label :} opcode params
 
 ```
 opcode ::=
- live | ld   | st   | add  | or   | xor   | zjmp |
+ nb_live | ld   | st   | add  | or   | xor   | zjmp |
  ldi  | sti  | fork | lld  | lldi | lfork | aff
 ```
 
@@ -131,7 +131,7 @@ champion_description ::= .comment string
 
 | Op    | Binaire | Hexa |  Cycle | Arg 1                   | Arg 2                   | Arg 3          | carry | octet_param | dir_size_2 |
 | ------|:-------:| :---:| :----: | :---------------------: | :---------------------: | :------------: | :----:| :----------:| :---------:|
-| live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           | 0          |
+| nb_live  | 0000001 | 0x01 | 10     | T_DIR                   |                         |                | 0     | 0           | 0          |
 | ld    | 0000010 | 0x02 | 5      | T_DIR or T_IND          | T_REG                   |                | 1     | 1           | 0          |
 | st    | 0000011 | 0x03 | 5      | T_REG                   | T_IND or T_REG          |                | 0     | 1           | 0          |
 | add   | 0000100 | 0x04 | 10     | T_REG                   | T_REG                   | T_REG          | 1     | 1           | 0          |
@@ -181,10 +181,10 @@ L’exécutable commence toujours par un header, défini dans op.h par le type
 ```
 .name "zork"
 .comment "just a basic living prog"
-l2: sti r1,%:live,%1
+l2: sti r1,%:nb_live,%1
 and r1,%0,r1
-live: live %1
-zjmp %:live
+nb_live: nb_live %1
+zjmp %:nb_live
 
 # Executable compile:
 #
@@ -210,10 +210,10 @@ zjmp %:live
 < 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 < *
 
-> sti	r1, %:live, %1			;change live by the right value
+> sti	r1, %:nb_live, %1			;change nb_live by the right value
 < 0b 68 01 00-45 00-01
 
-> sti	r1, %:live2, %1			;change live by the right value
+> sti	r1, %:live2, %1			;change nb_live by the right value
 < 0b 68 01 00-22 00-01
 
 > ld	%1, r3
@@ -233,7 +233,7 @@ forks:
 
 live2:
 
-> live 	%4
+> nb_live 	%4
 < 01 00-00-00-04
 
 > zjmp	%:endwhile		;if (carry)
@@ -254,12 +254,12 @@ endwhile:
 > ld	%0, r4			;carry = 1
 < 02 90 00-00-00-00 04
 
-live:
+nb_live:
 
-> live %4
+> nb_live %4
 < 01 00-00-00-04
 
-> zjmp %:live
+> zjmp %:nb_live
 < 09 ff-fb
 ```
 
@@ -342,7 +342,7 @@ même si c’est un peu bête car il n’y a qu’un paramètre, qui est un regi
 le contenu est interprété comme la valeur ASCII d’un caractère à afficher sur la
 sortie standard. Ce code est modulo 256.
 
-- **live** : L’instruction qui permet à un processus de rester vivant. A également pour
+- **nb_live** : L’instruction qui permet à un processus de rester vivant. A également pour
 effet de rapporter que le joueur dont le numéro est en paramètre est en vie. Pas
 d’octet de codage des paramètres, opcode 0x01. Oh, et son seul paramètre est sur
 4 octets.
@@ -385,12 +385,12 @@ y charger les champions et leurs processus associés, et les exécuter séquenti
 jusqu’à ce que mort s’ensuive.
 
 - Tous les **CYCLE_TO_DIE** cycles, la machine doit s’assurer que chaque processus
-a exécuté au moins un live depuis la dernière vérification. Un processus qui ne se
+a exécuté au moins un nb_live depuis la dernière vérification. Un processus qui ne se
 soumet pas à cette règle sera mis à mort à l’aide d’une batte en mousse virtuelle.
 (Bonus bruitage !)
 
 - Si au cours d’une de ces vérifications on se rend compte qu’il y a eu au moins
-**NBR_LIVE** exécutions de live depuis la dernière vérification en date, on décrémente **CYCLE_TO_DIE** de **CYCLE_DELTA** unités.
+**NBR_LIVE** exécutions de nb_live depuis la dernière vérification en date, on décrémente **CYCLE_TO_DIE** de **CYCLE_DELTA** unités.
 
 - Quand il n’y a plus de processus en vie, la partie est terminée.
 
@@ -399,7 +399,7 @@ va ensuite afficher : "le joueur x(nom_champion) a gagne", où x est le numéro
 du joueur et nom_champion le nom de son champion.
 Exemple : "le joueur 2(rainbowdash) a gagne"
 
-- A chaque exécution valide de l’instruction live, la machine doit afficher :
+- A chaque exécution valide de l’instruction nb_live, la machine doit afficher :
 "un processus dit que le joueur x(nom_champion) est en vie"
 
 - En tout état de cause, la mémoire est circulaire et fait **MEM_SIZE** octets.
@@ -445,9 +445,9 @@ soit rapporté comme "en vie", comprendre le sens de ladite vie, et annihiler se
 adversaires.
 
 - Pour que son joueur soit dit comme "en vie", votre champion doit faire en sorte que
-des live soient faits avec son numéro. Si l’un de ses processus fait un live avec
+des nb_live soient faits avec son numéro. Si l’un de ses processus fait un nb_live avec
 le numéro d’un autre joueur ... eh bien, c’est dommage, mais au moins un autre
-joueur sera content. Si un processus d’un autre joueur fait des live avec votre
+joueur sera content. Si un processus d’un autre joueur fait des nb_live avec votre
 numéro, vous avez l’autorisation de vous moquer de lui et de profiter éhontément
 de son erreur, tous en insultant sa famille en binaire.
 

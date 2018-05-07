@@ -12,49 +12,46 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "libft.h"
 
-void	kill_player(t_vm *vm)
+void	sup_proc(t_vm *vm, unsigned int ipr)
 {
-	int i;
+	if (ipr == vm->nb_process - 1)
+	{
+		vm->nb_process--;
+		return ;
+	}
+	ft_memmove(vm->process + ipr, vm->process + ipr + 1, sizeof(t_proc) * (vm->nb_process - ipr - 1));
+	vm->nb_process--;
+}
+
+void	kill_proc(t_vm *vm)
+{
+	unsigned int i;
 
 //	ft_printf("check_end\n");
 	i = 0;
-	while (i < vm->nb_p)
+	while (i < vm->nb_process)
 	{
-		if (vm->player[i].live == 0)
-			vm->player[i].is_alive = 0;
+		if (vm->process[i].nb_live == 0)
+		{
+			sup_proc(vm, i);
+		}
 		i++;
 	}
 }
 
-int		count_player_alive(t_vm *vm)
+int		check_nb_live_proc(t_vm *vm)
 {
-	int i;
-	int nb_player_alive;
-
-	nb_player_alive = 0;
-	i = 0;
-	while (i < vm->nb_p)
-	{
-		if (vm->player[i].is_alive)
-			nb_player_alive++;
-		i++;
-	}
-	return (nb_player_alive);
-}
-
-int		check_nb_live_player(t_vm *vm)
-{
-	int i;
+	unsigned int i;
 	int nb_live;
 
-//	ft_printf("check_nb_live_player\n");
+//	ft_printf("check_nb_live_proc\n");
 	nb_live = 0;
 	i = 0;
-	while (i < vm->nb_p)
+	while (i < vm->nb_process)
 	{
-		if (vm->player[i].is_alive)
-			nb_live += vm->player[i].live;
+		nb_live += vm->process[i].nb_live;
 		i++;
 	}
 	return (nb_live >= NBR_LIVE);
@@ -64,11 +61,17 @@ void reset_live(t_vm *vm)
 {
 	int i;
 
-//	ft_printf("check_nb_live_player\n");
+//	ft_printf("check_nb_live_proc\n");
+	i = 0;
+	while ((unsigned)i < vm->nb_process)
+	{
+		vm->process[i].nb_live = 0;
+		i++;
+	}
 	i = 0;
 	while (i < vm->nb_p)
 	{
-		vm->player[i].live = 0;
+		vm->player[i].nb_live = 0;
 		i++;
 	}
 }
