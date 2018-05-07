@@ -46,8 +46,10 @@ void	vm_display_res(t_vm *vm)
 	}
 	if (vm->d && vm->cycle >= (unsigned)vm->d_nb)
 	{
-		//vm_dump_mem(vm);
-		vm_print(vm);
+		if (vm->db)
+			vm_print(vm);
+		else
+			vm_dump_mem(vm);
 		return ;
 	}
 	a = 0;

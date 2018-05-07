@@ -14,6 +14,8 @@
 #include "corewar.h"
 #include "libft.h"
 
+static int end = 0;
+
 int		will_exec(t_vm *vm)
 {
 	unsigned int i;
@@ -46,10 +48,14 @@ void	debug(t_vm *vm)
 {
 	char	*line;
 
-	if (will_exec(vm))
+	if (will_exec(vm) && !end)
 	{
 		vm_print(vm);
 		if (get_next_line(0, &line) > 0)
+		{
+			if (ft_strequ(line, "end"))
+				end = 1;
 			free(line);
+		}
 	}
 }
