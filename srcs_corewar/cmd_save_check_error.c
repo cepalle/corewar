@@ -6,7 +6,7 @@
 /*   By: ppichier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/06 18:47:34 by ppichier     #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/06 18:47:36 by ppichier    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/07 10:46:25 by ppichier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,13 +17,13 @@
 
 int		ft_cmd_save_add_len_params(t_vm *vm, t_proc *processor, int op)
 {
-	unsigned char 	tmp;
-	int 			i;
-	int 			left;
+	unsigned char	tmp;
+	int				i;
+	int				left;
 
 	i = 0;
 	left = 0;
-	while(i < gopt()[op].nb_arg)
+	while (i < gopt()[op].nb_arg)
 	{
 		tmp = vm->tab[cal_pc_add(processor->PC, 1)];
 		tmp = tmp << left;
@@ -43,11 +43,11 @@ int		ft_cmd_save_add_len_params(t_vm *vm, t_proc *processor, int op)
 	return (1);
 }
 
-int 	ft_cmd_save_check_existence(int op, unsigned char tmp, int i)
+int		ft_cmd_save_check_existence(int op, unsigned char tmp, int i)
 {
 	unsigned char a;
 
-//	ft_printf("ft_cmd_save_check_existence\n");
+	//	ft_printf("ft_cmd_save_check_existence\n");
 	a = (unsigned char)gopt()[op].args[i];
 	if (tmp == 3)
 		tmp = 4;
@@ -56,13 +56,12 @@ int 	ft_cmd_save_check_existence(int op, unsigned char tmp, int i)
 	return (0);
 }
 
-int 	ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
+int		ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
 {
-	unsigned char tmp;
-	unsigned char masque;
-	int i;
-	int right;
-
+	unsigned char	tmp;
+	unsigned char	masque;
+	int				i;
+	int				right;
 //	ft_printf("ft_cmd_save_right_params\n");
 	i = 0;
 	masque = 0b11000000;
@@ -81,16 +80,26 @@ int 	ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
 	return (1);
 }
 
-int 	ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor)
+int		ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor)
 {
-	unsigned char tmp;
-	int i;
-
+	unsigned char	tmp;
+	int				i;
 //	ft_printf("ft_cmd_save_error_oct_params\n");
 	i = 0;
 	tmp = vm->tab[cal_pc_add(processor->PC, 1)];
 	tmp = tmp << 6;
 	if (tmp != 0)
 		return (0);
+	return (1);
+}
+
+int		ft_cmd_save_central_error(t_vm *vm, t_proc *processor, int op)
+{
+	if (ft_cmd_save_error_oct_params(vm, processor) == 0 ||
+			ft_cmd_save_right_params(vm, processor, op) == 0)
+	{
+		ft_cmd_save_add_len_params(vm, processor, op);
+		return (0);
+	}
 	return (1);
 }

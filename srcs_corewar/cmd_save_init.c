@@ -32,8 +32,7 @@
 	}
 }*/
 
-
-static int 	ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
+static int	ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
 {
 //	ft_printf("ft_no_oct_params\n");
 	if (gopt()[op].opcode == 1)

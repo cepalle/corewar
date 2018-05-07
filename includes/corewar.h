@@ -106,6 +106,7 @@ int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check,
 	unsigned int *cycle_to_check, unsigned int *nb_no_decr);
 void			vm_print(t_vm *vm);
 int 			stock_cmd(t_vm *vm, t_proc *processor);
+int 			ft_cmd_save_central_error(t_vm *vm, t_proc *processor, int op);
 int 			ft_cmd_save_check_existence(int op, unsigned char tmp, int i);
 int				ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op);
 int 			ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor);
