@@ -63,6 +63,7 @@ static int		ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
 	return (1);
 }
 
+/*
 static	int		ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 {
 	int i;
@@ -77,25 +78,18 @@ static	int		ft_get_op_ppichier(t_vm *vm, t_proc *processor)
 	}
 	return (-1);
 }
+*/
 
-int				stock_cmd(t_vm *vm, t_proc *processor)
+int				stock_cmd(t_vm *vm, t_proc *processor, int op)
 {
-	int op;
-
-	//ft_printf("stock_cmd\n");
-	if ((op = ft_get_op_ppichier(vm, processor)) == -1)
-		return (0);
+//	if ((op = ft_get_op_ppichier(vm, processor)) == -1)
+//		return (0);
+	processor->cmd_save.cmd = gopt()[op].op_fct;
 	if (gopt()[op].octet_param == 1)
-	{
 		ft_analyze_oct_params(vm, processor, op);
-		processor->cmd_save.cmd = gopt()[op].op_fct;
-	}
 	else
-	{
 		ft_no_oct_params(vm, processor, op);
-		processor->cmd_save.cmd = gopt()[op].op_fct;
-	}
-	processor->cmd_save.cycle_wating = (unsigned int)gopt()[op].cycle;
+//	processor->cmd_save.cycle_wating = (unsigned int)gopt()[op].cycle;
 //	ft_debug(processor, op);
 	return (1);
 }
