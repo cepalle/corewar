@@ -18,7 +18,7 @@
 static int	ft_params_is_ind(t_vm *vm, t_proc *processor,
 		unsigned int *cpt, int i)
 {
-	unsigned	short	ind_value;
+	signed	short	ind_value;
 
 	ind_value = 0;
 	processor->cmd_save.params_type[i] = 3;
