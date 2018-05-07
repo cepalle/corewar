@@ -39,14 +39,14 @@ static int	ft_no_oct_params(t_vm *vm, t_proc *processor, int op)
 	{
 		processor->cmd_save.params_size[0] = 4;
 		processor->cmd_save.params[0] =
-				vm_read_4(vm, cal_pc_add(processor->PC, 1));
+				(signed int)vm_read_4(vm, cal_pc_add(processor->PC, 1));
 		processor->cmd_save.cmd_len = 5;
 	}
 	else
 	{
 		processor->cmd_save.params_size[0] = 2;
 		processor->cmd_save.params[0] =
-				vm_read_2(vm, cal_pc_add(processor->PC, 1));
+				(signed short)vm_read_2(vm, cal_pc_add(processor->PC, 1));
 		processor->cmd_save.cmd_len = 3;
 	}
 	processor->cmd_save.params_type[0] = 2;
