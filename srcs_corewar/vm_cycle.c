@@ -30,6 +30,8 @@ int		vm_cycle(t_vm *vm, int *cycle_last_check, int *nb_no_decr)
 			vm->cycle_to_die -= CYCLE_DELTA;
 			*nb_no_decr = 0;
 		}
+		else
+			(*nb_no_decr)++;
 		reset_live(vm);
 	}
 	return (1);
