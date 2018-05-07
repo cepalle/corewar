@@ -62,16 +62,6 @@ static int	ft_params_is_reg(t_vm *vm, t_proc *processor,
 	return (1);
 }
 
-static unsigned char	ft_analyze_code(t_vm * vm, t_proc *processor, int left)
-{
-	unsigned char	tmp;
-
-	tmp = vm->tab[cal_pc_add(processor->PC, 1)];
-	tmp = tmp << left;
-	tmp = tmp >> 6;
-	return (tmp);
-}
-
 int			ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 {
 	unsigned	char	tmp;
@@ -87,9 +77,6 @@ int			ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op)
 		return (0);
 	while (++i < gopt()[op].nb_arg)
 	{
-		/*tmp = vm->tab[cal_pc_add(processor->PC, 1)];
-		tmp = tmp << left;
-		tmp = tmp >> 6;*/
 		tmp = ft_analyze_code(vm, processor, left);
 		if (tmp == REG_CODE)
 			ft_params_is_reg(vm, processor, &cpt, i);

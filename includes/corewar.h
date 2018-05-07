@@ -112,6 +112,7 @@ int				ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op);
 int 			ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor);
 int				ft_analyze_oct_params(t_vm *vm, t_proc *processor, int op);
 int				ft_cmd_save_add_len_params(t_vm *vm, t_proc *processor, int op);
+unsigned char	ft_analyze_code(t_vm * vm, t_proc *processor, int left);
 void			proc_exec(t_vm *vm, int ipr);
 void			procs_exec(t_vm *vm);
 signed char 	vm_read_1(t_vm *vm, unsigned int PC);
