@@ -24,7 +24,6 @@ signed	short	vm_read_2(t_vm *vm, unsigned int pc)
 {
 	unsigned short	stock;
 	int				i;
-
 //	ft_printf("vm_read_2\n");
 	i = 0;
 	stock = 0;
@@ -41,7 +40,6 @@ signed	int		vm_read_4(t_vm *vm, unsigned int pc)
 {
 	unsigned	int	stock;
 	int				i;
-
 //	ft_printf("vm_read_4\n");
 	i = 0;
 	stock = 0;
