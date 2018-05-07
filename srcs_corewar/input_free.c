@@ -16,7 +16,7 @@
 
 void	input_free(t_input *input)
 {
-	int a;
+	unsigned int a;
 
 	a = 0;
 	while (a < input->nb_p)
