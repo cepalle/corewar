@@ -15,8 +15,8 @@
 
 void	vm_run(t_vm *vm)
 {
-	unsigned int	cycle_last_check;
-	unsigned int	nb_no_decr;
+	int		cycle_last_check;
+	int		nb_no_decr;
 
 	vm->cycle = 0;
 	cycle_last_check = vm->cycle;
@@ -24,6 +24,6 @@ void	vm_run(t_vm *vm)
 	nb_no_decr = 0;
 	while (!vm->d || vm->d_nb > (int)vm->cycle)
 		if (!vm_cycle(vm, &cycle_last_check, &nb_no_decr))
-			return ;
+			break ;
 	vm_display_res(vm);
 }

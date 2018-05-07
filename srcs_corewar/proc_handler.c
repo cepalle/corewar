@@ -14,7 +14,7 @@
 #include "corewar.h"
 #include "libft.h"
 
-void	sup_proc(t_vm *vm, unsigned int ipr)
+void	sup_proc(t_vm *vm, int ipr)
 {
 	if (ipr == vm->nb_process - 1)
 	{
@@ -27,7 +27,7 @@ void	sup_proc(t_vm *vm, unsigned int ipr)
 
 void	kill_proc(t_vm *vm)
 {
-	unsigned int i;
+	int i;
 
 //	ft_printf("check_end\n");
 	i = 0;
@@ -44,7 +44,7 @@ void	kill_proc(t_vm *vm)
 
 int		check_nb_live_proc(t_vm *vm)
 {
-	unsigned int i;
+	int i;
 	int nb_live;
 
 //	ft_printf("check_nb_live_proc\n");
@@ -64,7 +64,7 @@ void reset_live(t_vm *vm)
 
 //	ft_printf("check_nb_live_proc\n");
 	i = 0;
-	while ((unsigned)i < vm->nb_process)
+	while (i < vm->nb_process)
 	{
 		vm->process[i].nb_live = 0;
 		i++;

@@ -55,7 +55,7 @@ void	vm_display_res(t_vm *vm)
 		ft_printf("* Player %d, weighing %d bytes, '%s' ('%s') !\n", a + 1, vm->player[a].head.prog_size, vm->player[a].head.prog_name, vm->player[a].head.comment);
 		a++;
 	}
-	if (vm->d && vm->cycle >= (unsigned)vm->d_nb)
+	if (vm->d && vm->cycle >= vm->d_nb)
 	{
 		if (vm->db)
 			vm_print(vm);

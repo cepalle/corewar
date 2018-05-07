@@ -13,11 +13,11 @@
 
 #include <corewar.h>
 
-int		vm_cycle(t_vm *vm, unsigned int *cycle_last_check, unsigned int *nb_no_decr)
+int		vm_cycle(t_vm *vm, int *cycle_last_check, int *nb_no_decr)
 {
+	procs_exec(vm);
 	if (vm->db)
 		debug(vm);
-	procs_exec(vm);
 	vm->cycle++;
 	if (vm->cycle - *cycle_last_check >= vm->cycle_to_die)
 	{

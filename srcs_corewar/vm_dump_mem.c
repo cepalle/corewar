@@ -16,7 +16,7 @@
 
 int		is_pc_proc(t_vm *vm, int PC)
 {
-	unsigned int i;
+	int i;
 
 	i = 0;
 	while (i < vm->nb_process)

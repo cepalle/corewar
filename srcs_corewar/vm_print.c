@@ -18,7 +18,7 @@ static int end = 0;
 
 int		will_exec(t_vm *vm)
 {
-	unsigned int i;
+	int i;
 
 	i = 0;
 	while (i < vm->nb_process)
@@ -32,7 +32,7 @@ int		will_exec(t_vm *vm)
 
 void	vm_print(t_vm *vm)
 {
-	unsigned int i;
+	int i;
 
 	i = 0;
 	vm_dump_mem_color(vm);
@@ -40,7 +40,7 @@ void	vm_print(t_vm *vm)
 	ft_printf("CYCLe_TO_DIE: %d\n", vm->cycle_to_die);
 	while (i < vm->nb_process)
 	{
-		ft_printf("proc %d wait: %d\n", i, vm->process[i].cmd_save.cycle_wating);
+		ft_printf("proc %d wait: %d nb_live: %d\n", i, vm->process[i].cmd_save.cycle_wating, vm->process[i].nb_live);
 		i++;
 	}
 }

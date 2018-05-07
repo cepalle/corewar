@@ -77,10 +77,10 @@ struct		s_vm
 	unsigned char 	tab[MEM_SIZE];
 	t_player 		player[4];
 	t_proc			*process; // TODO test ref
-	unsigned int	nb_process;
-	unsigned int	len_process;
-	unsigned int	cycle;
-	unsigned int	cycle_to_die;
+	int				nb_process;
+	int				len_process;
+	int				cycle;
+	int				cycle_to_die;
 };
 typedef struct s_vm t_vm;
 
@@ -103,7 +103,7 @@ typedef struct		s_vm_proc t_vm_proc;
 int				input_cmdline(int argc, char **argv, t_input *input);
 void			vm_init(t_vm *vm, t_input input);
 void			vm_run(t_vm *vm);
-int				vm_cycle(t_vm *vm, unsigned int *c, unsigned int *n);
+int				vm_cycle(t_vm *vm, int *c, int *n);
 void			vm_print(t_vm *vm);
 int 			stock_cmd(t_vm *vm, t_proc *processor);
 int 			ft_cmd_save_central_error(t_vm *vm, t_proc *processor, int op);
