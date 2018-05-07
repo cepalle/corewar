@@ -20,7 +20,7 @@ int		cmd_ldi(t_vm *vm, int ipr)
 	int				ri2;
 	int				res;
 
-	init_vm_proc(&vm_proc, vm, ipr, 0);
+	init_vm_proc(&vm_proc, vm, ipr, 1);
 	ri1 = read_param(&vm_proc, 0);
 	ri2 = read_param(&vm_proc, 1);
 	res = vm_read_4(vm, cal_pc_add(vm->process[ipr].PC, (ri1 + ri2) % IDX_MOD));

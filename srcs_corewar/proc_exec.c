@@ -16,12 +16,16 @@
 
 void	proc_exec(t_vm *vm, int ipr)
 {
+//	ft_printf("in %p\n",vm->process[ipr].cmd_save.cmd);
 	if (!vm->process[ipr].cmd_save.cmd &&
 		!stock_cmd(vm, vm->process + ipr))
 	{
+//		ft_printf("ici\n");
 		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, 1);
+		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
 		return ;
 	}
+//	ft_printf("out %p\n",vm->process[ipr].cmd_save.cmd);
 	vm->process[ipr].cmd_save.cycle_wating--;
 	if (vm->process[ipr].cmd_save.cycle_wating <= 0)
 	{

@@ -20,7 +20,7 @@ int		do_op(t_vm *vm, int ipr, t_cal cal)
 	int				ri2;
 	int				res;
 
-	init_vm_proc(&vm_proc, vm, ipr, 0);
+	init_vm_proc(&vm_proc, vm, ipr, 1);
 	ri1 = read_param(&vm_proc, 0);
 	ri2 = read_param(&vm_proc, 1);
 	res = cal(ri1, ri2);

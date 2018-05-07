@@ -19,7 +19,7 @@ int		cmd_fork(t_vm *vm, int ipr)
 	t_vm_proc		vm_proc;
 	int				p1;
 
-	init_vm_proc(&vm_proc, vm, ipr, 0);
+	init_vm_proc(&vm_proc, vm, ipr, 1);
 	p1 = read_param(&vm_proc, 0);
 	if (!vm_proc.er)
 		vm_fork(vm, ipr, p1 % IDX_MOD);
