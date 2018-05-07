@@ -38,7 +38,8 @@ void	proc_exec(t_vm *vm, int ipr)
 	vm->process[ipr].cmd_save.cycle_wating--;
 	if (vm->process[ipr].cmd_save.cycle_wating <= 0)
 	{
-		if (stock_cmd(vm, vm->process + ipr, vm->process[ipr].cmd_save.opcode))
+		stock_cmd(vm, vm->process + ipr, vm->process[ipr].cmd_save.opcode);
+		if (vm->process[ipr].cmd_save.cmd)
 			((t_cmd)vm->process[ipr].cmd_save.cmd)(vm, ipr);
 		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
 			vm->process[ipr].cmd_save.cmd_len);
