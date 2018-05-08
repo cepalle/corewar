@@ -132,7 +132,7 @@ typedef struct s_parser		t_parser;
 struct						s_file
 {
 	char					**file;
-	int 					*i_col;
+	int						*i_col;
 	int						*i_line;
 };
 typedef struct s_file		t_file;

@@ -63,7 +63,6 @@ typedef char			t_arg_type;
 # define T_IND	0b100
 # define T_LAB	8
 
-
 /*
 ** HEADER
 */
@@ -95,8 +94,8 @@ struct					s_op
 	char				*descr;
 	int					octet_param;
 	int					dir_size_2;
-	void 				*op_fct;
-	int 				default_len;
+	void				*op_fct;
+	int					default_len;
 };
 typedef struct s_op		t_op;
 
