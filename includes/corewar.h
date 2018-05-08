@@ -33,7 +33,7 @@ struct						s_input
 	int						d_nb;
 	t_bool					dl;
 	int						dl_nb;
-	unsigned char			*prog[4];
+	unsigned char			*(prog[4]);
 	t_header				head[4];
 	unsigned int			nb_p;
 };
