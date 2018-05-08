@@ -17,7 +17,7 @@
 static	void	ft_find_last_live(t_vm *vm)
 {
 	int a;
-	unsigned max;
+	int max;
 
 	a = 0;
 	max = vm->player[0].last_live;

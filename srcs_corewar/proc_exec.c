@@ -13,32 +13,36 @@
 
 #include <corewar.h>
 #include "libft.h"
-#include "op.h"
 
-void	proc_exec(t_vm *vm, int ipr)
+static int	proc_init(t_vm *vm, int ipr)
 {
 	char	opcode;
 
-	if (!vm->process[ipr].cmd_save.cmd)
+	ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
+	opcode = vm_read_1(vm, vm->process[ipr].pc);
+	if (opcode < 1 || opcode > 16)
 	{
-		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
-		opcode = vm_read_1(vm, vm->process[ipr].pc);
-		if (opcode < 1 || opcode > 16)
-		{
-			vm->process[ipr].pc = cal_pc_add(vm->process[ipr].pc, 1);
-			return ;
-		}
-		else
-		{
-			vm->process[ipr].cmd_save.cycle_wating = get_op_cmd(opcode).cycle;
-			vm->process[ipr].cmd_save.opcode = opcode;
-			vm->process[ipr].cmd_save.cmd = get_op_cmd(opcode).op_fct;
-		}
+		vm->process[ipr].pc = cal_pc_add(vm->process[ipr].pc, 1);
+		return (0);
 	}
+	else
+	{
+		vm->process[ipr].cmd_save.cycle_wating = get_op_cmd(opcode).cycle;
+		vm->process[ipr].cmd_save.opcode = opcode;
+		vm->process[ipr].cmd_save.cmd = get_op_cmd(opcode).op_fct;
+	}
+	return (1);
+}
+
+void		proc_exec(t_vm *vm, int ipr)
+{
+	if (!vm->process[ipr].cmd_save.cmd && !proc_init(vm, ipr))
+		return ;
 	vm->process[ipr].cmd_save.cycle_wating--;
 	if (vm->process[ipr].cmd_save.cycle_wating <= 0)
 	{
-		if (stock_cmd(vm, vm->process + ipr, vm->process[ipr].cmd_save.opcode - 1))
+		if (stock_cmd(vm, vm->process + ipr,
+				vm->process[ipr].cmd_save.opcode - 1))
 			((t_cmd)vm->process[ipr].cmd_save.cmd)(vm, ipr);
 		vm->process[ipr].pc = cal_pc_add(vm->process[ipr].pc,
 			vm->process[ipr].cmd_save.cmd_len);
@@ -46,7 +50,7 @@ void	proc_exec(t_vm *vm, int ipr)
 	}
 }
 
-void	procs_exec(t_vm *vm)
+void		procs_exec(t_vm *vm)
 {
 	int	i;
 

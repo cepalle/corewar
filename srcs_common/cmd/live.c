@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   nb_live.c                                           .::    .:/ .      .::   */
+/*   live.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: cepalle <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/03 08:43:09 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/03 08:43:10 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/05/08 11:48:51 by cepalle      #+#   ##    ##    #+#       */
+/*   Updated: 2018/05/08 11:48:52 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include "libft.h" // a supprimer une fois debug termine
 
 static void	player_add_live(t_vm *vm, int id)
 {

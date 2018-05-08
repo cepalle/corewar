@@ -14,87 +14,91 @@
 #include <corewar.h>
 #include "libft.h"
 
-void	init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod)
+void		init_vm_proc(t_vm_proc *vm_proc, t_vm *vm, int ipr, int idx_mod)
 {
-//	ft_printf("init_vm_proc\n");
 	ft_bzero(vm_proc, sizeof(t_vm_proc));
 	vm_proc->vm = vm;
 	vm_proc->ipr = ipr;
 	vm_proc->idx_mod = idx_mod;
 }
 
-int		read_param(t_vm_proc *vm_proc, int ipar)
+static int	read_ind(t_vm_proc *vm_proc, int ipar)
 {
 	t_cmd_save cmd_sav;
 
-//	ft_printf("read_param\n");
+	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
+	if (vm_proc->idx_mod)
+		return (vm_read_4(vm_proc->vm,
+			cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
+			cmd_sav.params[ipar] % IDX_MOD)));
+	else
+		return (vm_read_4(vm_proc->vm,
+			cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
+			cmd_sav.params[ipar])));
+}
+
+int			read_param(t_vm_proc *vm_proc, int ipar)
+{
+	t_cmd_save	cmd_sav;
+	t_proc		*proc;
+
 	if (vm_proc->er)
 		return (0);
-//	ft_printf("vm_proc->ipr = %d\n", vm_proc->ipr);
-//	ft_printf("r1 = %d\n", vm_proc->vm->process[0].cmd_save.params[ipar]);
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
-//	ft_printf("cmd_sav.params %d\n", cmd_sav.params[ipar]);
+	proc = vm_proc->vm->process + vm_proc->ipr;
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
 		if (cmd_sav.params[ipar] > 0 &&
 			cmd_sav.params[ipar] < 17)
-			return (vm_proc->vm->process[vm_proc->ipr].reg[cmd_sav.params[ipar] - 1]);
+			return (proc->reg[cmd_sav.params[ipar] - 1]);
 		vm_proc->er = 1;
 		return (0);
 	}
 	if (cmd_sav.params_type[ipar] == IND_CODE)
-	{
-		if (vm_proc->idx_mod)
-			return (vm_read_4(vm_proc->vm,
-							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
-										cmd_sav.params[ipar] % IDX_MOD)));
-		else
-			return (vm_read_4(vm_proc->vm,
-							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
-										cmd_sav.params[ipar])));
-	}
+		return (read_ind(vm_proc, ipar));
 	else
 	{
-//		ft_printf("je suis la ds la commande\n");
-//		ft_printf("ipar = %d\n", ipar);
 		return (cmd_sav.params[ipar]);
 	}
 }
 
-void	load_param(t_vm_proc *vm_proc, int ipar, int data)
+static void	write_ind(t_vm_proc *vm_proc, int ipar, int data)
 {
 	t_cmd_save cmd_sav;
 
-//	ft_printf("load_param\n");
+	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
+	if (vm_proc->idx_mod)
+	{
+		vm_write_4(vm_proc->vm,
+			cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
+			cmd_sav.params[ipar] % IDX_MOD),
+			(unsigned int)(data));
+	}
+	else
+		vm_write_4(vm_proc->vm,
+			cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
+			cmd_sav.params[ipar]),
+			(unsigned int)(data));
+}
+
+void		load_param(t_vm_proc *vm_proc, int ipar, int data)
+{
+	t_cmd_save	cmd_sav;
+	t_proc		*proc;
+
 	if (vm_proc->er)
 		return ;
 	cmd_sav = vm_proc->vm->process[vm_proc->ipr].cmd_save;
+	proc = vm_proc->vm->process + vm_proc->ipr;
 	if (cmd_sav.params_type[ipar] == REG_CODE)
 	{
 		if (cmd_sav.params[ipar] > 0 && cmd_sav.params[ipar] < 17)
-			vm_proc->vm->process[vm_proc->ipr].reg[cmd_sav.params[ipar] - 1] = data;
+			proc->reg[cmd_sav.params[ipar] - 1] = data;
 		else
 			vm_proc->er = 1;
 	}
 	else if (cmd_sav.params_type[ipar] == IND_CODE)
-	{
-		if (vm_proc->idx_mod)
-		{
-//			ft_printf("je vais copier a un indirect\n");
-//			ft_printf("le pc auquel on copie est de %d\n", cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
-//																	  cmd_sav.params[ipar] % IDX_MOD));
-//			ft_printf("data = %d\n", data);
-			vm_write_4(vm_proc->vm,
-					   cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
-								  cmd_sav.params[ipar] % IDX_MOD),
-					   (unsigned int) (data));
-		}
-		else
-			vm_write_4(vm_proc->vm,
-					cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
-								cmd_sav.params[ipar]),
-				(unsigned int)(data));
-	}
+		write_ind(vm_proc, ipar, data);
 	else
 		vm_proc->er = 1;
 }

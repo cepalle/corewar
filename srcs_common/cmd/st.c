@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "libft.h" // a supprimer
 
 int		cmd_st(t_vm *vm, int ipr)
 {

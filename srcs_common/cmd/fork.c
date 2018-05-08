@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include "libft.h" // a supprimr une fois debug termine
 
 int		cmd_fork(t_vm *vm, int ipr)
 {

@@ -52,7 +52,7 @@ typedef struct s_cmd_save	t_cmd_save;
 struct	s_player
 {
 	t_header		head;
-	unsigned int	last_live;
+	int				last_live;
 	unsigned int	nb_live;
 	unsigned int	id;
 };

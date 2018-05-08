@@ -15,10 +15,10 @@
 
 static int	op_or(int a, int b)
 {
-	return a | b;
+	return (a | b);
 }
 
-int		cmd_or(t_vm *vm, int ipr)
+int			cmd_or(t_vm *vm, int ipr)
 {
-	return do_op(vm, ipr, &op_or);
+	return (do_op(vm, ipr, &op_or));
 }

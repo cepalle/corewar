@@ -12,11 +12,9 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "libft.h" //a supprimer une fois debug termine
 
 void	vm_write_1(t_vm *vm, unsigned int pc, unsigned char data)
 {
-//	ft_printf("vm_write_1\n");
 	vm->tab[cal_pc_add(pc, 0)] = data;
 }
 
@@ -24,7 +22,7 @@ void	vm_write_2(t_vm *vm, unsigned int pc, unsigned short data)
 {
 	int				a;
 	unsigned char	*ptr;
-//	ft_printf("vm_write_2\n");
+
 	a = 0;
 	ptr = (unsigned char*)&data;
 	swap_2(&data);
@@ -39,7 +37,7 @@ void	vm_write_4(t_vm *vm, unsigned int pc, unsigned int data)
 {
 	int				a;
 	unsigned char	*ptr;
-//	ft_printf("vm_write_4\n");
+
 	a = 0;
 	ptr = (unsigned char*)&data;
 	swap_4(&data);

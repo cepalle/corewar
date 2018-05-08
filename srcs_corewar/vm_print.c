@@ -14,8 +14,6 @@
 #include "corewar.h"
 #include "libft.h"
 
-static int end = 0;
-
 int		will_exec(t_vm *vm)
 {
 	int i;
@@ -38,18 +36,22 @@ void	vm_print(t_vm *vm)
 	vm_dump_mem_color(vm);
 	ft_printf("CYCLE: %d: \n", vm->cycle);
 	ft_printf("CYCLE_TO_DIE: %d\n", vm->cycle_to_die);
-	ft_printf("NEXT_DIE: %d\n", vm->cycle_to_die - (vm->cycle - vm->cycle_last_check));
+	ft_printf("NEXT_DIE: %d\n",
+		vm->cycle_to_die - (vm->cycle - vm->cycle_last_check));
 	while (i < vm->nb_process)
 	{
-		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d cmd: %5s\n", i, vm->process[i].cmd_save.cycle_wating,
-				vm->process[i].nb_live, vm->process[i].pc, get_op_cmd(vm->process[i].cmd_save.opcode).name);
+		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d cmd: %5s\n",
+			i, vm->process[i].cmd_save.cycle_wating,
+			vm->process[i].nb_live, vm->process[i].pc,
+			get_op_cmd(vm->process[i].cmd_save.opcode).name);
 		i++;
 	}
 }
 
 void	debug(t_vm *vm)
 {
-	char	*line;
+	char		*line;
+	static int	end = 0;
 
 	if (will_exec(vm) && !end)
 	{
