@@ -60,28 +60,24 @@ int		ft_check_ldump(char **argv, t_input *input, int *a, int argc)
 	int er;
 
 	er = 0;
-	if (ft_strcmp(argv[*a], "-dl") == 0)
+	input->dl_nb = 0;
+	if (*a + 1 < argc)
 	{
-		input->dl = 1;
-		input->dl_nb = 0;
-		if (*a + 1 < argc)
+		*a = *a + 1;
+		input->dl_nb = ft_atoi_only(argv[*a], &er);
+		if (er == 1 || input->dl_nb < 0)
 		{
-			*a = *a + 1;
-			input->dl_nb = ft_atoi_only(argv[*a], &er);
-			if (er == 1 || input->dl_nb < 0)
-			{
-				ft_printf("Invalid number\n");
-				return (0);
-			}
-		}
-		else
-		{
-			ft_printf("Not enought arguments\n");
+			ft_printf("Invalid number\n");
 			return (0);
 		}
-		return (1);
+		input->dl = 1;
 	}
-	return (0);
+	else
+	{
+		ft_printf("Not enought arguments\n");
+		return (0);
+	}
+	return (1);
 }
 
 int		ft_check_dump(char **argv, t_input *input, int *a, int argc)
@@ -89,28 +85,24 @@ int		ft_check_dump(char **argv, t_input *input, int *a, int argc)
 	int er;
 
 	er = 0;
-	if (ft_strcmp(argv[*a], "-d") == 0)
+	input->d_nb = 0;
+	if (*a + 1 < argc)
 	{
-		input->d = 1;
-		input->d_nb = 0;
-		if (*a + 1 < argc)
+		*a = *a + 1;
+		input->d_nb = ft_atoi_only(argv[*a], &er);
+		if (er == 1 || input->d_nb < 0)
 		{
-			*a = *a + 1;
-			input->d_nb = ft_atoi_only(argv[*a], &er);
-			if (er == 1 || input->d_nb < 0)
-			{
-				ft_printf("Invalid number\n");
-				return (0);
-			}
-		}
-		else
-		{
-			ft_printf("Not enought arguments\n");
+			ft_printf("Invalid number\n");
 			return (0);
 		}
-		return (1);
+		input->d = 1;
 	}
-	return (0);
+	else
+	{
+		ft_printf("Not enought arguments\n");
+		return (0);
+	}
+	return (1);
 }
 
 int		ft_check_champ_num(char **argv, t_input *input,

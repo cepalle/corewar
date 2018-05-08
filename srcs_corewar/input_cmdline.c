@@ -43,15 +43,26 @@ static	int		ft_check_player(char *argv, t_input *input)
 
 static	int		ft_check_option(char **argv, t_input *input, int *a, int argc)
 {
-
-	if (ft_check_champ_num(argv, input, a, argc) == 1)
+	if (ft_strcmp(argv[*a], "-n") == 0)
+	{
+		if (ft_check_champ_num(argv, input, a, argc) == 1)
 			return (1);
-	else if (ft_check_dump(argv, input, a, argc) == 1)
-		return (1);
-	else if (ft_check_ldump(argv, input, a, argc) == 1)
-		return (1);
+	}
+	else if (ft_strcmp(argv[*a], "-d") == 0)
+	{
+		if (ft_check_dump(argv, input, a, argc) == 1)
+			return (1);
+	}
+	else if (ft_strcmp(argv[*a], "-dl") == 0)
+	{
+		if (ft_check_ldump(argv, input, a, argc) == 1)
+			return (1);
+	}
 	else if (ft_strcmp(argv[*a], "-db") == 0)
+	{
 		input->db = 1;
+		return (1);
+	}
 	return (0);
 }
 
