@@ -53,7 +53,7 @@ static	void			player_init(t_vm *vm, t_input input)
 		vm->player[a].last_live = 0;
 		vm->player[a].nb_live = 0;
 		ft_strncpy(vm->player[a].head.prog_name, input.head[a].prog_name,
-			input.head->prog_size);
+			PROG_NAME_LENGTH + 1);
 		ft_strncpy(vm->player[a].head.comment, input.head[a].comment,
 				COMMENT_LENGTH + 1);
 		a++;
