@@ -20,8 +20,10 @@ void			ft_usage(void)
 	"Usage: ./corewar [-d N -n N -dl N] "
 	"<champion1.cor> <...>\n"
 	"######################################################################\n"
-	"    -d  N     : Dumps memory after N cycles then exits 32 display mode\n"
-	"    -dl N     : Dumps memory after N cycles then exits 64 display mode\n"
-	"    -n  N     : Choose champion number id N\n"
+	"    -d  N                 : Dumps memory after N cycles then "
+			"exits 32 display mode\n"
+	"    -dl N                 : Dumps memory after N cycles then "
+			"exits 64 display mode\n"
+	"    -n  N <champion1.cor> : Choose champion number id N\n"
 	"######################################################################\n");
 }

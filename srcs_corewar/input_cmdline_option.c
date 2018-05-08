@@ -26,7 +26,7 @@ int		ft_check_double_num(t_input *input)
 		while (b < input->nb_p)
 		{
 			if (input->num_player[a] == input->num_player[b]
-				&& input->num_player[a] != 0)
+				&& input->num_player[a] != INT_MIN_COR)
 			{
 				ft_printf("Error same champion number\n");
 				return (0);
@@ -107,7 +107,7 @@ int		ft_check_champ_num(char **argv, t_input *input,
 	if (*a + 1 < argc)
 	{
 		*a = *a + 1;
-		if (input->num_player[input->nb_p] == 0)
+		if (input->num_player[input->nb_p] == INT_MIN_COR)
 		{
 			if (ft_atoi(argv[*a]) < 0)
 			{

@@ -45,7 +45,7 @@ static	void			player_init(t_vm *vm, t_input input)
 		vm->player[a].head.prog_size = input.head[a].prog_size;
 		vm->player[a].head.magic = input.head[a].magic;
 		vm->player[a].id = 0;
-		if (input.num_player[a] != 0)
+		if (input.num_player[a] != INT_MIN_COR)
 			vm->player[a].id = (unsigned int)input.num_player[a];
 		else
 			vm->player[a].id = (unsigned int)ft_generate_nb(vm, input, a);
