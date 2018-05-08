@@ -116,25 +116,25 @@ int		ft_check_dump(char **argv, t_input *input, int *a, int argc)
 int		ft_check_champ_num(char **argv, t_input *input,
 										int *a, int argc)
 {
+	int er;
+	int n;
+
+	er = 0;
 	if (*a + 1 < argc)
 	{
 		*a = *a + 1;
+		n = ft_atoi_only(argv[*a], &er);
 		if (input->num_player[input->nb_p] == INT_MIN_COR)
 		{
-			if (ft_atoi(argv[*a]) < 0)
+			if (er == 0 || n < 0)
 			{
-				ft_printf("Negatif number not allowed\n");
+				ft_printf("Invalid number\n");
 				return (0);
 			}
-			input->num_player[input->nb_p] = ft_atoi(argv[*a]);
+			input->num_player[input->nb_p] = n;
 		}
 	}
-	else
-	{
-		ft_printf("No champion anymore\n");
-		return (0);
-	}
-	if (*a + 1 == argc)
+	if (*a + 1 >= argc)
 	{
 		ft_printf("No champion anymore\n");
 		return (0);
