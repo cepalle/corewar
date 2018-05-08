@@ -71,10 +71,7 @@ void	vm_dump_mem(t_vm *vm)
 			ft_printf("0x0000 : ");
 		while (j < DUMP_LEN)
 		{
-			if (vm->tab[i * DUMP_LEN + j])
-				ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
-			else
-				ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
+			ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
 			j++;
 		}
 		ft_printf("\n");
