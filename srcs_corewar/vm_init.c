@@ -113,6 +113,8 @@ void					vm_init(t_vm *vm, t_input input)
 	vm->db = input.db;
 	vm->nb_p = input.nb_p;
 	vm->d_nb = input.d_nb;
+	vm->dl = input.dl;
+	vm->dl_nb = input.dl_nb;
 	vm->process = ft_memalloc(sizeof(t_proc) * LEN_INIT_PROC);
 	vm->nb_process = (unsigned int)vm->nb_p;
 	vm->len_process = LEN_INIT_PROC;

@@ -78,6 +78,8 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 
 C_FILES_NAMES_COREWAR = main.c \
     input_cmdline.c \
+    input_cmdline_option.c \
+    input_cmdline_player.c \
     ft_str_is_digit.c \
     ft_usage.c \
     proc_exec.c \
