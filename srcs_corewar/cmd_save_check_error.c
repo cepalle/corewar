@@ -25,7 +25,7 @@ int		ft_cmd_save_add_len_params(t_vm *vm, t_proc *processor, int op)
 	left = 0;
 	while (i < gopt()[op].nb_arg)
 	{
-		tmp = vm->tab[cal_pc_add(processor->PC, 1)];
+		tmp = vm->tab[cal_pc_add(processor->pc, 1)];
 		tmp = tmp << left;
 		tmp = tmp >> 6;
 		if (tmp == REG_CODE)
@@ -47,7 +47,6 @@ int		ft_cmd_save_check_existence(int op, unsigned char tmp, int i)
 {
 	unsigned char a;
 
-	//	ft_printf("ft_cmd_save_check_existence\n");
 	a = (unsigned char)gopt()[op].args[i];
 	if (tmp == 3)
 		tmp = 4;
@@ -62,13 +61,13 @@ int		ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
 	unsigned char	masque;
 	int				i;
 	int				right;
-//	ft_printf("ft_cmd_save_right_params\n");
+
 	i = 0;
 	masque = 0b11000000;
 	right = 6;
 	while (i < gopt()[op].nb_arg)
 	{
-		tmp = vm->tab[cal_pc_add(processor->PC, 1)];
+		tmp = vm->tab[cal_pc_add(processor->pc, 1)];
 		tmp = tmp & masque;
 		tmp = tmp >> right;
 		masque = masque >> 2;
@@ -84,9 +83,9 @@ int		ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor)
 {
 	unsigned char	tmp;
 	int				i;
-//	ft_printf("ft_cmd_save_error_oct_params\n");
+
 	i = 0;
-	tmp = vm->tab[cal_pc_add(processor->PC, 1)];
+	tmp = vm->tab[cal_pc_add(processor->pc, 1)];
 	tmp = tmp << 6;
 	if (tmp != 0)
 		return (0);

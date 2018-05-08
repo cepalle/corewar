@@ -12,7 +12,6 @@
 /* ************************************************************************** */
 
 #include <corewar.h>
-#include "libft.h" // a supprimer une fois debug termine
 
 int		cmd_lld(t_vm *vm, int ipr)
 {

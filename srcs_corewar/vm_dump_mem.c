@@ -21,7 +21,7 @@ int		is_pc_proc(t_vm *vm, int PC)
 	i = 0;
 	while (i < vm->nb_process)
 	{
-		if (vm->process[i].PC == (unsigned)PC)
+		if (vm->process[i].pc == (unsigned)PC)
 			return (1);
 		i++;
 	}
@@ -71,15 +71,10 @@ void	vm_dump_mem(t_vm *vm)
 			ft_printf("0x0000 : ");
 		while (j < DUMP_LEN)
 		{
-			if (vm->tab[i * DUMP_LEN + j])
-				ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
-			else
-				ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
+			ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
 			j++;
 		}
 		ft_printf("\n");
 		i++;
 	}
 }
-
-

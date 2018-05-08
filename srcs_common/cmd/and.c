@@ -15,10 +15,10 @@
 
 static int	op_and(int a, int b)
 {
-	return a & b;
+	return (a & b);
 }
 
-int		cmd_and(t_vm *vm, int ipr)
+int			cmd_and(t_vm *vm, int ipr)
 {
-	return do_op(vm, ipr, &op_and);
+	return (do_op(vm, ipr, &op_and));
 }
