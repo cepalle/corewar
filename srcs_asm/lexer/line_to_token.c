@@ -15,7 +15,36 @@
 #include "op.h"
 #include "libft.h"
 
-t_token		get_token(int *i_line, char **file, int *i_col)
+static t_token	get_token_aux(int *il, char **f, int *ic)
+{
+	t_token	token;
+
+	if (f[*il][*ic] == ',')
+		token = get_separator_char(il, f, ic);
+	else if (f[*il][*ic] == '.')
+		token = get_dote_start(il, f, ic);
+	else if (f[*il][*ic] == '%')
+		token = get_direct(il, f, ic);
+	else if (f[*il][*ic] == ':')
+		token = get_indirect_label(il, f, ic);
+	else if (f[*il][*ic] == '#' || f[*il][*ic] == ';')
+		token = get_comment(il, f, ic);
+	else if (f[*il][*ic] == '"')
+		token = get_string(il, f, ic);
+	else if (ft_isdigit(f[*il][*ic]) ||
+			f[*il][*ic] == '-')
+		token = get_indirect_number(il, f, ic);
+	else if (f[*il][*ic] && ft_strchr(LABEL_CHARS, f[*il][*ic]))
+		token = get_label(il, f, ic);
+	else
+	{
+		print_local_error(f, ic, il, "lexer: Unexpected char");
+		token.er = 1;
+	}
+	return (token);
+}
+
+t_token			get_token(int *i_line, char **file, int *i_col)
 {
 	t_token	token;
 	int		i_line_sav;
@@ -24,30 +53,7 @@ t_token		get_token(int *i_line, char **file, int *i_col)
 	i_line_sav = *i_line;
 	i_col_sav = *i_col;
 	ft_bzero(&token, sizeof(t_token));
-	if (file[*i_line][*i_col] == ',')
-		token = get_separator_char(i_line, file, i_col);
-	else if (file[*i_line][*i_col] == '.')
-		token = get_dote_start(i_line, file, i_col);
-	else if (file[*i_line][*i_col] == '%')
-		token = get_direct(i_line, file, i_col);
-	else if (file[*i_line][*i_col] == ':')
-		token = get_indirect_label(i_line, file, i_col);
-	else if (file[*i_line][*i_col] == '#' || file[*i_line][*i_col] == ';')
-		token = get_comment(i_line, file, i_col);
-	else if (file[*i_line][*i_col] == '"')
-		token = get_string(i_line, file, i_col);
-	else if (ft_isdigit(file[*i_line][*i_col]) ||
-		file[*i_line][*i_col] == '-')
-		token = get_indirect_number(i_line, file, i_col);
-	else if (file[*i_line][*i_col] &&
-		ft_strchr(LABEL_CHARS, file[*i_line][*i_col]))
-		token = get_label(i_line, file, i_col);
-	else
-	{
-		print_local_error(file, i_col, i_line,
-			"lexer: Unexpected char");
-		token.er = 1;
-	}
+	token = get_token_aux(i_line, file, i_col);
 	while (file[*i_line] &&
 		(file[*i_line][*i_col] == '\t' ||
 		file[*i_line][*i_col] == ' '))
@@ -57,7 +63,7 @@ t_token		get_token(int *i_line, char **file, int *i_col)
 	return (token);
 }
 
-void		line_to_token(t_token *ltken, char **file, int *i_line)
+void			line_to_token(t_token *ltken, char **file, int *i_line)
 {
 	int		i_tken;
 	int		i_col;

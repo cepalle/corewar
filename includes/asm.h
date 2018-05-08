@@ -176,5 +176,6 @@ t_token						get_comment(int *il, char **f, int *ic);
 void						print_tab_token(t_tab_token tab_token);
 void						free_parser(t_parser parser_res);
 void						free_lexer(t_lexer lexer_res);
+void						inst_add_params(t_ast_inst *a, t_lexer l, int *i);
 
 #endif

@@ -17,35 +17,21 @@
 
 int		check_ast(t_parser parser_res, char **file)
 {
-	int		er;
-
-	er = 0;
 	if (!parser_res.ast_prog.prog_name ||
 			!ft_strlen(parser_res.ast_prog.prog_name))
-	{
-		ft_printf("error: The program must have a name\n");
-		er = 1;
-	}
+		return (ft_printf("error: The program must have a name\n"));
 	else if (ft_strlen(parser_res.ast_prog.prog_name) > PROG_NAME_LENGTH)
-	{
-		ft_printf("error: Program name can't be contain more than 128 char\n");
-		er = 1;
-	}
+		return (ft_printf(
+			"error: Program name can't be contain more than 128 char\n"));
 	else if (parser_res.ast_prog.prog_comment &&
 			ft_strlen(parser_res.ast_prog.prog_comment) > COMMENT_LENGTH)
-	{
-		ft_printf(
-			"error: Program comment can't be contain more than 2048 char\n");
-		er = 1;
-	}
+		return (ft_printf(
+			"error: Program comment can't be contain more than 2048 char\n"));
 	else if (!prog_len(parser_res.ast_prog.ast_inst))
-	{
-		ft_printf("error: The program is empty\n");
-		er = 1;
-	}
+		return (ft_printf("error: The program is empty\n"));
 	else if (check_registres(parser_res.ast_prog.ast_inst, file) ||
 			check_labels(parser_res, parser_res.ast_prog.ast_inst, file) ||
 			check_insts(parser_res.ast_prog.ast_inst, file))
-		er = 1;
-	return (er);
+		return (1);
+	return (0);
 }

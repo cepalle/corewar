@@ -14,7 +14,7 @@
 #include "asm.h"
 #include "libft.h"
 
-void	inst_add_labels_dec(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
+void		inst_add_labels_dec(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
 {
 	while (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_LABEL_DECLARATION
 		&& !ast_inst->er)
@@ -40,44 +40,7 @@ void	inst_add_labels_dec(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
 	}
 }
 
-void	inst_add_params(t_ast_inst *ast_inst, t_lexer lexer_res, int *i)
-{
-	if (lexer_res.tab_token.tokens[*i].enum_token != TOKEN_DIRECT_LABEL &&
-		lexer_res.tab_token.tokens[*i].enum_token != TOKEN_DIRECT_NUMBER &&
-		lexer_res.tab_token.tokens[*i].enum_token != TOKEN_INDIRECT_NUMBER &&
-		lexer_res.tab_token.tokens[*i].enum_token != TOKEN_INDIRECT_LABEL &&
-		lexer_res.tab_token.tokens[*i].enum_token != TOKEN_LABEL)
-	{
-		print_local_error(lexer_res.file,
-						&(lexer_res.tab_token.tokens[*i].file_pose_col),
-						&(lexer_res.tab_token.tokens[*i].file_pose_line),
-						"parser: Need a param");
-		ast_inst->er = 1;
-		return ;
-	}
-	if (ast_inst->nb_ast_params >= MAX_PARAMS)
-	{
-		print_local_error(lexer_res.file,
-						&(lexer_res.tab_token.tokens[*i].file_pose_col),
-						&(lexer_res.tab_token.tokens[*i].file_pose_line),
-						"parser: command can't have more than 3 param");
-		ast_inst->er = 1;
-		return ;
-	}
-	ast_inst->ast_params[ast_inst->nb_ast_params] =
-			lexer_res.tab_token.tokens[*i];
-	ast_inst->ast_params[ast_inst->nb_ast_params].data = ft_strdup(
-			lexer_res.tab_token.tokens[*i].data);
-	ast_inst->nb_ast_params++;
-	(*i)++;
-	if (lexer_res.tab_token.tokens[*i].enum_token == TOKEN_SEPARATOR_CHAR)
-	{
-		(*i)++;
-		inst_add_params(ast_inst, lexer_res, i);
-	}
-}
-
-void	add_inst_to_parser_res(t_parser *parser_res, t_ast_inst ast_inst)
+void		add_inst_to_parser_res(t_parser *parser_res, t_ast_inst ast_inst)
 {
 	t_ast_inst	*current;
 	t_ast_inst	*to_add;
@@ -95,33 +58,41 @@ void	add_inst_to_parser_res(t_parser *parser_res, t_ast_inst ast_inst)
 	}
 }
 
-void	ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
+static int	ast_add_inst_check_error(t_parser *parser_res,
+		t_lexer lexer_res, int *i, t_ast_inst ast_inst)
+{
+	if (ast_inst.er)
+	{
+		parser_res->er = 1;
+		add_inst_to_parser_res(parser_res, ast_inst);
+		return (1);
+	}
+	if (ast_inst.nb_labels_dec > 0 && lexer_res.tab_token.i < (*i))
+	{
+		add_inst_to_parser_res(parser_res, ast_inst);
+		return (1);
+	}
+	if (lexer_res.tab_token.tokens[*i].enum_token != TOKEN_LABEL)
+	{
+		print_local_error(lexer_res.file,
+			&(lexer_res.tab_token.tokens[*i].file_pose_col),
+			&(lexer_res.tab_token.tokens[*i].file_pose_line),
+			"parser: Need a command");
+		parser_res->er = 1;
+		add_inst_to_parser_res(parser_res, ast_inst);
+		return (1);
+	}
+	return (0);
+}
+
+void		ast_add_inst(t_parser *parser_res, t_lexer lexer_res, int *i)
 {
 	t_ast_inst	ast_inst;
 
 	ft_bzero(&ast_inst, sizeof(t_ast_inst));
 	inst_add_labels_dec(&ast_inst, lexer_res, i);
-	if (ast_inst.er)
-	{
-		parser_res->er = 1;
-		add_inst_to_parser_res(parser_res, ast_inst);
+	if (ast_add_inst_check_error(parser_res, lexer_res, i, ast_inst))
 		return ;
-	}
-	if (ast_inst.nb_labels_dec > 0 && lexer_res.tab_token.i < (*i))
-	{
-		add_inst_to_parser_res(parser_res, ast_inst);
-		return ;
-	}
-	if (lexer_res.tab_token.tokens[*i].enum_token != TOKEN_LABEL)
-	{
-		print_local_error(lexer_res.file,
-						&(lexer_res.tab_token.tokens[*i].file_pose_col),
-						&(lexer_res.tab_token.tokens[*i].file_pose_line),
-						"parser: Need a command");
-		parser_res->er = 1;
-		add_inst_to_parser_res(parser_res, ast_inst);
-		return ;
-	}
 	ast_inst.cmd = lexer_res.tab_token.tokens[*i];
 	ast_inst.cmd.data = ft_strdup(lexer_res.tab_token.tokens[*i].data);
 	(*i)++;

@@ -71,6 +71,7 @@ C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
 	parser/ast_add_inst.c \
 	parser/ast_dote_start.c \
 	parser/free_parser.c \
+	parser/inst_add_params.c \
 	print/print_ast.c \
 	print/print_error.c \
 	print/print_tab_token.c \
@@ -168,13 +169,20 @@ fclean_not_lib: clean
 	rm -f $(COREWAR_NAME)
 
 make_test:
+	./asm $(CHAMP1).s
+	mv $(CHAMP1).cor tmp1.cor
+	./asm $(CHAMP2).s
+	mv $(CHAMP2).cor tmp2.cor
 	./bin_ref/asm $(CHAMP1).s
+	mv $(CHAMP1).cor tmp1r.cor
 	./bin_ref/asm $(CHAMP2).s
+	mv $(CHAMP2).cor tmp2r.cor
 	@make corewar
 
 diff_corewar: make_test
-	./bin_ref/corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep -a "0x0" > test_ref || true
-	./corewar $(CHAMP1).cor $(CHAMP2).cor -d $(NB_DUMP) | grep -a "0x0" > test_my || true
+	./bin_ref/corewar tmp1r.cor tmp2r.cor -d $(NB_DUMP) | grep -a "0x0" > test_ref || true
+	./corewar tmp1.cor tmp2.cor -d $(NB_DUMP) | grep -a "0x0" > test_my || true
+	rm -f tmp1.cor tmp2.cor tmp1r.cor tmp2r.cor
 	diff test_ref test_my
 
 diff_all_turn: make_test

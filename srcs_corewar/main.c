@@ -49,7 +49,7 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	vm_init(&vm, input);
-	ft_debug_init_vm(vm);
+//	ft_debug_init_vm(vm);
 	input_free(&input);
 	vm_run(&vm);
 	vm_free(&vm);

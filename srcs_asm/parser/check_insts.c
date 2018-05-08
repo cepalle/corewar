@@ -15,7 +15,7 @@
 #include "op.h"
 #include "libft.h"
 
-int		check_param(t_token token, int t_arg, char **file)
+int			check_param(t_token token, int t_arg, char **file)
 {
 	if ((t_arg & T_DIR) &&
 		(token.enum_token == TOKEN_DIRECT_LABEL ||
@@ -34,7 +34,7 @@ int		check_param(t_token token, int t_arg, char **file)
 	return (1);
 }
 
-int		check_cmd(t_ast_inst *inst, t_op op_desc, char **file)
+int			check_cmd(t_ast_inst *inst, t_op op_desc, char **file)
 {
 	int		i;
 
@@ -55,7 +55,16 @@ int		check_cmd(t_ast_inst *inst, t_op op_desc, char **file)
 	return (0);
 }
 
-int		check_inst(t_ast_inst *inst, char **file)
+static int	print_aux(t_ast_inst *inst, char **file)
+{
+	print_local_error(file,
+		&(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_col),
+		&(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_line),
+		"error: label as not cmd and is not in the end");
+	return (1);
+}
+
+int			check_inst(t_ast_inst *inst, char **file)
 {
 	int		i;
 
@@ -66,13 +75,7 @@ int		check_inst(t_ast_inst *inst, char **file)
 		return (1);
 	}
 	if (!inst->cmd.enum_token && inst->next)
-	{
-		print_local_error(file,
-			&(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_col),
-			&(inst->labels_dec[inst->nb_labels_dec - 1].file_pose_line),
-			"error: label as not cmd and is not in the end");
-		return (1);
-	}
+		return (print_aux(inst, file));
 	else if (!inst->cmd.enum_token && !inst->next)
 		return (0);
 	while (i < OP_TAB_LENGTH)
@@ -87,7 +90,7 @@ int		check_inst(t_ast_inst *inst, char **file)
 	return (1);
 }
 
-int		check_insts(t_ast_inst *inst, char **file)
+int			check_insts(t_ast_inst *inst, char **file)
 {
 	if (!inst)
 		return (0);
