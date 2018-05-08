@@ -57,6 +57,9 @@ int		ft_check_n_option(t_input *input)
 
 int		ft_check_ldump(char **argv, t_input *input, int *a, int argc)
 {
+	int er;
+
+	er = 0;
 	if (ft_strcmp(argv[*a], "-dl") == 0)
 	{
 		input->dl = 1;
@@ -64,7 +67,12 @@ int		ft_check_ldump(char **argv, t_input *input, int *a, int argc)
 		if (*a + 1 < argc)
 		{
 			*a = *a + 1;
-			input->dl_nb = ft_atoi(argv[*a]);
+			input->dl_nb = ft_atoi_only(argv[*a], &er);
+			if (er == 1)
+			{
+				ft_printf("Invalid number\n");
+				return (0);
+			}
 			if (input->dl_nb < 0)
 				input->dl = 0;
 		}
@@ -80,6 +88,9 @@ int		ft_check_ldump(char **argv, t_input *input, int *a, int argc)
 
 int		ft_check_dump(char **argv, t_input *input, int *a, int argc)
 {
+	int er;
+
+	er = 0;
 	if (ft_strcmp(argv[*a], "-d") == 0)
 	{
 		input->d = 1;
@@ -87,7 +98,12 @@ int		ft_check_dump(char **argv, t_input *input, int *a, int argc)
 		if (*a + 1 < argc)
 		{
 			*a = *a + 1;
-			input->d_nb = ft_atoi(argv[*a]);
+			input->d_nb = ft_atoi_only(argv[*a], &er);
+			if (er == 1)
+			{
+				ft_printf("Invalid number\n");
+				return (0);
+			}
 			if (input->d_nb < 0)
 				input->d = 0;
 		}

@@ -31,7 +31,7 @@ static	int		ft_check_player(char *argv, t_input *input)
 	}
 	if (input->nb_p >= MAX_PLAYERS)
 	{
-		ft_printf("Too many player\n");
+		ft_printf("Too many players\n");
 		return (0);
 	}
 	if (!ft_fill_player(input, fd))
