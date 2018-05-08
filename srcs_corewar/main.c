@@ -14,6 +14,28 @@
 #include "corewar.h"
 #include "libft.h"
 
+void	ft_debug_init_vm(t_vm vm)
+{
+	int a;
+
+	a = 0;
+	ft_printf("d = %d et nb_d = %d\n", vm.d, vm.d_nb);
+	ft_printf("dl = %d et nb_dl = %d\n", vm.dl, vm.dl_nb);
+	ft_printf("nombre de joueurs de la vm est %d\n", vm.nb_p);
+	if (vm.db == 1)
+		ft_printf("debug mod active\n");
+	while (a < vm.nb_p)
+	{
+		ft_printf("le numero du joueur %d est %d\n", a, vm.player[a].id);
+		ft_printf("la taille du programme est de %d\n",
+				vm.player[a].head.prog_size);
+		ft_printf("le nom du programme est %d\n", vm.player[a].head.prog_name);
+		ft_printf("comment :\n %s\n", vm.player[a].head.comment);
+		ft_printf("magic = %x\n", vm.player[a].head.magic);
+		a++;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_vm		vm;
@@ -27,8 +49,9 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	vm_init(&vm, input);
+	ft_debug_init_vm(vm);
 	input_free(&input);
-	vm_run(&vm);
-	vm_free(&vm);
+//	vm_run(&vm);
+//	vm_free(&vm);
 	return (0);
 }

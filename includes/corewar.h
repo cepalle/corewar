@@ -6,7 +6,7 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/09 16:56:27 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/08 12:05:50 by ppichier    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/08 12:13:37 by ppichier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,8 @@ struct						s_input
 	t_bool					db;
 	t_bool					d;
 	int						d_nb;
-	t_bool					nc;
+	t_bool					dl;
+	int						dl_nb;
 	unsigned char			*prog[4];
 	t_header				head[4];
 	unsigned int			nb_p;
@@ -73,6 +74,8 @@ struct						s_vm
 	t_bool					db;
 	int						nb_p;
 	t_bool					d;
+	t_bool					dl;
+	int						dl_nb;
 	int						d_nb;
 	unsigned char			tab[MEM_SIZE];
 	t_player				player[4];
@@ -132,6 +135,16 @@ int							check_nb_live_proc(t_vm *vm);
 int							count_player_alive(t_vm *vm);
 void						kill_proc(t_vm *vm);
 void						vm_display_res(t_vm *vm);
+int							ft_check_double_num(t_input *input);
+int							ft_check_n_option(t_input *input);
+int							ft_check_ldump(char **argv, t_input *input,
+							int *a, int argc);
+int							ft_check_dump(char **argv, t_input *input,
+							int *a, int argc);
+int							ft_check_champ_num(char **argv, t_input *input,
+							int *a, int argc);
+int							ft_fill_player(t_input *input, int fd);
+int							player_check_header(t_input *input);
 
 /*
 ** UTILS
