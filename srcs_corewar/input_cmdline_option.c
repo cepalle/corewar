@@ -68,13 +68,11 @@ int		ft_check_ldump(char **argv, t_input *input, int *a, int argc)
 		{
 			*a = *a + 1;
 			input->dl_nb = ft_atoi_only(argv[*a], &er);
-			if (er == 1)
+			if (er == 1 || input->dl_nb < 0)
 			{
 				ft_printf("Invalid number\n");
 				return (0);
 			}
-			if (input->dl_nb < 0)
-				input->dl = 0;
 		}
 		else
 		{
@@ -99,13 +97,11 @@ int		ft_check_dump(char **argv, t_input *input, int *a, int argc)
 		{
 			*a = *a + 1;
 			input->d_nb = ft_atoi_only(argv[*a], &er);
-			if (er == 1)
+			if (er == 1 || input->d_nb < 0)
 			{
 				ft_printf("Invalid number\n");
 				return (0);
 			}
-			if (input->d_nb < 0)
-				input->d = 0;
 		}
 		else
 		{
