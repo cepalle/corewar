@@ -126,7 +126,7 @@ int		ft_check_champ_num(char **argv, t_input *input,
 		n = ft_atoi_only(argv[*a], &er);
 		if (input->num_player[input->nb_p] == INT_MIN_COR)
 		{
-			if (er == 0 || n < 0)
+			if (er == 1 || n < 0)
 			{
 				ft_printf("Invalid number\n");
 				return (0);
