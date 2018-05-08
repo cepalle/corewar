@@ -4,6 +4,7 @@ COREWAR_NAME = corewar
 NB_DUMP = 128
 CHAMP1 = ./champs/examples/my_test
 CHAMP2 = ./champs/examples/my_scnd_test
+CHAMP3 = ./champs/examples/my_scnd_test
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -180,11 +181,12 @@ diff_all_turn: make_test
 	sh ./test_corewar/test.sh $(CHAMP1).cor $(CHAMP2).cor $(NB_DUMP)
 
 ppichier_test_diff:
-	./bin_ref/asm ./champs/examples/turtle.s
-	./bin_ref/asm ./champs/examples/helltrain.s
-	make corewar
-	./bin_ref/corewar ./champs/examples/helltrain.cor ./champs/examples/turtle.cor  -d $(NB_DUMP) | grep "0x0" > ppichier_test_ref
-	./corewar ./champs/examples/helltrain.cor ./champs/examples/turtle.cor -d $(NB_DUMP) | grep "0x0" > ppichier_test_my
-	diff ppichier_test_ref ppichier_test_my
+	./bin_ref/asm $(CHAMP1).s
+	./bin_ref/asm $(CHAMP2).s
+	./bin_ref/asm $(CHAMP3).s
+	@make corewar
+	./bin_ref/corewar $(CHAMP1).cor $(CHAMP2).cor $(CHAMP3).cor -d $(NB_DUMP) | grep -a "0x0" > test_ref || true
+	./corewar $(CHAMP1).cor $(CHAMP2).cor $(CHAMP3).cor -d $(NB_DUMP) | grep -a "0x0" > test_my || true
+	diff test_ref test_my
 
 .PHONY: all clean re fclean make_test

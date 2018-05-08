@@ -51,7 +51,7 @@ int		main(int argc, char **argv)
 	vm_init(&vm, input);
 	ft_debug_init_vm(vm);
 	input_free(&input);
-//	vm_run(&vm);
-//	vm_free(&vm);
+	vm_run(&vm);
+	vm_free(&vm);
 	return (0);
 }
