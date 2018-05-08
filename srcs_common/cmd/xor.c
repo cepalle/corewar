@@ -15,10 +15,10 @@
 
 static int	op_xor(int a, int b)
 {
-	return a ^ b;
+	return (a ^ b);
 }
 
-int		cmd_xor(t_vm *vm, int ipr)
+int			cmd_xor(t_vm *vm, int ipr)
 {
-	return do_op(vm, ipr, &op_xor);
+	return (do_op(vm, ipr, &op_xor));
 }

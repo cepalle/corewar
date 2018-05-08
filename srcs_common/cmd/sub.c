@@ -15,10 +15,10 @@
 
 static int	op_sub(int a, int b)
 {
-	return a - b;
+	return (a - b);
 }
 
-int		cmd_sub(t_vm *vm, int ipr)
+int			cmd_sub(t_vm *vm, int ipr)
 {
-	return do_op(vm, ipr, &op_sub);
+	return (do_op(vm, ipr, &op_sub));
 }
