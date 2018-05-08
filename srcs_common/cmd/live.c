@@ -26,7 +26,7 @@ static void	player_add_live(t_vm *vm, int id)
 		if (vm->player[i].id == idp)
 		{
 			vm->player[i].last_live = vm->cycle;
-			ft_printf("un processus dit que le joueur %s est en vie\n",
+			ft_printf("Un processus dit que le joueur %s est en vie\n",
 			vm->player[i].head.prog_name);
 			vm->player[i].nb_live++;
 			return ;
