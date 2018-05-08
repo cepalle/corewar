@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-files=`find champs -type f`;
+files=`find champs -type f -name "*.s"`;
 error=""
 msg_error=""
 
 for f in $files
 do
- #echo "Processing $f"
+ echo "Processing $f"
  ./bin_ref/asm $f > /dev/null
  mv `echo $f | sed "s/\.s/\.cor/g"` tmp1.cor
  msg_error=`./asm $f`
