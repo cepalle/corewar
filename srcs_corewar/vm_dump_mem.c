@@ -81,5 +81,3 @@ void	vm_dump_mem(t_vm *vm)
 		i++;
 	}
 }
-
-
