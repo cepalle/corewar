@@ -29,7 +29,7 @@ void	ft_debug_init_vm(t_vm vm)
 		ft_printf("le numero du joueur %d est %d\n", a, vm.player[a].id);
 		ft_printf("la taille du programme est de %d\n",
 				vm.player[a].head.prog_size);
-		ft_printf("le nom du programme est %d\n", vm.player[a].head.prog_name);
+		ft_printf("le nom du programme est %s\n", vm.player[a].head.prog_name);
 		ft_printf("comment :\n %s\n", vm.player[a].head.comment);
 		ft_printf("magic = %x\n", vm.player[a].head.magic);
 		a++;
