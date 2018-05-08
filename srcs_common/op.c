@@ -17,7 +17,7 @@
 
 static t_op	g_op_tab[17] =
 {
-	{"nb_live", 1, {T_DIR},
+	{"live", 1, {T_DIR},
 		1, 10, "alive", 0, 0, &cmd_live, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG},
 		2, 5, "load", 1, 0, &cmd_ld, 6},
