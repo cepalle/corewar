@@ -21,7 +21,7 @@ int		is_pc_proc(t_vm *vm, int PC)
 	i = 0;
 	while (i < vm->nb_process)
 	{
-		if (vm->process[i].PC == (unsigned)PC)
+		if (vm->process[i].pc == (unsigned)PC)
 			return (1);
 		i++;
 	}

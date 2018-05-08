@@ -22,10 +22,10 @@ void	proc_exec(t_vm *vm, int ipr)
 	if (!vm->process[ipr].cmd_save.cmd)
 	{
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
-		opcode = vm_read_1(vm, vm->process[ipr].PC);
+		opcode = vm_read_1(vm, vm->process[ipr].pc);
 		if (opcode < 1 || opcode > 16)
 		{
-			vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC, 1);
+			vm->process[ipr].pc = cal_pc_add(vm->process[ipr].pc, 1);
 			return ;
 		}
 		else
@@ -40,7 +40,7 @@ void	proc_exec(t_vm *vm, int ipr)
 	{
 		if (stock_cmd(vm, vm->process + ipr, vm->process[ipr].cmd_save.opcode - 1))
 			((t_cmd)vm->process[ipr].cmd_save.cmd)(vm, ipr);
-		vm->process[ipr].PC = cal_pc_add(vm->process[ipr].PC,
+		vm->process[ipr].pc = cal_pc_add(vm->process[ipr].pc,
 			vm->process[ipr].cmd_save.cmd_len);
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
 	}

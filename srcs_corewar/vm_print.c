@@ -42,7 +42,7 @@ void	vm_print(t_vm *vm)
 	while (i < vm->nb_process)
 	{
 		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d cmd: %5s\n", i, vm->process[i].cmd_save.cycle_wating,
-				vm->process[i].nb_live, vm->process[i].PC, get_op_cmd(vm->process[i].cmd_save.opcode).name);
+				vm->process[i].nb_live, vm->process[i].pc, get_op_cmd(vm->process[i].cmd_save.opcode).name);
 		i++;
 	}
 }

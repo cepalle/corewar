@@ -46,11 +46,11 @@ int		read_param(t_vm_proc *vm_proc, int ipar)
 	{
 		if (vm_proc->idx_mod)
 			return (vm_read_4(vm_proc->vm,
-							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
 										cmd_sav.params[ipar] % IDX_MOD)));
 		else
 			return (vm_read_4(vm_proc->vm,
-							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+							cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
 										cmd_sav.params[ipar])));
 	}
 	else
@@ -85,13 +85,13 @@ void	load_param(t_vm_proc *vm_proc, int ipar, int data)
 //																	  cmd_sav.params[ipar] % IDX_MOD));
 //			ft_printf("data = %d\n", data);
 			vm_write_4(vm_proc->vm,
-					   cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+					   cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
 								  cmd_sav.params[ipar] % IDX_MOD),
 					   (unsigned int) (data));
 		}
 		else
 			vm_write_4(vm_proc->vm,
-					cal_pc_add(vm_proc->vm->process[vm_proc->ipr].PC,
+					cal_pc_add(vm_proc->vm->process[vm_proc->ipr].pc,
 								cmd_sav.params[ipar]),
 				(unsigned int)(data));
 	}

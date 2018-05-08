@@ -27,6 +27,6 @@ int		cmd_sti(t_vm *vm, int ipr)
 	p3 = read_param(&vm_proc, 2);
 	if (vm_proc.er)
 		return (0);
-	vm_write_4(vm, cal_pc_add(vm->process[ipr].PC, (p2 + p3) % IDX_MOD), (unsigned int)p1);
+	vm_write_4(vm, cal_pc_add(vm->process[ipr].pc, (p2 + p3) % IDX_MOD), (unsigned int)p1);
 	return (1);
 }

@@ -20,7 +20,7 @@ void	vm_fork(t_vm *vm, int ipr, int add)
 
 //	ft_printf("vm_fork\n");
 	to_add = vm->process[ipr];
-	to_add.PC = cal_pc_add(to_add.PC, add);
+	to_add.pc = cal_pc_add(to_add.pc, add);
 	ft_bzero(&(to_add.cmd_save), sizeof(t_cmd_save));
 	if (vm->nb_process >= vm->len_process)
 	{
