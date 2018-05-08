@@ -86,7 +86,7 @@ int				stock_cmd(t_vm *vm, t_proc *processor, int op)
 //		return (0);
 //	processor->cmd_save.cmd = gopt()[op].op_fct;
 	if (gopt()[op].octet_param == 1)
-		ft_analyze_oct_params(vm, processor, op);
+		return (ft_analyze_oct_params(vm, processor, op));
 	else
 		ft_no_oct_params(vm, processor, op);
 //	processor->cmd_save.cycle_wating = (unsigned int)gopt()[op].cycle;
