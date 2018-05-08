@@ -21,7 +21,8 @@ void	sup_proc(t_vm *vm, int ipr)
 		vm->nb_process--;
 		return ;
 	}
-	ft_memmove(vm->process + ipr, vm->process + ipr + 1, sizeof(t_proc) * (vm->nb_process - ipr - 1));
+	ft_memmove(vm->process + ipr, vm->process + ipr + 1,
+		sizeof(t_proc) * (vm->nb_process - ipr - 1));
 	vm->nb_process--;
 }
 
@@ -29,7 +30,6 @@ void	kill_proc(t_vm *vm)
 {
 	int i;
 
-//	ft_printf("check_end\n");
 	i = 0;
 	while (i < vm->nb_process)
 	{
@@ -47,7 +47,6 @@ int		check_nb_live_proc(t_vm *vm)
 	int i;
 	int nb_live;
 
-//	ft_printf("check_nb_live_proc\n");
 	nb_live = 0;
 	i = 0;
 	while (i < vm->nb_process)
@@ -58,11 +57,10 @@ int		check_nb_live_proc(t_vm *vm)
 	return (nb_live >= NBR_LIVE);
 }
 
-void reset_live(t_vm *vm)
+void	reset_live(t_vm *vm)
 {
 	int i;
 
-//	ft_printf("check_nb_live_proc\n");
 	i = 0;
 	while (i < vm->nb_process)
 	{
