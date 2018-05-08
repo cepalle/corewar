@@ -14,14 +14,14 @@
 #include "libft.h"
 #include "corewar.h"
 
-int		is_pc_proc(t_vm *vm, int PC)
+int		is_pc_proc(t_vm *vm, int pc)
 {
 	int i;
 
 	i = 0;
 	while (i < vm->nb_process)
 	{
-		if (vm->process[i].pc == (unsigned)PC)
+		if (vm->process[i].pc == (unsigned)pc)
 			return (1);
 		i++;
 	}

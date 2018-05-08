@@ -21,7 +21,7 @@ void	input_free(t_input *input)
 	a = 0;
 	while (a < input->nb_p)
 	{
-		ft_memdel((void **) &(input->prog));
+		ft_memdel((void **)&(input->prog));
 		a++;
 	}
 }

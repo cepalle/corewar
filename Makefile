@@ -88,6 +88,7 @@ C_FILES_NAMES_COREWAR = main.c \
     cmd_save_check_error.c \
     cmd_save_oct_params.c \
     vm_init.c \
+    generate_nb.c \
     vm_print.c \
     vm_run.c \
     vm_free.c \

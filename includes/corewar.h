@@ -111,6 +111,7 @@ int				ft_check_ldump(char **argv, t_input *input, int *a, int argc);
 int				ft_check_dump(char **argv, t_input *input, int *a, int argc);
 int				ft_check_champ_num(char **argv, t_input *input,
 							  int *a, int argc);
+int				ft_generate_nb(t_vm *vm, t_input input, unsigned int a);
 int				ft_fill_player(t_input *input, int fd);
 int				player_check_header(t_input *input);
 void			vm_init(t_vm *vm, t_input input);
