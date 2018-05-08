@@ -31,7 +31,7 @@ static	int		ft_check_player(char *argv, t_input *input)
 	}
 	if (input->nb_p >= MAX_PLAYERS)
 	{
-		ft_printf("Too many player\n");
+		ft_printf("Too many players\n");
 		return (0);
 	}
 	if (!ft_fill_player(input, fd))
@@ -87,7 +87,7 @@ static	void	input_cmd_line_init(t_input *input)
 	input->d = 0;
 	input->d_nb = 0;
 	while (++a < MAX_PLAYERS)
-		input->num_player[a] = 0;
+		input->num_player[a] = INT_MIN_COR;
 }
 
 int				input_cmdline(int argc, char **argv, t_input *input)

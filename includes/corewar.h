@@ -17,6 +17,7 @@
 # define REG_CONTENT_SIZE 4
 # define LEN_INIT_PROC    8
 # define DUMP_LEN         64
+# define INT_MIN_COR	  (-2147483648)
 
 # include <stdlib.h>
 # include <unistd.h>
