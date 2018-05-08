@@ -15,7 +15,6 @@
 
 void			ft_usage(void)
 {
-	ft_printf("ft_usage\n");
 	ft_printf(
 	"Usage: ./corewar [-d N -n N -dl N] "
 	"<champion1.cor> <...>\n"
