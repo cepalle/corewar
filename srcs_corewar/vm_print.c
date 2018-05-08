@@ -41,8 +41,8 @@ void	vm_print(t_vm *vm)
 	ft_printf("NEXT_DIE: %d\n", vm->cycle_to_die - (vm->cycle - vm->cycle_last_check));
 	while (i < vm->nb_process)
 	{
-		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d\n", i, vm->process[i].cmd_save.cycle_wating,
-				vm->process[i].nb_live, vm->process[i].PC);
+		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d cmd: %5s\n", i, vm->process[i].cmd_save.cycle_wating,
+				vm->process[i].nb_live, vm->process[i].PC, get_op_cmd(vm->process[i].cmd_save.opcode).name);
 		i++;
 	}
 }
