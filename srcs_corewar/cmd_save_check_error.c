@@ -79,40 +79,9 @@ int		ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
 	return (1);
 }
 
-int		ft_cmd_save_error_oct_params(void)
-{
-
-	return (1);
-	/*i = 0;
-	opcode = 0; // to sup
-	tmp = (unsigned char)vm_read_1(vm , cal_pc_add(processor->pc, 1));
-	tmp = tmp << 2 * gopt()[op].nb_arg;
-	if (tmp != 0)
-		return (0);*/
-	/*
-	opcode = gopt()[op].opcode;
-	if (opcode == 0x02 || opcode == 0x03 || opcode == 0x0d)
-	{
-		tmp = vm->tab[cal_pc_add(processor->pc, 1)];
-		tmp = tmp << 4;m
-		if (tmp != 0)
-			return (0);
-	}
-	if (opcode == 0x10)
-	{
-		tmp = vm->tab[cal_pc_add(processor->pc, 1)];
-		tmp = tmp << 2;
-		if (tmp != 0)
-			return (0);
-	}
-	 */
-	return (1);
-}
-
 int		ft_cmd_save_central_error(t_vm *vm, t_proc *processor, int op)
 {
-	if (ft_cmd_save_error_oct_params() == 0 ||
-			ft_cmd_save_right_params(vm, processor, op) == 0)
+	if (ft_cmd_save_right_params(vm, processor, op) == 0)
 	{
 		ft_cmd_save_add_len_params(vm, processor, op);
 		return (0);
