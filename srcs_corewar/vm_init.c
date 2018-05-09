@@ -77,4 +77,5 @@ void					vm_init(t_vm *vm, t_input input)
 	ft_memset(vm->tab, 0, MEM_SIZE);
 	vm->cycle = 0;
 	player_init(vm, input);
+	ft_memmove(vm->old, vm->tab, MEM_SIZE);
 }

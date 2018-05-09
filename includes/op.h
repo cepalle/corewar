@@ -96,6 +96,7 @@ struct					s_op
 	int					dir_size_2;
 	void				*op_fct;
 	int					default_len;
+	int					carry;
 };
 typedef struct s_op		t_op;
 

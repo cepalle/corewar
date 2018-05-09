@@ -81,6 +81,7 @@ struct						s_vm
 	int						dl_nb;
 	int						d_nb;
 	unsigned char			tab[MEM_SIZE];
+	unsigned char			old[MEM_SIZE];
 	t_player				player[4];
 	t_proc					*process;
 	int						nb_process;
@@ -123,8 +124,7 @@ int							ft_cmd_save_check_existence(int op,
 							unsigned char tmp, int i);
 int							ft_cmd_save_right_params(t_vm *vm,
 							t_proc *processor, int op);
-int							ft_cmd_save_error_oct_params(t_vm *vm,
-							t_proc *processor, int op);
+int							ft_cmd_save_error_oct_params(void);
 int							ft_analyze_oct_params(t_vm *vm,
 							t_proc *processor, int op);
 int							ft_cmd_save_add_len_params(t_vm *vm,

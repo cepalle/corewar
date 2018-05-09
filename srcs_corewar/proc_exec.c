@@ -60,4 +60,5 @@ void		procs_exec(t_vm *vm)
 		proc_exec(vm, i - 1);
 		i--;
 	}
+	ft_memmove(vm->old, vm->tab, MEM_SIZE);
 }
