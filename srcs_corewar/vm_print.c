@@ -40,21 +40,24 @@ void	vm_print(t_vm *vm)
 	ft_printf("NEXT_DIE: %d\n",
 			  vm->cycle_to_die - (vm->cycle - vm->cycle_last_check));
 	ft_printf("NB_LIVE_TOT: %d\n", count_nb_live_proc(vm));
+	ft_printf("NB_PROC_TOT: %d\n", vm->nb_process);
 	while (i < vm->nb_process)
 	{
-
-		j = 0;
-		if ((vm->process[i].cmd_save.opcode == 0x0b || vm->process[i].cmd_save.opcode == 0x03)
-			&& vm->process[i].cmd_save.cycle_wating == 1)
+		if (vm->process[i].id == 12)
 		{
-			ft_printf("\n");
-			while (j < REG_NUMBER)
+			j = 0;
+			if ((vm->process[i].cmd_save.opcode == 0x0b || vm->process[i].cmd_save.opcode == 0x03)
+				&& vm->process[i].cmd_save.cycle_wating == 1)
 			{
-				ft_printf("r%d = %d\n", j + 1, vm->process[i].reg[j]);
-				j++;
+				ft_printf("\n");
+				while (j < REG_NUMBER)
+				{
+					ft_printf("r%d = %d\n", j + 1, vm->process[i].reg[j]);
+					j++;
+				}
 			}
-		}
 
+		}
 		if (vm->process[i].id == 13 || vm->process[i].id == 9 || vm->process[i].id == 15)
 		{
 			ft_printf("proc_id %4d wait: %4d nb_live: %3d PC: %4d cmd: %7s line: %2d col : %2d carry: %d\n",
@@ -74,6 +77,7 @@ void	debug(t_vm *vm)
 	char		*line;
 	static int	end = 0;
 
+	return ;
 	if (will_exec(vm) && !end)
 	{
 		vm_print(vm);
