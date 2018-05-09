@@ -22,7 +22,7 @@ int		will_exec(t_vm *vm)
 	while (i < vm->nb_process)
 	{
 		if (vm->process[i].cmd_save.cycle_wating == 0 &&
-				vm->process[i].id == 150)
+				(vm->process[i].id == 12))
 			return (1);
 		i++;
 	}
@@ -32,7 +32,7 @@ int		will_exec(t_vm *vm)
 void	vm_print(t_vm *vm)
 {
 	int i;
-//	int j;
+	int j;
 	i = 0;
 	vm_dump_mem_color(vm);
 	ft_printf("CYCLE: %d: \n", vm->cycle);
@@ -42,7 +42,7 @@ void	vm_print(t_vm *vm)
 	ft_printf("NB_LIVE_TOT: %d\n", count_nb_live_proc(vm));
 	while (i < vm->nb_process)
 	{
-		/*
+
 		j = 0;
 		if ((vm->process[i].cmd_save.opcode == 0x0b || vm->process[i].cmd_save.opcode == 0x03)
 			&& vm->process[i].cmd_save.cycle_wating == 1)
@@ -54,8 +54,8 @@ void	vm_print(t_vm *vm)
 				j++;
 			}
 		}
-		*/
-		if (vm->process[i].id == 150)
+
+		if (vm->process[i].id == 12)
 		{
 			ft_printf("proc_id %4d wait: %4d nb_live: %3d PC: %4d cmd: %7s line: %2d col : %2d carry: %d\n",
 				vm->process[i].id, vm->process[i].cmd_save.cycle_wating,
