@@ -15,33 +15,39 @@
 #include "op.h"
 #include "libft.h"
 
-static t_token	get_token_aux(int *il, char **f, int *ic)
+static t_token	get_token_aux2(int *il, char **f, int *ic)
 {
 	t_token	token;
 
-	if (f[*il][*ic] == ',')
-		token = get_separator_char(il, f, ic);
-	else if (f[*il][*ic] == '.')
-		token = get_dote_start(il, f, ic);
-	else if (f[*il][*ic] == '%')
-		token = get_direct(il, f, ic);
-	else if (f[*il][*ic] == ':')
-		token = get_indirect_label(il, f, ic);
-	else if (f[*il][*ic] == '#' || f[*il][*ic] == ';')
-		token = get_comment(il, f, ic);
-	else if (f[*il][*ic] == '"')
-		token = get_string(il, f, ic);
-	else if (ft_isdigit(f[*il][*ic]) ||
+	ft_bzero(&token, sizeof(t_token));
+	if (ft_isdigit(f[*il][*ic]) ||
 			f[*il][*ic] == '-')
-		token = get_indirect_number(il, f, ic);
+		return (get_indirect_number(il, f, ic));
 	else if (f[*il][*ic] && ft_strchr(LABEL_CHARS, f[*il][*ic]))
-		token = get_label(il, f, ic);
+		return (get_label(il, f, ic));
 	else
 	{
 		print_local_error(f, ic, il, "lexer: Unexpected char");
 		token.er = 1;
 	}
 	return (token);
+}
+
+static t_token	get_token_aux(int *il, char **f, int *ic)
+{
+	if (f[*il][*ic] == ',')
+		return (get_separator_char(il, f, ic));
+	else if (f[*il][*ic] == '.')
+		return (get_dote_start(il, f, ic));
+	else if (f[*il][*ic] == '%')
+		return (get_direct(il, f, ic));
+	else if (f[*il][*ic] == ':')
+		return (get_indirect_label(il, f, ic));
+	else if (f[*il][*ic] == '#' || f[*il][*ic] == ';')
+		return (get_comment(il, f, ic));
+	else if (f[*il][*ic] == '"')
+		return (get_string(il, f, ic));
+	return (get_token_aux2(il, f, ic));
 }
 
 t_token			get_token(int *i_line, char **file, int *i_col)

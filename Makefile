@@ -2,9 +2,10 @@ ASM_NAME = asm
 COREWAR_NAME = corewar
 
 NB_DUMP = 128
-CHAMP1 = ./champs/examples/my_test
-CHAMP2 = ./champs/examples/my_scnd_test
-CHAMP3 = ./champs/examples/my_scnd_test
+CHAMP1 = ./champs/zork
+CHAMP2 = ./champs/zork
+CHAMP3 = ./champs/zork
+CHAMP4 = ./champs/zork
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -171,13 +172,12 @@ fclean_not_lib: clean
 make_test:
 	@./asm $(CHAMP1).s > /dev/null
 	@mv $(CHAMP1).cor tmp1.cor
-	@./asm $(CHAMP2).s > /dev/null
-	@mv $(CHAMP2).cor tmp2.cor
 	@./bin_ref/asm $(CHAMP1).s > /dev/null
 	@mv $(CHAMP1).cor tmp1r.cor
+	@./asm $(CHAMP2).s > /dev/null
+	@mv $(CHAMP2).cor tmp2.cor
 	@./bin_ref/asm $(CHAMP2).s > /dev/null
 	@mv $(CHAMP2).cor tmp2r.cor
-	@make corewar > /dev/null
 
 diff_corewar: make_test
 	@./bin_ref/corewar tmp1r.cor tmp2r.cor -d $(NB_DUMP) | grep -a "0x0" > test_ref || true
