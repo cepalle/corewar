@@ -152,6 +152,7 @@ clean:
 	rm -rf $(OBJDIR_ASM)
 	rm -rf $(OBJDIR_COREWAR)
 	rm -rf *.dSYM
+	rm -rf *.cor
 	make -C $(LIBFTDIR) clean
 
 re: fclean all
