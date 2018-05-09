@@ -44,7 +44,9 @@ void	vm_print(t_vm *vm)
 	ft_printf("NB_PROC_TOT: %d\n", vm->nb_process);
 	while (i < vm->nb_process)
 	{
-		ft_printf("proc_id %4d wait: %4d nb_live: %3d PC: %4d cmd: %7s line: %2d col : %2d carry: %d\n",
+		ft_printf(
+	"proc_id %4d wait: %4d nb_live: %3d PC: %4d"
+	" cmd: %7s line: %2d col : %2d carry: %d\n",
 			vm->process[i].id, vm->process[i].cmd_save.cycle_wating,
 			vm->process[i].nb_live, vm->process[i].pc,
 			get_op_cmd(vm->process[i].cmd_save.opcode).name,

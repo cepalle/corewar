@@ -34,9 +34,9 @@ void	vm_dump_mem_color(t_vm *vm)
 	int j;
 	int line_len;
 
-	i = 0;
+	i = -1;
 	line_len = 32 + 32 * vm->l;
-	while (i < MEM_SIZE / line_len)
+	while (++i < MEM_SIZE / line_len)
 	{
 		j = 0;
 		if (i)
@@ -54,7 +54,6 @@ void	vm_dump_mem_color(t_vm *vm)
 			j++;
 		}
 		ft_printf("\n");
-		i++;
 	}
 }
 

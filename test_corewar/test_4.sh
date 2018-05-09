@@ -35,7 +35,7 @@ do
             mv "$f4.cor" tmp4r.cor
 
             ./bin_ref/corewar tmp1r.cor tmp2r.cor tmp3r.cor tmp4r.cor -d 1200 | grep -a "0x0" > test_ref || true
-            ./corewar tmp1.cor tmp2.cor tmp3.cor tmp4.cor -d 1200 | grep -a "0x0" > test_my || true
+            ./corewar tmp1.cor tmp2.cor tmp3.cor tmp4.cor -dl 1200 | grep -a "0x0" > test_my || true
             rm -f tmp1.cor tmp2.cor tmp3.cor tmp4.cor tmp1r.cor tmp2r.cor tmp3r.cor tmp4r.cor
             diff test_ref test_my
             done
