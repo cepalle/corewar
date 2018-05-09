@@ -33,7 +33,7 @@ void	kill_proc(t_vm *vm)
 	i = 0;
 	while (i < vm->nb_process)
 	{
-		if (vm->process[i].nb_live == 0)
+		if (!vm->process[i].is_alive)
 		{
 			sup_proc(vm, i);
 			continue ;
@@ -42,7 +42,7 @@ void	kill_proc(t_vm *vm)
 	}
 }
 
-int		check_nb_live_proc(t_vm *vm)
+int		count_nb_live_proc(t_vm *vm)
 {
 	int i;
 	int nb_live;
@@ -54,7 +54,12 @@ int		check_nb_live_proc(t_vm *vm)
 		nb_live += vm->process[i].nb_live;
 		i++;
 	}
-	return (nb_live >= NBR_LIVE);
+	return (nb_live);
+}
+
+int		check_nb_live_proc(t_vm *vm)
+{
+	return (count_nb_live_proc(vm) >= NBR_LIVE);
 }
 
 void	reset_live(t_vm *vm)
@@ -65,6 +70,7 @@ void	reset_live(t_vm *vm)
 	while (i < vm->nb_process)
 	{
 		vm->process[i].nb_live = 0;
+		vm->process[i].is_alive = 0;
 		i++;
 	}
 	i = 0;

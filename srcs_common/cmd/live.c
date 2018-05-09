@@ -14,7 +14,7 @@
 #include <corewar.h>
 #include "libft.h"
 
-static void	player_add_live(t_vm *vm, int id)
+static int	player_add_live(t_vm *vm, int id)
 {
 	unsigned int	idp;
 	int				i;
@@ -29,10 +29,11 @@ static void	player_add_live(t_vm *vm, int id)
 			ft_printf("Un processus dit que le joueur %s est en vie\n",
 			vm->player[i].head.prog_name);
 			vm->player[i].nb_live++;
-			return ;
+			return (1);
 		}
 		i++;
 	}
+	return (0);
 }
 
 int			cmd_live(t_vm *vm, int ipr)
@@ -46,5 +47,6 @@ int			cmd_live(t_vm *vm, int ipr)
 		return (0);
 	player_add_live(vm, p1);
 	vm->process[ipr].nb_live++;
+	vm->process[ipr].is_alive = 1;
 	return (1);
 }
