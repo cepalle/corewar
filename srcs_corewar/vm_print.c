@@ -31,7 +31,7 @@ int		will_exec(t_vm *vm)
 void	vm_print(t_vm *vm)
 {
 	int i;
-
+	int j;
 	i = 0;
 	vm_dump_mem_color(vm);
 	ft_printf("CYCLE: %d: \n", vm->cycle);
@@ -41,10 +41,23 @@ void	vm_print(t_vm *vm)
 	ft_printf("NB_LIVE_TOT: %d\n", count_nb_live_proc(vm));
 	while (i < vm->nb_process)
 	{
-		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d cmd: %5s\n",
+		j = 0;
+		if ((vm->process[i].cmd_save.opcode == 0x0b || vm->process[i].cmd_save.opcode == 0x03)
+			&& vm->process[i].cmd_save.cycle_wating == 1)
+		{
+			ft_printf("\n");
+			while (j < REG_NUMBER)
+			{
+				ft_printf("r%d = %d\n", j + 1, vm->process[i].reg[j]);
+				j++;
+			}
+		}
+		ft_printf("proc %3d wait: %4d nb_live: %3d PC: %4d cmd: %7s line: %2d col : %2d\n",
 			i, vm->process[i].cmd_save.cycle_wating,
 			vm->process[i].nb_live, vm->process[i].pc,
-			get_op_cmd(vm->process[i].cmd_save.opcode).name);
+			get_op_cmd(vm->process[i].cmd_save.opcode).name,
+			vm->process[i].pc / 64,
+			vm->process[i].pc % 64);
 		i++;
 	}
 }
