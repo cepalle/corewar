@@ -64,14 +64,33 @@ static	void			player_init(t_vm *vm, t_input input)
 	process_init(vm, input);
 }
 
+static	void			d_init(t_vm *vm, t_input *input)
+{
+	if (input->d == 1)
+	{
+		vm->d = 1;
+		vm->l = 0;
+		vm->d_nb = input->d_nb;
+	}
+
+	else if (input->dl == 1)
+	{
+		vm->d = 1;
+		vm->l = 1;
+		vm->d_nb = input->d_nb;
+	}
+	else
+	{
+		vm->d = 0;
+		vm->l = 0;
+		vm->d_nb = 0;
+	}
+}
+
+
 void					vm_init(t_vm *vm, t_input input)
 {
-	vm->d = input.d;
-	vm->db = input.db;
-	vm->nb_p = input.nb_p;
-	vm->d_nb = input.d_nb;
-	vm->dl = input.dl;
-	vm->dl_nb = input.dl_nb;
+	d_init(vm, &input);
 	vm->process = ft_memalloc(sizeof(t_proc) * LEN_INIT_PROC);
 	vm->nb_process = (unsigned int)vm->nb_p;
 	vm->len_process = LEN_INIT_PROC;
