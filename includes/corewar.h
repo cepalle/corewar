@@ -124,8 +124,6 @@ int							ft_cmd_save_check_existence(int op,
 							unsigned char tmp, int i);
 int							ft_cmd_save_right_params(t_vm *vm,
 							t_proc *processor, int op);
-int							ft_cmd_save_error_oct_params(t_vm *vm,
-							t_proc *processor, int op);
 int							ft_analyze_oct_params(t_vm *vm,
 							t_proc *processor, int op);
 int							ft_cmd_save_add_len_params(t_vm *vm,

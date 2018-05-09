@@ -24,5 +24,6 @@ void			ft_usage(void)
 	"    -dl N                 : Dumps memory after N cycles then "
 			"exits 64 display mode\n"
 	"    -n  N <champion1.cor> : Choose champion number id N\n"
+	"    -db                   : Mode debug\n"
 	"######################################################################\n");
 }

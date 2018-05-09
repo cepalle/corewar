@@ -19,7 +19,7 @@ unsigned char	ft_analyze_code(t_vm *vm, t_proc *processor, int left)
 {
 	unsigned char	tmp;
 
-	tmp = (unsigned char)vm_read_1(vm , cal_pc_add(processor->pc, 1));
+	tmp = (unsigned char)vm_read_1(vm, cal_pc_add(processor->pc, 1));
 	tmp = tmp << left;
 	tmp = tmp >> 6;
 	return (tmp);

@@ -104,7 +104,7 @@ static	void	input_cmd_line_init(t_input *input)
 int				input_cmdline(int argc, char **argv, t_input *input)
 {
 	input_cmd_line_init(input);
-	if (argc == 1 || ft_check_arg(argv, input, argc) == 0)
+	if (argc == 1 || ft_check_arg(argv, input, argc) == 0 || input->nb_p == 0)
 	{
 		ft_usage();
 		return (0);
