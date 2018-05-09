@@ -86,10 +86,12 @@ int		ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor, int op)
 	int 			opcode;
 
 	i = 0;
+	opcode = 0; // to sup
 	tmp = vm->tab[cal_pc_add(processor->pc, 1)];
-	tmp = tmp << 6;
+	tmp = tmp << 2 * gopt()[op].nb_arg;
 	if (tmp != 0)
 		return (0);
+	/*
 	opcode = gopt()[op].opcode;
 	if (opcode == 0x02 || opcode == 0x03 || opcode == 0x0d)
 	{
@@ -105,6 +107,7 @@ int		ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor, int op)
 		if (tmp != 0)
 			return (0);
 	}
+	 */
 	return (1);
 }
 

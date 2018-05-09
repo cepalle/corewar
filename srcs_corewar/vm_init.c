@@ -26,6 +26,8 @@ static	void			process_init(t_vm *vm, t_input input)
 	placement = MEM_SIZE / input.nb_p;
 	while (a < vm->nb_p)
 	{
+		vm->process[a].id = vm->next_id_proc;
+		vm->next_id_proc++;
 		vm->process[a].pc = res;
 		vm->process[a].carry = 0;
 		ft_memcpy(vm->tab + res, input.prog[a], input.head[a].prog_size);

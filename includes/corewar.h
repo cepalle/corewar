@@ -15,7 +15,7 @@
 # define COREWAR_H
 
 # define REG_CONTENT_SIZE 4
-# define LEN_INIT_PROC    8
+# define LEN_INIT_PROC    16
 # define DUMP_LEN         64
 # define INT_MIN_COR	  (-2147483648)
 
@@ -68,6 +68,7 @@ struct						s_proc
 	unsigned int			nb_live;
 	unsigned int			is_alive;
 	t_cmd_save				cmd_save;
+	unsigned				id;
 };
 typedef struct s_proc		t_proc;
 
@@ -87,6 +88,7 @@ struct						s_vm
 	int						cycle;
 	int						cycle_to_die;
 	int						cycle_last_check;
+	unsigned int			next_id_proc;
 };
 typedef struct s_vm			t_vm;
 
