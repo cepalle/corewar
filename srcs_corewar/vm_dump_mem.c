@@ -22,7 +22,7 @@ int		is_pc_proc(t_vm *vm, int pc)
 	while (i < vm->nb_process)
 	{
 		if (vm->process[i].pc == (unsigned)pc &&
-				vm->process[i].id == 150)
+				vm->process[i].id == 12)
 		{
 			return (1);
 		}
