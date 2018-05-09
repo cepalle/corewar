@@ -85,6 +85,7 @@ int		ft_cmd_save_error_oct_params(t_vm *vm, t_proc *processor, int op)
 	int				i;
 	int 			opcode;
 
+	return (1);
 	i = 0;
 	opcode = 0; // to sup
 	tmp = (unsigned char)vm_read_1(vm , cal_pc_add(processor->pc, 1));
