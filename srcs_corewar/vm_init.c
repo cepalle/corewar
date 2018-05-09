@@ -77,7 +77,7 @@ static	void			d_init(t_vm *vm, t_input *input)
 	{
 		vm->d = 1;
 		vm->l = 1;
-		vm->d_nb = input->d_nb;
+		vm->d_nb = input->dl_nb;
 	}
 	else
 	{
