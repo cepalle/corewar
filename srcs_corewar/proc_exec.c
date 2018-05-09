@@ -44,8 +44,6 @@ void		proc_exec(t_vm *vm, int ipr)
 		if (stock_cmd(vm, vm->process + ipr,
 				vm->process[ipr].cmd_save.opcode - 1))
 			((t_cmd)vm->process[ipr].cmd_save.cmd)(vm, ipr);
-		//else if (get_op_cmd(vm->process[ipr].cmd_save.opcode).carry)
-		//	vm->process[ipr].carry = 0;
 		vm->process[ipr].pc = cal_pc_add(vm->process[ipr].pc,
 			vm->process[ipr].cmd_save.cmd_len);
 		ft_bzero(&(vm->process[ipr].cmd_save), sizeof(t_cmd_save));
@@ -62,4 +60,5 @@ void		procs_exec(t_vm *vm)
 		proc_exec(vm, i - 1);
 		i--;
 	}
+	ft_memmove(vm->old, vm->tab, MEM_SIZE);
 }

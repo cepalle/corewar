@@ -81,6 +81,7 @@ struct						s_vm
 	int						dl_nb;
 	int						d_nb;
 	unsigned char			tab[MEM_SIZE];
+	unsigned char			old[MEM_SIZE];
 	t_player				player[4];
 	t_proc					*process;
 	int						nb_process;
