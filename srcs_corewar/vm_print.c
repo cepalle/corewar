@@ -37,7 +37,8 @@ void	vm_print(t_vm *vm)
 	ft_printf("CYCLE: %d: \n", vm->cycle);
 	ft_printf("CYCLE_TO_DIE: %d\n", vm->cycle_to_die);
 	ft_printf("NEXT_DIE: %d\n",
-		vm->cycle_to_die - (vm->cycle - vm->cycle_last_check));
+			  vm->cycle_to_die - (vm->cycle - vm->cycle_last_check));
+	ft_printf("NB_LIVE_TOT: %d\n", count_nb_live_proc(vm));
 	while (i < vm->nb_process)
 	{
 		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d cmd: %5s\n",

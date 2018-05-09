@@ -66,6 +66,7 @@ struct						s_proc
 	t_bool					carry;
 	int						reg[REG_NUMBER];
 	unsigned int			nb_live;
+	unsigned int			is_alive;
 	t_cmd_save				cmd_save;
 };
 typedef struct s_proc		t_proc;
@@ -174,6 +175,7 @@ void						init_vm_proc(t_vm_proc *vm_proc, t_vm *vm,
 int							do_op(t_vm *vm, int ipr, t_cal cal);
 void						vm_dump_mem_color(t_vm *vm);
 void						debug(t_vm *vm);
+int							count_nb_live_proc(t_vm *vm);
 
 /*
 ** CMD
