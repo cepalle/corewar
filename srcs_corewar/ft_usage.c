@@ -16,7 +16,7 @@
 void			ft_usage(void)
 {
 	ft_printf(
-	"Usage: ./corewar [-d N -n N -dl N] "
+	"Usage: ./corewar [-d N -n N -dl N -db] "
 	"<champion1.cor> <...>  Nb_player 1 to 4\n"
 	"############################################################"
 			"######################\n"
