@@ -19,7 +19,7 @@ void	ft_debug_init_vm(t_vm vm)
 	int a;
 
 	a = 0;
-	ft_printf("d = %d et nb_d = %d\n", vm.d, vm.d_nb);
+	ft_printf("d = %d et d_nb = %d\n", vm.d, vm.d_nb);
 	ft_printf("l = %d\n", vm.l);
 	ft_printf("nombre de joueurs de la vm est %d\n", vm.nb_p);
 	if (vm.db == 1)
@@ -49,6 +49,7 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	vm_init(&vm, input);
+	ft_debug_init_vm(vm);
 	input_free(&input);
 	vm_run(&vm);
 	vm_free(&vm);

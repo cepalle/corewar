@@ -72,7 +72,6 @@ static	void			d_init(t_vm *vm, t_input *input)
 		vm->l = 0;
 		vm->d_nb = input->d_nb;
 	}
-
 	else if (input->dl == 1)
 	{
 		vm->d = 1;
@@ -86,7 +85,6 @@ static	void			d_init(t_vm *vm, t_input *input)
 		vm->d_nb = 0;
 	}
 }
-
 
 void					vm_init(t_vm *vm, t_input input)
 {
