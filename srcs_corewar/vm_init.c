@@ -23,6 +23,7 @@ static	void			process_init(t_vm *vm, t_input input)
 
 	a = 0;
 	res = 0;
+	placement = 0;
 	if (input.nb_p > 0)
 		placement = MEM_SIZE / input.nb_p;
 	while (a < vm->nb_p)
@@ -88,6 +89,7 @@ static	void			d_init(t_vm *vm, t_input *input)
 
 void					vm_init(t_vm *vm, t_input input)
 {
+	vm->nb_p = input.nb_p;
 	d_init(vm, &input);
 	vm->process = ft_memalloc(sizeof(t_proc) * LEN_INIT_PROC);
 	vm->nb_process = (unsigned int)vm->nb_p;
