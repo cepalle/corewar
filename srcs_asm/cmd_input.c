@@ -15,43 +15,42 @@
 #include "libft.h"
 #include <fcntl.h>
 
-int		check_arg(t_cmdl *cmdl, int argc, char **argv)
+static t_cmdl	check_erro_cmdl(int argc, char **argv, t_cmdl *cmdl)
 {
-	if ((argc != 2 && argc != 1) ||
-		(argc == 2 && !ft_strequ("-a", argv[0])) ||
-		(argc == 1 && ft_strequ("-a", argv[0])))
+	size_t	len;
+
+	if (argc != 1)
 	{
 		asm_usage();
 		cmdl->er = 1;
-		return (1);
+		return (*cmdl);
 	}
-	return (0);
-}
-
-t_cmdl	cmd_input(int argc, char **argv)
-{
-	t_cmdl	cmdl;
-	size_t	len;
-
-	ft_bzero(&cmdl, sizeof(t_cmdl));
-	if (check_arg(&cmdl, argc, argv))
-		return (cmdl);
-	len = ft_strlen(argv[0 + cmdl.opt_a]);
+	len = ft_strlen(argv[0]);
 	if (len < 3 ||
-		argv[0 + cmdl.opt_a][len - 1] != 's' ||
-		argv[0 + cmdl.opt_a][len - 2] != '.')
+		argv[0][len - 1] != 's' ||
+		argv[0][len - 2] != '.')
 	{
 		ft_printf("file name must finish with .s and not be empty\n");
-		cmdl.er = 1;
-		return (cmdl);
+		cmdl->er = 1;
+		return (*cmdl);
 	}
-	cmdl.fd = open(argv[0 + cmdl.opt_a], O_RDONLY);
-	cmdl.opt_a = argc == 2;
+	return (*cmdl);
+}
+
+t_cmdl			cmd_input(int argc, char **argv)
+{
+	t_cmdl	cmdl;
+
+	ft_bzero(&cmdl, sizeof(t_cmdl));
+	check_erro_cmdl(argc, argv, &cmdl);
+	if (cmdl.er)
+		return (cmdl);
+	cmdl.fd = open(argv[0], O_RDONLY);
 	if (cmdl.fd < 0)
 	{
-		ft_printf("No file name %s\n", argv[0 + cmdl.opt_a]);
+		ft_printf("No file name %s\n", argv[0]);
 		cmdl.er = 1;
 	}
-	cmdl.file_name = argv[0 + cmdl.opt_a];
+	cmdl.file_name = argv[0];
 	return (cmdl);
 }
