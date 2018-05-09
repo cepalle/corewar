@@ -77,7 +77,7 @@ struct						s_vm
 	t_bool					db;
 	int						nb_p;
 	t_bool					d;
-	t_bool					dl;
+	t_bool					l;
 	int						dl_nb;
 	int						d_nb;
 	unsigned char			tab[MEM_SIZE];

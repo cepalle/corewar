@@ -21,11 +21,8 @@ int		is_pc_proc(t_vm *vm, int pc)
 	i = 0;
 	while (i < vm->nb_process)
 	{
-		if (vm->process[i].pc == (unsigned)pc &&
-				(1 || vm->process[i].id == 9 || vm->process[i].id == 13 || vm->process[i].id == 15))
-		{
+		if (vm->process[i].pc == (unsigned)pc)
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -35,23 +32,25 @@ void	vm_dump_mem_color(t_vm *vm)
 {
 	int i;
 	int j;
+	int line_len;
 
 	i = 0;
-	while (i < MEM_SIZE / DUMP_LEN)
+	line_len = 32 + 32 * vm->l;
+	while (i < MEM_SIZE / line_len)
 	{
 		j = 0;
 		if (i)
-			ft_printf("%#.4x : ", i * DUMP_LEN);
+			ft_printf("%#.4x : ", i * line_len);
 		else
 			ft_printf("0x0000 : ");
-		while (j < DUMP_LEN)
+		while (j < line_len)
 		{
-			if (is_pc_proc(vm, i * DUMP_LEN + j))
-				ft_printf("\033[34m%.2hhx\033[0m ", vm->tab[i * DUMP_LEN + j]);
-			else if (vm->tab[i * DUMP_LEN + j])
-				ft_printf("\033[31m%.2hhx\033[0m ", vm->tab[i * DUMP_LEN + j]);
+			if (is_pc_proc(vm, i * line_len + j))
+				ft_printf("\033[34m%.2hhx\033[0m ", vm->tab[i * line_len + j]);
+			else if (vm->tab[i * line_len + j])
+				ft_printf("\033[31m%.2hhx\033[0m ", vm->tab[i * line_len + j]);
 			else
-				ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
+				ft_printf("%.2hhx ", vm->tab[i * line_len + j]);
 			j++;
 		}
 		ft_printf("\n");
@@ -63,18 +62,20 @@ void	vm_dump_mem(t_vm *vm)
 {
 	int i;
 	int j;
+	int line_len;
 
 	i = 0;
-	while (i < MEM_SIZE / DUMP_LEN)
+	line_len = 32 + 32 * vm->l;
+	while (i < MEM_SIZE / line_len)
 	{
 		j = 0;
 		if (i)
-			ft_printf("%#.4x : ", i * DUMP_LEN);
+			ft_printf("%#.4x : ", i * line_len);
 		else
 			ft_printf("0x0000 : ");
-		while (j < DUMP_LEN)
+		while (j < line_len)
 		{
-			ft_printf("%.2hhx ", vm->tab[i * DUMP_LEN + j]);
+			ft_printf("%.2hhx ", vm->tab[i * line_len + j]);
 			j++;
 		}
 		ft_printf("\n");
