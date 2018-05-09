@@ -67,7 +67,7 @@ t_lexer			lexer(t_cmdl cmdl)
 	i_line = 0;
 	feed_lexer_files(&lexer_res, cmdl.fd);
 	if (lexer_res.er)
-		return (lexer_res);
+		return (free_error(&lexer_res));
 	while (lexer_res.file[i_line])
 	{
 		ft_bzero(ltken, sizeof(t_token) * LEN_LTOKEN);
