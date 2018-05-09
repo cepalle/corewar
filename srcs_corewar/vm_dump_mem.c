@@ -21,8 +21,11 @@ int		is_pc_proc(t_vm *vm, int pc)
 	i = 0;
 	while (i < vm->nb_process)
 	{
-		if (vm->process[i].pc == (unsigned)pc)
+		if (vm->process[i].pc == (unsigned)pc &&
+				vm->process[i].id == 150)
+		{
 			return (1);
+		}
 		i++;
 	}
 	return (0);

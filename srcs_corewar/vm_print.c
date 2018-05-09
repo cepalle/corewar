@@ -21,7 +21,7 @@ int		will_exec(t_vm *vm)
 	i = 0;
 	while (i < vm->nb_process)
 	{
-		if (vm->process[i].cmd_save.cycle_wating == 1 &&
+		if (vm->process[i].cmd_save.cycle_wating == 0 &&
 				vm->process[i].id == 150)
 			return (1);
 		i++;
@@ -55,12 +55,16 @@ void	vm_print(t_vm *vm)
 			}
 		}
 		*/
-		vm->process[i].id == 150 && ft_printf("proc_id %4d wait: %4d nb_live: %3d PC: %4d cmd: %7s line: %2d col : %2d\n",
-			vm->process[i].id, vm->process[i].cmd_save.cycle_wating,
-			vm->process[i].nb_live, vm->process[i].pc,
-			get_op_cmd(vm->process[i].cmd_save.opcode).name,
-			vm->process[i].pc / 64,
-			vm->process[i].pc % 64);
+		if (vm->process[i].id == 150)
+		{
+			ft_printf("proc_id %4d wait: %4d nb_live: %3d PC: %4d cmd: %7s line: %2d col : %2d carry: %d\n",
+				vm->process[i].id, vm->process[i].cmd_save.cycle_wating,
+				vm->process[i].nb_live, vm->process[i].pc,
+				get_op_cmd(vm->process[i].cmd_save.opcode).name,
+				vm->process[i].pc / 64,
+				vm->process[i].pc % 64,
+				vm->process[i].carry);
+		}
 		i++;
 	}
 }
