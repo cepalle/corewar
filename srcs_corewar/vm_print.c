@@ -41,10 +41,12 @@ void	vm_print(t_vm *vm)
 	ft_printf("NB_LIVE_TOT: %d\n", count_nb_live_proc(vm));
 	while (i < vm->nb_process)
 	{
-		ft_printf("proc %2d wait: %4d nb_live: %3d PC: %4d cmd: %5s\n",
+		ft_printf("proc %3d wait: %4d nb_live: %3d PC: %4d cmd: %7s line: %2d col : %2d\n",
 			i, vm->process[i].cmd_save.cycle_wating,
 			vm->process[i].nb_live, vm->process[i].pc,
-			get_op_cmd(vm->process[i].cmd_save.opcode).name);
+			get_op_cmd(vm->process[i].cmd_save.opcode).name,
+			vm->process[i].pc / 64,
+			vm->process[i].pc % 64);
 		i++;
 	}
 }
