@@ -25,7 +25,7 @@ int		ft_cmd_save_add_len_params(t_vm *vm, t_proc *processor, int op)
 	left = 0;
 	while (i < gopt()[op].nb_arg)
 	{
-		tmp = (unsigned char)vm_read_1(vm , cal_pc_add(processor->pc, 1));
+		tmp = (unsigned char)vm_read_1(vm, cal_pc_add(processor->pc, 1));
 		tmp = tmp << left;
 		tmp = tmp >> 6;
 		if (tmp == REG_CODE)
@@ -67,7 +67,7 @@ int		ft_cmd_save_right_params(t_vm *vm, t_proc *processor, int op)
 	right = 6;
 	while (i < gopt()[op].nb_arg)
 	{
-		tmp = (unsigned char)vm_read_1(vm , cal_pc_add(processor->pc, 1));
+		tmp = (unsigned char)vm_read_1(vm, cal_pc_add(processor->pc, 1));
 		tmp = tmp & masque;
 		tmp = tmp >> right;
 		masque = masque >> 2;
