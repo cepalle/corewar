@@ -23,7 +23,8 @@ static	void			process_init(t_vm *vm, t_input input)
 
 	a = 0;
 	res = 0;
-	placement = MEM_SIZE / input.nb_p;
+	if (input.nb_p > 0)
+		placement = MEM_SIZE / input.nb_p;
 	while (a < vm->nb_p)
 	{
 		vm->process[a].id = vm->next_id_proc;
