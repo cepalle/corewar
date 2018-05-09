@@ -93,7 +93,6 @@ struct						s_cmdl
 {
 	int						er;
 	int						fd;
-	char					opt_a;
 	char					*file_name;
 };
 typedef struct s_cmdl		t_cmdl;

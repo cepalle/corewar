@@ -31,10 +31,7 @@ int	main(int argc, char **argv)
 	free_lexer(lexer_res);
 	if (parser_res.er)
 		return (1);
-	if (cmdl.opt_a)
-		print_ast_prog(parser_res.ast_prog);
-	else
-		ast_to_byte(parser_res, cmdl.file_name);
+	ast_to_byte(parser_res, cmdl.file_name);
 	free_parser(parser_res);
 	return (0);
 }

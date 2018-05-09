@@ -15,8 +15,7 @@
 
 int	asm_usage(void)
 {
-	ft_printf("Usage: ./bin_ref/asm [-a] <sourcefile.s>\n");
-	ft_printf("    -a : Display AST\n");
+	ft_printf("Usage: ./bin_ref/asm <sourcefile.s>\n");
 	return (-1);
 }
 
