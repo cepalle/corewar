@@ -182,7 +182,7 @@ make_test:
 
 diff_corewar: make_test
 	@./bin_ref/corewar tmp1r.cor tmp2r.cor -d $(NB_DUMP) | grep -a "0x0" > test_ref || true
-	@./corewar tmp1.cor tmp2.cor -d $(NB_DUMP) | grep -a "0x0" > test_my || true
+	@./corewar tmp1.cor tmp2.cor -dl $(NB_DUMP) | grep -a "0x0" > test_my || true
 	@rm -f tmp1.cor tmp2.cor tmp1r.cor tmp2r.cor
 	diff test_ref test_my
 
