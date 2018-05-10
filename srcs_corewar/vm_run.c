@@ -12,7 +12,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "libft.h" // a supp
+#include "libft.h"
 
 void	vm_run(t_vm *vm)
 {
@@ -24,8 +24,8 @@ void	vm_run(t_vm *vm)
 	while (a < vm->nb_p)
 	{
 		ft_printf("* Player %d, weighing %d bytes, '%s' ('%s') !\n", a + 1,
-				  vm->player[a].head.prog_size, vm->player[a].head.prog_name,
-				  vm->player[a].head.comment);
+				vm->player[a].head.prog_size, vm->player[a].head.prog_name,
+				vm->player[a].head.comment);
 		a++;
 	}
 	vm->cycle = 0;
