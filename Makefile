@@ -240,7 +240,7 @@ $(OBJDIR_COREWAR)%.o: $(DIR_COREWAR)%.c $(INCLUDE_H)
 
 # BIN
 
-$(LIBFT): libft/includes/libft.h
+$(LIBFT): libft/includes/libft.h $(LIBFT_FILES_C)
 	make -C $(LIBFTDIR) all
 
 # TO CHANGE OBJ_COREWARE

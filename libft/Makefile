@@ -130,9 +130,9 @@ all:$(NAME)
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: $(SRCDIR)%.c $(INCLUDEDIR)/libft.h
 	@mkdir -p $(OBJDIR)
-	@$(CC) -c $^ $(CFLAGS) -o $@ -I $(INCLUDEDIR)
+	@$(CC) -c $< $(CFLAGS) -o $@ -I $(INCLUDEDIR)
 
 clean:
 	rm -f $(OBJ)
