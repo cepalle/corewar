@@ -42,17 +42,6 @@ static	void	ft_find_last_live(t_vm *vm)
 
 void			vm_display_res(t_vm *vm)
 {
-	int a;
-
-	a = 0;
-	ft_printf("Introducing contestants...\n");
-	while (a < vm->nb_p)
-	{
-		ft_printf("* Player %d, weighing %d bytes, '%s' ('%s') !\n", a + 1,
-		vm->player[a].head.prog_size, vm->player[a].head.prog_name,
-				vm->player[a].head.comment);
-		a++;
-	}
 	if (vm->d && vm->cycle >= vm->d_nb)
 	{
 		if (vm->db)

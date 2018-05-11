@@ -71,7 +71,6 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	vm_init(&vm, input);
-	ft_debug_init_cmdline(input);
 	input_free(&input);
 	vm_run(&vm);
 	vm_free(&vm);
