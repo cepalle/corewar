@@ -44,6 +44,7 @@ C_FILES_NAMES_COMMON = op.c swap_char.c \
     vm_write.c \
     vm_fork.c \
     cal_pc_add.c \
+    vm_free.c \
     do_op.c
 
 C_FILES_NAMES_ASM = ast_to_byte/ast_to_byte.c \
@@ -94,7 +95,6 @@ C_FILES_NAMES_COREWAR = main.c \
     generate_nb.c \
     vm_print.c \
     vm_run.c \
-    vm_free.c \
     input_free.c \
     header_print.c \
     vm_dump_mem.c \

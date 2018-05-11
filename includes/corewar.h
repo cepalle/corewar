@@ -14,10 +14,11 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# define REG_CONTENT_SIZE 4
-# define LEN_INIT_PROC    16
-# define DUMP_LEN         64
-# define INT_MIN_COR	  (-2147483648)
+# define REG_CONTENT_SIZE	4
+# define LEN_INIT_PROC		16
+# define DUMP_LEN			64
+# define INT_MIN_COR		(-2147483648)
+# define NB_PROC_MAX		1000000
 
 # include <stdlib.h>
 # include <unistd.h>
