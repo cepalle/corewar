@@ -26,6 +26,12 @@ void	vm_fork(t_vm *vm, int ipr, int add)
 	vm->next_id_proc++;
 	if (vm->nb_process >= vm->len_process)
 	{
+		if (vm->nb_process >= NB_PROC_MAX)
+		{
+			ft_printf("Anti games detected, you try to kill the vm!\n");
+			vm_free(vm);
+			exit(1);
+		}
 		vm->process = ft_realloc(vm->process,
 			sizeof(t_proc) * vm->len_process,
 			sizeof(t_proc) * vm->len_process * 2);
