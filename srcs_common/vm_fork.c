@@ -29,9 +29,7 @@ void	vm_fork(t_vm *vm, int ipr, int add)
 		vm->process = ft_realloc(vm->process,
 			sizeof(t_proc) * vm->len_process,
 			sizeof(t_proc) * vm->len_process * 2);
-		ft_printf("vm->len_process avant = %d\n", vm->len_process);
 		vm->len_process *= 2;
-		ft_printf("vm->len_process apres = %d\n\n", vm->len_process);
 	}
 	vm->process[vm->nb_process] = to_add;
 	vm->nb_process++;
