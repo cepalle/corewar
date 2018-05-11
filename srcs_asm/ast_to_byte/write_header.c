@@ -28,5 +28,10 @@ void	write_header(int fd, t_parser parser_res)
 	swap_4(&(header.prog_size));
 	if (parser_res.ast_prog.prog_comment)
 		ft_strcpy(header.comment, parser_res.ast_prog.prog_comment);
-	write(fd, &header, sizeof(t_header));
+	if (write(fd, &header, sizeof(t_header)) != sizeof(t_header))
+	{
+		ft_printf("Unexpected error, can't write the file.cor\n");
+		free_parser(parser_res);
+		exit(1);
+	}
 }
