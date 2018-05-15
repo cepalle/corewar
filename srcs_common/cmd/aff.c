@@ -23,6 +23,7 @@ int		cmd_aff(t_vm *vm, int ipr)
 	c = (unsigned char)(read_param(&vm_proc, 0) % 256);
 	if (vm_proc.er)
 		return (0);
-	ft_printf("%c", c);
+	if (!vm->l && !vm->db)
+		ft_printf("%c", c);
 	return (1);
 }
