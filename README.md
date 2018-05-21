@@ -1,4 +1,4 @@
-# COREWAR (Work in progress)
+# COREWAR
 
 Ce projet a pour but de vous faire réaliser une "arène" virtuelle dans laquelle
 vont s’affronter des programmes (les "champions"). Vous allez également réaliser un
@@ -44,7 +44,7 @@ In line comment start with `#` or `;`.
 
 #### Labels:
 
-Labels start with a letter, followed by any number of alphanumeric characters plus the underscore.
+Labels are composed by any number of alphanumeric characters plus the underscore.
 ```
 label_ref_direct ::= : % label_ref_indirect
 label_ref_indirect ::= : letter { letter | digit | _ }
@@ -474,7 +474,3 @@ de préciser davantage, vous couvrir de gloire et de chatons.
 
 Carry: La VM mets le carry à 1, si l'instruction fonctionne et que le paramètre donné est 0.
 Si tu mets une autre valeur, la VM mettra le carry à 0.
-
-### TODO
-
-Do a generator of bad champion for test tricky case.
