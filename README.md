@@ -469,8 +469,3 @@ probablement assez rapidement votre champion en tas informe de boyaux virtuels,
 mais qui pourrait bien, au prix d’une ou deux cérémonies vaudou impliquant des
 épingles à nourrice et un endroit que l’honnêteté et la décence m’interdisent
 de préciser davantage, vous couvrir de gloire et de chatons.
-
-## IV NOTES
-
-Carry: La VM mets le carry à 1, si l'instruction fonctionne et que le paramètre donné est 0.
-Si tu mets une autre valeur, la VM mettra le carry à 0.
