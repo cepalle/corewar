@@ -6,7 +6,7 @@
 /*   By: cepalle <cepalle@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/07 14:48:34 by cepalle      #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/07 14:48:34 by cepalle     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 08:40:22 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,8 +32,8 @@ static	void	ft_find_last_live(t_vm *vm)
 	{
 		if (max == vm->player[a].last_live)
 		{
-			ft_printf("Contestant %d, '%s' has won !\n", a + 1,
-					vm->player[a].head.prog_name);
+			ft_printf("Contestant %d(%s) has won !\n",
+					vm->player[a].id, vm->player[a].head.prog_name);
 			return ;
 		}
 		a++;
