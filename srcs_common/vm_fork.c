@@ -6,7 +6,7 @@
 /*   By: aurollan <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/05/04 14:27:46 by aurollan     #+#   ##    ##    #+#       */
-/*   Updated: 2018/05/04 14:27:56 by aurollan    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/05/22 08:32:10 by cepalle     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,16 +26,16 @@ void	vm_fork(t_vm *vm, int ipr, int add)
 	vm->next_id_proc++;
 	if (vm->nb_process >= vm->len_process)
 	{
-		if (vm->nb_process >= NB_PROC_MAX)
+		vm->process = ft_realloc(vm->process,
+			sizeof(t_proc) * vm->len_process,
+			sizeof(t_proc) * vm->len_process * 2);
+		vm->len_process *= 2;
+		if (!vm->process)
 		{
 			ft_printf("Anti games detected, you try to kill the vm!\n");
 			vm_free(vm);
 			exit(1);
 		}
-		vm->process = ft_realloc(vm->process,
-			sizeof(t_proc) * vm->len_process,
-			sizeof(t_proc) * vm->len_process * 2);
-		vm->len_process *= 2;
 	}
 	vm->process[vm->nb_process] = to_add;
 	vm->nb_process++;
